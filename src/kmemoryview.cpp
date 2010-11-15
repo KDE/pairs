@@ -29,7 +29,7 @@ void kmemoryView::cardSelected(CardItem* card)
 {
     Q_ASSERT(card);
     
-    qDebug() << "-------" << int(m_last) << int(card);
+//     qDebug() << "-------" << int(m_last) << int(card);
     if(m_last) {
         if(m_last->data(0)==card->data(0)) {
             //yay!
