@@ -9,6 +9,7 @@
 
 #include <QtGui/QGraphicsView>
 
+class CardItem;
 class kmemoryView : public QGraphicsView
 {
     Q_OBJECT
@@ -22,6 +23,11 @@ public:
      * Destructor
      */
     virtual ~kmemoryView();
+public slots:
+    void cardSelected(CardItem* cardData);
+    
+private:
+    CardItem* m_last;
 };
 
 #endif // kmemoryVIEW_H

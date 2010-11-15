@@ -1,4 +1,4 @@
-set(kmemory_SRCS
+set(kmemory_SRCS carditem.cpp
    kmemory.cpp
    main.cpp
    kmemoryview.cpp
