@@ -45,7 +45,7 @@ kmemory::kmemory()
     setupGUI();
     
     QSpinBox* itemsPerRowInput = new QSpinBox(this);
-    itemsPerRowInput->setMinimum(0);
+    itemsPerRowInput->setMinimum(1);
     itemsPerRowInput->setValue(5);
     connect(itemsPerRowInput, SIGNAL(valueChanged(int)), m_view, SLOT(setRowSize(int)));
     
