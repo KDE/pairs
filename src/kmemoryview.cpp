@@ -7,19 +7,30 @@
 #include "kmemoryview.h"
 #include "carditem.h"
 #include <QDebug>
+#include <QPropertyAnimation>
+#include <QGraphicsRotation>
 
 kmemoryView::kmemoryView(QWidget *parent)
     : QGraphicsView(parent), m_last(0)
 {
     setScene(new QGraphicsScene(this));
     
-    for(int i=0; i<5; i++) {
-        QColor c = QColor::fromHsv(255*i/5, 255, 255);
-        CardItem* item = new CardItem(Qt::black, QRectF(i*110,0,100,100), 0, scene());
-        item->setData(0, i);
+    const int num=10;
+    m_cardsSize=QSizeF(100,100);
+    
+    for(int i=0; i<num; i++) {
+        int it = i%(num/2);
+        
+        QColor c = QColor::fromHsv(255*it/5, 255, 255);
+        CardItem* item = new CardItem(Qt::white, m_cardsSize, 0, scene());
+        item->setData(0, it);
         item->setCardColor(c);
         connect(item, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
+        
+        m_cards += item;
     }
+    
+    setRowSize(5);
 }
 
 kmemoryView::~kmemoryView()
@@ -40,6 +51,22 @@ void kmemoryView::cardSelected(CardItem* card)
         m_last=0;
     } else
         m_last=card;
+}
+
+void kmemoryView::setRowSize(int itemsPerRow)
+{
+    int i=0;
+    
+    foreach(CardItem* card, m_cards) {
+        QPointF p((i%itemsPerRow)*(m_cardsSize.width()+10), (i/itemsPerRow)*(m_cardsSize.height()+10));
+        
+        QPropertyAnimation* anim = new QPropertyAnimation(card, "position", card);
+        anim->setEndValue(p);
+        anim->setDuration(1000);
+        
+        anim->start(QAbstractAnimation::DeleteWhenStopped);
+        i++;
+    }
 }
 
 #include "kmemoryview.moc"

@@ -23,11 +23,16 @@ public:
      * Destructor
      */
     virtual ~kmemoryView();
+    
 public slots:
     void cardSelected(CardItem* cardData);
+    void setRowSize(int itemsPerRow);
     
 private:
     CardItem* m_last;
+    QList<CardItem*> m_cards;
+    
+    QSizeF m_cardsSize;
 };
 
 #endif // kmemoryVIEW_H

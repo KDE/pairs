@@ -3,12 +3,12 @@
 #include <QPropertyAnimation>
 #include <qbrush.h>
 
-CardItem::CardItem(const QColor& backColor, const QRectF& rect, QGraphicsItem* parent, QGraphicsScene* scene)
-    : QGraphicsRectItem(rect, parent, scene), m_activated(false), m_color(Qt::green), m_backColor(backColor)
+CardItem::CardItem(const QColor& backColor, const QSizeF& size, QGraphicsItem* parent, QGraphicsScene* scene)
+    : QGraphicsRectItem(QRectF(QPointF(), size), parent, scene), m_activated(false), m_color(Qt::green), m_backColor(backColor)
 {
     m_rotation = new QGraphicsRotation;
     m_rotation->setAxis(Qt::YAxis);
-    m_rotation->setOrigin(QVector3D(rect.center()));
+    m_rotation->setOrigin(QVector3D(rect().center()));
     
     m_animation = new QPropertyAnimation(m_rotation, "angle", m_rotation);
     m_animation->setStartValue(0);

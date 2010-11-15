@@ -9,8 +9,9 @@ class CardItem
     : public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
+    Q_PROPERTY(QPointF position READ pos WRITE setPos);
     public:
-        CardItem(const QColor& backColor, const QRectF& rect, QGraphicsItem* parent = 0, QGraphicsScene* scene = 0);
+        CardItem(const QColor& backColor, const QSizeF& rect, QGraphicsItem* parent = 0, QGraphicsScene* scene = 0);
         virtual ~CardItem();
         
         virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);

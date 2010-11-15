@@ -15,6 +15,7 @@
 #include <kstatusbar.h>
 
 #include <kaction.h>
+#include <KToolBar>
 #include <kactioncollection.h>
 #include <kstandardaction.h>
 
@@ -42,6 +43,13 @@ kmemory::kmemory()
     // mainwindow to automatically save settings if changed: window size,
     // toolbar position, icon size, etc.
     setupGUI();
+    
+    QSpinBox* itemsPerRowInput = new QSpinBox(this);
+    itemsPerRowInput->setMinimum(0);
+    itemsPerRowInput->setValue(5);
+    connect(itemsPerRowInput, SIGNAL(valueChanged(int)), m_view, SLOT(setRowSize(int)));
+    
+    toolBar()->addWidget(itemsPerRowInput);
 }
 
 kmemory::~kmemory()
