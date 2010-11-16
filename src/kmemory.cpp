@@ -20,6 +20,7 @@
 #include <kstandardaction.h>
 
 #include <KDE/KLocale>
+#include "newmemorydialog.h"
 
 kmemory::kmemory()
     : KXmlGuiWindow(),
@@ -50,6 +51,7 @@ kmemory::kmemory()
     connect(itemsPerRowInput, SIGNAL(valueChanged(int)), m_view, SLOT(setRowSize(int)));
     
     toolBar()->addWidget(itemsPerRowInput);
+    
 }
 
 kmemory::~kmemory()
@@ -58,7 +60,15 @@ kmemory::~kmemory()
 
 void kmemory::setupActions()
 {
+    KStandardAction::open(this, SLOT(newGame()), actionCollection());
     KStandardAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
+}
+
+void kmemory::newGame()
+{
+    NewMemoryDialog dialog;
+    
+    dialog.exec();
 }
 
 #include "kmemory.moc"

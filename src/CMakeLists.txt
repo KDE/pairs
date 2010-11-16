@@ -1,10 +1,10 @@
-set(kmemory_SRCS carditem.cpp
+set(kmemory_SRCS memorytheme.cpp newmemorydialog.cpp carditem.cpp
    kmemory.cpp
    main.cpp
    kmemoryview.cpp
  )
 
-kde4_add_ui_files(kmemory_SRCS kmemoryview_base.ui prefs_base.ui)
+kde4_add_ui_files(kmemory_SRCS newmemorydialog.ui)
 
 kde4_add_kcfg_files(kmemory_SRCS settings.kcfgc )
 

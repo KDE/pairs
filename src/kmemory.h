@@ -28,6 +28,9 @@ public:
      */
     virtual ~kmemory();
 
+private slots:
+    void newGame();
+    
 private:
     void setupActions();
 
