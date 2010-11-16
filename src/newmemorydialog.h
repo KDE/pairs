@@ -2,6 +2,7 @@
 #define NEWMEMORYDIALOG_H
 
 #include <kdialog.h>
+#include "memorytheme.h"
 
 namespace Ui { class NewMemoryDialog; }
 
@@ -11,10 +12,11 @@ class NewMemoryDialog
     Q_OBJECT
     public:
         explicit NewMemoryDialog(QWidget* parent = 0);
-        
+        MemoryTheme theme() const;
         
     private:
         Ui::NewMemoryDialog* m_ui;
+        QList<MemoryTheme> m_themes;
 };
 
 #endif // NEWMEMORYDIALOG_H

@@ -15,7 +15,7 @@ class CardItem
         virtual ~CardItem();
         
         virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
-        virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) {}
+        virtual void mousePressEvent(QGraphicsSceneMouseEvent*) {}
         void turn();
         void setCardColor(const QColor& color);
         
