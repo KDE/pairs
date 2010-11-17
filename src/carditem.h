@@ -6,22 +6,22 @@
 class QPropertyAnimation;
 class QGraphicsRotation;
 class CardItem
-    : public QObject, public QGraphicsRectItem
+    : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
     Q_PROPERTY(QPointF position READ pos WRITE setPos);
     public:
-        CardItem(const QColor& backColor, const QSizeF& rect, QGraphicsItem* parent = 0, QGraphicsScene* scene = 0);
+        CardItem(const QPixmap& backImagePath, const QSizeF& size, QGraphicsItem* parent = 0, QGraphicsScene* scene = 0);
         virtual ~CardItem();
         
         virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
         virtual void mousePressEvent(QGraphicsSceneMouseEvent*) {}
         void turn();
-        void setCardColor(const QColor& color);
+        void setCardPixmap(const QPixmap& path);
         
     public slots:
-        void valueChanged(const QVariant& value);
         void emitActivation();
+        void changeValue();
         
     signals:
         void selected(CardItem* data);
@@ -29,10 +29,12 @@ class CardItem
     private:
         QGraphicsRotation* m_rotation;
         QPropertyAnimation* m_animation;
+        QPropertyAnimation* m_animationBack;
         
+        QSizeF m_size;
         bool m_activated;
-        QColor m_color;
-        QColor m_backColor;
+        QPixmap m_color;
+        QPixmap m_back;
 };
 
 #endif // CARDITEM_H

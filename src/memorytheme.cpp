@@ -29,10 +29,10 @@ MemoryTheme::MemoryTheme(const QString& path)
             
             QString name = reader.name().toString();
          
-            if(name=="item") {
+            if(name=="card") {
                 ThemeItem item;
-                item.imagePath = reader.attributes().value("image").toString();
-                item.soundPath = reader.attributes().value("sound").toString();
+                item.imagePath = m_baseDir +'/'+ reader.attributes().value("image").toString();
+                item.soundPath = m_baseDir +'/'+ reader.attributes().value("sound").toString();
                 m_items += item;
             }
         } else if (type==QXmlStreamReader::EndElement) {
@@ -41,9 +41,9 @@ MemoryTheme::MemoryTheme(const QString& path)
             
             if(name=="description") m_description = m_data;
             else if(name=="description") m_name = m_data;
-            else if(name=="back") m_backPath = m_data;
+            else if(name=="back") m_backPath = m_baseDir +'/'+m_data;
             else if(name=="name") m_name = m_data;
-            else if(name=="item") {}
+            else if(name=="card" || name=="memory") {}
             else
                 m_error = i18n("Unknown item '%1' found", reader.name().toString());
         } else {

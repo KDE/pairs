@@ -20,8 +20,10 @@ NewMemoryDialog::NewMemoryDialog(QWidget* parent)
         
         if(!theme.isCorrect()) {
             qWarning() << "uncorrect theme:" << themePath << theme.error();
+        } else {
+            m_ui->themesList->addItem(theme.name());
+            m_themes += theme;
         }
-        m_ui->themesList->addItem(theme.name());
     }
     m_ui->themesList->setCurrentItem(m_ui->themesList->item(0));
 }
@@ -31,3 +33,6 @@ MemoryTheme NewMemoryDialog::theme() const
     int row = m_ui->themesList->currentRow();
     return m_themes.at(row);
 }
+
+int NewMemoryDialog::columns() const { return m_ui->columns->value(); }
+int NewMemoryDialog::rows() const { return m_ui->rows->value(); }

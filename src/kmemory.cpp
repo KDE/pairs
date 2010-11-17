@@ -45,13 +45,7 @@ kmemory::kmemory()
     // toolbar position, icon size, etc.
     setupGUI();
     
-    QSpinBox* itemsPerRowInput = new QSpinBox(this);
-    itemsPerRowInput->setMinimum(1);
-    itemsPerRowInput->setValue(5);
-    connect(itemsPerRowInput, SIGNAL(valueChanged(int)), m_view, SLOT(setRowSize(int)));
-    
-    toolBar()->addWidget(itemsPerRowInput);
-    
+    QMetaObject::invokeMethod(this, "newGame", Qt::QueuedConnection);
 }
 
 kmemory::~kmemory()
@@ -68,7 +62,9 @@ void kmemory::newGame()
 {
     NewMemoryDialog dialog;
     
-    dialog.exec();
+    if(dialog.exec()==QDialog::Accepted) {
+        m_view->newGame(dialog.theme(), dialog.rows(), dialog.columns());
+    }
 }
 
 #include "kmemory.moc"

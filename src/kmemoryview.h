@@ -9,6 +9,7 @@
 
 #include <QtGui/QGraphicsView>
 
+class MemoryTheme;
 class CardItem;
 class kmemoryView : public QGraphicsView
 {
@@ -24,9 +25,10 @@ public:
      */
     virtual ~kmemoryView();
     
+    void setRowSize(int itemsPerRow);
+    void newGame(const MemoryTheme& theme, int rows, int columns);
 public slots:
     void cardSelected(CardItem* cardData);
-    void setRowSize(int itemsPerRow);
     
 private:
     CardItem* m_last;
