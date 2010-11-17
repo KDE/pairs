@@ -16,12 +16,12 @@ class CardItem
         
         virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
         virtual void mousePressEvent(QGraphicsSceneMouseEvent*) {}
-        void turn();
         void setCardPixmap(const QPixmap& path);
         
     public slots:
         void emitActivation();
         void changeValue();
+        void turn();
         
     signals:
         void selected(CardItem* data);

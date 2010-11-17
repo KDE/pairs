@@ -1,7 +1,6 @@
 #include "carditem.h"
 #include <QGraphicsRotation>
 #include <QPropertyAnimation>
-#include <qbrush.h>
 
 CardItem::CardItem(const QPixmap& backImage, const QSizeF& size, QGraphicsItem* parent, QGraphicsScene* scene)
     : QGraphicsPixmapItem(parent, scene), m_size(size), m_activated(false), m_back(backImage.scaledToWidth(m_size.width()))

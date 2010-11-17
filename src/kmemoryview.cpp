@@ -11,6 +11,7 @@
 #include <QGraphicsRotation>
 #include "memorytheme.h"
 #include <QDate>
+#include <QTimer>
 
 kmemoryView::kmemoryView(QWidget *parent)
     : QGraphicsView(parent), m_last(0)
@@ -32,8 +33,8 @@ void kmemoryView::cardSelected(CardItem* card)
         if(m_last->data(0)==card->data(0)) {
             //yay!
         } else {
-            m_last->turn();
-            card->turn();
+            QTimer::singleShot(500, card, SLOT(turn()));
+            QTimer::singleShot(500, m_last, SLOT(turn()));
         }
         m_last=0;
     } else
