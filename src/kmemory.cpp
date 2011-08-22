@@ -10,6 +10,7 @@
 #include <QtGui/QDropEvent>
 #include <QtGui/QPainter>
 #include <QtGui/QPrinter>
+#include <QtCore/QCoreApplication>
 
 #include <kconfigdialog.h>
 #include <kstatusbar.h>

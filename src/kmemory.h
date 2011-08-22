@@ -9,8 +9,6 @@
 
 #include <kxmlguiwindow.h>
 
-#include "ui_prefs_base.h"
-
 class kmemoryView;
 class KToggleAction;
 
