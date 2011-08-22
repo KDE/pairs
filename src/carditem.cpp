@@ -5,20 +5,22 @@
 CardItem::CardItem(const QPixmap& backImage, const QSizeF& size, QGraphicsItem* parent, QGraphicsScene* scene)
     : QGraphicsPixmapItem(parent, scene), m_size(size), m_activated(false), m_back(backImage.scaledToWidth(m_size.width()))
 {
-    m_rotation = new QGraphicsRotation;
+    const int duration = 200;
+    
+    m_rotation = new QGraphicsRotation(this);
     m_rotation->setAxis(Qt::YAxis);
     m_rotation->setOrigin(QVector3D(m_back.rect().center()));
     
     m_animation = new QPropertyAnimation(m_rotation, "angle", m_rotation);
     m_animation->setStartValue(0);
     m_animation->setEndValue(90);
-    m_animation->setDuration(300);
+    m_animation->setDuration(duration);
     connect(m_animation, SIGNAL(finished()), SLOT(changeValue()));
     
     m_animationBack = new QPropertyAnimation(m_rotation, "angle", m_rotation);
     m_animationBack->setStartValue(90);
     m_animationBack->setEndValue(0);
-    m_animationBack->setDuration(300);
+    m_animationBack->setDuration(duration);
     connect(m_animation, SIGNAL(finished()), SLOT(emitActivation()));
     
     setTransformations(QList<QGraphicsTransform*>() << m_rotation);
@@ -28,9 +30,7 @@ CardItem::CardItem(const QPixmap& backImage, const QSizeF& size, QGraphicsItem* 
 }
 
 CardItem::~CardItem()
-{
-    delete m_rotation;
-}
+{}
 
 void CardItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* )
 {
