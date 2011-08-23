@@ -67,12 +67,14 @@ void kmemoryView::newGame(const MemoryTheme& theme, int rows, int columns)
     QList<ThemeItem> items = theme.items();
     int num=qMin(((rows*columns)/2)*2, items.size()); //we make it %2
     
+    QPixmap back(theme.backPath());
+    Q_ASSERT(!back.isNull());
     for(int i=0; i<num; i++) {
         ThemeItem titem = items.at(i);
         
         for(int j=0; j<2; j++) { //we want pairs
             
-            CardItem* item = new CardItem(theme.backPath(), m_cardsSize, 0, scene());
+            CardItem* item = new CardItem(back, m_cardsSize, 0, scene());
             item->setData(0, i);
             item->setCardPixmap(QPixmap(titem.imagePath));
             connect(item, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
