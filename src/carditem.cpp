@@ -1,29 +1,38 @@
 #include "carditem.h"
 #include <QGraphicsRotation>
 #include <QPropertyAnimation>
+#include <QGraphicsOpacityEffect>
 
 CardItem::CardItem(const QPixmap& backImage, const QSizeF& size, QGraphicsItem* parent, QGraphicsScene* scene)
     : QGraphicsPixmapItem(parent, scene), m_size(size), m_activated(false), m_back(backImage.scaledToWidth(m_size.width()))
 {
     const int duration = 200;
     
-    m_rotation = new QGraphicsRotation(this);
-    m_rotation->setAxis(Qt::YAxis);
-    m_rotation->setOrigin(QVector3D(m_back.rect().center()));
+    QGraphicsRotation* rotation = new QGraphicsRotation(this);
+    rotation->setAxis(Qt::YAxis);
+    rotation->setOrigin(QVector3D(m_back.rect().center()));
     
-    m_animation = new QPropertyAnimation(m_rotation, "angle", m_rotation);
+    m_animation = new QPropertyAnimation(rotation, "angle", rotation);
     m_animation->setStartValue(0);
     m_animation->setEndValue(90);
     m_animation->setDuration(duration);
     connect(m_animation, SIGNAL(finished()), SLOT(changeValue()));
     
-    m_animationBack = new QPropertyAnimation(m_rotation, "angle", m_rotation);
+    m_animationBack = new QPropertyAnimation(rotation, "angle", rotation);
     m_animationBack->setStartValue(90);
     m_animationBack->setEndValue(0);
     m_animationBack->setDuration(duration);
     connect(m_animation, SIGNAL(finished()), SLOT(emitActivation()));
     
-    setTransformations(QList<QGraphicsTransform*>() << m_rotation);
+    setTransformations(QList<QGraphicsTransform*>() << rotation);
+    
+    QGraphicsOpacityEffect* opacity = new QGraphicsOpacityEffect(this);
+    opacity->setOpacity(1.);
+    
+    m_opacityAnimation=new QPropertyAnimation(opacity, "opacity", opacity);
+//     m_opacityAnimation->setEasingCurve(QEasingCurve::InExpo);
+    m_opacityAnimation->setEndValue(0.2);
+    setGraphicsEffect(opacity);
     
     Q_ASSERT(!m_back.isNull());
     setPixmap(m_back);
@@ -65,4 +74,9 @@ void CardItem::changeValue()
     else
         setPixmap(m_back);
     m_animationBack->start();
+}
+
+void CardItem::markDone()
+{
+    m_opacityAnimation->start();
 }

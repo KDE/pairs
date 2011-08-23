@@ -17,6 +17,7 @@ class CardItem
         virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
         virtual void mousePressEvent(QGraphicsSceneMouseEvent*) {}
         void setCardPixmap(const QPixmap& path);
+        void markDone();
         
     public slots:
         void emitActivation();
@@ -27,7 +28,6 @@ class CardItem
         void selected(CardItem* data);
         
     private:
-        QGraphicsRotation* m_rotation;
         QPropertyAnimation* m_animation;
         QPropertyAnimation* m_animationBack;
         
@@ -35,6 +35,7 @@ class CardItem
         bool m_activated;
         QPixmap m_color;
         QPixmap m_back;
+        QPropertyAnimation* m_opacityAnimation;
 };
 
 #endif // CARDITEM_H
