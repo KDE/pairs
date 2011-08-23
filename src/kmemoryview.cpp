@@ -19,6 +19,7 @@ kmemoryView::kmemoryView(QWidget *parent)
     setScene(new QGraphicsScene(this));
     
     m_cardsSize=QSizeF(128,128);
+    qsrand(QTime::currentTime().msec()*QTime::currentTime().second());
 }
 
 kmemoryView::~kmemoryView()
@@ -80,7 +81,6 @@ void kmemoryView::newGame(const MemoryTheme& theme, int rows, int columns)
         }
     }
     
-    qsrand(QDateTime::currentMSecsSinceEpoch());
     while(!cards.isEmpty())
         m_cards += cards.takeAt(qrand()%cards.size());
     
