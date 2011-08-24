@@ -68,8 +68,6 @@ void kmemoryView::newGame(const MemoryTheme& theme, int rows, int columns)
     QList<ThemeItem> items = theme.items();
     int num=qMin(((rows*columns)/2)*2, items.size()); //we make it %2
     QSvgRenderer svgRenderer(theme.backPath());
-    QPixmap back(svgRenderer.defaultSize());
-            
     
     for(int i=0; i<num; i++) {
         ThemeItem titem = items.at(i);
