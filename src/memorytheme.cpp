@@ -17,7 +17,7 @@ MemoryTheme::MemoryTheme(const QString& path)
         m_baseDir = ".";
     
     QXmlStreamReader reader(&f);
-    
+    qDebug() << "hola" << m_baseDir << path;
     while (m_error.isEmpty() && !reader.atEnd()) {
         QXmlStreamReader::TokenType type = reader.readNext();
         
