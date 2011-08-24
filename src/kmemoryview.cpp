@@ -33,7 +33,8 @@ void kmemoryView::cardSelected(CardItem* card)
 //     qDebug() << "-------" << int(m_last) << int(card);
     if(m_last) {
         if(m_last->data(0)==card->data(0)) {
-            //yay!
+            m_last->markDone();
+            card->markDone();
         } else {
             QTimer::singleShot(500, card, SLOT(turn()));
             QTimer::singleShot(500, m_last, SLOT(turn()));

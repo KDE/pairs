@@ -1,15 +1,15 @@
 install( FILES 
     kde.memory
     
-    dolphin.svgz
+    dolphin.svg
     kalgebra.svg
-    kdevelop.svgz
-    konqueror.svgz
-    kopete.svgz
+    kdevelop.svg
+    konqueror.svg
+    kopete.svg
     ktuberling.svg
     kturtle.svg
     okular.svg
-    okular.svgz
-    kde.svgz
+    okular.svg
+    kde.svg
     
     DESTINATION ${DATA_INSTALL_DIR}/kmemory/themes)
