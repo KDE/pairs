@@ -6,11 +6,9 @@ CardItem::CardItem(QPixmap backImage, const QSizeF& size, QSvgRenderer &renderer
     : QGraphicsPixmapItem(parent, scene), m_size(size), m_activated(false), m_back(backImage.scaledToWidth(m_size.width()))
 {
     const int duration = 200;
-    QPainter pixPainter(&backImage);
-    renderer.render(&pixPainter);
-    m_back.fill();
     m_back = backImage.scaledToWidth(m_size.width());
-//    backImage.fill(Qt::transparent);
+    QPainter pixPainter(&m_back);
+    renderer.render(&pixPainter);
     m_rotation = new QGraphicsRotation(this);
     m_rotation->setAxis(Qt::YAxis);
     m_rotation->setOrigin(QVector3D(m_back.rect().center()));
@@ -52,10 +50,10 @@ void CardItem::turn()
 
 void CardItem::setCardPixmap(QPixmap pix, QSvgRenderer &renderer)
 {
-    QPainter pixPainter(&pix);
-    renderer.render(&pixPainter);
     Q_ASSERT(!pix.isNull());
     m_color=pix.scaledToWidth(m_size.width());
+    QPainter pixPainter(&m_color);
+    renderer.render(&pixPainter);
 }
 
 void CardItem::emitActivation()
