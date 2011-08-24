@@ -2,6 +2,7 @@
 #define CARDITEM_H
 
 #include <QGraphicsRectItem>
+#include <QSvgRenderer>
 
 class QPropertyAnimation;
 class QGraphicsRotation;
@@ -11,12 +12,12 @@ class CardItem
     Q_OBJECT
     Q_PROPERTY(QPointF position READ pos WRITE setPos);
     public:
-        CardItem(const QPixmap& backImagePath, const QSizeF& size, QGraphicsItem* parent = 0, QGraphicsScene* scene = 0);
+        CardItem(QPixmap backImagePath, const QSizeF& size, QSvgRenderer &renderer, QGraphicsItem* parent = 0, QGraphicsScene* scene = 0);
         virtual ~CardItem();
         
         virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
         virtual void mousePressEvent(QGraphicsSceneMouseEvent*) {}
-        void setCardPixmap(const QPixmap& path);
+        void setCardPixmap(QPixmap path, QSvgRenderer &renderer);
         
     public slots:
         void emitActivation();

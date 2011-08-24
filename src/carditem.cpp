@@ -1,12 +1,16 @@
 #include "carditem.h"
 #include <QGraphicsRotation>
 #include <QPropertyAnimation>
-
-CardItem::CardItem(const QPixmap& backImage, const QSizeF& size, QGraphicsItem* parent, QGraphicsScene* scene)
+#include <QPainter>
+CardItem::CardItem(QPixmap backImage, const QSizeF& size, QSvgRenderer &renderer, QGraphicsItem* parent, QGraphicsScene* scene)
     : QGraphicsPixmapItem(parent, scene), m_size(size), m_activated(false), m_back(backImage.scaledToWidth(m_size.width()))
 {
     const int duration = 200;
-    
+    QPainter pixPainter(&backImage);
+    renderer.render(&pixPainter);
+    m_back.fill();
+    m_back = backImage.scaledToWidth(m_size.width());
+//    backImage.fill(Qt::transparent);
     m_rotation = new QGraphicsRotation(this);
     m_rotation->setAxis(Qt::YAxis);
     m_rotation->setOrigin(QVector3D(m_back.rect().center()));
@@ -46,8 +50,10 @@ void CardItem::turn()
     m_animation->start();
 }
 
-void CardItem::setCardPixmap(const QPixmap& pix)
+void CardItem::setCardPixmap(QPixmap pix, QSvgRenderer &renderer)
 {
+    QPainter pixPainter(&pix);
+    renderer.render(&pixPainter);
     Q_ASSERT(!pix.isNull());
     m_color=pix.scaledToWidth(m_size.width());
 }
