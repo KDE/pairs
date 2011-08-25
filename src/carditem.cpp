@@ -4,18 +4,18 @@
 #include <QPainter>
 #include <QGraphicsOpacityEffect>
 
-CardItem::CardItem(QPixmap backImage, const QSizeF& size, QSvgRenderer &renderer, QGraphicsItem* parent, QGraphicsScene* scene)
-    : QGraphicsPixmapItem(parent, scene), m_size(size), m_activated(false), m_back(backImage.scaledToWidth(m_size.width()))
+CardItem::CardItem(QSvgRenderer *back, const QSizeF& size, QGraphicsItem* parent, QGraphicsScene* scene)
+    : QGraphicsPixmapItem(parent, scene), m_size(size), m_activated(false), m_color(size.toSize()), m_back(size.toSize())
 {
     const int duration = 200;
+    
     QGraphicsRotation* rotation = new QGraphicsRotation(this);
     rotation->setAxis(Qt::YAxis);
     rotation->setOrigin(QVector3D(m_back.rect().center()));
-  
-    m_back = backImage.scaledToWidth(m_size.width());
-    QPainter pixPainter(&m_back);
-    renderer.render(&pixPainter);
-   
+    
+    m_back.fill(Qt::transparent);
+    back->render(&m_back);
+    
     m_animation = new QPropertyAnimation(rotation, "angle", rotation);
     m_animation->setStartValue(0);
     m_animation->setEndValue(90);
@@ -59,12 +59,11 @@ void CardItem::turn()
     m_animation->start();
 }
 
-void CardItem::setCardPixmap(QPixmap pix, QSvgRenderer &renderer)
+void CardItem::setCardPixmap(QSvgRenderer* renderer)
 {
-    Q_ASSERT(!pix.isNull());
-    m_color=pix.scaledToWidth(m_size.width());
+    m_color.fill(Qt::transparent);
     QPainter pixPainter(&m_color);
-    renderer.render(&pixPainter);
+    renderer->render(&pixPainter);
 }
 
 void CardItem::emitActivation()

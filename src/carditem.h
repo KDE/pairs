@@ -12,12 +12,12 @@ class CardItem
     Q_OBJECT
     Q_PROPERTY(QPointF position READ pos WRITE setPos);
     public:
-        CardItem(QPixmap backImagePath, const QSizeF& size, QSvgRenderer &renderer, QGraphicsItem* parent = 0, QGraphicsScene* scene = 0);
+        CardItem(QSvgRenderer* back, const QSizeF& size, QGraphicsItem* parent = 0, QGraphicsScene* scene = 0);
         virtual ~CardItem();
         
         virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
         virtual void mousePressEvent(QGraphicsSceneMouseEvent*) {}
-        void setCardPixmap(QPixmap path, QSvgRenderer &renderer);
+        void setCardPixmap(QSvgRenderer *renderer);
         void markDone();
         
     public slots:
