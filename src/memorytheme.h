@@ -3,20 +3,22 @@
 #include <QString>
 #include <QList>
 
+
 struct ThemeItem
 {
-    QString imagePath;
-    QString soundPath;
+    QString imageName;
+    QString soundName;
 };
 
 class MemoryTheme
 {
     public:
         MemoryTheme(const QString& path);
-        
+
         QString name() const { return m_name; }
         QString description() const { return m_description; }
-        QString backPath() const { return m_backPath; }
+        QString backName() const { return m_backName; }
+        QString path() const { return m_path; }
         
         QList<ThemeItem> items() const { return m_items; }
         
@@ -24,15 +26,16 @@ class MemoryTheme
         QString error() const { return m_error; }
         
     private:
+
         QString m_data;
         
         QString m_name;
         QString m_description;
-        QString m_backPath;
+        QString m_backName;
         QList<ThemeItem> m_items;
         
         QString m_error;
-        QString m_baseDir;
+        QString m_path;
 };
 
 #endif // MEMORYTHEME_H

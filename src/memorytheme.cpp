@@ -3,11 +3,18 @@
 #include <QFile>
 #include <QDebug>
 #include <KLocalizedString>
+#include <KTar>
 
 MemoryTheme::MemoryTheme(const QString& path)
 {
-    QFile f(path);
-    if(!f.open(QIODevice::ReadOnly)) {
+	KTar archive(path);
+	m_path = path;
+	archive.open(QIODevice::ReadOnly);
+	QStringList files(archive.directory()->entries());
+	QString themename(files[ files.lastIndexOf(QRegExp ("*.html")) ]);
+
+/*
+	if(!f.open(QIODevice::ReadOnly)) {
         m_error = i18n("Could not open the theme file");
         return;
     }
@@ -15,8 +22,8 @@ MemoryTheme::MemoryTheme(const QString& path)
         m_baseDir = path.left(path.lastIndexOf('/'));
     else
         m_baseDir = ".";
-    
-    QXmlStreamReader reader(&f);
+  */
+    QXmlStreamReader reader(((KArchiveFile*)(archive.directory()->entry(themename)))->createDevice());
     
     while (m_error.isEmpty() && !reader.atEnd()) {
         QXmlStreamReader::TokenType type = reader.readNext();
@@ -31,8 +38,8 @@ MemoryTheme::MemoryTheme(const QString& path)
          
             if(name=="card") {
                 ThemeItem item;
-                item.imagePath = m_baseDir +'/'+ reader.attributes().value("image").toString();
-                item.soundPath = m_baseDir +'/'+ reader.attributes().value("sound").toString();
+                item.imageName = reader.attributes().value("image").toString();
+                item.soundName = reader.attributes().value("sound").toString();
                 m_items += item;
             }
         } else if (type==QXmlStreamReader::EndElement) {
@@ -41,7 +48,7 @@ MemoryTheme::MemoryTheme(const QString& path)
             
             if(name=="description") m_description = m_data;
             else if(name=="description") m_name = m_data;
-            else if(name=="back") m_backPath = m_baseDir +'/'+m_data;
+            else if(name=="back") m_backName = m_data;
             else if(name=="name") m_name = m_data;
             else if(name=="card" || name=="memory") {}
             else
@@ -53,3 +60,4 @@ MemoryTheme::MemoryTheme(const QString& path)
     
     if (reader.hasError()) {}
 }
+

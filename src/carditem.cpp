@@ -14,7 +14,8 @@ CardItem::CardItem(QSvgRenderer *back, const QSizeF& size, QGraphicsItem* parent
     rotation->setOrigin(QVector3D(m_back.rect().center()));
     
     m_back.fill(Qt::transparent);
-    back->render(&m_back);
+    QPainter p(&m_back);
+    back->render(&p);
     
     m_animation = new QPropertyAnimation(rotation, "angle", rotation);
     m_animation->setStartValue(0);

@@ -10,7 +10,7 @@ kde4_add_kcfg_files(kmemory_SRCS settings.kcfgc )
 
 kde4_add_executable(kmemory ${kmemory_SRCS})
 
-target_link_libraries(kmemory ${KDE4_KDEUI_LIBS} )
+target_link_libraries(kmemory ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS})
 
 install(TARGETS kmemory ${INSTALL_TARGETS_DEFAULT_ARGS} )
 

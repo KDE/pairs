@@ -13,6 +13,7 @@
 #include <QDate>
 #include <QTimer>
 #include <QSvgRenderer>
+#include <KTar>
 
 kmemoryView::kmemoryView(QWidget *parent)
     : QGraphicsView(parent), m_last(0)
@@ -65,10 +66,12 @@ void kmemoryView::newGame(const MemoryTheme& theme, int rows, int columns)
     qDeleteAll(m_cards);
     m_cards.clear();
     QList<CardItem*> cards;
+	KTar archive(theme.path());
+	archive.open(QIODevice::ReadOnly);
     
     QList<ThemeItem> items = theme.items();
     int num=qMin(((rows*columns)/2)*2, items.size()); //we make it %2
-    QSvgRenderer backRenderer(theme.backPath());
+    QSvgRenderer backRenderer(((KArchiveFile*)(archive.directory()->entry(theme.backName())))->data());
     for(int i=0; i<num; i++) {
         ThemeItem titem = items.at(i);
         
@@ -76,10 +79,9 @@ void kmemoryView::newGame(const MemoryTheme& theme, int rows, int columns)
             CardItem* item = new CardItem(&backRenderer, m_cardsSize, NULL, scene());
             item->setData(0, i);
             
-            QSvgRenderer imageRenderer(titem.imagePath);
+            QSvgRenderer imageRenderer(((KArchiveFile*)(archive.directory()->entry(titem.imageName)))->data());
             item->setCardPixmap(&imageRenderer);
             connect(item, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
-            
             cards += item;
         }
     }
