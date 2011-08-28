@@ -1,3 +1,24 @@
+/*
+ *  Copyright (C) <2010>       <Aleix Pol>           <aleixpol@kde.org>
+ *  Copyright (C) <2011>       <Marco Calignano>     <marco.calignano@gmail.com>
+ *
+ *  This program is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU General Public License as
+ *  published by the Free Software Foundation; either version 2 of
+ *  the License or (at your option) version 3 or any later version
+ *  accepted by the membership of KDE e.V. (or its successor approved
+ *  by the membership of KDE e.V.), which shall act as a proxy 
+ *  defined in Section 14 of version 3 of the license.
+ *  
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *  
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "memorytheme.h"
 #include <QXmlStreamReader>
 #include <QFile>
@@ -11,19 +32,9 @@ MemoryTheme::MemoryTheme(const QString& path)
 	m_path = path;
 	archive.open(QIODevice::ReadOnly);
 	QStringList files(archive.directory()->entries());
-	QString themename(files[ files.lastIndexOf(QRegExp ("*.html")) ]);
-
-/*
-	if(!f.open(QIODevice::ReadOnly)) {
-        m_error = i18n("Could not open the theme file");
-        return;
-    }
-    if(path.contains('/'))
-        m_baseDir = path.left(path.lastIndexOf('/'));
-    else
-        m_baseDir = ".";
-  */
-    QXmlStreamReader reader(((KArchiveFile*)(archive.directory()->entry(themename)))->createDevice());
+	QString themename(files[ files.lastIndexOf(QRegExp ("*.game", Qt::CaseSensitive, QRegExp::Wildcard))]);
+	
+    QXmlStreamReader reader(((KArchiveFile*)(archive.directory()->entry(themename)))->data());
     
     while (m_error.isEmpty() && !reader.atEnd()) {
         QXmlStreamReader::TokenType type = reader.readNext();
@@ -43,7 +54,7 @@ MemoryTheme::MemoryTheme(const QString& path)
                 m_items += item;
             }
         } else if (type==QXmlStreamReader::EndElement) {
-//             qDebug() << "ssssss" << m_data << type;
+           //  qDebug() << "ssssss" << m_data << type;
             QString name = reader.name().toString();
             
             if(name=="description") m_description = m_data;
