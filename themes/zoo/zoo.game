@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<memory>
+  <back>HappyPandaFace.svg</back>
+  <name>Zoo</name>
+  <description>A little Zoo</description>
+  <card image='cat-clipart.svg' />
+  <card image='hippopotamus-clipart.svg' />
+  <card image='lion-clipart.svg' />
+  <card image='mouse-clipart.svg' />
+  <card image='rabbit-clipart.svg' />
+  <card image='squirrel-clipart.svg' />
+</memory>
+
