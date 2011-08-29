@@ -30,11 +30,18 @@ MemoryTheme::MemoryTheme(const QString& path)
 {
 	KTar archive(path);
 	m_path = path;
-	archive.open(QIODevice::ReadOnly);
+	bool b = archive.open(QIODevice::ReadOnly);
+    Q_ASSERT(b);
 	QStringList files(archive.directory()->entries());
-	QString themename(files[ files.lastIndexOf(QRegExp ("*.game", Qt::CaseSensitive, QRegExp::Wildcard))]);
-	
-    QXmlStreamReader reader(((KArchiveFile*)(archive.directory()->entry(themename)))->data());
+    files = files.filter(QRegExp("*.game", Qt::CaseSensitive, QRegExp::Wildcard));
+    
+    Q_ASSERT(!files.isEmpty() && "no games in the theme!");
+    
+    QString themename(files.first()); //TODO: Support many games inside a theme
+    Q_ASSERT(archive.directory()->entry(themename)->isFile());
+    KArchiveFile* file = static_cast<KArchiveFile*>(archive.directory()->entry(themename));
+    
+    QXmlStreamReader reader(file->data());
     
     while (m_error.isEmpty() && !reader.atEnd()) {
         QXmlStreamReader::TokenType type = reader.readNext();
