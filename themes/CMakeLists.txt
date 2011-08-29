@@ -17,10 +17,36 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+macro(create_theme _baseName)
+    if(WIN32)
+        set(_template ${CMAKE_CURRENT_BINARY_DIR}/${_baseName}.memory.zip)
+    else(WIN32)
+        set(_template ${CMAKE_CURRENT_BINARY_DIR}/${_baseName}.memory.tar.bz2)
+    endif(WIN32)
+    
+    file(GLOB _files "${CMAKE_CURRENT_SOURCE_DIR}/${_template}/*")
+    
+    add_custom_target(${_baseName} ALL DEPENDS ${_template})
 
-install( FILES 
-    kde.memory.tar.gz
-    linux.memory.tar.bz2
-    zoo.memory.tgz
+    if(WIN32)
+        add_custom_command(OUTPUT ${_template}
+            COMMAND zip ARGS -r
+                ${_template} ${CMAKE_CURRENT_SOURCE_DIR}/${_baseName}
+            DEPENDS ${_deps}
+            WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/${_baseName}"
+        )
+    else(WIN32)
+        add_custom_command(OUTPUT ${_template}
+            COMMAND tar ARGS cjf
+                ${_template} .
+            DEPENDS ${_deps}
+            WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/${_baseName}"
+        )
+    endif(WIN32)
+    
+    install(FILES ${_template} DESTINATION ${DATA_INSTALL_DIR}/kmemory/themes)
+endmacro(create_theme)
 
-    DESTINATION ${DATA_INSTALL_DIR}/kmemory/themes)
+create_theme(kde)
+create_theme(zoo)
+create_theme(linux)
