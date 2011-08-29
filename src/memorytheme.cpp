@@ -39,7 +39,7 @@ MemoryTheme::MemoryTheme(const QString& path)
     
     QString themename(files.first()); //TODO: Support many games inside a theme
     Q_ASSERT(archive.directory()->entry(themename)->isFile());
-    KArchiveFile* file = static_cast<KArchiveFile*>(archive.directory()->entry(themename));
+    const KArchiveFile* file = static_cast<const KArchiveFile*>(archive.directory()->entry(themename));
     
     QXmlStreamReader reader(file->data());
     
