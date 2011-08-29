@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<memory>
+  <back>kde.svg</back>
+  <name>KDE Programs</name>
+  <description>Helps you learn KDE programs</description>
+  
+  <card image='ktuberling.svg' />
+  <card image='kalgebra.svg' />
+  <card image='okular.svg' />
+  <card image='kdevelop.svg' />
+  <card image='kopete.svg' />
+  <card image='konqueror.svg' />
+  <card image='dolphin.svg' />
+</memory>

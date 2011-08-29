@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<memory>
+  <back>Tux.svg</back>
+  <name>Linux Flavours</name>
+  <description>Some of Linux Distributions</description>
+  
+  <card image='centos_logo.svg' />
+  <card image='debian-logo.svg' />
+  <card image='fedora-logo.svg' />
+  <card image='gentoo-logo.svg' />
+  <card image='knoppix-logo.svg' />
+  <card image='mandrake_logo.svg' />
+  <card image='mint-logo.svg' />
+  <card image='redhat-logo.svg' />
+  <card image='suse_logo.svg' />
+  <card image='ubuntu-logo.svg' />
+</memory>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<memory>
+  <back>vaca.svg</back>
+  <name>Animals</name>
+  <description>Some animals</description>
+  
+  <card image='caine2.svg ' />
+  <card image='caine.svg' />
+  <card image='cocos2.svg' />
+  <card image='cocos.svg' />
+  <card image='gaina1.svg' />
+  <card image='gaina2.svg' />
+  <card image='rata1.svg' />
+  <card image='rata2.svg' />
+  <card image='vaca2.svg' />
+  <card image='vaca3.svg' />
+  <card image='vaca4.svg' />
+</memory>
