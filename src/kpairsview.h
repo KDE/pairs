@@ -27,19 +27,19 @@
 
 class MemoryTheme;
 class CardItem;
-class kmemoryView : public QGraphicsView
+class kpairsView : public QGraphicsView
 {
     Q_OBJECT
 public:
     /**
      * Default constructor
      */
-    kmemoryView(QWidget *parent);
+    kpairsView(QWidget *parent);
 
     /**
      * Destructor
      */
-    virtual ~kmemoryView();
+    virtual ~kpairsView();
     
     void setRowSize(int itemsPerRow);
     void newGame(const MemoryTheme& theme, int rows, int columns);
@@ -53,4 +53,4 @@ private:
     QSizeF m_cardsSize;
 };
 
-#endif // kmemoryVIEW_H
+#endif // kpairsVIEW_H

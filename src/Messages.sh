@@ -1,3 +1,3 @@
 #! /usr/bin/env bash
 $EXTRACTRC `find . -name \*.rc` >> rc.cpp
-$XGETTEXT *.cpp -o $podir/kmemory.pot
+$XGETTEXT *.cpp -o $podir/kpairs.pot

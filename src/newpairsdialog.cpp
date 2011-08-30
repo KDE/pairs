@@ -19,15 +19,15 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "newmemorydialog.h"
+#include "newpairsdialog.h"
 #include <KLocalizedString>
 #include <KStandardDirs>
 #include <QBoxLayout>
 #include <QListWidget>
 #include <QDebug>
 
-#include "ui_newmemorydialog.h"
-#include "memorytheme.h"
+#include "ui_newpairsdialog.h"
+#include "pairstheme.h"
 
 NewMemoryDialog::NewMemoryDialog(QWidget* parent)
     : QDialog(parent)
@@ -35,7 +35,7 @@ NewMemoryDialog::NewMemoryDialog(QWidget* parent)
 {
     m_ui->setupUi(this);
     
-    const QStringList themes = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "themes/*.memory.*" ));
+    const QStringList themes = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "themes/*.pairs.*" ));
     foreach(const QString& themePath, themes) {
         MemoryTheme theme(themePath);
         

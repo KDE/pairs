@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<memory>
+<pairs>
   <back>Tux.svg</back>
   <name>Linux Flavours</name>
   <description>Some of Linux Distributions</description>
@@ -15,4 +15,4 @@
   <card image='redhat-logo.svg' />
   <card image='suse_logo.svg' />
   <card image='ubuntu-logo.svg' />
-</memory>
+</pairs>

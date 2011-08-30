@@ -1,4 +1,5 @@
 /*
+ *  Copyright (C) <2008>       <Albert Astals Cid>   <aacid@kde.org>
  *  Copyright (C) <2010>       <Aleix Pol>           <aleixpol@kde.org>
  *
  *  This program is free software; you can redistribute it and/or
@@ -18,27 +19,40 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef NEWMEMORYDIALOG_H
-#define NEWMEMORYDIALOG_H
+#ifndef KMEMORY_H
+#define KMEMORY_H
 
-#include <kdialog.h>
-#include "memorytheme.h"
 
-namespace Ui { class NewMemoryDialog; }
+#include <kxmlguiwindow.h>
 
-class NewMemoryDialog
-    : public QDialog
+class kpairsView;
+class KToggleAction;
+
+class kpairs : public KXmlGuiWindow
 {
     Q_OBJECT
-    public:
-        explicit NewMemoryDialog(QWidget* parent = 0);
-        MemoryTheme theme() const;
-        int rows() const;
-        int columns() const;
-        
-    private:
-        Ui::NewMemoryDialog* m_ui;
-        QList<MemoryTheme> m_themes;
+public:
+    /**
+     * Default Constructor
+     */
+    kpairs();
+
+    /**
+     * Default Destructor
+     */
+    virtual ~kpairs();
+
+private slots:
+    void newGame();
+    
+private:
+    void setupActions();
+
+private:
+    kpairsView *m_view;
+
+    KToggleAction *m_toolbarAction;
+    KToggleAction *m_statusbarAction;
 };
 
-#endif // NEWMEMORYDIALOG_H
+#endif // _KMEMORY_H_

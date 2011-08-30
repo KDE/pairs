@@ -2,7 +2,7 @@
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
   <!-- Define an entity for your application if it is not part of KDE
        CVS -->
-  <!ENTITY kmyapplication "<application>kmemory</application>">
+  <!ENTITY kmyapplication "<application>kpairs</application>">
   <!ENTITY kappname "&kmyapplication;"><!-- replace kmyapplication here
                                             do *not* replace kappname-->
   <!ENTITY package "kde-module"><!-- kdebase, kdeadmin, etc.  Leave
@@ -514,7 +514,7 @@ information here.
 <para>
 In order to successfully use &kmyapplication;, you need &kde; 1.1. Foobar.lib is
 required in order to support the advanced &kmyapplication; features. &kmyapplication; uses
-about 5 megs of memory to run, but this may vary depending on your
+about 5 megs of pairs to run, but this may vary depending on your
 platform and configuration.
 </para>
 

@@ -18,7 +18,7 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-project(kmemory)
+project(kpairs)
 
 find_package(KDE4 REQUIRED)
 include (KDE4Defaults)

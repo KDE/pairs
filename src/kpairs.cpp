@@ -19,8 +19,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "kmemory.h"
-#include "kmemoryview.h"
+#include "kpairs.h"
+#include "kpairsview.h"
 #include "settings.h"
 
 #include <QtGui/QDropEvent>
@@ -37,11 +37,11 @@
 #include <kstandardaction.h>
 
 #include <KDE/KLocale>
-#include "newmemorydialog.h"
+#include "newpairsdialog.h"
 
-kmemory::kmemory()
+kpairs::kpairs()
     : KXmlGuiWindow(),
-      m_view(new kmemoryView(this))
+      m_view(new kpairsView(this))
 {
     // accept dnd
     setAcceptDrops(true);
@@ -65,17 +65,17 @@ kmemory::kmemory()
     QMetaObject::invokeMethod(this, "newGame", Qt::QueuedConnection);
 }
 
-kmemory::~kmemory()
+kpairs::~kpairs()
 {
 }
 
-void kmemory::setupActions()
+void kpairs::setupActions()
 {
     KStandardAction::open(this, SLOT(newGame()), actionCollection());
     KStandardAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
 }
 
-void kmemory::newGame()
+void kpairs::newGame()
 {
     NewMemoryDialog dialog;
     
@@ -84,4 +84,4 @@ void kmemory::newGame()
     }
 }
 
-#include "kmemory.moc"
+#include "kpairs.moc"

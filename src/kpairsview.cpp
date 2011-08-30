@@ -20,18 +20,18 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "kmemoryview.h"
+#include "kpairsview.h"
 #include "carditem.h"
 #include <QDebug>
 #include <QPropertyAnimation>
 #include <QGraphicsRotation>
-#include "memorytheme.h"
+#include "pairstheme.h"
 #include <QDate>
 #include <QTimer>
 #include <QSvgRenderer>
 #include <KTar>
 
-kmemoryView::kmemoryView(QWidget *parent)
+kpairsView::kpairsView(QWidget *parent)
     : QGraphicsView(parent), m_last(0)
 {
     setScene(new QGraphicsScene(this));
@@ -40,10 +40,10 @@ kmemoryView::kmemoryView(QWidget *parent)
     qsrand(QTime::currentTime().msec()*QTime::currentTime().second());
 }
 
-kmemoryView::~kmemoryView()
+kpairsView::~kpairsView()
 {}
 
-void kmemoryView::cardSelected(CardItem* card)
+void kpairsView::cardSelected(CardItem* card)
 {
     Q_ASSERT(card);
     
@@ -61,7 +61,7 @@ void kmemoryView::cardSelected(CardItem* card)
         m_last=card;
 }
 
-void kmemoryView::setRowSize(int itemsPerRow)
+void kpairsView::setRowSize(int itemsPerRow)
 {
     int i=0;
     
@@ -77,7 +77,7 @@ void kmemoryView::setRowSize(int itemsPerRow)
     }
 }
 
-void kmemoryView::newGame(const MemoryTheme& theme, int rows, int columns)
+void kpairsView::newGame(const MemoryTheme& theme, int rows, int columns)
 {
     qDeleteAll(m_cards);
     m_cards.clear();
@@ -108,4 +108,4 @@ void kmemoryView::newGame(const MemoryTheme& theme, int rows, int columns)
     setRowSize(columns);
 }
 
-#include "kmemoryview.moc"
+#include "kpairsview.moc"

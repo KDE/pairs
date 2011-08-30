@@ -19,9 +19,9 @@
 
 macro(create_theme _baseName)
     if(WIN32)
-        set(_template ${CMAKE_CURRENT_BINARY_DIR}/${_baseName}.memory.zip)
+        set(_template ${CMAKE_CURRENT_BINARY_DIR}/${_baseName}.pairs.zip)
     else(WIN32)
-        set(_template ${CMAKE_CURRENT_BINARY_DIR}/${_baseName}.memory.tar.bz2)
+        set(_template ${CMAKE_CURRENT_BINARY_DIR}/${_baseName}.pairs.tar.bz2)
     endif(WIN32)
     
     file(GLOB _files "${CMAKE_CURRENT_SOURCE_DIR}/${_template}/*")
@@ -44,7 +44,7 @@ macro(create_theme _baseName)
         )
     endif(WIN32)
     
-    install(FILES ${_template} DESTINATION ${DATA_INSTALL_DIR}/kmemory/themes)
+    install(FILES ${_template} DESTINATION ${DATA_INSTALL_DIR}/kpairs/themes)
 endmacro(create_theme)
 
 create_theme(kde)

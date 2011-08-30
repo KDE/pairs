@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<memory>
+<pairs>
   <back>vaca.svg</back>
   <name>Animals</name>
   <description>Some animals</description>
@@ -16,4 +16,4 @@
   <card image='vaca2.svg' />
   <card image='vaca3.svg' />
   <card image='vaca4.svg' />
-</memory>
+</pairs>

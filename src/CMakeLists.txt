@@ -19,25 +19,25 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-set(kmemory_SRCS memorytheme.cpp newmemorydialog.cpp carditem.cpp
-   kmemory.cpp
+set(kpairs_SRCS pairstheme.cpp newpairsdialog.cpp carditem.cpp
+   kpairs.cpp
    main.cpp
-   kmemoryview.cpp
+   kpairsview.cpp
  )
 
-kde4_add_ui_files(kmemory_SRCS newmemorydialog.ui)
+kde4_add_ui_files(kpairs_SRCS newpairsdialog.ui)
 
-kde4_add_kcfg_files(kmemory_SRCS settings.kcfgc )
+kde4_add_kcfg_files(kpairs_SRCS settings.kcfgc )
 
-kde4_add_executable(kmemory ${kmemory_SRCS})
+kde4_add_executable(kpairs ${kpairs_SRCS})
 
-target_link_libraries(kmemory ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS})
+target_link_libraries(kpairs ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS})
 
-install(TARGETS kmemory ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS kpairs ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 
 ########### install files ###############
 
-install( FILES kmemory.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
-install( FILES kmemory.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
-install( FILES kmemoryui.rc  DESTINATION  ${DATA_INSTALL_DIR}/kmemory )
+install( FILES kpairs.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
+install( FILES kpairs.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
+install( FILES kpairsui.rc  DESTINATION  ${DATA_INSTALL_DIR}/kpairs )

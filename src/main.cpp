@@ -18,7 +18,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "kmemory.h"
+#include "kpairs.h"
 #include <KDE/KApplication>
 #include <KDE/KAboutData>
 #include <KDE/KCmdLineArgs>
@@ -31,7 +31,7 @@ static const char version[] = "0.1";
 
 int main(int argc, char **argv)
 {
-    KAboutData about("kmemory", 0, ki18n("kmemory"), version, ki18n(description),
+    KAboutData about("kpairs", 0, ki18n("kpairs"), version, ki18n(description),
                      KAboutData::License_GPL, ki18n("(C) 2007 Albert Astals Cid"), KLocalizedString(), 0, "aacid@kde.org");
     about.addAuthor( ki18n("Albert Astals Cid"), KLocalizedString(), "aacid@kde.org" );
     KCmdLineArgs::init(argc, argv, &about);
@@ -41,12 +41,12 @@ int main(int argc, char **argv)
     KCmdLineArgs::addCmdLineOptions(options);
     KApplication app;
 
-    kmemory *widget = new kmemory;
+    kpairs *widget = new kpairs;
 
     // see if we are starting with session management
     if (app.isSessionRestored())
     {
-        RESTORE(kmemory);
+        RESTORE(kpairs);
     }
     else
     {
@@ -54,7 +54,7 @@ int main(int argc, char **argv)
         KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
         if (args->count() == 0)
         {
-            //kmemory *widget = new kmemory;
+            //kpairs *widget = new kpairs;
             widget->show();
         }
         else
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
             int i = 0;
             for (; i < args->count(); i++)
             {
-                //kmemory *widget = new kmemory;
+                //kpairs *widget = new kpairs;
                 widget->show();
             }
         }

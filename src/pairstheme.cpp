@@ -19,7 +19,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "memorytheme.h"
+#include "pairstheme.h"
 #include <QXmlStreamReader>
 #include <QFile>
 #include <QDebug>
@@ -68,7 +68,7 @@ MemoryTheme::MemoryTheme(const QString& path)
             else if(name=="description") m_name = m_data;
             else if(name=="back") m_backName = m_data;
             else if(name=="name") m_name = m_data;
-            else if(name=="card" || name=="memory") {}
+            else if(name=="card" || name=="pairs") {}
             else
                 m_error = i18n("Unknown item '%1' found", reader.name().toString());
         } else {
