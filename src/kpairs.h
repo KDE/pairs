@@ -53,7 +53,7 @@ private slots:
     
 private:
     void setupActions();
-    void setStatusBar();
+    void setScore();
 
 private:
     kpairsView *m_view;

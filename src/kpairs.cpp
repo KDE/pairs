@@ -86,7 +86,7 @@ void kpairs::update()
 {
 //    qDebug() << "update";
     (*m_gameduration) = m_gameduration->addSecs(1);
-    setStatusBar();
+    setScore();
 }
 
 void kpairs::newGame()
@@ -107,16 +107,16 @@ void kpairs::newGame()
 void kpairs::inc_missed()
 {
    m_missed++;
-   setStatusBar();
+   setScore();
 }
 
 void kpairs::inc_found()
 {
    m_found++;
-   setStatusBar();
+   setScore();
 }
 
-void kpairs::setStatusBar()
+void kpairs::setScore()
 {
    QString missed, found;
    missed.setNum(m_missed);
