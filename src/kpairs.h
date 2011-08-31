@@ -24,6 +24,8 @@
 
 
 #include <kxmlguiwindow.h>
+#include <QTimer>
+#include <QTime>
 
 class kpairsView;
 class KToggleAction;
@@ -44,6 +46,7 @@ public:
 public slots:
     void inc_missed();
     void inc_found();
+    void update();
 
 private slots:
     void newGame();
@@ -59,6 +62,8 @@ private:
     int m_found;
     KToggleAction *m_toolbarAction;
     KToggleAction *m_statusbarAction;
+    QTimer *m_timer;
+    QTime *m_gameduration;
 };
 
 #endif // _KMEMORY_H_

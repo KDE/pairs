@@ -46,7 +46,10 @@ kpairs::kpairs()
 {
     m_missed = 0;
     m_found = 0;
-        
+    m_timer = new QTimer(this);
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
+    m_gameduration = new QTime(0,0,0,0);
+                
     // accept dnd
     setAcceptDrops(true);
 
@@ -79,6 +82,13 @@ void kpairs::setupActions()
     KStandardAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
 }
 
+void kpairs::update()
+{
+//    qDebug() << "update";
+    (*m_gameduration) = m_gameduration->addSecs(1);
+    setStatusBar();
+}
+
 void kpairs::newGame()
 {
     NewMemoryDialog dialog;
@@ -87,6 +97,7 @@ void kpairs::newGame()
     if(dialog.exec()==QDialog::Accepted) {
         m_view->newGame(dialog.theme(), dialog.rows(), dialog.columns());
     }
+    m_timer->start(1000);
     statusBar()->showMessage(tr("New Game started"));
 }
 
@@ -107,11 +118,12 @@ void kpairs::setStatusBar()
    QString missed, found;
    missed.setNum(m_missed);
    found.setNum(m_found);
-   QString line("Score: pairs missed: ");
-   line += missed + " pairs found: " + found;
+   QString line("Duration ");
+   line += m_gameduration->toString("hh:mm:ss") + " - pairs missed: " + missed + " pairs found: " + found;
    statusBar()->showMessage(line);
    if(m_found == m_view->cardsNum()/2)
    {
+       m_timer->stop();
        QString endline ("Congratulations you finished the game\n");
        KMessageBox::information	(this, endline + line, "Congratulations");
    }
