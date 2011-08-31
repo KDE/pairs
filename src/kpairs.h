@@ -24,9 +24,6 @@
 
 
 #include <kxmlguiwindow.h>
-#include <QDockWidget>
-#include <QVBoxLayout>
-
 
 class kpairsView;
 class KToggleAction;
@@ -54,10 +51,6 @@ private:
 private:
     kpairsView *m_view;
 
-	QVBoxLayout *m_layout;
-	QDockWidget *m_score;
-	QDockWidget *m_menu;
-	QWidget *m_main;
     KToggleAction *m_toolbarAction;
     KToggleAction *m_statusbarAction;
 };

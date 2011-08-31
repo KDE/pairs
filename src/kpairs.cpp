@@ -46,21 +46,8 @@ kpairs::kpairs()
     // accept dnd
     setAcceptDrops(true);
 
-
-	m_layout = new QVBoxLayout;
-	m_score = new QDockWidget(this);
-	m_menu = new QDockWidget(this);
-    m_score->show();
-    m_menu->show();
-    m_layout->setAlignment(Qt::AlignTop);
-
-    m_layout->addWidget(m_menu);
-    m_layout->addWidget(m_view);
-    m_layout->addWidget(m_score);
-    m_main = new QWidget(this);
-    m_main->setLayout(m_layout);
     // tell the KXmlGuiWindow that this is indeed the main widget
-    setCentralWidget(m_main);
+    setCentralWidget(m_view);
 
     // then, setup our actions
     setupActions();
