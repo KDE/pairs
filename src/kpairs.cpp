@@ -97,6 +97,9 @@ void kpairs::newGame()
     if(dialog.exec()==QDialog::Accepted) {
         m_view->newGame(dialog.theme(), dialog.rows(), dialog.columns());
     }
+    m_missed = 0;
+    m_found = 0;
+    m_gameduration->setHMS(0,0,0);
     m_timer->start(1000);
     statusBar()->showMessage(tr("New Game started"));
 }
@@ -126,9 +129,6 @@ void kpairs::setStatusBar()
        m_timer->stop();
        QString endline ("Congratulations you finished the game\n");
        KMessageBox::information	(this, endline + line, "Congratulations");
-       m_missed = 0;
-       m_found = 0;
-       m_gameduration->setHMS(0,0,0);
    }
 }
 
