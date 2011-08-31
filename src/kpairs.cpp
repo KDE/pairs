@@ -118,17 +118,12 @@ void kpairs::inc_found()
 
 void kpairs::setScore()
 {
-   QString missed, found;
-   missed.setNum(m_missed);
-   found.setNum(m_found);
-   QString line("Duration ");
-   line += m_gameduration->toString("hh:mm:ss") + " - pairs missed: " + missed + " pairs found: " + found;
+   QString line = i18n("Duration %1 - pairs missed: %2 pairs found: %3", m_gameduration->toString("hh:mm:ss"), m_missed, m_found);
    statusBar()->showMessage(line);
    if(m_found == m_view->cardsNum()/2)
    {
        m_timer->stop();
-       QString endline ("Congratulations you finished the game\n");
-       KMessageBox::information	(this, endline + line, "Congratulations");
+       KMessageBox::information	(this, i18n("Congratulations you finished the game\n%1", line), i18n("Congratulations"));
    }
 }
 
