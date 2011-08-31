@@ -126,6 +126,9 @@ void kpairs::setStatusBar()
        m_timer->stop();
        QString endline ("Congratulations you finished the game\n");
        KMessageBox::information	(this, endline + line, "Congratulations");
+       m_missed = 0;
+       m_found = 0;
+       m_gameduration->setHMS(0,0,0);
    }
 }
 
