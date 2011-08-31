@@ -1,48 +1,27 @@
 <?xml version="1.0"?>
+
 <pairs>
-
   <title>Zoo</title>
-  <description>littel zoo</description>
+  <description>Little zoo</description> <!--todo: we'll have to figure out how to get this translated-->
   <author>Marco Calignano</author>
-  <back>zoo.svg</back>
+  <date>21/03/2012</date> <!-- can be useful for versioning?-->
 
-  <!-- these are all the language supported to pair iamge-word -->
-  <language>english<\language>
-  <language>italian<\language>
-  <language>german<\language>
+  <!-- we can use the same semantics as in the elements -->
+  <sound type='missed' src='missed.ogg' />
+  <sound type='found' src='found.ogg' />
+  <image type='back' src='zoo.svg' />
 
-  <!-- different sounds for card turning, for match found and match missed -->
-  <sound type='turn'> turning.wav</sound>  
-  <sound type='missed'> missed.wav</sound>  
-  <sound type='found'> found.wav</sound>  
-
-  <!-- the level section set how many elements the program takes -->
-  <!-- when the user choose the level difficulty -->
-  <!-- for example level medium has 4 elements so 8 cards -->
-  <level>
-     <trivial>2<\trivial>
-     <easy>3<\easy>
-     <medium>4<\medium>
-     <difficult>5<\difficult>
-     <master>6<\master>
-  </level>
+  <main type='image' />
 
   <!-- now come the list of the elements -->
   <element>
-    <!-- each element has a main this tells the program -->
-    <!-- which object to use for the first element of a couple -->
-    <!-- in this case the image -->
-    <!-- in this way we could have sound and words or sound and video -->
-    <main>image</main>
-    <sound>lion.wav</sound>
-    <video>lion.avi</video>
-    <!-- here come a list of words one for each language define above -->
-    <word lang=english>lion</word>
-    <word lang=italian>leone</word>
-    <word lang=german>loewe</word>
-    <image>lion.svg</image>
-    <!-- other image is to pair one image with a different but related one -->
-    <otherimage>baby_lion.svg</otherimage>
-  </element>
+    <sound src='lion.ogg' />
+    <video src='lion.ogv' />
+    <image src='lion.svg' pref='1'/>
+    <image src='baby_lion.svg' pref='2'/>
 
+    <word lang='en'>lion</word>
+    <word lang='it'>leone</word>
+    <word lang='de'>loewe</word>
+  </element>
 </pairs>
