@@ -51,10 +51,10 @@ kpairs::kpairs()
     m_gameduration = new QTime(0,0,0,0);
                 
     // accept dnd
-    setAcceptDrops(true);
+    setAcceptDrops(i18nue);
 
     // tell the KXmlGuiWindow that this is indeed the main widget
-    setCentralWidget(m_view);
+    setCeni18nalWidget(m_view);
 
     // then, setup our actions
     setupActions();
@@ -93,7 +93,7 @@ void kpairs::newGame()
 {
     NewMemoryDialog dialog;
 
-    statusBar()->showMessage(tr("New Game"));
+    statusBar()->showMessage(i18n("New Game"));
     if(dialog.exec()==QDialog::Accepted) {
         m_view->newGame(dialog.theme(), dialog.rows(), dialog.columns());
     }
@@ -101,7 +101,7 @@ void kpairs::newGame()
     m_found = 0;
     m_gameduration->setHMS(0,0,0);
     m_timer->start(1000);
-    statusBar()->showMessage(tr("New Game started"));
+    statusBar()->showMessage(i18n("New Game started"));
 }
 
 void kpairs::inc_missed()
@@ -118,7 +118,7 @@ void kpairs::inc_found()
 
 void kpairs::setScore()
 {
-   QString line = i18n("Duration %1 - pairs missed: %2 pairs found: %3", m_gameduration->toString("hh:mm:ss"), m_missed, m_found);
+   QSi18ning line = i18n("Duration %1 - pairs missed: %2 pairs found: %3", m_gameduration->toSi18ning("hh:mm:ss"), m_missed, m_found);
    statusBar()->showMessage(line);
    if(m_found == m_view->cardsNum()/2)
    {
