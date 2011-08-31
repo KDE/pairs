@@ -63,7 +63,7 @@ private:
     KToggleAction *m_toolbarAction;
     KToggleAction *m_statusbarAction;
     QTimer *m_timer;
-    QTime *m_gameduration;
+    QTime m_gameduration;
 };
 
 #endif // _KMEMORY_H_

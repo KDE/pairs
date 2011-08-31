@@ -41,20 +41,19 @@
 #include "newpairsdialog.h"
 
 kpairs::kpairs()
-    : KXmlGuiWindow(),
-      m_view(new kpairsView(this))
+    : KXmlGuiWindow()
+    , m_view(new kpairsView(this))
+    , m_missed(0)
+    , m_found(0)
 {
-    m_missed = 0;
-    m_found = 0;
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
-    m_gameduration = new QTime(0,0,0,0);
                 
     // accept dnd
-    setAcceptDrops(i18nue);
+    setAcceptDrops(true);
 
     // tell the KXmlGuiWindow that this is indeed the main widget
-    setCeni18nalWidget(m_view);
+    setCentralWidget(m_view);
 
     // then, setup our actions
     setupActions();
@@ -85,7 +84,6 @@ void kpairs::setupActions()
 void kpairs::update()
 {
 //    qDebug() << "update";
-    (*m_gameduration) = m_gameduration->addSecs(1);
     setScore();
 }
 
@@ -99,7 +97,7 @@ void kpairs::newGame()
     }
     m_missed = 0;
     m_found = 0;
-    m_gameduration->setHMS(0,0,0);
+    m_gameduration.start();
     m_timer->start(1000);
     statusBar()->showMessage(i18n("New Game started"));
 }
@@ -118,7 +116,9 @@ void kpairs::inc_found()
 
 void kpairs::setScore()
 {
-   QSi18ning line = i18n("Duration %1 - pairs missed: %2 pairs found: %3", m_gameduration->toSi18ning("hh:mm:ss"), m_missed, m_found);
+   int dur=m_gameduration.elapsed()/1000;
+   QTime dd(0,0, dur);
+   QString line = i18n("Duration %1 - pairs missed: %2 pairs found: %3", dd.toString("mm:ss"), m_missed, m_found);
    statusBar()->showMessage(line);
    if(m_found == m_view->cardsNum()/2)
    {
