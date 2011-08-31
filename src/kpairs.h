@@ -41,16 +41,22 @@ public:
      * Default Destructor
      */
     virtual ~kpairs();
+public slots:
+    void inc_missed();
+    void inc_found();
 
 private slots:
     void newGame();
     
 private:
     void setupActions();
+    void setStatusBar();
 
 private:
     kpairsView *m_view;
 
+    int m_missed;
+    int m_found;
     KToggleAction *m_toolbarAction;
     KToggleAction *m_statusbarAction;
 };

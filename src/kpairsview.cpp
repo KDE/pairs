@@ -34,6 +34,8 @@
 kpairsView::kpairsView(QWidget *parent)
     : QGraphicsView(parent), m_last(0)
 {
+    QObject::connect(this, SIGNAL(pair_missed()), parent, SLOT(inc_missed()));
+    QObject::connect(this, SIGNAL(pair_found()), parent, SLOT(inc_found()));
     setScene(new QGraphicsScene(this));
     
     m_cardsSize=QSizeF(128,128);
@@ -52,14 +54,22 @@ void kpairsView::cardSelected(CardItem* card)
         if(m_last->data(0)==card->data(0)) {
             m_last->markDone();
             card->markDone();
+            emit pair_found();
         } else {
             QTimer::singleShot(500, card, SLOT(turn()));
             QTimer::singleShot(500, m_last, SLOT(turn()));
+            emit pair_missed();
         }
         m_last=0;
     } else
         m_last=card;
 }
+
+int kpairsView::cardsNum()
+{
+   return m_cards.count();
+}
+
 
 void kpairsView::setRowSize(int itemsPerRow)
 {

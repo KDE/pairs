@@ -33,6 +33,7 @@
 
 #include <kaction.h>
 #include <KToolBar>
+#include <KMessageBox>
 #include <kactioncollection.h>
 #include <kstandardaction.h>
 
@@ -43,6 +44,9 @@ kpairs::kpairs()
     : KXmlGuiWindow(),
       m_view(new kpairsView(this))
 {
+    m_missed = 0;
+    m_found = 0;
+        
     // accept dnd
     setAcceptDrops(true);
 
@@ -78,10 +82,39 @@ void kpairs::setupActions()
 void kpairs::newGame()
 {
     NewMemoryDialog dialog;
-    
+
+    statusBar()->showMessage(tr("New Game"));
     if(dialog.exec()==QDialog::Accepted) {
         m_view->newGame(dialog.theme(), dialog.rows(), dialog.columns());
     }
+    statusBar()->showMessage(tr("New Game started"));
+}
+
+void kpairs::inc_missed()
+{
+   m_missed++;
+   setStatusBar();
+}
+
+void kpairs::inc_found()
+{
+   m_found++;
+   setStatusBar();
+}
+
+void kpairs::setStatusBar()
+{
+   QString missed, found;
+   missed.setNum(m_missed);
+   found.setNum(m_found);
+   QString line("Score: pairs missed: ");
+   line += missed + " pairs found: " + found;
+   statusBar()->showMessage(line);
+   if(m_found == m_view->cardsNum()/2)
+   {
+       QString endline ("Congratulations you finished the game\n");
+       KMessageBox::information	(this, endline + line, "Congratulations");
+   }
 }
 
 #include "kpairs.moc"

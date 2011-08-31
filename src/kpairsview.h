@@ -43,13 +43,18 @@ public:
     
     void setRowSize(int itemsPerRow);
     void newGame(const MemoryTheme& theme, int rows, int columns);
+    int cardsNum();
+
+signals:
+    void pair_missed();
+    void pair_found();
+    
 public slots:
     void cardSelected(CardItem* cardData);
     
 private:
     CardItem* m_last;
     QList<CardItem*> m_cards;
-    
     QSizeF m_cardsSize;
 };
 
