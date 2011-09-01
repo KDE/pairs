@@ -23,6 +23,7 @@ set(kpairs_SRCS pairstheme.cpp newpairsdialog.cpp carditem.cpp
    kpairs.cpp
    main.cpp
    kpairsview.cpp
+   kpairsplayer.cpp
  )
 
 kde4_add_ui_files(kpairs_SRCS newpairsdialog.ui)

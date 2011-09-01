@@ -25,7 +25,8 @@
 
 #include <kxmlguiwindow.h>
 #include <QTimer>
-#include <QTime>
+#include <QList>
+#include <kpairsplayer.h>
 
 class kpairsView;
 class KToggleAction;
@@ -57,13 +58,12 @@ private:
 
 private:
     kpairsView *m_view;
-
-    int m_missed;
+    QList<KPairsPlayer> m_players;
+    int m_currentplayer;
     int m_found;
     KToggleAction *m_toolbarAction;
     KToggleAction *m_statusbarAction;
     QTimer *m_timer;
-    QTime m_gameduration;
 };
 
 #endif // _KMEMORY_H_

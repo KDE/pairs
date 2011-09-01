@@ -43,9 +43,13 @@
 kpairs::kpairs()
     : KXmlGuiWindow()
     , m_view(new kpairsView(this))
-    , m_missed(0)
+    , m_players()
     , m_found(0)
 {
+	QString myname("player1");
+	m_players.append(KPairsPlayer(myname));
+	myname = "player2";
+	m_players.append(KPairsPlayer(myname));
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
                 
@@ -84,6 +88,7 @@ void kpairs::setupActions()
 void kpairs::update()
 {
 //    qDebug() << "update";
+	m_players[m_currentplayer].incSeconds();
     setScore();
 }
 
@@ -95,35 +100,55 @@ void kpairs::newGame()
     if(dialog.exec()==QDialog::Accepted) {
         m_view->newGame(dialog.theme(), dialog.rows(), dialog.columns());
     }
-    m_missed = 0;
     m_found = 0;
-    m_gameduration.start();
+    for (int i = 0; i < m_players.size(); ++i) {
+         m_players[i].reset();
+    }
+    m_currentplayer = 0;
     m_timer->start(1000);
     statusBar()->showMessage(i18n("New Game started"));
 }
 
 void kpairs::inc_missed()
 {
-   m_missed++;
-   setScore();
+	m_players[m_currentplayer].incMissed();
+	++m_currentplayer %= m_players.size();
+	setScore();
 }
 
 void kpairs::inc_found()
 {
    m_found++;
+   m_players[m_currentplayer].incFound();
    setScore();
 }
 
 void kpairs::setScore()
 {
-   int dur=m_gameduration.elapsed()/1000;
-   QTime dd(0,0, dur);
-   QString line = i18n("Duration %1 - pairs missed: %2 pairs found: %3", dd.toString("mm:ss"), m_missed, m_found);
+   QTime dd(0,0, m_players[m_currentplayer].seconds());
+   QString line = i18n("%1: Duration %2 - pairs missed: %3 pairs found: %4",
+		   m_players[m_currentplayer].name(),
+		   dd.toString("mm:ss"),
+		   m_players[m_currentplayer].missed(),
+		   m_players[m_currentplayer].found()
+   );
    statusBar()->showMessage(line);
-   if(m_found == m_view->cardsNum()/2)
+   if(m_found == m_view->cardsNum()/2 && m_view->cardsNum() != 0)
    {
        m_timer->stop();
-       KMessageBox::information	(this, i18n("Congratulations you finished the game\n%1", line), i18n("Congratulations"));
+	   QString final_line (i18n("Congratulations you finished the game\n"));
+	   for(int i = 0; i < m_players.size(); ++i)
+	   {
+		   dd.setHMS(0,0,0);
+
+		   final_line += i18n("%1: Duration %2 - pairs missed: %3 pairs found: %4\n",
+				   	   	   m_players[i].name(),
+				   	   	   dd.addSecs(m_players[i].seconds()).toString("mm:ss"),
+				   	   	   m_players[i].missed(),
+				   	   	   m_players[i].found()
+		                 );
+	   }
+	   KMessageBox::information(this, final_line, i18n("Congratulations"));
    }
 }
 
