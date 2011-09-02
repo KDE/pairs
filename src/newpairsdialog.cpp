@@ -23,17 +23,31 @@
 #include <KLocalizedString>
 #include <KStandardDirs>
 #include <QBoxLayout>
+#include <QList>
 #include <QListWidget>
+#include <QPushButton>
 #include <QDebug>
 
 #include "ui_newpairsdialog.h"
 #include "pairstheme.h"
 
+
 NewMemoryDialog::NewMemoryDialog(QWidget* parent)
     : QDialog(parent)
     , m_ui(new Ui::NewMemoryDialog)
 {
-    m_ui->setupUi(this);
+	m_ui->setupUi(this);
+	QPushButton *addButton = new QPushButton(tr("&Add"));
+	addButton->setDefault(true);
+
+    QPushButton *delButton = new QPushButton(tr("&Delete"));
+	addButton->setDefault(true);
+
+	m_ui->playerButtons->clear();
+	m_ui->playerButtons->addButton(addButton, QDialogButtonBox::ActionRole);
+	m_ui->playerButtons->addButton(delButton, QDialogButtonBox::ActionRole);
+	connect(addButton, SIGNAL(clicked()), this, SLOT(add_user()));
+	connect(delButton, SIGNAL(clicked()), this, SLOT(del_user()));
     
     const QStringList themes = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "themes/*.pairs.*" ));
     foreach(const QString& themePath, themes) {
@@ -53,4 +67,25 @@ MemoryTheme NewMemoryDialog::theme() const
 {
     int row = m_ui->themesList->currentRow();
     return m_themes.at(row);
+}
+
+const QStringList NewMemoryDialog::players()
+{
+	QStringList result;
+	for (int i = 0; i < m_ui->playerList->count(); i++)
+	{
+		result << m_ui->playerList->item(i)->text();
+	}
+	return result;
+}
+
+void NewMemoryDialog::add_user()
+{
+	m_ui->playerList->addItem(m_ui->playerName->toPlainText());
+	m_ui->playerName->clear();
+}
+
+void NewMemoryDialog::del_user()
+{
+	delete m_ui->playerList->item(0);
 }

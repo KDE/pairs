@@ -20,7 +20,7 @@
 
 #include "kpairsplayer.h"
 
-KPairsPlayer::KPairsPlayer(QString &name)
+KPairsPlayer::KPairsPlayer(const QString &name)
  : m_name(name)
 {
 	reset();

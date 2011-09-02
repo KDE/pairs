@@ -46,10 +46,6 @@ kpairs::kpairs()
     , m_players()
     , m_found(0)
 {
-	QString myname("player1");
-	m_players.append(KPairsPlayer(myname));
-	myname = "player2";
-	m_players.append(KPairsPlayer(myname));
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
                 
@@ -98,8 +94,21 @@ void kpairs::newGame()
 
     statusBar()->showMessage(i18n("New Game"));
     if(dialog.exec()==QDialog::Accepted) {
-        m_view->newGame(dialog.theme());
+    	m_players.clear();
+    	for(int i= 0; i < dialog.players().count(); i++)
+    	{
+    		m_players.append(KPairsPlayer(dialog.players().at(i)));
+    	}
+    	m_view->newGame(dialog.theme());
     }
+
+/*
+	QString myname("player1");
+	m_players.append(KPairsPlayer(myname));
+	myname = "player2";
+	m_players.append(KPairsPlayer(myname));
+*/
+
     m_found = 0;
     for (int i = 0; i < m_players.size(); ++i) {
          m_players[i].reset();

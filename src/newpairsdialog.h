@@ -33,7 +33,12 @@ class NewMemoryDialog
     public:
         explicit NewMemoryDialog(QWidget* parent = 0);
         MemoryTheme theme() const;
+        const QStringList players();
         
+    public slots:
+    	void add_user();
+    	void del_user();
+
     private:
         Ui::NewMemoryDialog* m_ui;
         QList<MemoryTheme> m_themes;

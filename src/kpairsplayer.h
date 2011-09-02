@@ -27,7 +27,7 @@ class KPairsPlayer
 {
 
 public:
-	KPairsPlayer(QString &name);
+	KPairsPlayer(const QString &name);
 	~KPairsPlayer(){};
 	void reset();
 	void incMissed() {m_missed++; };
