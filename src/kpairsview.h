@@ -42,7 +42,7 @@ public:
     virtual ~kpairsView();
     
     void setRowSize(int itemsPerRow);
-    void newGame(const MemoryTheme& theme, int rows, int columns);
+    void newGame(const MemoryTheme& theme);
     int cardsNum();
 
 signals:

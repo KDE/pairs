@@ -54,6 +54,3 @@ MemoryTheme NewMemoryDialog::theme() const
     int row = m_ui->themesList->currentRow();
     return m_themes.at(row);
 }
-
-int NewMemoryDialog::columns() const { return m_ui->columns->value(); }
-int NewMemoryDialog::rows() const { return m_ui->rows->value(); }

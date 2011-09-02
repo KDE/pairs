@@ -87,7 +87,7 @@ void kpairsView::setRowSize(int itemsPerRow)
     }
 }
 
-void kpairsView::newGame(const MemoryTheme& theme, int rows, int columns)
+void kpairsView::newGame(const MemoryTheme& theme)
 {
     qDeleteAll(m_cards);
     m_cards.clear();
@@ -96,7 +96,8 @@ void kpairsView::newGame(const MemoryTheme& theme, int rows, int columns)
 	archive.open(QIODevice::ReadOnly);
     
     QList<ThemeItem> items = theme.items();
-    int num=qMin(((rows*columns)/2)*2, items.size()); //we make it %2
+    //int num=qMin(((rows*columns)/2)*2, items.size()); //we make it %2
+    int num = items.size();
     QSvgRenderer backRenderer(((KArchiveFile*)(archive.directory()->entry(theme.backName())))->data());
     for(int i=0; i<num; i++) {
         ThemeItem titem = items.at(i);
@@ -114,8 +115,10 @@ void kpairsView::newGame(const MemoryTheme& theme, int rows, int columns)
     
     while(!cards.isEmpty())
         m_cards += cards.takeAt(qrand()%cards.size());
-    
-    setRowSize(columns);
+    if(num % 2 == 0)
+    	setRowSize(qMax(4, num/2));
+    else
+    	setRowSize((2*num)/3);
 }
 
 #include "kpairsview.moc"

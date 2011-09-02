@@ -98,7 +98,7 @@ void kpairs::newGame()
 
     statusBar()->showMessage(i18n("New Game"));
     if(dialog.exec()==QDialog::Accepted) {
-        m_view->newGame(dialog.theme(), dialog.rows(), dialog.columns());
+        m_view->newGame(dialog.theme());
     }
     m_found = 0;
     for (int i = 0; i < m_players.size(); ++i) {

@@ -33,8 +33,6 @@ class NewMemoryDialog
     public:
         explicit NewMemoryDialog(QWidget* parent = 0);
         MemoryTheme theme() const;
-        int rows() const;
-        int columns() const;
         
     private:
         Ui::NewMemoryDialog* m_ui;
