@@ -76,7 +76,16 @@ const QStringList NewMemoryDialog::players()
 	{
 		result << m_ui->playerList->item(i)->text();
 	}
+	if(result.isEmpty())
+	{
+		result << "Player";
+	}
 	return result;
+}
+
+void NewMemoryDialog::setPlayer(const QString &name)
+{
+	m_ui->playerList->addItem(name);
 }
 
 void NewMemoryDialog::add_user()
