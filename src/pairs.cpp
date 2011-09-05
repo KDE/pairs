@@ -48,7 +48,10 @@ Pairs::Pairs()
 {
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
-                
+    m_media = new Phonon::MediaObject(this);
+    Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput(Phonon::GameCategory, this);
+    createPath(m_media, audioOutput);
+
     // accept dnd
     setAcceptDrops(true);
 
@@ -124,6 +127,8 @@ void Pairs::newGame()
 
 void Pairs::inc_missed()
 {
+	m_media->setCurrentSource(QUrl("file:///usr/share/kde4/apps/themes/wrong.ogg"));
+	m_media->play();
 	m_players[m_currentplayer].incMissed();
 	++m_currentplayer %= m_players.size();
 	setScore();
@@ -131,9 +136,11 @@ void Pairs::inc_missed()
 
 void Pairs::inc_found()
 {
-   m_found++;
-   m_players[m_currentplayer].incFound();
-   setScore();
+	m_media->setCurrentSource(QUrl("file:///usr/share/kde4/apps/themes/right.ogg"));
+	m_media->play();
+    m_found++;
+    m_players[m_currentplayer].incFound();
+    setScore();
 }
 
 void Pairs::setScore()
