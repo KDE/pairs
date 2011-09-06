@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/game" xmlns:tns="http://www.example.org/game" elementFormDefault="qualified">
+
+    <xsd:complexType name="Card">
+    	<xsd:attribute name="Image" type="xsd:string"></xsd:attribute>
+    </xsd:complexType>
+
+<xsd:element name="pairs" minOccurs="1" maxOccurs="1">
+  <xsd:complexType>
+    <xsd:sequence>
+    	<xsd:element name="Name" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+    	<xsd:element name="Description" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+    	<xsd:element name="Date" type="xsd:date" maxOccurs="1" minOccurs="1"/>
+    	<xsd:element name="Back" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+    	<xsd:element name="Card" type="tns:Card" maxOccurs="unbounded" minOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:element>
+
+
+</xsd:schema>
