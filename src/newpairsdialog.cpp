@@ -37,20 +37,15 @@ NewMemoryDialog::NewMemoryDialog(QWidget* parent)
     , m_ui(new Ui::NewMemoryDialog)
 {
 	m_ui->setupUi(this);
-	QPushButton *addButton = new QPushButton(tr("&Add"));
-	addButton->setDefault(true);
-
-    QPushButton *delButton = new QPushButton(tr("&Delete"));
-	addButton->setDefault(true);
-
-	m_ui->playerButtons->clear();
-	m_ui->playerButtons->addButton(addButton, QDialogButtonBox::ActionRole);
-	m_ui->playerButtons->addButton(delButton, QDialogButtonBox::ActionRole);
-	connect(addButton, SIGNAL(clicked()), this, SLOT(add_user()));
-	connect(delButton, SIGNAL(clicked()), this, SLOT(del_user()));
+    m_ui->add->setIcon(KIcon("list-add"));
+    m_ui->remove->setIcon(KIcon("list-remove"));
+    connect(m_ui->add, SIGNAL(clicked()), this, SLOT(addUser()));
+    connect(m_ui->remove, SIGNAL(clicked()), this, SLOT(deleteUser()));
+    connect(m_ui->playerName, SIGNAL(textChanged(QString)), SLOT(playerNameChanged(QString)));
     
     const QStringList themes = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "themes/*.pairs.*" ));
-    foreach(const QString& themePath, themes) {
+    
+    Q_FOREACH(const QString& themePath, themes) {
         MemoryTheme theme(themePath);
         
         if(!theme.isCorrect()) {
@@ -60,7 +55,9 @@ NewMemoryDialog::NewMemoryDialog(QWidget* parent)
             m_themes += theme;
         }
     }
-    m_ui->themesList->setCurrentItem(m_ui->themesList->item(0));
+    
+    m_ui->themesList->setCurrentRow(0);
+    m_ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 }
 
 MemoryTheme NewMemoryDialog::theme() const
@@ -69,13 +66,14 @@ MemoryTheme NewMemoryDialog::theme() const
     return m_themes.at(row);
 }
 
-const QStringList NewMemoryDialog::players()
+QStringList NewMemoryDialog::players()
 {
 	QStringList result;
 	for (int i = 0; i < m_ui->playerList->count(); i++)
 	{
 		result << m_ui->playerList->item(i)->text();
 	}
+	
 	if(result.isEmpty())
 	{
 		result << "Player";
@@ -88,13 +86,27 @@ void NewMemoryDialog::setPlayer(const QString &name)
 	m_ui->playerList->addItem(name);
 }
 
-void NewMemoryDialog::add_user()
+void NewMemoryDialog::addUser()
 {
-	m_ui->playerList->addItem(m_ui->playerName->toPlainText());
+	m_ui->playerList->addItem(m_ui->playerName->text());
+    m_ui->playerList->setCurrentRow(m_ui->playerList->count()-1);
 	m_ui->playerName->clear();
+    
+    m_ui->add->setEnabled(false);
+    m_ui->remove->setEnabled(true);
+    m_ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
 }
 
-void NewMemoryDialog::del_user()
+void NewMemoryDialog::deleteUser()
 {
-	delete m_ui->playerList->item(0);
+    qDeleteAll(m_ui->playerList->selectedItems());
+    
+    bool hasUsers = m_ui->playerList->count()>0;
+    m_ui->remove->setEnabled(hasUsers);
+    m_ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(hasUsers);
+}
+
+void NewMemoryDialog::playerNameChanged(const QString & newname)
+{
+    m_ui->add->setEnabled(!newname.isEmpty());
 }

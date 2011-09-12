@@ -27,20 +27,20 @@ class KPairsPlayer
 {
 
 public:
-	KPairsPlayer(const QString &name);
-	~KPairsPlayer(){};
-	void reset();
-	void incMissed() {m_missed++; };
-	void incFound() {m_found++; };
-	void incSeconds() {m_seconds++; };
-	int missed() {return m_missed; };
-	int found() {return m_found; };
-	int seconds() {return m_seconds; };
-	const QString &name() {return m_name; };
+    KPairsPlayer(const QString &name);
+    ~KPairsPlayer(){};
+    void reset();
+    void incMissed() {m_missed++; };
+    void incFound() {m_found++; };
+    void incSeconds() {m_seconds++; };
+    int missed() {return m_missed; };
+    int found() {return m_found; };
+    int seconds() {return m_seconds; };
+    const QString &name() {return m_name; };
 
 private:
-	QString m_name;
-	int m_missed;
+    QString m_name;
+    int m_missed;
     int m_found;
     int m_seconds;
 

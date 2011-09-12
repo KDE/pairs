@@ -23,13 +23,13 @@
 KPairsPlayer::KPairsPlayer(const QString &name)
  : m_name(name)
 {
-	reset();
+    reset();
 }
 
 void KPairsPlayer::reset()
 {
-	m_found = 0;
-	m_missed = 0;
-	m_seconds = 0;
+    m_found = 0;
+    m_missed = 0;
+    m_seconds = 0;
 }
 

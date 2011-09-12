@@ -138,30 +138,30 @@ void kpairs::inc_found()
 
 void kpairs::setScore()
 {
-   QTime dd(0,0, m_players[m_currentplayer].seconds());
-   QString line = i18n("%1: Duration %2 - pairs missed: %3 pairs found: %4",
-		   m_players[m_currentplayer].name(),
-		   dd.toString("mm:ss"),
-		   m_players[m_currentplayer].missed(),
-		   m_players[m_currentplayer].found()
+    QTime dd(0,0, m_players[m_currentplayer].seconds());
+    QString line = i18n("%1: Duration %2 - pairs missed: %3 pairs found: %4",
+            m_players[m_currentplayer].name(),
+            dd.toString("mm:ss"),
+            m_players[m_currentplayer].missed(),
+            m_players[m_currentplayer].found()
    );
    statusBar()->showMessage(line);
    if(m_found == m_view->cardsNum()/2 && m_view->cardsNum() != 0)
    {
-       m_timer->stop();
-	   QString final_line (i18n("Congratulations you finished the game\n"));
-	   for(int i = 0; i < m_players.size(); ++i)
-	   {
-		   dd.setHMS(0,0,0);
+        m_timer->stop();
+        QString final_line (i18n("Congratulations you finished the game\n"));
+        for(int i = 0; i < m_players.size(); ++i)
+        {
+            dd.setHMS(0,0,0);
 
-		   final_line += i18n("%1: Duration %2 - pairs missed: %3 pairs found: %4\n",
-				   	   	   m_players[i].name(),
-				   	   	   dd.addSecs(m_players[i].seconds()).toString("mm:ss"),
-				   	   	   m_players[i].missed(),
-				   	   	   m_players[i].found()
-		                 );
-	   }
-	   KMessageBox::information(this, final_line, i18n("Congratulations"));
+            final_line += i18n("%1: Duration %2 - pairs missed: %3 pairs found: %4\n",
+                            m_players[i].name(),
+                            dd.addSecs(m_players[i].seconds()).toString("mm:ss"),
+                            m_players[i].missed(),
+                            m_players[i].found()
+                            );
+        }
+        KMessageBox::information(this, final_line, i18n("Congratulations"));
    }
 }
 
