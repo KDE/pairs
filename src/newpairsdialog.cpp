@@ -55,7 +55,7 @@ NewMemoryDialog::NewMemoryDialog(QWidget* parent)
             m_themes += theme;
         }
     }
-    
+    m_ui->playerName->setClickMessage(i18n("Player name..."));
     m_ui->themesList->setCurrentRow(0);
     m_ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 }

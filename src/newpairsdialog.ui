@@ -77,11 +77,7 @@
        </spacer>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="playerName">
-        <property name="placeholderText">
-         <string>Player name...</string>
-        </property>
-       </widget>
+       <widget class="KLineEdit" name="playerName"/>
       </item>
      </layout>
     </widget>
@@ -98,6 +94,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
