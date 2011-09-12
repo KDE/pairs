@@ -18,18 +18,32 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "kpairsplayer.h"
+#ifndef KPAIRSPLAYER_H
+#define KPAIRSPLAYER_H
 
-KPairsPlayer::KPairsPlayer(const QString &name)
- : m_name(name)
+#include <QString>
+
+class PairsPlayer
 {
-    reset();
-}
 
-void KPairsPlayer::reset()
-{
-    m_found = 0;
-    m_missed = 0;
-    m_seconds = 0;
-}
+public:
+    PairsPlayer(const QString &name);
+    ~PairsPlayer(){};
+    void reset();
+    void incMissed() {m_missed++; };
+    void incFound() {m_found++; };
+    void incSeconds() {m_seconds++; };
+    int missed() {return m_missed; };
+    int found() {return m_found; };
+    int seconds() {return m_seconds; };
+    const QString &name() {return m_name; };
 
+private:
+    QString m_name;
+    int m_missed;
+    int m_found;
+    int m_seconds;
+
+};
+
+#endif

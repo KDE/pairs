@@ -19,8 +19,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "kpairs.h"
-#include "kpairsview.h"
+#include "pairs.h"
+#include "pairsview.h"
 #include "settings.h"
 
 #include <QtGui/QDropEvent>
@@ -40,9 +40,9 @@
 #include <KDE/KLocale>
 #include "newpairsdialog.h"
 
-kpairs::kpairs()
+Pairs::Pairs()
     : KXmlGuiWindow()
-    , m_view(new kpairsView(this))
+    , m_view(new PairsView(this))
     , m_players()
     , m_found(0)
 {
@@ -71,24 +71,24 @@ kpairs::kpairs()
     QMetaObject::invokeMethod(this, "newGame", Qt::QueuedConnection);
 }
 
-kpairs::~kpairs()
+Pairs::~Pairs()
 {
 }
 
-void kpairs::setupActions()
+void Pairs::setupActions()
 {
     KStandardAction::open(this, SLOT(newGame()), actionCollection());
     KStandardAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
 }
 
-void kpairs::update()
+void Pairs::update()
 {
 //    qDebug() << "update";
 	m_players[m_currentplayer].incSeconds();
     setScore();
 }
 
-void kpairs::newGame()
+void Pairs::newGame()
 {
     NewMemoryDialog dialog;
 
@@ -101,16 +101,16 @@ void kpairs::newGame()
     	m_players.clear();
     	for(int i= 0; i < dialog.players().count(); i++)
     	{
-    		m_players.append(KPairsPlayer(dialog.players().at(i)));
+    		m_players.append(PairsPlayer(dialog.players().at(i)));
     	}
     	m_view->newGame(dialog.theme());
     }
 
 /*
 	QString myname("player1");
-	m_players.append(KPairsPlayer(myname));
+	m_players.append(pairsPlayer(myname));
 	myname = "player2";
-	m_players.append(KPairsPlayer(myname));
+	m_players.append(pairsPlayer(myname));
 */
 
     m_found = 0;
@@ -122,21 +122,21 @@ void kpairs::newGame()
     statusBar()->showMessage(i18n("New Game started"));
 }
 
-void kpairs::inc_missed()
+void Pairs::inc_missed()
 {
 	m_players[m_currentplayer].incMissed();
 	++m_currentplayer %= m_players.size();
 	setScore();
 }
 
-void kpairs::inc_found()
+void Pairs::inc_found()
 {
    m_found++;
    m_players[m_currentplayer].incFound();
    setScore();
 }
 
-void kpairs::setScore()
+void Pairs::setScore()
 {
     QTime dd(0,0, m_players[m_currentplayer].seconds());
     QString line = i18n("%1: Duration %2 - pairs missed: %3 pairs found: %4",
@@ -165,4 +165,4 @@ void kpairs::setScore()
    }
 }
 
-#include "kpairs.moc"
+#include "pairs.moc"

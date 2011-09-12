@@ -19,26 +19,26 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-set(kpairs_SRCS pairstheme.cpp newpairsdialog.cpp carditem.cpp
-   kpairs.cpp
+set(pairs_SRCS pairstheme.cpp newpairsdialog.cpp carditem.cpp
+   pairs.cpp
    main.cpp
-   kpairsview.cpp
-   kpairsplayer.cpp
+   pairsview.cpp
+   pairsplayer.cpp
  )
 
-kde4_add_ui_files(kpairs_SRCS newpairsdialog.ui)
+kde4_add_ui_files(pairs_SRCS newpairsdialog.ui)
 
-kde4_add_kcfg_files(kpairs_SRCS settings.kcfgc )
+kde4_add_kcfg_files(pairs_SRCS settings.kcfgc )
 
-kde4_add_executable(kpairs ${kpairs_SRCS})
+kde4_add_executable(pairs ${pairs_SRCS})
 
-target_link_libraries(kpairs ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS})
+target_link_libraries(pairs ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS})
 
-install(TARGETS kpairs ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS pairs ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 
 ########### install files ###############
 
-install( FILES kpairs.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
-install( FILES kpairs.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
-install( FILES kpairsui.rc  DESTINATION  ${DATA_INSTALL_DIR}/kpairs )
+install( FILES pairs.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
+install( FILES pairs.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
+install( FILES pairsui.rc  DESTINATION  ${DATA_INSTALL_DIR}/pairs )

@@ -18,22 +18,24 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "kpairs.h"
+#include "pairs.h"
 #include <KDE/KApplication>
 #include <KDE/KAboutData>
 #include <KDE/KCmdLineArgs>
 #include <KDE/KLocale>
 
 static const char description[] =
-    I18N_NOOP("A KDE 4 Application");
+    I18N_NOOP("A game to enhance your memory for KDE!");
 
 static const char version[] = "0.1";
 
 int main(int argc, char **argv)
 {
-    KAboutData about("kpairs", 0, ki18n("kpairs"), version, ki18n(description),
-                     KAboutData::License_GPL, ki18n("(C) 2007 Albert Astals Cid"), KLocalizedString(), 0, "aacid@kde.org");
-    about.addAuthor( ki18n("Albert Astals Cid"), KLocalizedString(), "aacid@kde.org" );
+    KAboutData about("Pairs", 0, ki18n("pairs"), version, ki18n(description),
+                     KAboutData::License_GPL, ki18n("(C) 2011 Aleix Pol Gonzalez"), KLocalizedString(), 0, "aleixpol@kde.org");
+    about.addAuthor( ki18n("Aleix Pol Gonzalez"), ki18n("Initial implementation and maintainer"), "aleixpol@kde.org" );
+    about.addAuthor( ki18n("Marco Calignano"), ki18n("Theme support enhancement and general feature development"), "marco.calignano@gmail.com");
+    about.addAuthor( ki18n("Albert Astals Cid"), ki18n("Initial project setup and ideas"), "aacid@kde.org" );
     KCmdLineArgs::init(argc, argv, &about);
 
     KCmdLineOptions options;
@@ -41,12 +43,12 @@ int main(int argc, char **argv)
     KCmdLineArgs::addCmdLineOptions(options);
     KApplication app;
 
-    kpairs *widget = new kpairs;
+    Pairs *widget = new Pairs;
 
     // see if we are starting with session management
     if (app.isSessionRestored())
     {
-        RESTORE(kpairs);
+        RESTORE(Pairs);
     }
     else
     {
@@ -54,7 +56,7 @@ int main(int argc, char **argv)
         KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
         if (args->count() == 0)
         {
-            //kpairs *widget = new kpairs;
+            //Pairs *widget = new Pairs;
             widget->show();
         }
         else
@@ -62,7 +64,7 @@ int main(int argc, char **argv)
             int i = 0;
             for (; i < args->count(); i++)
             {
-                //kpairs *widget = new kpairs;
+                //Pairs *widget = new Pairs;
                 widget->show();
             }
         }
