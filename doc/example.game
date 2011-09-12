@@ -4,21 +4,31 @@
   <title>Zoo</title>
   <description>Little zoo</description> <!--todo: we'll have to figure out how to get this translated-->
   <author>Marco Calignano</author>
-  <date>21/03/2012</date> <!-- can be useful for versioning?-->
+  <date>21/03/2012</date>
+  <version>1.0</version>
+  
 
   <!-- we can use the same semantics as in the elements -->
   <sound type='missed' src='missed.ogg' />
   <sound type='found' src='found.ogg' />
+  <sound type='turn' src='turn.ogg' />
   <image type='back' src='zoo.svg' />
+  <image type='trasparent_back' src='backtr.svg' />
+  <image type='bakcground' src='all_animal.svg' />
 
   <main type='image' />
 
   <!-- now come the list of the elements -->
   <element>
-    <sound src='lion.ogg' />
-    <video src='lion.ogv' />
-    <image src='lion.svg' pref='1'/>
-    <image src='baby_lion.svg' pref='2'/>
+    <sound src='lion.ogg' lang='en' />
+    <video src='lion.ogv' lang='en' />
+    <image src='lion.svg' lang='en'/>
+    <image src='baby_lion.svg' lang='en' category='babies'/>
+    <sound src='baby_lion.ogg' lang='en' category='babies'/>
+    <video src='baby_lion.ogv' lang='en' category='babies'/>
+    <image src='baby_lionit.svg' lang='it' category='babies'/>
+    <sound src='baby_lionit.ogg' lang='it' category='babies'/>
+    <video src='baby_lionit.ogv' lang='it' category='babies'/>
 
     <word lang='en'>lion</word>
     <word lang='it'>leone</word>
