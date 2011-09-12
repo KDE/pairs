@@ -44,7 +44,7 @@ macro(create_theme _baseName)
         )
     endif(WIN32)
     
-    install(FILES ${_template} DESTINATION ${DATA_INSTALL_DIR}/kpairs/themes)
+    install(FILES ${_template} DESTINATION ${DATA_INSTALL_DIR}/pairs/themes)
 endmacro(create_theme)
 
 create_theme(kde)

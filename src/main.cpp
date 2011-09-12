@@ -31,7 +31,7 @@ static const char version[] = "0.1";
 
 int main(int argc, char **argv)
 {
-    KAboutData about("Pairs", 0, ki18n("pairs"), version, ki18n(description),
+    KAboutData about("pairs", 0, ki18n("pairs"), version, ki18n(description),
                      KAboutData::License_GPL, ki18n("(C) 2011 Aleix Pol Gonzalez"), KLocalizedString(), 0, "aleixpol@kde.org");
     about.addAuthor( ki18n("Aleix Pol Gonzalez"), ki18n("Initial implementation and maintainer"), "aleixpol@kde.org" );
     about.addAuthor( ki18n("Marco Calignano"), ki18n("Theme support enhancement and general feature development"), "marco.calignano@gmail.com");
