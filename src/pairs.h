@@ -27,9 +27,11 @@
 #include <QTimer>
 #include <QList>
 #include <pairsplayer.h>
+#include <phonon/phonon>
 
 class PairsView;
 class KToggleAction;
+using namespace Phonon;
 
 class Pairs : public KXmlGuiWindow
 {
@@ -64,6 +66,7 @@ private:
     KToggleAction *m_toolbarAction;
     KToggleAction *m_statusbarAction;
     QTimer *m_timer;
+    MediaObject *m_media;
 };
 
 #endif // _KMEMORY_H_
