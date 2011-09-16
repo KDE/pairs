@@ -36,6 +36,7 @@
 #include <KMessageBox>
 #include <kactioncollection.h>
 #include <kstandardaction.h>
+#include <kstandarddirs.h>
 
 #include <KDE/KLocale>
 #include "newpairsdialog.h"
@@ -45,12 +46,16 @@ Pairs::Pairs()
     , m_view(new PairsView(this))
     , m_players()
     , m_found(0)
+	, m_right(KGlobal::dirs()->findResource("appdata", "themes/right.ogg"))
+	, m_wrong(KGlobal::dirs()->findResource("appdata", "themes/wrong.ogg"))
+
 {
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
     m_media = new Phonon::MediaObject(this);
     Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput(Phonon::GameCategory, this);
     createPath(m_media, audioOutput);
+
 
     // accept dnd
     setAcceptDrops(true);
@@ -127,7 +132,7 @@ void Pairs::newGame()
 
 void Pairs::inc_missed()
 {
-	m_media->setCurrentSource(QUrl("file:///usr/share/kde4/apps/themes/wrong.ogg"));
+	m_media->setCurrentSource(QUrl(m_wrong));
 	m_media->play();
 	m_players[m_currentplayer].incMissed();
 	++m_currentplayer %= m_players.size();
@@ -136,7 +141,7 @@ void Pairs::inc_missed()
 
 void Pairs::inc_found()
 {
-	m_media->setCurrentSource(QUrl("file:///usr/share/kde4/apps/themes/right.ogg"));
+	m_media->setCurrentSource(QUrl(m_right));
 	m_media->play();
     m_found++;
     m_players[m_currentplayer].incFound();

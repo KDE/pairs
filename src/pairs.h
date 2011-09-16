@@ -67,6 +67,8 @@ private:
     KToggleAction *m_statusbarAction;
     QTimer *m_timer;
     MediaObject *m_media;
+    QString m_right;
+    QString m_wrong;
 };
 
 #endif // _KMEMORY_H_
