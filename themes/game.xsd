@@ -1,18 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/game" xmlns:tns="http://www.example.org/game" elementFormDefault="qualified">
 
-    <xsd:complexType name="Card">
-    	<xsd:attribute name="Image" type="xsd:string"></xsd:attribute>
+    <xsd:complexType name="Sound">
+    	<xsd:attribute name="type" use="required">
+    		<xsd:simpleType>
+    			<xsd:restriction base="xsd:string">
+    				<xsd:enumeration value="missed"></xsd:enumeration>
+    				<xsd:enumeration value="found"></xsd:enumeration>
+    				<xsd:enumeration value="turn"></xsd:enumeration>
+    			</xsd:restriction>
+    		</xsd:simpleType>
+    	</xsd:attribute>
+    	<xsd:attribute name="src" type="xsd:string"></xsd:attribute>
     </xsd:complexType>
 
-<xsd:element name="pairs" minOccurs="1" maxOccurs="1">
+    <xsd:complexType name="Image">
+        <xsd:attribute name="type" use="required">
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="back"></xsd:enumeration>
+                    <xsd:enumeration value="trasparent_bask"></xsd:enumeration>
+                    <xsd:enumeration value="background"></xsd:enumeration>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="src" type="xsd:string"></xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="Main">
+        <xsd:attribute name="type" use="required">
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="image"></xsd:enumeration>
+                    <xsd:enumeration value="sound"></xsd:enumeration>
+                    <xsd:enumeration value="word"></xsd:enumeration>
+                    <xsd:enumeration value="video"></xsd:enumeration>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="Description">
+        <xsd:attribute name="lang" type="xsd:string"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="el_sound">
+        <xsd:attribute name="src" type="xsd:string" use="required"/>
+        <xsd:attribute name="lang" type="xsd:string"></xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="el_video">
+        <xsd:attribute name="src" type="xsd:string" use="required"/>
+        <xsd:attribute name="lang" type="xsd:string"></xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="el_image">
+        <xsd:attribute name="src" type="xsd:string" use="required"/>
+        <xsd:attribute name="lang" type="xsd:string"></xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="el_word">
+        <xsd:attribute name="lang" type="xsd:string" use="required"</xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="Element">
+    	<xsd:sequence>
+    		<xsd:element name="image" type="tns:el_image" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+            <xsd:element name="sound" type="tns:el_sound" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+            <xsd:element name="video" type="tns:el_video" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+            <xsd:element name="word" type="tns:el_word" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:element name="pairs" minOccurs="1" maxOccurs="1">
   <xsd:complexType>
     <xsd:sequence>
-    	<xsd:element name="Name" type="xsd:string" maxOccurs="1" minOccurs="1"/>
-    	<xsd:element name="Description" type="xsd:string" maxOccurs="1" minOccurs="1"/>
-    	<xsd:element name="Date" type="xsd:date" maxOccurs="1" minOccurs="1"/>
-    	<xsd:element name="Back" type="xsd:string" maxOccurs="1" minOccurs="1"/>
-    	<xsd:element name="Card" type="tns:Card" maxOccurs="unbounded" minOccurs="1"></xsd:element>
+    	<xsd:element name="title" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+    	<xsd:element name="description" type="tns:Description" maxOccurs="1" minOccurs="1"/>
+        <xsd:element name="author" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+    	<xsd:element name="date" type="xsd:date" maxOccurs="1" minOccurs="1"/>
+        <xsd:element name="version" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+        <xsd:element name="sound" type="tns:Sound" maxOccurs="3" minOccurs="0"/>
+        <xsd:element name="image" type="tns:Image" maxOccurs="3" minOccurs="0"/>
+        <xsd:element name="main" type="tns:Main" maxOccurs="1" minOccurs="1"/>
+    	<xsd:element name="element" type="tns:Element" maxOccurs="unbounded" minOccurs="1"></xsd:element>
     </xsd:sequence>
   </xsd:complexType>
 </xsd:element>
