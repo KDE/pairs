@@ -84,6 +84,10 @@ QStringList NewMemoryDialog::players()
 void NewMemoryDialog::setPlayer(const QString &name)
 {
 	m_ui->playerList->addItem(name);
+    bool hasUsers = m_ui->playerList->count() > 0;
+    m_ui->remove->setEnabled(hasUsers);
+    m_ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(hasUsers);
+
 }
 
 void NewMemoryDialog::addUser()
