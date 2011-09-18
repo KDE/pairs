@@ -32,7 +32,7 @@ kde4_add_kcfg_files(pairs_SRCS settings.kcfgc )
 
 kde4_add_executable(pairs ${pairs_SRCS})
 
-target_link_libraries(pairs ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} phonon)
+target_link_libraries(pairs ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} phonon ${QT_QTXMLPATTERNS_LIBRARY})
 
 install(TARGETS pairs ${INSTALL_TARGETS_DEFAULT_ARGS} )
 

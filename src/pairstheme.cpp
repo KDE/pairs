@@ -24,9 +24,11 @@
 #include <QFile>
 #include <QDebug>
 #include <KLocalizedString>
-#include <KTar>
+#include <KStandardDirs>
+#include <QXmlSchemaValidator>
+#include <QXmlSchema>
 
-MemoryTheme::MemoryTheme(const QString& path)
+PairsTheme::PairsTheme(const QString& path)
 {
 	KTar archive(path);
 	m_path = path;
@@ -40,12 +42,14 @@ MemoryTheme::MemoryTheme(const QString& path)
     QString themename(files.first()); //TODO: Support many games inside a theme
     Q_ASSERT(archive.directory()->entry(themename)->isFile());
     const KArchiveFile* file = static_cast<const KArchiveFile*>(archive.directory()->entry(themename));
-    
+    if(!isValid(file)){
+        qWarning() << "Skipping game theme not valid";
+    }
+
     QXmlStreamReader reader(file->data());
     
     while (m_error.isEmpty() && !reader.atEnd()) {
         QXmlStreamReader::TokenType type = reader.readNext();
-        
         if(type==QXmlStreamReader::StartDocument || type==QXmlStreamReader::EndDocument) {}
         else if (type==QXmlStreamReader::Characters)
             m_data += reader.text().toString();
@@ -79,3 +83,16 @@ MemoryTheme::MemoryTheme(const QString& path)
     if (reader.hasError()) {}
 }
 
+bool PairsTheme::isValid(const KArchiveFile* file){
+
+    QUrl schemaUrl(KGlobal::dirs()->findResource("appdata", QLatin1String( "themes/game.xsd" )));
+    QXmlSchema schema;
+    schema.load(schemaUrl);
+
+    if(!schema.isValid()){
+        qWarning() << "game Schema not valid";
+        return false;
+    }
+    QXmlSchemaValidator validator(schema);
+    return validator.validate(file->data());
+}

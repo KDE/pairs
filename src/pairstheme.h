@@ -19,10 +19,11 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MEMORYTHEME_H
-#define MEMORYTHEME_H
+#ifndef PAIRSTHEME_H
+#define PAIRSTHEME_H
 #include <QString>
 #include <QList>
+#include <KTar>
 
 
 struct ThemeItem
@@ -31,10 +32,10 @@ struct ThemeItem
     QString soundName;
 };
 
-class MemoryTheme
+class PairsTheme
 {
     public:
-        MemoryTheme(const QString& path);
+        PairsTheme(const QString& path);
 
         QString name() const { return m_name; }
         QString description() const { return m_description; }
@@ -48,6 +49,7 @@ class MemoryTheme
         
     private:
 
+        bool isValid(const KArchiveFile* file);
         QString m_data;
         
         QString m_name;
@@ -59,4 +61,4 @@ class MemoryTheme
         QString m_path;
 };
 
-#endif // MEMORYTHEME_H
+#endif // PAIRSTHEME_H
