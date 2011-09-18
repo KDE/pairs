@@ -25,7 +25,7 @@
 
 #include <QtGui/QGraphicsView>
 
-class MemoryTheme;
+class PairsTheme;
 class CardItem;
 class PairsView : public QGraphicsView
 {
@@ -42,7 +42,7 @@ public:
     virtual ~PairsView();
     
     void setRowSize(int itemsPerRow);
-    void newGame(const MemoryTheme& theme);
+    void newGame(const PairsTheme& theme);
     int cardsNum();
 
 signals:

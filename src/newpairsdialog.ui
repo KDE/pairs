@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>NewMemoryDialog</class>
- <widget class="QDialog" name="NewMemoryDialog">
+ <class>NewPairsDialog</class>
+ <widget class="QDialog" name="NewPairsDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -106,7 +106,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>NewMemoryDialog</receiver>
+   <receiver>NewPairsDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -122,7 +122,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>NewMemoryDialog</receiver>
+   <receiver>NewPairsDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">

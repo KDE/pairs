@@ -98,7 +98,7 @@ void Pairs::update()
 
 void Pairs::newGame()
 {
-    NewMemoryDialog dialog;
+    NewPairsDialog dialog;
 
     for(int y = 0; y< m_players.count(); y++)
     {

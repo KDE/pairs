@@ -87,7 +87,7 @@ void PairsView::setRowSize(int itemsPerRow)
     }
 }
 
-void PairsView::newGame(const MemoryTheme& theme)
+void PairsView::newGame(const PairsTheme& theme)
 {
     qDeleteAll(m_cards);
     m_cards.clear();

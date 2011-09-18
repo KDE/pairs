@@ -71,4 +71,4 @@ private:
     QString m_wrong;
 };
 
-#endif // _KMEMORY_H_
+#endif // PAIRS_H

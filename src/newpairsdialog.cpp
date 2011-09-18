@@ -32,9 +32,9 @@
 #include "pairstheme.h"
 
 
-NewMemoryDialog::NewMemoryDialog(QWidget* parent)
+NewPairsDialog::NewPairsDialog(QWidget* parent)
     : QDialog(parent)
-    , m_ui(new Ui::NewMemoryDialog)
+    , m_ui(new Ui::NewPairsDialog)
 {
 	m_ui->setupUi(this);
     m_ui->add->setIcon(KIcon("list-add"));
@@ -46,7 +46,7 @@ NewMemoryDialog::NewMemoryDialog(QWidget* parent)
     const QStringList themes = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "themes/*.pairs.*" ));
     
     Q_FOREACH(const QString& themePath, themes) {
-        MemoryTheme theme(themePath);
+        PairsTheme theme(themePath);
         
         if(!theme.isCorrect()) {
             qWarning() << "uncorrect theme:" << themePath << theme.error();
@@ -60,13 +60,13 @@ NewMemoryDialog::NewMemoryDialog(QWidget* parent)
     m_ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 }
 
-MemoryTheme NewMemoryDialog::theme() const
+PairsTheme NewPairsDialog::theme() const
 {
     int row = m_ui->themesList->currentRow();
     return m_themes.at(row);
 }
 
-QStringList NewMemoryDialog::players()
+QStringList NewPairsDialog::players()
 {
 	QStringList result;
 	for (int i = 0; i < m_ui->playerList->count(); i++)
@@ -81,7 +81,7 @@ QStringList NewMemoryDialog::players()
 	return result;
 }
 
-void NewMemoryDialog::setPlayer(const QString &name)
+void NewPairsDialog::setPlayer(const QString &name)
 {
 	m_ui->playerList->addItem(name);
     bool hasUsers = m_ui->playerList->count() > 0;
@@ -90,7 +90,7 @@ void NewMemoryDialog::setPlayer(const QString &name)
 
 }
 
-void NewMemoryDialog::addUser()
+void NewPairsDialog::addUser()
 {
 	m_ui->playerList->addItem(m_ui->playerName->text());
     m_ui->playerList->setCurrentRow(m_ui->playerList->count()-1);
@@ -101,7 +101,7 @@ void NewMemoryDialog::addUser()
     m_ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
 }
 
-void NewMemoryDialog::deleteUser()
+void NewPairsDialog::deleteUser()
 {
     qDeleteAll(m_ui->playerList->selectedItems());
     
@@ -110,7 +110,7 @@ void NewMemoryDialog::deleteUser()
     m_ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(hasUsers);
 }
 
-void NewMemoryDialog::playerNameChanged(const QString & newname)
+void NewPairsDialog::playerNameChanged(const QString & newname)
 {
     m_ui->add->setEnabled(!newname.isEmpty());
 }

@@ -18,21 +18,21 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef NEWMEMORYDIALOG_H
-#define NEWMEMORYDIALOG_H
+#ifndef NEWPairsDialog_H
+#define NEWPairsDialog_H
 
 #include <kdialog.h>
 #include "pairstheme.h"
 
-namespace Ui { class NewMemoryDialog; }
+namespace Ui { class NewPairsDialog; }
 
-class NewMemoryDialog
+class NewPairsDialog
     : public QDialog
 {
     Q_OBJECT
     public:
-        explicit NewMemoryDialog(QWidget* parent = 0);
-        MemoryTheme theme() const;
+        explicit NewPairsDialog(QWidget* parent = 0);
+        PairsTheme theme() const;
         QStringList players();
         void setPlayer(const QString &name);
     public slots:
@@ -41,8 +41,8 @@ class NewMemoryDialog
         void playerNameChanged(const QString & newname);
 
     private:
-        Ui::NewMemoryDialog* m_ui;
-        QList<MemoryTheme> m_themes;
+        Ui::NewPairsDialog* m_ui;
+        QList<PairsTheme> m_themes;
 };
 
-#endif // NEWMEMORYDIALOG_H
+#endif // NEWPairsDialog_H
