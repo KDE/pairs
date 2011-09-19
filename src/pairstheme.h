@@ -46,15 +46,28 @@ class PairsTheme
         
         bool isCorrect() const { return m_error.isEmpty(); }
         QString error() const { return m_error; }
+        void parseElement(QXmlStreamReader &reader);
         
     private:
 
         bool isValid(const KArchiveFile* file);
         QString m_data;
         
-        QString m_name;
+        QString m_title;
         QString m_description;
-        QString m_backName;
+        QString m_author;
+        QString m_date;
+        QString m_version;
+
+        QString m_missed_snd;
+        QString m_found_snd;
+        QString m_turn_snd;
+
+        QString m_back_img;
+        QString m_background_img;
+        QString m_backtrasp_img;
+        QString m_main;
+
         QList<ThemeItem> m_items;
         
         QString m_error;

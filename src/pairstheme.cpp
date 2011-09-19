@@ -51,31 +51,55 @@ PairsTheme::PairsTheme(const QString& path)
     while (m_error.isEmpty() && !reader.atEnd()) {
         QXmlStreamReader::TokenType type = reader.readNext();
         if(type==QXmlStreamReader::StartDocument || type==QXmlStreamReader::EndDocument) {}
-        else if (type==QXmlStreamReader::Characters)
-            m_data += reader.text().toString();
-        else if(type==QXmlStreamReader::StartElement) {
-            m_data.clear();
-            
+        if(type==QXmlStreamReader::StartElement) {
             QString name = reader.name().toString();
-         
-            if(name=="card") {
-                ThemeItem item;
-                item.imageName = reader.attributes().value("image").toString();
-                item.soundName = reader.attributes().value("sound").toString();
-                m_items += item;
+            if(name == "title") {
+                m_title = reader.readElementText();
             }
-        } else if (type==QXmlStreamReader::EndElement) {
-           //  qDebug() << "ssssss" << m_data << type;
-            QString name = reader.name().toString();
-            
-            if(name=="description") m_description = m_data;
-            else if(name=="description") m_name = m_data;
-            else if(name=="back") m_backName = m_data;
-            else if(name=="name") m_name = m_data;
-            else if(name=="card" || name=="pairs") {}
-            else
-                m_error = i18n("Unknown item '%1' found", reader.name().toString());
-        } else {
+            if(name == "description") {
+                m_description = reader.readElementText();
+            }
+            if(name == "author") {
+                m_author = reader.readElementText();
+            }
+            if(name == "version") {
+                m_version = reader.readElementText();
+            }
+            if(name == "date") {
+                m_date = reader.readElementText();
+            }
+            if(name == "main") {
+                m_date = reader.attributes().value("type");
+            }
+            if(name == "sound") {
+                if(reader.attributes().value("type") == "missed"){
+                    m_missed_snd = reader.attributes().value("src");
+                }
+                if(reader.attributes().value("type") == "found"){
+                    m_found_snd = reader.attributes().value("src");
+                }
+                if(reader.attributes().value("type") == "turn"){
+                    m_turn_snd = reader.attributes().value("src");
+                }
+            }
+
+            if(name == "image") {
+                if(reader.attributes().value("type") == "back"){
+                    m_back_img = reader.attributes().value("src");
+                }
+                if(reader.attributes().value("type") == "trasparent_back"){
+                    m_backtrasp_img = reader.attributes().value("src");
+                }
+                if(reader.attributes().value("type") == "bakcground"){
+                    m_background_img = reader.attributes().value("src");
+                }
+            }
+
+            if(name=="element") {
+                parseElement();
+            }
+        }
+        else {
             m_error = i18n("%1:%2 Unknown token in theme file", reader.lineNumber(), reader.columnNumber());
         }
     }
