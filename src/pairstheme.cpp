@@ -20,7 +20,6 @@
  */
 
 #include "pairstheme.h"
-#include <QXmlStreamReader>
 #include <QFile>
 #include <QDebug>
 #include <KLocalizedString>
@@ -44,6 +43,7 @@ PairsTheme::PairsTheme(const QString& path)
     const KArchiveFile* file = static_cast<const KArchiveFile*>(archive.directory()->entry(themename));
     if(!isValid(file)){
         qWarning() << "Skipping game theme not valid";
+        m_error = "Not valid XML file";
     }
 
     QXmlStreamReader reader(file->data());
@@ -51,7 +51,9 @@ PairsTheme::PairsTheme(const QString& path)
     while (m_error.isEmpty() && !reader.atEnd()) {
         QXmlStreamReader::TokenType type = reader.readNext();
         if(type==QXmlStreamReader::StartDocument || type==QXmlStreamReader::EndDocument) {}
-        if(type==QXmlStreamReader::StartElement) {
+        else if (type==QXmlStreamReader::Characters){}
+        else if (type==QXmlStreamReader::EndElement){}
+        else if(type==QXmlStreamReader::StartElement) {
             QString name = reader.name().toString();
             if(name == "title") {
                 m_title = reader.readElementText();
@@ -69,42 +71,92 @@ PairsTheme::PairsTheme(const QString& path)
                 m_date = reader.readElementText();
             }
             if(name == "main") {
-                m_date = reader.attributes().value("type");
+                m_date = reader.attributes().value("type").toString();
             }
             if(name == "sound") {
                 if(reader.attributes().value("type") == "missed"){
-                    m_missed_snd = reader.attributes().value("src");
+                    m_missed_snd = reader.attributes().value("src").toString();
                 }
                 if(reader.attributes().value("type") == "found"){
-                    m_found_snd = reader.attributes().value("src");
+                    m_found_snd = reader.attributes().value("src").toString();
                 }
                 if(reader.attributes().value("type") == "turn"){
-                    m_turn_snd = reader.attributes().value("src");
+                    m_turn_snd = reader.attributes().value("src").toString();
                 }
             }
 
             if(name == "image") {
                 if(reader.attributes().value("type") == "back"){
-                    m_back_img = reader.attributes().value("src");
+                    m_back_img = reader.attributes().value("src").toString();
                 }
                 if(reader.attributes().value("type") == "trasparent_back"){
-                    m_backtrasp_img = reader.attributes().value("src");
+                    m_backtrasp_img = reader.attributes().value("src").toString();
                 }
                 if(reader.attributes().value("type") == "bakcground"){
-                    m_background_img = reader.attributes().value("src");
+                    m_background_img = reader.attributes().value("src").toString();
                 }
             }
 
             if(name=="element") {
-                parseElement();
+                parseElement(reader);
             }
         }
         else {
             m_error = i18n("%1:%2 Unknown token in theme file", reader.lineNumber(), reader.columnNumber());
         }
     }
-    
+    qDebug() << m_title << m_description << m_author << m_date << m_version << m_missed_snd << m_found_snd
+             << m_turn_snd << m_back_img << m_background_img << m_backtrasp_img << m_main << m_languages;
+    foreach (ThemeItem i, m_items){
+        qDebug() << i.imageName << i.langName << i.wordName;
+    }
     if (reader.hasError()) {}
+}
+
+void PairsTheme::parseElement(QXmlStreamReader &reader)
+{
+    QMap<QString, ThemeItem> itemMap;
+    QXmlStreamReader::TokenType type = reader.readNext();
+    while(!reader.atEnd()){
+        if(type==QXmlStreamReader::EndElement) {
+            if(reader.name().toString() == "element"){
+                foreach (ThemeItem value, itemMap){
+                    m_items.append(value);
+                }
+                return;
+            }
+        }
+        else
+        if(type==QXmlStreamReader::StartElement) {
+            ThemeItem item;
+            QString name = reader.name().toString();
+            QString l = reader.attributes().value("lang").toString();
+            if(!l.isEmpty() && m_languages.lastIndexOf(l) == -1){
+                m_languages.append(l);
+                ThemeItem item;
+                itemMap[l] = item;
+            }
+            itemMap[l].langName = l;
+            if(name == "image") {
+                if(item.imageName.isEmpty()) {
+                    itemMap[l].imageName = reader.attributes().value("src").toString();
+                }
+                else{
+                    itemMap[l].image2Name = reader.attributes().value("src").toString();
+                }
+            }
+            if(name == "sound") {
+                itemMap[l].soundName = reader.attributes().value("src").toString();
+            }
+            if(name == "video") {
+                itemMap[l].videoName = reader.attributes().value("src").toString();
+            }
+            if(name == "word") {
+                itemMap[l].wordName = reader.readElementText();
+            }
+        }
+        type = reader.readNext();
+    }
 }
 
 bool PairsTheme::isValid(const KArchiveFile* file){

@@ -51,7 +51,7 @@ NewPairsDialog::NewPairsDialog(QWidget* parent)
         if(!theme.isCorrect()) {
             qWarning() << "uncorrect theme:" << themePath << theme.error();
         } else {
-            m_ui->themesList->addItem(theme.name());
+            m_ui->themesList->addItem(theme.title());
             m_themes += theme;
         }
     }

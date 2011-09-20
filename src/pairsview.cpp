@@ -98,7 +98,7 @@ void PairsView::newGame(const PairsTheme& theme)
     QList<ThemeItem> items = theme.items();
     //int num=qMin(((rows*columns)/2)*2, items.size()); //we make it %2
     int num = items.size();
-    QSvgRenderer backRenderer(((KArchiveFile*)(archive.directory()->entry(theme.backName())))->data());
+    QSvgRenderer backRenderer(((KArchiveFile*)(archive.directory()->entry(theme.backImage())))->data());
     for(int i=0; i<num; i++) {
         ThemeItem titem = items.at(i);
         

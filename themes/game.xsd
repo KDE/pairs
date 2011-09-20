@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/game" xmlns:tns="http://www.example.org/game" elementFormDefault="qualified">
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.example.org/game" 
+xmlns:tns="http://www.example.org/game" 
+elementFormDefault="qualified">
 
     <xsd:complexType name="Sound">
     	<xsd:attribute name="type" use="required">
@@ -41,7 +45,11 @@
     </xsd:complexType>
 
     <xsd:complexType name="Description">
-        <xsd:attribute name="lang" type="xsd:string"/>
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+         	  <xsd:attribute name="lang" type="xsd:string" />
+            </xsd:extension>
+        </xsd:simpleContent>
     </xsd:complexType>
 
     <xsd:complexType name="el_sound">
@@ -60,7 +68,11 @@
     </xsd:complexType>
 
     <xsd:complexType name="el_word">
-        <xsd:attribute name="lang" type="xsd:string" use="required"></xsd:attribute>
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="lang" type="xsd:string" use="required"></xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
     </xsd:complexType>
 
     <xsd:complexType name="Element">
@@ -72,22 +84,26 @@
     	</xsd:sequence>
     </xsd:complexType>
 
-
 <xsd:element name="pairs">
   <xsd:complexType>
     <xsd:sequence>
-    	<xsd:element name="title" type="xsd:string" maxOccurs="1" minOccurs="1"/>
-    	<xsd:element name="description" type="tns:Description" maxOccurs="1" minOccurs="1"/>
+        <xsd:element name="title" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+        <xsd:element name="description" type="tns:Description" maxOccurs="1" minOccurs="1"/>
         <xsd:element name="author" type="xsd:string" maxOccurs="1" minOccurs="1"/>
-    	<xsd:element name="date" type="xsd:date" maxOccurs="1" minOccurs="1"/>
+        <xsd:element name="date" type="xsd:string" maxOccurs="1" minOccurs="1"/>
         <xsd:element name="version" type="xsd:string" maxOccurs="1" minOccurs="1"/>
         <xsd:element name="sound" type="tns:Sound" maxOccurs="3" minOccurs="0"/>
         <xsd:element name="image" type="tns:Image" maxOccurs="3" minOccurs="0"/>
         <xsd:element name="main" type="tns:Main" maxOccurs="1" minOccurs="1"/>
-    	<xsd:element name="element" type="tns:Element" maxOccurs="unbounded" minOccurs="1"></xsd:element>
+        <xsd:element name="element" type="tns:Element" maxOccurs="unbounded" minOccurs="1"></xsd:element>
     </xsd:sequence>
   </xsd:complexType>
 </xsd:element>
 
 
+
+
+    <xsd:simpleType name="NewSimpleType">
+    	<xsd:restriction base="xsd:string"></xsd:restriction>
+    </xsd:simpleType>
 </xsd:schema>

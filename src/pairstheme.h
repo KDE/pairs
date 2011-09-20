@@ -24,12 +24,16 @@
 #include <QString>
 #include <QList>
 #include <KTar>
-
+#include <QXmlStreamReader>
 
 struct ThemeItem
 {
     QString imageName;
     QString soundName;
+    QString videoName;
+    QString wordName;
+    QString image2Name;
+    QString langName;
 };
 
 class PairsTheme
@@ -37,9 +41,9 @@ class PairsTheme
     public:
         PairsTheme(const QString& path);
 
-        QString name() const { return m_name; }
+        QString title() const { return m_title; }
         QString description() const { return m_description; }
-        QString backName() const { return m_backName; }
+        QString backImage() const { return m_back_img; }
         QString path() const { return m_path; }
         
         QList<ThemeItem> items() const { return m_items; }
@@ -72,6 +76,7 @@ class PairsTheme
         
         QString m_error;
         QString m_path;
+        QStringList m_languages;
 };
 
 #endif // PAIRSTHEME_H
