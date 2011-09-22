@@ -37,8 +37,10 @@
 #include <kactioncollection.h>
 #include <kstandardaction.h>
 #include <kstandarddirs.h>
-
 #include <KDE/KLocale>
+
+#include <Phonon/MediaObject>
+#include <Phonon/AudioOutput>
 #include "newpairsdialog.h"
 
 Pairs::Pairs()
