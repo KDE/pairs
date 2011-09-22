@@ -1,15 +1,18 @@
 <?xml version="1.0"?>
 
-<pairs>
+<pairs xmlns="http://edu.kde.org/game">
   <back>kde.svg</back>
   <name>KDE Programs</name>
   <description>Helps you learn KDE programs</description>
+  <date>23/9/2011</date>
+  <version>0.1</version>
+  <main type='image' />
   
-  <card image='ktuberling.svg' />
-  <card image='kalgebra.svg' />
-  <card image='okular.svg' />
-  <card image='kdevelop.svg' />
-  <card image='kopete.svg' />
-  <card image='konqueror.svg' />
-  <card image='dolphin.svg' />
+  <element><image src='ktuberling.svg' lang='en'></image><word lang='en'>KTuberling</word></element>
+  <element><image src='kalgebra.svg' lang='en'></image><word lang='en'>KAlgebra</word></element>
+  <element><image src='okular.svg' lang='en'></image><word lang='en'>Okular</word></element>
+  <element><image src='kdevelop.svg' lang='en'></image><word lang='en'>KDevelop</word></element>
+  <element><image src='kopete.svg' lang='en'></image><word lang='en'>Kopete</word></element>
+  <element><image src='konqueror.svg' lang='en'></image><word lang='en'>Konqueror</word></element>
+  <element><image src='dolphin.svg' lang='en'></image><word lang='en'>Dolphin</word></element>
 </pairs>
