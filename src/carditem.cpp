@@ -86,7 +86,7 @@ void CardItem::setType(int type, QString &file, KTar &archive){
     switch(type){
     case CARD_SOUND:
     {
-
+        m_color.fill(Qt::gray);
         m_mediafile.setData(((KArchiveFile*)(archive.directory()->entry(file)))->data());
 ///        void copy(QIODevice *source , QIODevice *target){         target->write(source->readAll());         }
         break;
