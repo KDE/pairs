@@ -24,11 +24,12 @@
 
 #include <QGraphicsRectItem>
 #include <QSvgRenderer>
+#include <QBuffer>
 
 #include <KTar>
 #include "cardtype.h"
 
-namespace Phonon { class MediaObject; }
+namespace Phonon { class MediaObject; class MediaSource;}
 
 class QPropertyAnimation;
 class QGraphicsRotation;
@@ -38,7 +39,7 @@ class CardItem
     Q_OBJECT
     Q_PROPERTY(QPointF position READ pos WRITE setPos);
     public:
-        CardItem(QSvgRenderer* back, const QSizeF& size, QGraphicsItem* parent = 0, QGraphicsScene* scene = 0);
+        CardItem(QSvgRenderer* back, const QSizeF& size, Phonon::MediaObject *media, QGraphicsItem* parent = 0, QGraphicsScene* scene = 0);
         virtual ~CardItem();
         
         virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
@@ -65,6 +66,7 @@ class CardItem
         QPixmap m_color;
         QPixmap m_back;
         Phonon::MediaObject *m_media;
+        QBuffer m_mediafile;
         QPropertyAnimation* m_opacityAnimation;
 };
 

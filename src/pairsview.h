@@ -24,6 +24,7 @@
 #define PAIRSVIEW_H
 
 #include <QtGui/QGraphicsView>
+namespace Phonon { class MediaObject;}
 
 class PairsTheme;
 class CardItem;
@@ -42,7 +43,7 @@ public:
     virtual ~PairsView();
     
     void setRowSize(int itemsPerRow);
-    void newGame(const PairsTheme& theme);
+    void newGame(const PairsTheme& theme, Phonon::MediaObject *media);
     int cardsNum();
 
 signals:

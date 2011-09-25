@@ -32,17 +32,17 @@
 #include <Phonon/VideoPlayer>
 
 
-CardItem::CardItem(QSvgRenderer *back, const QSizeF& size, QGraphicsItem* parent, QGraphicsScene* scene) :
+CardItem::CardItem(QSvgRenderer *back, const QSizeF& size, Phonon::MediaObject *media, QGraphicsItem* parent, QGraphicsScene* scene) :
 QGraphicsPixmapItem(parent, scene),
 m_type(CARD_NONE),
 m_size(size),
 m_activated(false),
 m_color(size.toSize()),
-m_back(size.toSize())
+m_back(size.toSize()),
+m_mediafile(this)
 {
     const int duration = 200;
-    m_media = new Phonon::MediaObject(this);
-
+    m_media = media;
     QGraphicsRotation* rotation = new QGraphicsRotation(this);
     rotation->setAxis(Qt::YAxis);
     rotation->setOrigin(QVector3D(m_back.rect().center()));
@@ -86,9 +86,9 @@ void CardItem::setType(int type, QString &file, KTar &archive){
     switch(type){
     case CARD_SOUND:
     {
-        Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput(Phonon::GameCategory, NULL);
-        createPath(m_media, audioOutput);
-        m_media->setCurrentSource(Phonon::MediaSource(((KArchiveFile*)(archive.directory()->entry(file)))->data()));
+
+        m_mediafile.setData(((KArchiveFile*)(archive.directory()->entry(file)))->data());
+///        void copy(QIODevice *source , QIODevice *target){         target->write(source->readAll());         }
         break;
     }
     case CARD_VIDEO:
@@ -145,6 +145,7 @@ void CardItem::changeValue()
 
     switch(m_type){
     case CARD_SOUND:
+        m_media->setCurrentSource(Phonon::MediaSource(&m_mediafile));
         m_media->play();
         break;
     }

@@ -45,6 +45,7 @@ public:
      * Default Destructor
      */
     virtual ~Pairs();
+    void Play(QIODevice * ioDevice);
 public slots:
     void inc_missed();
     void inc_found();

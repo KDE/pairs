@@ -87,7 +87,7 @@ void PairsView::setRowSize(int itemsPerRow)
     }
 }
 
-void PairsView::newGame(const PairsTheme& theme)
+void PairsView::newGame(const PairsTheme& theme, Phonon::MediaObject *media)
 {
     qDeleteAll(m_cards);
     m_cards.clear();
@@ -103,14 +103,14 @@ void PairsView::newGame(const PairsTheme& theme)
 
         qDebug() << theme.mainType() << titem.langName << titem.name[1] << titem.name[2] << titem.name[3] << titem.name[4] << titem.name[5];
 
-        CardItem* item = new CardItem(&backRenderer, m_cardsSize, NULL, scene());
+        CardItem* item = new CardItem(&backRenderer, m_cardsSize, media, NULL, scene());
         item->setData(0, i);
         item->setType(theme.mainType(), titem.name[theme.mainType()], archive);
 
-        CardItem* item1 = new CardItem(&backRenderer, m_cardsSize, NULL, scene());
+        CardItem* item1 = new CardItem(&backRenderer, m_cardsSize, media, NULL, scene());
         item1->setData(0, i);
         //for now  fixed to test sound
-        item1->setType(CARD_IMAGE, titem.name[CARD_IMAGE], archive);
+        item1->setType(CARD_SOUND, titem.name[CARD_SOUND], archive);
 
         connect(item, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
         connect(item1, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
