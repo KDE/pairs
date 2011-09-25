@@ -45,12 +45,12 @@ class CardItem
         virtual void mousePressEvent(QGraphicsSceneMouseEvent*) {}
         void setCardPixmap(QSvgRenderer *renderer);
         void markDone();
+        void setType(int type, QString &file, KTar &archive);
         
     public slots:
         void emitActivation();
         void changeValue();
         void turn();
-        void setType(int type, QString &file, KTar &archive);
         
     signals:
         void selected(CardItem* data);

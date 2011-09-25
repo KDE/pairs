@@ -111,6 +111,9 @@ void PairsView::newGame(const PairsTheme& theme)
         item1->setData(0, i);
         //for now  fixed to test sound
         item1->setType(CARD_IMAGE, titem.name[CARD_IMAGE], archive);
+
+        connect(item, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
+        connect(item1, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
         cards += item;
         cards += item1;
 
