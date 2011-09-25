@@ -24,12 +24,25 @@
 #include <QPropertyAnimation>
 #include <QPainter>
 #include <QGraphicsOpacityEffect>
+#include <KTar>
+#include <KDE/KLocale>
 
-CardItem::CardItem(QSvgRenderer *back, const QSizeF& size, QGraphicsItem* parent, QGraphicsScene* scene)
-    : QGraphicsPixmapItem(parent, scene), m_size(size), m_activated(false), m_color(size.toSize()), m_back(size.toSize())
+#include <Phonon/MediaObject>
+#include <Phonon/AudioOutput>
+#include <Phonon/VideoPlayer>
+
+
+CardItem::CardItem(QSvgRenderer *back, const QSizeF& size, QGraphicsItem* parent, QGraphicsScene* scene) :
+QGraphicsPixmapItem(parent, scene),
+m_type(CARD_NONE),
+m_size(size),
+m_activated(false),
+m_color(size.toSize()),
+m_back(size.toSize())
 {
     const int duration = 200;
-    
+    m_media = new Phonon::MediaObject(this);
+
     QGraphicsRotation* rotation = new QGraphicsRotation(this);
     rotation->setAxis(Qt::YAxis);
     rotation->setOrigin(QVector3D(m_back.rect().center()));
@@ -67,6 +80,35 @@ CardItem::CardItem(QSvgRenderer *back, const QSizeF& size, QGraphicsItem* parent
 CardItem::~CardItem()
 {}
 
+
+void CardItem::setType(int type, QString &file, KTar &archive){
+    m_type = type;
+    switch(type){
+    case CARD_SOUND:
+    {
+        Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput(Phonon::GameCategory, NULL);
+        createPath(m_media, audioOutput);
+        m_media->setCurrentSource(Phonon::MediaSource(((KArchiveFile*)(archive.directory()->entry(file)))->data()));
+        break;
+    }
+    case CARD_VIDEO:
+    {
+        Phonon::VideoPlayer *videoPlayer = new Phonon::VideoPlayer(Phonon::GameCategory, NULL);
+      //  createPath(m_media, videoPlayer);
+        break;
+    }
+    case CARD_IMAGE:
+    {
+        QSvgRenderer imageRenderer(((KArchiveFile*)(archive.directory()->entry(file)))->data());
+        setCardPixmap(&imageRenderer);
+        break;
+    }
+
+    }
+
+}
+
+
 void CardItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* )
 {
     if(!m_activated) {
@@ -100,6 +142,13 @@ void CardItem::changeValue()
         setPixmap(m_color);
     else
         setPixmap(m_back);
+
+    switch(m_type){
+    case CARD_SOUND:
+        m_media->play();
+        break;
+    }
+
     m_animationBack->start();
 }
 

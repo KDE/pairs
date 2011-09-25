@@ -25,15 +25,19 @@
 #include <QList>
 #include <KTar>
 #include <QXmlStreamReader>
+#include "cardtype.h"
 
-struct ThemeItem
-{
-    QString imageName;
-    QString soundName;
-    QString videoName;
-    QString wordName;
-    QString image2Name;
+class ThemeElement {
+public:
+    QString name[CARD_MAX_TYPE];
     QString langName;
+    ThemeElement(){ reset(); };
+    ~ThemeElement(){};
+    void reset() {
+        langName = "";
+        for(int i = 0; i < CARD_MAX_TYPE; i++) name[i] = "";
+    };
+
 };
 
 class PairsTheme
@@ -46,17 +50,17 @@ class PairsTheme
         QString backImage() const { return m_back_img; }
         QString path() const { return m_path; }
         
-        QList<ThemeItem> items() const { return m_items; }
+        QList<ThemeElement> items() const { return m_items; }
         
         bool isCorrect() const { return m_error.isEmpty(); }
         QString error() const { return m_error; }
         void parseElement(QXmlStreamReader &reader);
+        int mainType() const { return m_main_type; };
         
     private:
 
         bool isValid(const KArchiveFile* file);
         QString m_data;
-        
         QString m_title;
         QString m_description;
         QString m_author;
@@ -71,8 +75,9 @@ class PairsTheme
         QString m_background_img;
         QString m_backtrasp_img;
         QString m_main;
+        int m_main_type;
 
-        QList<ThemeItem> m_items;
+        QList<ThemeElement> m_items;
         
         QString m_error;
         QString m_path;

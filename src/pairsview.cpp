@@ -94,23 +94,26 @@ void PairsView::newGame(const PairsTheme& theme)
     QList<CardItem*> cards;
 	KTar archive(theme.path());
 	archive.open(QIODevice::ReadOnly);
-    
-    QList<ThemeItem> items = theme.items();
+    QList<ThemeElement> items = theme.items();
     //int num=qMin(((rows*columns)/2)*2, items.size()); //we make it %2
     int num = items.size();
     QSvgRenderer backRenderer(((KArchiveFile*)(archive.directory()->entry(theme.backImage())))->data());
     for(int i=0; i<num; i++) {
-        ThemeItem titem = items.at(i);
-        
-        for(int j=0; j<2; j++) { //we want pairs
-            CardItem* item = new CardItem(&backRenderer, m_cardsSize, NULL, scene());
-            item->setData(0, i);
-            
-            QSvgRenderer imageRenderer(((KArchiveFile*)(archive.directory()->entry(titem.imageName)))->data());
-            item->setCardPixmap(&imageRenderer);
-            connect(item, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
-            cards += item;
-        }
+        ThemeElement titem = items.at(i);
+
+        qDebug() << theme.mainType() << titem.langName << titem.name[1] << titem.name[2] << titem.name[3] << titem.name[4] << titem.name[5];
+
+        CardItem* item = new CardItem(&backRenderer, m_cardsSize, NULL, scene());
+        item->setData(0, i);
+        item->setType(theme.mainType(), titem.name[theme.mainType()], archive);
+
+        CardItem* item1 = new CardItem(&backRenderer, m_cardsSize, NULL, scene());
+        item1->setData(0, i);
+        //for now  fixed to test sound
+        item1->setType(CARD_IMAGE, titem.name[CARD_IMAGE], archive);
+        cards += item;
+        cards += item1;
+
     }
     
     while(!cards.isEmpty())

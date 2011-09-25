@@ -26,6 +26,7 @@
 #include <KStandardDirs>
 #include <QXmlSchemaValidator>
 #include <QXmlSchema>
+#include "cardtype.h"
 
 PairsTheme::PairsTheme(const QString& path)
 {
@@ -71,7 +72,14 @@ PairsTheme::PairsTheme(const QString& path)
                 m_date = reader.readElementText();
             }
             if(name == "main") {
-                m_date = reader.attributes().value("type").toString();
+                m_main = reader.attributes().value("type").toString();
+                if (m_main == "image") m_main_type = CARD_IMAGE;
+                if (m_main == "image2") m_main_type = CARD_IMAGE2;
+                if (m_main == "sound") m_main_type = CARD_SOUND;
+                if (m_main == "video") m_main_type = CARD_VIDEO;
+                if (m_main == "word") m_main_type = CARD_WORD;
+
+
             }
             if(name == "sound") {
                 if(reader.attributes().value("type") == "missed"){
@@ -107,56 +115,51 @@ PairsTheme::PairsTheme(const QString& path)
     }
     qDebug() << m_title << m_description << m_author << m_date << m_version << m_missed_snd << m_found_snd
              << m_turn_snd << m_back_img << m_background_img << m_backtrasp_img << m_main << m_languages;
-    foreach (ThemeItem i, m_items){
-        qDebug() << i.imageName << i.langName << i.wordName;
-    }
     if (reader.hasError()) {}
 }
 
 void PairsTheme::parseElement(QXmlStreamReader &reader)
 {
-    QMap<QString, ThemeItem> itemMap;
     QXmlStreamReader::TokenType type = reader.readNext();
+    ThemeElement item;
     while(!reader.atEnd()){
-        if(type==QXmlStreamReader::EndElement) {
-            if(reader.name().toString() == "element"){
-                foreach (ThemeItem value, itemMap){
-                    m_items.append(value);
-                }
-                return;
-            }
+        if(type==QXmlStreamReader::EndElement && reader.name().toString() == "element") {
+            m_items += item;
+            item.reset();
         }
         else
         if(type==QXmlStreamReader::StartElement) {
-            ThemeItem item;
             QString name = reader.name().toString();
             QString l = reader.attributes().value("lang").toString();
             if(!l.isEmpty() && m_languages.lastIndexOf(l) == -1){
                 m_languages.append(l);
-                ThemeItem item;
-                itemMap[l] = item;
             }
-            itemMap[l].langName = l;
+            item.langName = l;
             if(name == "image") {
-                if(item.imageName.isEmpty()) {
-                    itemMap[l].imageName = reader.attributes().value("src").toString();
+                if(item.name[CARD_IMAGE].isEmpty()) {
+                    item.name[CARD_IMAGE] = reader.attributes().value("src").toString();
                 }
                 else{
-                    itemMap[l].image2Name = reader.attributes().value("src").toString();
+                    item.name[CARD_IMAGE2] = reader.attributes().value("src").toString();
                 }
             }
             if(name == "sound") {
-                itemMap[l].soundName = reader.attributes().value("src").toString();
+                item.name[CARD_SOUND] = reader.attributes().value("src").toString();
             }
             if(name == "video") {
-                itemMap[l].videoName = reader.attributes().value("src").toString();
+                item.name[CARD_VIDEO] = reader.attributes().value("src").toString();
             }
             if(name == "word") {
-                itemMap[l].wordName = reader.readElementText();
+                item.name[CARD_WORD] = reader.readElementText();
+            }
+            if(name != "element") {
+
             }
         }
         type = reader.readNext();
     }
+
+    qDebug() << item.langName << item.name[1] << item.name[2] << item.name[3] << item.name[4] << item.name[5];
 }
 
 bool PairsTheme::isValid(const KArchiveFile* file){

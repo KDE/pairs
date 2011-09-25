@@ -42,7 +42,7 @@ NewPairsDialog::NewPairsDialog(QWidget* parent)
     connect(m_ui->add, SIGNAL(clicked()), this, SLOT(addUser()));
     connect(m_ui->remove, SIGNAL(clicked()), this, SLOT(deleteUser()));
     connect(m_ui->playerName, SIGNAL(textChanged(QString)), SLOT(playerNameChanged(QString)));
-    
+
     const QStringList themes = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "themes/*.pairs.*" ));
     
     Q_FOREACH(const QString& themePath, themes) {

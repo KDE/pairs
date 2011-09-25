@@ -25,6 +25,11 @@
 #include <QGraphicsRectItem>
 #include <QSvgRenderer>
 
+#include <KTar>
+#include "cardtype.h"
+
+namespace Phonon { class MediaObject; }
+
 class QPropertyAnimation;
 class QGraphicsRotation;
 class CardItem
@@ -45,6 +50,7 @@ class CardItem
         void emitActivation();
         void changeValue();
         void turn();
+        void setType(int type, QString &file, KTar &archive);
         
     signals:
         void selected(CardItem* data);
@@ -53,10 +59,12 @@ class CardItem
         QPropertyAnimation* m_animation;
         QPropertyAnimation* m_animationBack;
         
+        int m_type;
         QSizeF m_size;
         bool m_activated;
         QPixmap m_color;
         QPixmap m_back;
+        Phonon::MediaObject *m_media;
         QPropertyAnimation* m_opacityAnimation;
 };
 
