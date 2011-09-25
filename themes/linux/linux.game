@@ -1,50 +1,51 @@
 <?xml version="1.0"?>
-<pairs xmlns="http://www.example.org/game">
-<title>Linux Flavours</title>
-<description lang='en'>'Some of Linux Distributions'</description> 
-<author>Marco Calignano</author>
-<date>20/09/2011</date>
-<version>0.1</version>
-<image type='back' src='Tux.svg'></image>
-<main type='image'></main>
-<element>
-<image src='centos_logo.svg' lang='en'></image>
-<word lang='en'>centos</word>
-</element>
-<element>
-<image src='debian-logo.svg' lang='en'></image>
-<word lang='en'>debian</word>
-</element>
-<element>
-<image src='fedora-logo.svg' lang='en'></image>
-<word lang='en'>fedora</word>
-</element>
-<element>
-<image src='gentoo-logo.svg' lang='en'></image>
-<word lang='en'>gentoo</word>
-</element>
-<element>
-<image src='knoppix-logo.svg' lang='en'></image>
-<word lang='en'>knoppix</word>
-</element>
-<element>
-<image src='mandrake_logo.svg' lang='en'></image>
-<word lang='en'>mandrake</word>
-</element>
-<element>
-<image src='mint-logo.svg' lang='en'></image>
-<word lang='en'>mint</word>
-</element>
-<element>
-<image src='redhat-logo.svg' lang='en'></image>
-<word lang='en'>redhat</word>
-</element>
-<element>
-<image src='suse_logo.svg' lang='en'></image>
-<word lang='en'>suse</word>
-</element>
-<element>
-<image src='ubuntu-logo.svg' lang='en'></image>
-<word lang='en'>ubuntu</word>
-</element>
+
+<pairs xmlns="http://edu.kde.org/game">
+    <title>Linux Flavours</title>
+    <description lang='en'>'Some of Linux Distributions'</description> 
+    <author>Marco Calignano</author>
+    <date>20/09/2011</date>
+    <version>0.1</version>
+    <image type='back' src='Tux.svg'></image>
+    <main type='image'></main>
+    <element>
+        <image src='centos_logo.svg' lang='en'></image>
+        <word lang='en'>centos</word>
+    </element>
+    <element>
+        <image src='debian-logo.svg' lang='en'></image>
+        <word lang='en'>debian</word>
+    </element>
+    <element>
+        <image src='fedora-logo.svg' lang='en'></image>
+        <word lang='en'>fedora</word>
+    </element>
+    <element>
+        <image src='gentoo-logo.svg' lang='en'></image>
+        <word lang='en'>gentoo</word>
+    </element>
+    <element>
+        <image src='knoppix-logo.svg' lang='en'></image>
+        <word lang='en'>knoppix</word>
+    </element>
+    <element>
+        <image src='mandrake_logo.svg' lang='en'></image>
+        <word lang='en'>mandrake</word>
+    </element>
+    <element>
+        <image src='mint-logo.svg' lang='en'></image>
+        <word lang='en'>mint</word>
+    </element>
+    <element>
+        <image src='redhat-logo.svg' lang='en'></image>
+        <word lang='en'>redhat</word>
+    </element>
+    <element>
+        <image src='suse_logo.svg' lang='en'></image>
+        <word lang='en'>suse</word>
+    </element>
+    <element>
+        <image src='ubuntu-logo.svg' lang='en'></image>
+        <word lang='en'>ubuntu</word>
+    </element>
 </pairs>

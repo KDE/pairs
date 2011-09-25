@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 
 <pairs xmlns="http://edu.kde.org/game">
-  <back>kde.svg</back>
-  <name>KDE Programs</name>
-  <description>Helps you learn KDE programs</description>
+  <title>KDE Programs</title>
+  <description lang='en'>Helps you learn KDE programs</description>
+  <author>Aleix Pol</author>
   <date>23/9/2011</date>
   <version>0.1</version>
+  <image type='back' src='kde.svg'></image>
   <main type='image' />
   
   <element><image src='ktuberling.svg' lang='en'></image><word lang='en'>KTuberling</word></element>
