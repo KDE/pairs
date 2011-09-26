@@ -28,6 +28,7 @@
 
 #include <KTar>
 #include "cardtype.h"
+#include <phonon/mediasource.h>
 
 namespace Phonon { class MediaObject; class MediaSource;}
 
@@ -39,7 +40,7 @@ class CardItem
     Q_OBJECT
     Q_PROPERTY(QPointF position READ pos WRITE setPos);
     public:
-        CardItem(QSvgRenderer* back, const QSizeF& size, Phonon::MediaObject *media, QGraphicsItem* parent = 0, QGraphicsScene* scene = 0);
+        CardItem(QSvgRenderer* back, const QSizeF& size, QGraphicsItem* parent, QGraphicsScene* scene = 0);
         virtual ~CardItem();
         
         virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
@@ -64,9 +65,8 @@ class CardItem
         bool m_activated;
         QPixmap m_color;
         QPixmap m_back;
-        Phonon::MediaObject *m_media;
-        QBuffer m_mediafile;
         QPropertyAnimation* m_opacityAnimation;
+        Phonon::MediaSource m_source;
 };
 
 #endif // CARDITEM_H

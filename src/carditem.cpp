@@ -32,17 +32,15 @@
 #include <Phonon/VideoPlayer>
 
 
-CardItem::CardItem(QSvgRenderer *back, const QSizeF& size, Phonon::MediaObject *media, QGraphicsItem* parent, QGraphicsScene* scene) :
+CardItem::CardItem(QSvgRenderer *back, const QSizeF& size, QGraphicsItem* parent, QGraphicsScene* scene) :
 QGraphicsPixmapItem(parent, scene),
 m_type(CARD_NONE),
 m_size(size),
 m_activated(false),
 m_color(size.toSize()),
-m_back(size.toSize()),
-m_mediafile(this)
+m_back(size.toSize())
 {
     const int duration = 200;
-    m_media = media;
     QGraphicsRotation* rotation = new QGraphicsRotation(this);
     rotation->setAxis(Qt::YAxis);
     rotation->setOrigin(QVector3D(m_back.rect().center()));
@@ -84,10 +82,13 @@ void CardItem::setType(CardType type, QString& file, KTar& archive){
     m_type = type;
     switch(type){
         case CARD_SOUND:
+        {
             m_color.fill(Qt::blue);
-            m_mediafile.setData(static_cast<const KArchiveFile*>(archive.directory()->entry(file))->data());
+            QBuffer *mediafile = new QBuffer(this);
+            mediafile->setData(static_cast<const KArchiveFile*>(archive.directory()->entry(file))->data());
+            m_source = Phonon::MediaSource(mediafile);
     ///        void copy(QIODevice *source , QIODevice *target){         target->write(source->readAll());         }
-            break;
+        }   break;
         case CARD_VIDEO:
         {
             Phonon::VideoPlayer *videoPlayer = new Phonon::VideoPlayer(Phonon::GameCategory, NULL);
@@ -149,9 +150,13 @@ void CardItem::changeValue()
     else
         setPixmap(m_back);
 
-    if(m_type==CARD_SOUND){
-        m_media->setCurrentSource(Phonon::MediaSource(&m_mediafile));
-        m_media->play();
+    if(m_type==CARD_SOUND && m_activated) {
+        Phonon::MediaObject* object = new Phonon::MediaObject(this);
+        Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput(Phonon::GameCategory, this);
+        createPath(object, audioOutput);
+        object->setCurrentSource(m_source);
+        object->play();
+        connect(object, SIGNAL(finished()), object, SLOT(deleteLater()));
     }
 
     if(m_activated)
