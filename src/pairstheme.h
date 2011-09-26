@@ -55,7 +55,7 @@ class PairsTheme
         bool isCorrect() const { return m_error.isEmpty(); }
         QString error() const { return m_error; }
         void parseElement(QXmlStreamReader &reader);
-        int mainType() const { return m_main_type; };
+        CardType mainType() const { return m_main_type; };
         
     private:
 
@@ -75,7 +75,7 @@ class PairsTheme
         QString m_background_img;
         QString m_backtrasp_img;
         QString m_main;
-        int m_main_type;
+        CardType m_main_type;
 
         QList<ThemeElement> m_items;
         

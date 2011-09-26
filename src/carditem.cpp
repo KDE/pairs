@@ -80,16 +80,14 @@ CardItem::~CardItem()
 {}
 
 
-void CardItem::setType(int type, QString &file, KTar &archive){
+void CardItem::setType(CardType type, QString& file, KTar& archive){
     m_type = type;
     switch(type){
         case CARD_SOUND:
-        {
             m_color.fill(Qt::blue);
             m_mediafile.setData(((KArchiveFile*)(archive.directory()->entry(file)))->data());
     ///        void copy(QIODevice *source , QIODevice *target){         target->write(source->readAll());         }
             break;
-        }
         case CARD_VIDEO:
         {
             Phonon::VideoPlayer *videoPlayer = new Phonon::VideoPlayer(Phonon::GameCategory, NULL);
@@ -115,7 +113,9 @@ void CardItem::setType(int type, QString &file, KTar &archive){
             paint.setPen( Qt::blue );
             paint.drawText( m_color.rect(), Qt::AlignCenter, file);
             paint.end();
-        }
+        }   break;
+        default:
+            break;
     }
 
 }

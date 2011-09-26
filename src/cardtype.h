@@ -21,18 +21,16 @@
 #ifndef CARDTYPE_H_
 #define CARDTYPE_H_
 
-#define CARD_MAX_TYPE 6
-enum {
+enum CardType {
     CARD_NONE = 0,
+    
     CARD_IMAGE,
     CARD_IMAGE2,
     CARD_SOUND,
     CARD_VIDEO,
-    CARD_WORD
-
-
+    CARD_WORD,
+    
+    CARD_MAX_TYPE
 };
-
-
 
 #endif /* CARDTYPE_H_ */

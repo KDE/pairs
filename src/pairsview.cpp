@@ -33,13 +33,12 @@
 #include <Phonon/MediaObject>
 
 PairsView::PairsView(QWidget *parent)
-    : QGraphicsView(parent), m_last(0)
+    : QGraphicsView(parent), m_last(0), m_cardsSize(128,128)
 {
     QObject::connect(this, SIGNAL(pair_missed()), parent, SLOT(inc_missed()));
     QObject::connect(this, SIGNAL(pair_found()), parent, SLOT(inc_found()));
     setScene(new QGraphicsScene(this));
     
-    m_cardsSize=QSizeF(128,128);
     qsrand(QTime::currentTime().msec()*QTime::currentTime().second());
 }
 

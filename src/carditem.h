@@ -46,7 +46,7 @@ class CardItem
         virtual void mousePressEvent(QGraphicsSceneMouseEvent*) {}
         void setCardPixmap(QSvgRenderer *renderer);
         void markDone();
-        void setType(int type, QString &file, KTar &archive);
+        void setType(CardType type, QString &file, KTar &archive);
         
     public slots:
         void changeValue();
@@ -59,7 +59,7 @@ class CardItem
         QPropertyAnimation* m_animation;
         QPropertyAnimation* m_animationBack;
         
-        int m_type;
+        CardType m_type;
         QSizeF m_size;
         bool m_activated;
         QPixmap m_color;
