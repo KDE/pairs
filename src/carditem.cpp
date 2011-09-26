@@ -61,7 +61,6 @@ m_mediafile(this)
     m_animationBack->setStartValue(90);
     m_animationBack->setEndValue(0);
     m_animationBack->setDuration(duration);
-    connect(m_animation, SIGNAL(finished()), SLOT(emitActivation()));
     
     setTransformations(QList<QGraphicsTransform*>() << rotation);
     
@@ -86,7 +85,7 @@ void CardItem::setType(int type, QString &file, KTar &archive){
     switch(type){
     case CARD_SOUND:
     {
-        m_color.fill(Qt::gray);
+        m_color.fill(Qt::blue);
         m_mediafile.setData(((KArchiveFile*)(archive.directory()->entry(file)))->data());
 ///        void copy(QIODevice *source , QIODevice *target){         target->write(source->readAll());         }
         break;
@@ -130,12 +129,6 @@ void CardItem::setCardPixmap(QSvgRenderer* renderer)
     renderer->render(&pixPainter);
 }
 
-void CardItem::emitActivation()
-{
-    if(m_activated)
-        emit selected(this);
-}
-
 void CardItem::changeValue()
 {
     if(m_activated)
@@ -149,6 +142,9 @@ void CardItem::changeValue()
         m_media->play();
         break;
     }
+
+    if(m_activated)
+        emit selected(this);
 
     m_animationBack->start();
 }

@@ -27,6 +27,7 @@
 #include <QtGui/QPainter>
 #include <QtGui/QPrinter>
 #include <QtCore/QCoreApplication>
+#include <QList>
 
 #include <kconfigdialog.h>
 #include <kstatusbar.h>
@@ -57,7 +58,6 @@ Pairs::Pairs()
     m_media = new Phonon::MediaObject(this);
     Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput(Phonon::GameCategory, this);
     createPath(m_media, audioOutput);
-
 
     // accept dnd
     setAcceptDrops(true);
@@ -134,8 +134,15 @@ void Pairs::newGame()
 
 void Pairs::inc_missed()
 {
-	m_media->setCurrentSource(QUrl(m_wrong));
-	m_media->play();
+    QList<QUrl> list;
+    list += QUrl(m_wrong);
+    if(m_media->queue().empty()){
+        m_media->setCurrentSource(*list.begin());
+        m_media->play();
+    }
+    else {
+        m_media->enqueue(list);
+    }
 	m_players[m_currentplayer].incMissed();
 	++m_currentplayer %= m_players.size();
 	setScore();
@@ -143,8 +150,15 @@ void Pairs::inc_missed()
 
 void Pairs::inc_found()
 {
-	m_media->setCurrentSource(QUrl(m_right));
-	m_media->play();
+    QList<QUrl> list;
+    list += QUrl(m_right);
+    if(m_media->queue().empty()){
+        m_media->setCurrentSource(*list.begin());
+        m_media->play();
+    }
+    else {
+        m_media->enqueue(list);
+    }
     m_found++;
     m_players[m_currentplayer].incFound();
     setScore();

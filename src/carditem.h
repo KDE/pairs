@@ -49,7 +49,6 @@ class CardItem
         void setType(int type, QString &file, KTar &archive);
         
     public slots:
-        void emitActivation();
         void changeValue();
         void turn();
         

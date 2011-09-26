@@ -57,6 +57,7 @@ private:
     CardItem* m_last;
     QList<CardItem*> m_cards;
     QSizeF m_cardsSize;
+    Phonon::MediaObject *m_media;
 };
 
 #endif // kpairsVIEW_H

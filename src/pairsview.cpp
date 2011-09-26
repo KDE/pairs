@@ -30,6 +30,7 @@
 #include <QTimer>
 #include <QSvgRenderer>
 #include <KTar>
+#include <Phonon/MediaObject>
 
 PairsView::PairsView(QWidget *parent)
     : QGraphicsView(parent), m_last(0)
@@ -49,7 +50,6 @@ void PairsView::cardSelected(CardItem* card)
 {
     Q_ASSERT(card);
     
-//     qDebug() << "-------" << int(m_last) << int(card);
     if(m_last) {
         if(m_last->data(0)==card->data(0)) {
             m_last->markDone();
@@ -61,8 +61,10 @@ void PairsView::cardSelected(CardItem* card)
             emit pair_missed();
         }
         m_last=0;
-    } else
+    }
+    else {
         m_last=card;
+    }
 }
 
 int PairsView::cardsNum()
@@ -89,6 +91,7 @@ void PairsView::setRowSize(int itemsPerRow)
 
 void PairsView::newGame(const PairsTheme& theme, Phonon::MediaObject *media)
 {
+    m_media = media;
     qDeleteAll(m_cards);
     m_cards.clear();
     QList<CardItem*> cards;
