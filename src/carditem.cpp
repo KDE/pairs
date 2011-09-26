@@ -83,26 +83,39 @@ CardItem::~CardItem()
 void CardItem::setType(int type, QString &file, KTar &archive){
     m_type = type;
     switch(type){
-    case CARD_SOUND:
-    {
-        m_color.fill(Qt::blue);
-        m_mediafile.setData(((KArchiveFile*)(archive.directory()->entry(file)))->data());
-///        void copy(QIODevice *source , QIODevice *target){         target->write(source->readAll());         }
-        break;
-    }
-    case CARD_VIDEO:
-    {
-        Phonon::VideoPlayer *videoPlayer = new Phonon::VideoPlayer(Phonon::GameCategory, NULL);
-      //  createPath(m_media, videoPlayer);
-        break;
-    }
-    case CARD_IMAGE:
-    {
-        QSvgRenderer imageRenderer(((KArchiveFile*)(archive.directory()->entry(file)))->data());
-        setCardPixmap(&imageRenderer);
-        break;
-    }
+        case CARD_SOUND:
+        {
+            m_color.fill(Qt::blue);
+            m_mediafile.setData(((KArchiveFile*)(archive.directory()->entry(file)))->data());
+    ///        void copy(QIODevice *source , QIODevice *target){         target->write(source->readAll());         }
+            break;
+        }
+        case CARD_VIDEO:
+        {
+            Phonon::VideoPlayer *videoPlayer = new Phonon::VideoPlayer(Phonon::GameCategory, NULL);
+          //  createPath(m_media, videoPlayer);
+            break;
+        }
+        case CARD_IMAGE:
+        {
+            QSvgRenderer imageRenderer(((KArchiveFile*)(archive.directory()->entry(file)))->data());
+            setCardPixmap(&imageRenderer);
+            break;
+        }
+        case CARD_WORD:
+        {
+            m_color.fill(Qt::white);
+            QFont myFont;
+            myFont.setPointSizeF(22.0);
+            myFont.setFamily("Times");
+            QPainter paint;
+            paint.begin(&m_color);
+            paint.setFont(myFont);
 
+            paint.setPen( Qt::blue );
+            paint.drawText( m_color.rect(), Qt::AlignCenter, file);
+            paint.end();
+        }
     }
 
 }

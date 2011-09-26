@@ -113,7 +113,7 @@ void PairsView::newGame(const PairsTheme& theme, Phonon::MediaObject *media)
         CardItem* item1 = new CardItem(&backRenderer, m_cardsSize, media, NULL, scene());
         item1->setData(0, i);
         //for now  fixed to test sound
-        item1->setType(CARD_SOUND, titem.name[CARD_SOUND], archive);
+        item1->setType(CARD_WORD, titem.name[CARD_WORD], archive);
 
         connect(item, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
         connect(item1, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
