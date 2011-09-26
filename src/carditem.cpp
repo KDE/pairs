@@ -85,7 +85,7 @@ void CardItem::setType(CardType type, QString& file, KTar& archive){
     switch(type){
         case CARD_SOUND:
             m_color.fill(Qt::blue);
-            m_mediafile.setData(((KArchiveFile*)(archive.directory()->entry(file)))->data());
+            m_mediafile.setData(static_cast<const KArchiveFile*>(archive.directory()->entry(file))->data());
     ///        void copy(QIODevice *source , QIODevice *target){         target->write(source->readAll());         }
             break;
         case CARD_VIDEO:
@@ -96,7 +96,7 @@ void CardItem::setType(CardType type, QString& file, KTar& archive){
         }
         case CARD_IMAGE:
         {
-            QSvgRenderer imageRenderer(((KArchiveFile*)(archive.directory()->entry(file)))->data());
+            QSvgRenderer imageRenderer(static_cast<const KArchiveFile*>(archive.directory()->entry(file))->data());
             setCardPixmap(&imageRenderer);
             break;
         }
@@ -149,11 +149,9 @@ void CardItem::changeValue()
     else
         setPixmap(m_back);
 
-    switch(m_type){
-    case CARD_SOUND:
+    if(m_type==CARD_SOUND){
         m_media->setCurrentSource(Phonon::MediaSource(&m_mediafile));
         m_media->play();
-        break;
     }
 
     if(m_activated)
