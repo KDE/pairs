@@ -156,13 +156,19 @@ void CardItem::changeValue()
         createPath(object, audioOutput);
         object->setCurrentSource(m_source);
         object->play();
+        
+        //We delay the emit selected until it has played, that way sounds don't overlap
+        connect(object, SIGNAL(finished()), this, SLOT(emitSelected()));
         connect(object, SIGNAL(finished()), object, SLOT(deleteLater()));
-    }
-
-    if(m_activated)
-        emit selected(this);
+    } else if(m_activated)
+        emitSelected();
 
     m_animationBack->start();
+}
+
+void CardItem::emitSelected()
+{
+    emit selected(this);
 }
 
 void CardItem::markDone()

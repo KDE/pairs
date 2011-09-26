@@ -52,6 +52,7 @@ class CardItem
     public slots:
         void changeValue();
         void turn();
+        void emitSelected();
         
     signals:
         void selected(CardItem* data);
