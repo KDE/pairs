@@ -134,15 +134,13 @@ void Pairs::newGame()
 
 void Pairs::inc_missed()
 {
-    QList<QUrl> list;
-    list += QUrl(m_wrong);
-    if(m_media->queue().empty()){
-        m_media->setCurrentSource(*list.begin());
+    if(m_media->state()==Phonon::PlayingState) {
+        m_media->setQueue(QList<Phonon::MediaSource>() << m_wrong);
+    } else {
+        m_media->setCurrentSource(m_wrong);
         m_media->play();
     }
-    else {
-        m_media->enqueue(list);
-    }
+    
 	m_players[m_currentplayer].incMissed();
 	++m_currentplayer %= m_players.size();
 	setScore();
@@ -150,15 +148,13 @@ void Pairs::inc_missed()
 
 void Pairs::inc_found()
 {
-    QList<QUrl> list;
-    list += QUrl(m_right);
-    if(m_media->queue().empty()){
-        m_media->setCurrentSource(*list.begin());
+    if(m_media->state()==Phonon::PlayingState) {
+        m_media->setQueue(QList<Phonon::MediaSource>() << m_right);
+    } else {
+        m_media->setCurrentSource(m_right);
         m_media->play();
     }
-    else {
-        m_media->enqueue(list);
-    }
+    
     m_found++;
     m_players[m_currentplayer].incFound();
     setScore();
