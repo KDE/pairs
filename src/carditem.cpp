@@ -152,7 +152,7 @@ void CardItem::changeValue()
 
     if(m_type==CARD_SOUND && m_activated) {
         Phonon::MediaObject* object = new Phonon::MediaObject(this);
-        Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput(Phonon::GameCategory, this);
+        Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput(Phonon::GameCategory, object);
         createPath(object, audioOutput);
         object->setCurrentSource(m_source);
         object->play();
