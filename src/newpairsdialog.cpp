@@ -64,24 +64,26 @@ NewPairsDialog::NewPairsDialog(QWidget* parent)
 PairsTheme NewPairsDialog::theme() const
 {
     int row = m_ui->themesList->currentRow();
-    return m_themes.at(row);
+    return m_themes[row];
 }
 QString NewPairsDialog::language() const
 {
-    return m_ui->comboBox_l->currentText();
+    return m_ui->comboLanguages->currentText();
 }
 
 QString NewPairsDialog::cardType() const
 {
-    return m_ui->comboBox_c->currentText();
+    return m_ui->comboCardTypes->currentText();
 }
 
-void NewPairsDialog::themeSelected(QListWidgetItem *item){
-    int row = m_ui->themesList->row(item);
-    m_ui->comboBox_l->clear();
-    m_ui->comboBox_l->addItems(m_themes.at(row).languages());
-    m_ui->comboBox_c->clear();
-    m_ui->comboBox_c->addItems(m_themes.at(row).cardTypes());
+void NewPairsDialog::themeSelected(QListWidgetItem *item)
+{
+	int row = m_ui->themesList->row(item);
+    m_ui->comboLanguages->clear();
+	m_ui->comboCardTypes->clear();
+	
+	m_ui->comboLanguages->addItems(m_themes[row].languages());
+	m_ui->comboCardTypes->addItems(m_themes[row].cardTypes());
 }
 
 QStringList NewPairsDialog::players()
