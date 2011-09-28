@@ -42,7 +42,7 @@ NewPairsDialog::NewPairsDialog(QWidget* parent)
     connect(m_ui->add, SIGNAL(clicked()), this, SLOT(addUser()));
     connect(m_ui->remove, SIGNAL(clicked()), this, SLOT(deleteUser()));
     connect(m_ui->playerName, SIGNAL(textChanged(QString)), SLOT(playerNameChanged(QString)));
-
+    connect(m_ui->themesList, SIGNAL(itemClicked(QListWidgetItem *)), SLOT(themeSelected(QListWidgetItem *)));
     const QStringList themes = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "themes/*.pairs.*" ));
     
     Q_FOREACH(const QString& themePath, themes) {
@@ -58,12 +58,30 @@ NewPairsDialog::NewPairsDialog(QWidget* parent)
     m_ui->playerName->setClickMessage(i18n("Player name..."));
     m_ui->themesList->setCurrentRow(0);
     m_ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+    themeSelected(m_ui->themesList->currentItem());
 }
 
 PairsTheme NewPairsDialog::theme() const
 {
     int row = m_ui->themesList->currentRow();
     return m_themes.at(row);
+}
+QString NewPairsDialog::language() const
+{
+    return m_ui->comboBox_l->currentText();
+}
+
+QString NewPairsDialog::cardType() const
+{
+    return m_ui->comboBox_c->currentText();
+}
+
+void NewPairsDialog::themeSelected(QListWidgetItem *item){
+    int row = m_ui->themesList->row(item);
+    m_ui->comboBox_l->clear();
+    m_ui->comboBox_l->addItems(m_themes.at(row).languages());
+    m_ui->comboBox_c->clear();
+    m_ui->comboBox_c->addItems(m_themes.at(row).cardTypes());
 }
 
 QStringList NewPairsDialog::players()

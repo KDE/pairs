@@ -22,6 +22,7 @@
 #define NEWPairsDialog_H
 
 #include <kdialog.h>
+#include <QListWidgetItem>
 #include "pairstheme.h"
 
 namespace Ui { class NewPairsDialog; }
@@ -35,10 +36,14 @@ class NewPairsDialog
         PairsTheme theme() const;
         QStringList players();
         void setPlayer(const QString &name);
+        QString language() const;
+        QString cardType() const;
     public slots:
         void addUser();
         void deleteUser();
         void playerNameChanged(const QString & newname);
+        void themeSelected(QListWidgetItem *item);
+
 
     private:
         Ui::NewPairsDialog* m_ui;

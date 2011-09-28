@@ -113,7 +113,7 @@ void Pairs::newGame()
     	{
     		m_players.append(PairsPlayer(dialog.players().at(i)));
     	}
-    	m_view->newGame(dialog.theme(), m_media);
+    	m_view->newGame(dialog.theme(), dialog.language(), dialog.cardType());
     }
 
 /*

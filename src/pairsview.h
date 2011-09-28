@@ -43,7 +43,7 @@ public:
     virtual ~PairsView();
     
     void setRowSize(int itemsPerRow);
-    void newGame(const PairsTheme& theme, Phonon::MediaObject *media);
+    void newGame(const PairsTheme& theme, const QString language, const QString cardType);
     int cardsNum();
 
 signals:
@@ -57,7 +57,6 @@ private:
     CardItem* m_last;
     QList<CardItem*> m_cards;
     QSizeF m_cardsSize;
-    Phonon::MediaObject *m_media;
 };
 
 #endif // kpairsVIEW_H

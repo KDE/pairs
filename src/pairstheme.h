@@ -56,7 +56,8 @@ class PairsTheme
         QString error() const { return m_error; }
         void parseElement(QXmlStreamReader &reader);
         CardType mainType() const { return m_main_type; };
-        
+        QStringList languages() const  { return m_languages; };
+        QStringList cardTypes() const  { return m_cardtypes; };
     private:
 
         bool isValid(const KArchiveFile* file);
@@ -82,6 +83,7 @@ class PairsTheme
         QString m_error;
         QString m_path;
         QStringList m_languages;
+        QStringList m_cardtypes;
 };
 
 #endif // PAIRSTHEME_H

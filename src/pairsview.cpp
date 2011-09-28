@@ -88,9 +88,8 @@ void PairsView::setRowSize(int itemsPerRow)
     }
 }
 
-void PairsView::newGame(const PairsTheme& theme, Phonon::MediaObject *media)
+void PairsView::newGame(const PairsTheme& theme, const QString language, const QString cardType)
 {
-    m_media = media;
     qDeleteAll(m_cards);
     m_cards.clear();
     QList<CardItem*> cards;
@@ -114,7 +113,12 @@ void PairsView::newGame(const PairsTheme& theme, Phonon::MediaObject *media)
         CardItem* item1 = new CardItem(&backRenderer, m_cardsSize, 0, scene());
         item1->setData(0, i);
         //for now  fixed to test sound
-        item1->setType(CARD_SOUND, titem.name[CARD_SOUND], archive);
+        CardType type = CARD_IMAGE;
+        if(cardType == "image") type = CARD_IMAGE;
+        if(cardType == "sound") type = CARD_SOUND;
+        if(cardType == "video") type = CARD_VIDEO;
+        if(cardType == "word") type = CARD_WORD;
+        item1->setType(type, titem.name[type], archive);
 
         connect(item, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
         connect(item1, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));

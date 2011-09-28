@@ -135,6 +135,10 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                 m_languages.append(l);
             }
             item.langName = l;
+            if(m_cardtypes.lastIndexOf(name) == -1 && name != "element"){
+                m_cardtypes.append(name);
+            }
+
             if(name == "image") {
                 if(item.name[CARD_IMAGE].isEmpty()) {
                     item.name[CARD_IMAGE] = reader.attributes().value("src").toString();
@@ -159,7 +163,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
         type = reader.readNext();
     }
 
-    qDebug() << item.langName << item.name[1] << item.name[2] << item.name[3] << item.name[4] << item.name[5];
+    qDebug() << m_languages << m_cardtypes;
 }
 
 bool PairsTheme::isValid(const KArchiveFile* file){
