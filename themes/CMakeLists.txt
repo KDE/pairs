@@ -47,6 +47,7 @@ macro(create_theme _baseName)
     install(FILES ${_template} DESTINATION ${DATA_INSTALL_DIR}/pairs/themes)
 endmacro(create_theme)
 
+create_theme(animals)
 create_theme(kde)
 create_theme(zoo)
 create_theme(linux)

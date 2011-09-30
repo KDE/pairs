@@ -1,14 +1,18 @@
 <?xml version="1.0"?>
 
-<pairs>
-  <back>HappyPandaFace.svg</back>
-  <name>Zoo</name>
+<pairs xmlns="http://edu.kde.org/game">
+  <title>Zoo Animals</title>
   <description>A little Zoo</description>
-  <card image='cat-clipart.svg' />
-  <card image='hippopotamus-clipart.svg' />
-  <card image='lion-clipart.svg' />
-  <card image='mouse-clipart.svg' />
-  <card image='rabbit-clipart.svg' />
-  <card image='squirrel-clipart.svg' />
-</pairs>
+  <author></author>
+  <date>30/9/2011</date>
+  <version>0.2</version>
+  <image type='back' src='HappyPandaFace.svg'></image>
+  <main type='image' />
 
+  <element><image src='cat-clipart.svg' lang='en'></image><word lang='en'>Cat</word></element>
+  <element><image src='hippopotamus-clipart.svg' lang='en'></image><word lang='en'>Hippopotamus</word></element>
+  <element><image src='lion-clipart.svg' lang='en'></image><word lang='en'>Lion</word></element>
+  <element><image src='mouse-clipart.svg' lang='en'></image><word lang='en'>Mouse</word></element>
+  <element><image src='rabbit-clipart.svg' lang='en'></image><word lang='en'>Rabbit</word></element>
+  <element><image src='squirrel-clipart.svg' lang='en'></image><word lang='en'>Squirrel</word></element>
+</pairs>
