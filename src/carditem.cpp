@@ -103,16 +103,42 @@ void CardItem::setType(CardType type, QString& file, KTar& archive){
         }
         case CARD_WORD:
         {
+            double fontsize = 10.0;
             m_color.fill(Qt::white);
             QFont myFont;
-            myFont.setPointSizeF(22.0);
+            myFont.setPointSizeF(fontsize);
             myFont.setFamily("Times");
             QPainter paint;
             paint.begin(&m_color);
             paint.setFont(myFont);
-
+            QPainterPath myPath;
+            myPath.addText(0, 0, myFont, file);
+            while(myPath.boundingRect().width() < m_color.rect().width())
+            {
+                fontsize += 1.0;
+                myFont.setPointSizeF(fontsize);
+                myPath = QPainterPath();
+                myPath.addText(0, 0, myFont, file);
+            }
+            while(myPath.boundingRect().width() > m_color.rect().width() && fontsize > 0)
+            {
+                fontsize -= 1.0;
+                myFont.setPointSizeF(fontsize);
+                myPath = QPainterPath();
+                myPath.addText(0, 0, myFont, file);
+            }
+            fontsize -= 1.0;
+            myFont.setPointSizeF(fontsize);
+            double dx, dy;
+            dx = (m_color.rect().width() - myPath.boundingRect().width())/2;
+            dy = (m_color.rect().height() - myPath.boundingRect().height())/2 +  myPath.boundingRect().height()/2;
+            qDebug() << dx << dy << m_color.rect().width() << myPath.boundingRect().width();
+            myPath = QPainterPath();
+            myPath.addText(dx, dy, myFont, file);
+            myPath.setFillRule(Qt::OddEvenFill);
             paint.setPen( Qt::blue );
-            paint.drawText( m_color.rect(), Qt::AlignCenter, file);
+            paint.drawPath(myPath);
+//            paint.drawText( m_color.rect(), Qt::AlignCenter, file);
             paint.end();
         }   break;
         default:
