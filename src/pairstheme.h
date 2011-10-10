@@ -22,6 +22,7 @@
 #ifndef PAIRSTHEME_H
 #define PAIRSTHEME_H
 #include <QString>
+#include <QMap>
 #include <QList>
 #include <KTar>
 #include <QXmlStreamReader>
@@ -57,7 +58,7 @@ class PairsTheme
         void parseElement(QXmlStreamReader &reader);
         CardType mainType() const { return m_main_type; };
         QStringList languages() const  { return m_languages; };
-        QStringList cardTypes() const  { return m_cardtypes; };
+        QMap<QString, QStringList> cardTypes() const  { return m_cardtypes; };
     private:
 
         bool isValid(const KArchiveFile* file);
@@ -83,7 +84,7 @@ class PairsTheme
         QString m_error;
         QString m_path;
         QStringList m_languages;
-        QStringList m_cardtypes;
+        QMap<QString, QStringList> m_cardtypes;
 };
 
 #endif // PAIRSTHEME_H

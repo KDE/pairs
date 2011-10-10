@@ -135,8 +135,8 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                 m_languages.append(l);
             }
             item.langName = l;
-            if(m_cardtypes.lastIndexOf(name) == -1 && name != "element"){
-                m_cardtypes.append(name);
+            if(name != "element" && m_cardtypes[l].count(name) == 0){
+                m_cardtypes[l].append(name);
             }
 
             if(name == "image") {
