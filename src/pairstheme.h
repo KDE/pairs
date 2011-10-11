@@ -30,13 +30,11 @@
 
 class ThemeElement {
 public:
-    QString name[CARD_MAX_TYPE];
-    QString langName;
+    QMap<QString, QString>  name[CARD_MAX_TYPE];
     ThemeElement(){ reset(); };
     ~ThemeElement(){};
     void reset() {
-        langName = "";
-        for(int i = 0; i < CARD_MAX_TYPE; i++) name[i] = "";
+        for(int i = 0; i < CARD_MAX_TYPE; i++) name[i].clear();
     };
 
 };
