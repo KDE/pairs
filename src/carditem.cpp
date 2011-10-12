@@ -136,7 +136,10 @@ void CardItem::setType(CardType type, QString& file, KTar& archive){
             myPath = QPainterPath();
             myPath.addText(dx, dy, myFont, file);
             myPath.setFillRule(Qt::OddEvenFill);
-            paint.setPen( Qt::blue );
+            QBrush myBrush(Qt::SolidPattern);
+            myBrush.setColor(Qt::blue);
+            paint.setBrush(myBrush);
+            paint.setPen(Qt::blue);
             paint.drawPath(myPath);
 //            paint.drawText( m_color.rect(), Qt::AlignCenter, file);
             paint.end();
