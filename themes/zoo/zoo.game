@@ -9,11 +9,11 @@
   <image type='back' src='HappyPandaFace.svg'></image>
   <main type='image' />
 
-  <element><image src='cat-clipart.svg'></image><word lang='en'>Cat</word><word lang='it'>Gatto</word></element>
-  <element><image src='hippopotamus-clipart.svg'></image><word lang='en'>Hippopotamus</word><word lang='it'>Ippopotamo</word></element>
-  <element><image src='lion-clipart.svg'></image><word lang='en'>Lion</word><word lang='it'>Leone</word></element>
-  <element><image src='mouse-clipart.svg'></image><word lang='en'>Mouse</word><word lang='it'>Topo</word></element>
-  <element><image src='rabbit-clipart.svg'></image><word lang='en'>Rabbit</word><word lang='it'>Coniglio</word></element>
-  <element><image src='squirrel-clipart.svg'></image><word lang='en'>Squirrel</word><word lang='it'>Scoiattolo</word></element>
+  <element><image src='cat-clipart.svg' lang='en'></image><word lang='en'>Cat</word><word lang='it'>Gatto</word></element>
+  <element><image src='hippopotamus-clipart.svg' lang='en'></image><word lang='en'>Hippopotamus</word><word lang='it'>Ippopotamo</word></element>
+  <element><image src='lion-clipart.svg' lang='en'></image><word lang='en'>Lion</word><word lang='it'>Leone</word></element>
+  <element><image src='mouse-clipart.svg' lang='en'></image><word lang='en'>Mouse</word><word lang='it'>Topo</word></element>
+  <element><image src='rabbit-clipart.svg' lang='en'></image><word lang='en'>Rabbit</word><word lang='it'>Coniglio</word></element>
+  <element><image src='squirrel-clipart.svg' lang='en'></image><word lang='en'>Squirrel</word><word lang='it'>Scoiattolo</word></element>
   
 </pairs>

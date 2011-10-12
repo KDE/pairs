@@ -183,6 +183,8 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                     common[current_type] = reader.readElementText();
                 }
                 else{
+                    if(current_type == m_main_type)
+                        common[current_type] = reader.readElementText();
                     item.name[current_type][l] = reader.readElementText();
                 }
             }
@@ -192,6 +194,8 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                     common[current_type] = reader.attributes().value("src").toString();
                 }
                 else{
+                    if(current_type == m_main_type)
+                        common[current_type] = reader.attributes().value("src").toString();
                     item.name[current_type][l] = reader.attributes().value("src").toString();
                 }
             }
