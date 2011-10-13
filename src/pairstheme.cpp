@@ -137,7 +137,8 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
             for (int i = 0; i < CARD_MAX_TYPE; i++){
                 if(!common[i].isEmpty()){
                     foreach (const QString &str, m_cardtypes.keys()){
-                        item.name[i][str].append(common[i]);
+                        if(item.name[i][str].isEmpty())
+                            item.name[i][str].append(common[i]);
                     }
                 }
                 common[i] = "";
