@@ -38,11 +38,14 @@ class NewPairsDialog
         void setPlayer(const QString &name);
         QString language() const;
         QString cardType() const;
+
     public slots:
         void addUser();
+        void addUser(const QString& name);
         void deleteUser();
         void playerNameChanged(const QString & newname);
         void themeSelected(QListWidgetItem *item);
+        void dialogAccepted();
 
 
     private:

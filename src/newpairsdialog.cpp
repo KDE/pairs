@@ -30,6 +30,7 @@
 
 #include "ui_newpairsdialog.h"
 #include "pairstheme.h"
+#include <KApplication>
 
 
 NewPairsDialog::NewPairsDialog(QWidget* parent)
@@ -43,6 +44,7 @@ NewPairsDialog::NewPairsDialog(QWidget* parent)
     connect(m_ui->remove, SIGNAL(clicked()), this, SLOT(deleteUser()));
     connect(m_ui->playerName, SIGNAL(textChanged(QString)), SLOT(playerNameChanged(QString)));
     connect(m_ui->themesList, SIGNAL(itemClicked(QListWidgetItem *)), SLOT(themeSelected(QListWidgetItem *)));
+	connect(this, SIGNAL(accepted()), SLOT(dialogAccepted()));
     const QStringList themes = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "themes/*.pairs.*" ));
     
     Q_FOREACH(const QString& themePath, themes) {
@@ -59,6 +61,14 @@ NewPairsDialog::NewPairsDialog(QWidget* parent)
     m_ui->themesList->setCurrentRow(0);
     m_ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
     themeSelected(m_ui->themesList->currentItem());
+	
+	KConfig config;
+	KConfigGroup group(&config, "NewGame");
+	QStringList players = group.readEntry("Players", QStringList() << i18n("Player"));
+	
+	foreach(const QString& name, players) {
+		addUser(name);
+	}
 }
 
 PairsTheme NewPairsDialog::theme() const
@@ -96,10 +106,6 @@ QStringList NewPairsDialog::players()
 		result << m_ui->playerList->item(i)->text();
 	}
 	
-	if(result.isEmpty())
-	{
-		result << "Player";
-	}
 	return result;
 }
 
@@ -114,7 +120,12 @@ void NewPairsDialog::setPlayer(const QString &name)
 
 void NewPairsDialog::addUser()
 {
-	m_ui->playerList->addItem(m_ui->playerName->text());
+	addUser(m_ui->playerName->text());
+}
+
+void NewPairsDialog::addUser(const QString& name)
+{
+	m_ui->playerList->addItem(name);
     m_ui->playerList->setCurrentRow(m_ui->playerList->count()-1);
 	m_ui->playerName->clear();
     
@@ -135,4 +146,11 @@ void NewPairsDialog::deleteUser()
 void NewPairsDialog::playerNameChanged(const QString & newname)
 {
     m_ui->add->setEnabled(!newname.isEmpty());
+}
+
+void NewPairsDialog::dialogAccepted()
+{
+	KConfig config;
+	KConfigGroup group(&config, "NewGame");
+	group.writeEntry("Players", players());
 }
