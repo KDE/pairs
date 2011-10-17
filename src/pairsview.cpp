@@ -104,11 +104,11 @@ void PairsView::newGame(const PairsTheme& theme, const QString language, const Q
     for(int i=0; i<num; i++) {
         ThemeElement titem = items.at(i);
 
-        qDebug() << theme.mainType() << titem.langName << titem.name[1] << titem.name[2] << titem.name[3] << titem.name[4] << titem.name[5];
+        qDebug() << theme.mainType() << titem.name[1] << titem.name[2] << titem.name[3] << titem.name[4] << titem.name[5];
 
         CardItem* item = new CardItem(&backRenderer, m_cardsSize, 0, scene());
         item->setData(0, i);
-        item->setType(theme.mainType(), titem.name[theme.mainType()], archive);
+        item->setType(theme.mainType(), titem.name[theme.mainType()][language], archive);
 
         CardItem* item1 = new CardItem(&backRenderer, m_cardsSize, 0, scene());
         item1->setData(0, i);
@@ -118,7 +118,7 @@ void PairsView::newGame(const PairsTheme& theme, const QString language, const Q
         if(cardType == "sound") type = CARD_SOUND;
         if(cardType == "video") type = CARD_VIDEO;
         if(cardType == "word") type = CARD_WORD;
-        item1->setType(type, titem.name[type], archive);
+        item1->setType(type, titem.name[type][language], archive);
 
         connect(item, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
         connect(item1, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));

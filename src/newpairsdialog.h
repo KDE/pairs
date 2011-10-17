@@ -48,6 +48,7 @@ class NewPairsDialog
     private:
         Ui::NewPairsDialog* m_ui;
         QList<PairsTheme> m_themes;
+        int m_row;
 };
 
 #endif // NEWPairsDialog_H
