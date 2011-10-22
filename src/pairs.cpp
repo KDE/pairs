@@ -102,10 +102,6 @@ void Pairs::newGame()
 {
     NewPairsDialog dialog;
 
-    for(int y = 0; y< m_players.count(); y++)
-    {
-    	dialog.setPlayer(m_players[y].name());
-    }
     statusBar()->showMessage(i18n("New Game"));
     if(dialog.exec()==QDialog::Accepted) {
     	m_players.clear();
