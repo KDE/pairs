@@ -38,6 +38,8 @@
 #include <kactioncollection.h>
 #include <kstandardaction.h>
 #include <kstandarddirs.h>
+#include <knewstuff3/downloaddialog.h>
+#include <knewstuff3/entry.h>
 #include <KDE/KLocale>
 
 #include <Phonon/MediaObject>
@@ -88,6 +90,7 @@ Pairs::~Pairs()
 void Pairs::setupActions()
 {
     KStandardAction::open(this, SLOT(newGame()), actionCollection());
+    KStandardAction::find(this, SLOT(download()), actionCollection());
     KStandardAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
 }
 
@@ -183,6 +186,14 @@ void Pairs::setScore()
         }
         KMessageBox::information(this, final_line, i18n("Congratulations"));
    }
+}
+
+void Pairs::download(){
+    KNS3::DownloadDialog dialog("pairs.knsrc", this);
+    dialog.exec();
+    foreach (const KNS3::Entry& e, dialog.changedEntries()) {
+        kDebug() << "Changed Entry: " << e.name();
+    }
 }
 
 #include "pairs.moc"

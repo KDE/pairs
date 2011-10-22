@@ -53,6 +53,7 @@ public slots:
 
 private slots:
     void newGame();
+    void download();
     
 private:
     void setupActions();
