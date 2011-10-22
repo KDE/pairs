@@ -5,18 +5,18 @@
   <description>Some animals</description>
   <author></author>
   <date>30/9/2011</date>
-  <version>0.2</version>
+  <version>0.3</version>
   <image type='back' src='vaca4.svg'></image>
   <main type='image' />
   
-  <element><image src='caine2.svg'></image></element>
-  <element><image src='caine.svg'></image></element>
-  <element><image src='cocos2.svg'></image></element>
-  <element><image src='cocos.svg'></image></element>
-  <element><image src='gaina1.svg'></image></element>
-  <element><image src='gaina2.svg'></image></element>
-  <element><image src='rata1.svg'></image></element>
-  <element><image src='rata2.svg'></image></element>
-  <element><image src='vaca2.svg'></image></element>
-  <element><image src='vaca3.svg'></image></element>
+  <element><image src='caine2.svg' lang='en'></image></element>
+  <element><image src='caine.svg' lang='en'></image></element>
+  <element><image src='cocos2.svg' lang='en'></image></element>
+  <element><image src='cocos.svg' lang='en'></image></element>
+  <element><image src='gaina1.svg' lang='en'></image></element>
+  <element><image src='gaina2.svg' lang='en'></image></element>
+  <element><image src='rata1.svg' lang='en'></image></element>
+  <element><image src='rata2.svg' lang='en'></image></element>
+  <element><image src='vaca2.svg' lang='en'></image></element>
+  <element><image src='vaca3.svg' lang='en'></image></element>
 </pairs>
