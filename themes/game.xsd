@@ -54,17 +54,17 @@ elementFormDefault="qualified">
 
     <xsd:complexType name="el_sound">
         <xsd:attribute name="src" type="xsd:string" use="required"/>
-        <xsd:attribute name="lang" type="xsd:string"></xsd:attribute>
+        <xsd:attribute name="lang" type="xsd:string" use="required"></xsd:attribute>
     </xsd:complexType>
 
     <xsd:complexType name="el_video">
         <xsd:attribute name="src" type="xsd:string" use="required"/>
-        <xsd:attribute name="lang" type="xsd:string"></xsd:attribute>
+        <xsd:attribute name="lang" type="xsd:string" use="required"></xsd:attribute>
     </xsd:complexType>
 
     <xsd:complexType name="el_image">
         <xsd:attribute name="src" type="xsd:string" use="required"/>
-        <xsd:attribute name="lang" type="xsd:string"></xsd:attribute>
+        <xsd:attribute name="lang" type="xsd:string" use="required"></xsd:attribute>
     </xsd:complexType>
 
     <xsd:complexType name="el_word">
