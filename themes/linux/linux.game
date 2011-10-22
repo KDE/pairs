@@ -5,7 +5,7 @@
     <description lang='en'>'Some of Linux Distributions'</description> 
     <author>Marco Calignano</author>
     <date>20/09/2011</date>
-    <version>0.1</version>
+    <version>0.3</version>
     <image type='back' src='Tux.svg'></image>
     <main type='image'></main>
     <element>
