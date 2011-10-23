@@ -111,21 +111,16 @@ void Pairs::newGame()
     NewPairsDialog dialog;
 
     statusBar()->showMessage(i18n("New Game"));
-    if(dialog.exec()==QDialog::Accepted) {
-    	m_players.clear();
-    	for(int i= 0; i < dialog.players().count(); i++)
-    	{
-    		m_players.append(PairsPlayer(dialog.players().at(i)));
-    	}
-    	m_view->newGame(dialog.theme(), dialog.language(), dialog.cardType());
+    if(dialog.exec()!=QDialog::Accepted) {
+        return;
     }
 
-/*
-	QString myname("player1");
-	m_players.append(pairsPlayer(myname));
-	myname = "player2";
-	m_players.append(pairsPlayer(myname));
-*/
+    m_players.clear();
+    for(int i= 0; i < dialog.players().count(); i++)
+    {
+        m_players.append(PairsPlayer(dialog.players().at(i)));
+    }
+    m_view->newGame(dialog.theme(), dialog.language(), dialog.cardType());
 
     m_found = 0;
     for (int i = 0; i < m_players.size(); ++i) {
