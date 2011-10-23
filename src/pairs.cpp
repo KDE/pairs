@@ -90,7 +90,12 @@ Pairs::~Pairs()
 void Pairs::setupActions()
 {
     KStandardAction::open(this, SLOT(newGame()), actionCollection());
-    KStandardAction::find(this, SLOT(download()), actionCollection());
+    KAction *theme = new KAction("Get new theme", actionCollection());
+    theme->setIcon(KIcon("get-hot-new-stuff"));
+    actionCollection()->addAction("theme", theme);
+    connect(theme, SIGNAL(triggered(bool)), this, SLOT(download()));
+
+
     KStandardAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
 }
 
@@ -191,9 +196,6 @@ void Pairs::setScore()
 void Pairs::download(){
     KNS3::DownloadDialog dialog("pairs.knsrc", this);
     dialog.exec();
-    foreach (const KNS3::Entry& e, dialog.changedEntries()) {
-        kDebug() << "Changed Entry: " << e.name();
-    }
 }
 
 #include "pairs.moc"

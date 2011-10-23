@@ -1,8 +1,14 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
 <kpartgui name="pairs" version="1">
+
 <MenuBar>
-  <Menu name="move"><text>&amp;Move</text>
-    <Action name="switch_action" />
-  </Menu>
+    <Menu name="file" >
+      <Action name="theme" />
+    </Menu>
 </MenuBar>
+ 
+  <ToolBar name="mainToolBar" >
+    <text>Main Toolbar</text>
+    <Action name="theme" />
+  </ToolBar>
 </kpartgui>

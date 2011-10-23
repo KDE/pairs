@@ -27,7 +27,6 @@
 #include <QTimer>
 #include <QList>
 #include <pairsplayer.h>
-
 namespace Phonon { class MediaObject; }
 class PairsView;
 class KToggleAction;
