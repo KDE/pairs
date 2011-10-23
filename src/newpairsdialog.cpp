@@ -29,6 +29,7 @@
 #include <QDebug>
 
 #include "ui_newpairsdialog.h"
+#include "pairs.h"
 #include "pairstheme.h"
 #include <KApplication>
 
@@ -45,6 +46,28 @@ NewPairsDialog::NewPairsDialog(QWidget* parent)
     connect(m_ui->playerName, SIGNAL(textChanged(QString)), SLOT(playerNameChanged(QString)));
     connect(m_ui->themesList, SIGNAL(itemClicked(QListWidgetItem *)), SLOT(themeSelected(QListWidgetItem *)));
 	connect(this, SIGNAL(accepted()), SLOT(dialogAccepted()));
+    connect(m_ui->theme, SIGNAL(clicked(bool)), SLOT(download()));
+    m_ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+
+    loadThemesList();
+
+	KConfig config;
+	KConfigGroup group(&config, "NewGame");
+	QStringList players = group.readEntry("Players", QStringList() << i18n("Player"));
+
+	foreach(const QString& name, players) {
+		addUser(name);
+	}
+}
+
+void NewPairsDialog::download(){
+    Pairs *anch = static_cast<Pairs*> (this->parent());
+    anch->download();
+    m_ui->themesList->clear();
+    loadThemesList();
+}
+
+void NewPairsDialog::loadThemesList(){
     const QStringList themes = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "themes/*.pairs.*" ));
     
     Q_FOREACH(const QString& themePath, themes) {
@@ -59,17 +82,11 @@ NewPairsDialog::NewPairsDialog(QWidget* parent)
     }
     m_ui->playerName->setClickMessage(i18n("Player name..."));
     m_ui->themesList->setCurrentRow(0);
-    m_ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
     themeSelected(m_ui->themesList->currentItem());
-	
-	KConfig config;
-	KConfigGroup group(&config, "NewGame");
-	QStringList players = group.readEntry("Players", QStringList() << i18n("Player"));
-	
-	foreach(const QString& name, players) {
-		addUser(name);
-	}
+
+
 }
+
 
 PairsTheme NewPairsDialog::theme() const
 {

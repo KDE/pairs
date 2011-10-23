@@ -7,8 +7,4 @@
     </Menu>
 </MenuBar>
  
-  <ToolBar name="mainToolBar" >
-    <text>Main Toolbar</text>
-    <Action name="theme" />
-  </ToolBar>
 </kpartgui>

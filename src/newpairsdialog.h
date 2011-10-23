@@ -47,8 +47,11 @@ class NewPairsDialog
         void themeSelected(QListWidgetItem *item);
         void dialogAccepted();
 
+    private slots:
+        void download();
 
     private:
+        void loadThemesList();
         Ui::NewPairsDialog* m_ui;
         QList<PairsTheme> m_themes;
         int m_row;

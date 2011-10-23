@@ -49,10 +49,10 @@ public slots:
     void inc_missed();
     void inc_found();
     void update();
+    void download();
 
 private slots:
     void newGame();
-    void download();
     
 private:
     void setupActions();
