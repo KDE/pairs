@@ -167,18 +167,27 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
 
         CardItem* item = new CardItem(&backRenderer, m_cardsSize, cardsParent, scene());
         item->setData(0, i);
-        item->setType(theme->mainType(), titem.name[theme->mainType()][language], archive);
+        if(cardType == "logic"){
+            item->setType(CARD_LOGIC, titem.name[theme->mainType()][language], archive);
+        }
+        else{
+            item->setType(theme->mainType(), titem.name[theme->mainType()][language], archive);
+        }
 
         CardItem* item1 = new CardItem(&backRenderer, m_cardsSize, cardsParent, scene());
         item1->setData(0, i);
-        //for now  fixed to test sound
+
         CardType type = CARD_IMAGE;
         if(cardType == "image") type = CARD_IMAGE;
         else if(cardType == "sound") type = CARD_SOUND;
         else if(cardType == "video") type = CARD_VIDEO;
         else if(cardType == "word") type = CARD_WORD;
+        if(cardType == "logic") type = CARD_LOGIC;
         item1->setType(type, titem.name[type][language], archive);
-
+        if(type == CARD_LOGIC){
+            item->setDuration(0);
+            item1->setDuration(0);
+        }
         connect(item,  SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
         connect(item1, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
         cards += item;

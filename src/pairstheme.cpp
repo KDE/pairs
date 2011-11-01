@@ -122,6 +122,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
     QString common[CARD_MAX_TYPE];
     CardType current_type = CARD_IMAGE;
     QStringList commonname;
+    common[CARD_LOGIC] = "";
     QXmlStreamReader::TokenType type = reader.readNext();
     ThemeElement item;
     while(!reader.atEnd()) {
@@ -162,10 +163,14 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
             }
             
             if(name == "image") {
-                if(common[CARD_IMAGE].isEmpty() && item.name[CARD_IMAGE][l].isEmpty())
+                if(common[CARD_IMAGE].isEmpty() && item.name[CARD_IMAGE][l].isEmpty()){
                     current_type = CARD_IMAGE;
-                else
+                }
+                else{
                     current_type = CARD_IMAGE2;
+                    commonname.append("sec image");
+                    commonname.append("logic");
+                }
             }
             else if(name == "sound") {
                 current_type = CARD_SOUND;
@@ -189,10 +194,17 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                 QString src = reader.attributes().value("src").toString();
                 if(l.isEmpty()) {
                     common[current_type] = src;
-                } else {
-                    if(current_type == m_main_type)
+                    if(current_type == CARD_IMAGE2)
+                        common[CARD_LOGIC] = reader.attributes().value("src").toString();
+                }
+                else {
+                    if(current_type == m_main_type){
                         common[current_type] = src;
+                        common[CARD_LOGIC] = src;
+                    }
                     item.name[current_type][l] = src;
+                    if(current_type == CARD_IMAGE2)
+                        item.name[CARD_LOGIC][l] = src;
                 }
             }
         }

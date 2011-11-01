@@ -49,7 +49,7 @@ class CardItem
         void markDone();
         void setType(CardType type, QString &file, KTar &archive);
         bool isDone() const;
-        
+        void setDuration(int dur);
     public slots:
         void changeValue();
         void turn();

@@ -29,6 +29,7 @@ enum CardType {
     CARD_SOUND,
     CARD_VIDEO,
     CARD_WORD,
+    CARD_LOGIC,
     
     CARD_MAX_TYPE
 };

@@ -40,7 +40,7 @@ m_activated(false),
 m_color(size.toSize()),
 m_back(size.toSize())
 {
-    const int duration = 200;
+
     QGraphicsRotation* rotation = new QGraphicsRotation(this);
     rotation->setAxis(Qt::YAxis);
     rotation->setOrigin(QVector3D(m_back.rect().center()));
@@ -52,13 +52,11 @@ m_back(size.toSize())
     m_animation = new QPropertyAnimation(rotation, "angle", rotation);
     m_animation->setStartValue(0);
     m_animation->setEndValue(90);
-    m_animation->setDuration(duration);
     connect(m_animation, SIGNAL(finished()), SLOT(changeValue()));
     
     m_animationBack = new QPropertyAnimation(rotation, "angle", rotation);
     m_animationBack->setStartValue(90);
     m_animationBack->setEndValue(0);
-    m_animationBack->setDuration(duration);
     
     setTransformations(QList<QGraphicsTransform*>() << rotation);
     
@@ -72,13 +70,17 @@ m_back(size.toSize())
     
     Q_ASSERT(!m_back.isNull());
     setPixmap(m_back);
+    setDuration(200);
 }
 
 CardItem::~CardItem()
 {}
 
-void CardItem::setType(CardType type, QString& file, KTar& archive)
-{
+void CardItem::setDuration(int dur){
+    m_animation->setDuration(dur);
+    m_animationBack->setDuration(dur);
+}
+void CardItem::setType(CardType type, QString& file, KTar& archive){
     m_type = type;
     switch(type){
         case CARD_SOUND:
@@ -97,9 +99,21 @@ void CardItem::setType(CardType type, QString& file, KTar& archive)
         }
         case CARD_IMAGE:
         {
-            const KArchiveFile* thefile=static_cast<const KArchiveFile*>(archive.directory()->entry(file));
-            QSvgRenderer imageRenderer(thefile->data());
+            QSvgRenderer imageRenderer(static_cast<const KArchiveFile*>(archive.directory()->entry(file))->data());
             setCardPixmap(&imageRenderer);
+            break;
+        }
+        case CARD_IMAGE2:
+        {
+            QSvgRenderer imageRenderer(static_cast<const KArchiveFile*>(archive.directory()->entry(file))->data());
+            setCardPixmap(&imageRenderer);
+            break;
+        }
+        case CARD_LOGIC:
+        {
+            QSvgRenderer imageRenderer(static_cast<const KArchiveFile*>(archive.directory()->entry(file))->data());
+            setCardPixmap(&imageRenderer);
+            setPixmap(m_color);
             break;
         }
         case CARD_WORD:
@@ -177,8 +191,12 @@ void CardItem::changeValue()
 {
     if(m_activated)
         setPixmap(m_color);
-    else
-        setPixmap(m_back);
+    else{
+        if(m_type == CARD_LOGIC)
+            setPixmap(m_color);
+        else
+            setPixmap(m_back);
+    }
 
     if(m_type==CARD_SOUND && m_activated) {
         Phonon::MediaObject* object = new Phonon::MediaObject(this);
