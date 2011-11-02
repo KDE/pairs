@@ -87,7 +87,6 @@ void NewPairsDialog::loadThemesList(){
 
 }
 
-
 PairsTheme NewPairsDialog::theme() const
 {
     int row = m_ui->themesList->currentRow();

@@ -100,11 +100,11 @@ void PairsView::newGame(const PairsTheme& theme, const QString language, const Q
     QList<ThemeElement> items = theme.items();
     //int num=qMin(((rows*columns)/2)*2, items.size()); //we make it %2
     int num = items.size();
-    QSvgRenderer backRenderer(((KArchiveFile*)(archive.directory()->entry(theme.backImage())))->data());
+    QSvgRenderer backRenderer(static_cast<const KArchiveFile*>(archive.directory()->entry(theme.backImage()))->data());
     for(int i=0; i<num; i++) {
         ThemeElement titem = items.at(i);
 
-        qDebug() << theme.mainType() << titem.name[1] << titem.name[2] << titem.name[3] << titem.name[4] << titem.name[5];
+//         qDebug() << theme.mainType() << titem.name[1] << titem.name[2] << titem.name[3] << titem.name[4] << titem.name[5];
 
         CardItem* item = new CardItem(&backRenderer, m_cardsSize, 0, scene());
         item->setData(0, i);
@@ -115,12 +115,12 @@ void PairsView::newGame(const PairsTheme& theme, const QString language, const Q
         //for now  fixed to test sound
         CardType type = CARD_IMAGE;
         if(cardType == "image") type = CARD_IMAGE;
-        if(cardType == "sound") type = CARD_SOUND;
-        if(cardType == "video") type = CARD_VIDEO;
-        if(cardType == "word") type = CARD_WORD;
+        else if(cardType == "sound") type = CARD_SOUND;
+        else if(cardType == "video") type = CARD_VIDEO;
+        else if(cardType == "word") type = CARD_WORD;
         item1->setType(type, titem.name[type][language], archive);
 
-        connect(item, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
+        connect(item,  SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
         connect(item1, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
         cards += item;
         cards += item1;
@@ -129,6 +129,7 @@ void PairsView::newGame(const PairsTheme& theme, const QString language, const Q
     
     while(!cards.isEmpty())
         m_cards += cards.takeAt(qrand()%cards.size());
+    
     if(num % 2 == 0)
     	setRowSize(qMax(4, num/2));
     else
