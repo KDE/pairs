@@ -45,7 +45,8 @@ class PairsTheme : public QStandardItem
 {
     public:
         enum ThemeRoles {
-             TypeRole = Qt::UserRole + 1
+             CardTypeRole = Qt::UserRole + 1,
+             LanguagesRole
          };
 
         PairsTheme(const QString& path);
@@ -59,12 +60,10 @@ class PairsTheme : public QStandardItem
         
         bool isCorrect() const { return m_error.isEmpty(); }
         QString error() const { return m_error; }
-        void parseElement(QXmlStreamReader &reader);
-        CardType mainType() const { return m_main_type; };
-        QStringList languages() const  { return m_languages; };
-        QStringList cardTypes() const { return m_cardtypes.begin().value(); };
+        CardType mainType() const { return m_main_type; }
 
     private:
+        void parseElement(QXmlStreamReader &reader);
 
         bool isValid(const KArchiveFile* file);
         QString m_data;

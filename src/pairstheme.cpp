@@ -31,8 +31,6 @@
 PairsTheme::PairsTheme(const QString& path)
     : QStandardItem()
 {
-
-
 	KTar archive(path);
 	m_path = path;
 	bool b = archive.open(QIODevice::ReadOnly);
@@ -114,7 +112,8 @@ PairsTheme::PairsTheme(const QString& path)
 
     setText(title());
 //     setIcon(QIcon(backImage()));
-    setData(cardTypes(), TypeRole);
+    setData(m_cardtypes.begin().value(), CardTypeRole);
+    setData(m_languages, LanguagesRole);
 }
 
 void PairsTheme::parseElement(QXmlStreamReader &reader)

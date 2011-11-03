@@ -53,6 +53,7 @@ void ThemesModel::reload()
 QHash< int, QByteArray> ThemesModel::roleNames() const
 {
     QHash<int, QByteArray> names=QStandardItemModel::roleNames();
-    names.insert(PairsTheme::TypeRole, "type");
+    names.insert(PairsTheme::CardTypeRole, "type");
+    names.insert(PairsTheme::LanguagesRole, "languages");
     return names;
 }

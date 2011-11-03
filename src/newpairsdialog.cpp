@@ -88,8 +88,8 @@ void NewPairsDialog::themeSelected(const QModelIndex& idx)
 	m_ui->comboCardTypes->clear();
 	
     PairsTheme* it=static_cast<PairsTheme*>(m_themesModel->item(m_ui->themesList->currentIndex().row()));
-	m_ui->comboLanguages->addItems(it->languages());
-	m_ui->comboCardTypes->addItems(it->cardTypes());
+	m_ui->comboLanguages->addItems(it->data(PairsTheme::LanguagesRole).toStringList());
+	m_ui->comboCardTypes->addItems(it->data(PairsTheme::CardTypeRole).toStringList());
 }
 
 QStringList NewPairsDialog::players()
