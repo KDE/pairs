@@ -45,7 +45,7 @@ PairsTheme::PairsTheme(const QString& path)
     QString themename(files.first()); //TODO: Support many games inside a theme
     Q_ASSERT(archive.directory()->entry(themename)->isFile());
     const KArchiveFile* file = static_cast<const KArchiveFile*>(archive.directory()->entry(themename));
-    if(!isValid(file)){
+    if(!isValid(file)) {
         qWarning() << "Skipping game theme not valid";
         m_error = "Not valid XML file";
     }
@@ -55,8 +55,8 @@ PairsTheme::PairsTheme(const QString& path)
     while (m_error.isEmpty() && !reader.atEnd()) {
         QXmlStreamReader::TokenType type = reader.readNext();
         if(type==QXmlStreamReader::StartDocument || type==QXmlStreamReader::EndDocument) {}
-        else if (type==QXmlStreamReader::Characters){}
-        else if (type==QXmlStreamReader::EndElement){}
+        else if (type==QXmlStreamReader::Characters) {}
+        else if (type==QXmlStreamReader::EndElement) {}
         else if(type==QXmlStreamReader::StartElement) {
             QString name = reader.name().toString();
             if(name == "title") {
@@ -80,24 +80,24 @@ PairsTheme::PairsTheme(const QString& path)
 
             } else if(name == "sound") {
                 QStringRef soundtype=reader.attributes().value("type");
-                if(soundtype == "missed"){
+                if(soundtype == "missed") {
                     m_missed_snd = reader.attributes().value("src").toString();
                 }
-                else if(soundtype == "found"){
+                else if(soundtype == "found") {
                     m_found_snd = reader.attributes().value("src").toString();
                 }
-                else if(soundtype == "turn"){
+                else if(soundtype == "turn") {
                     m_turn_snd = reader.attributes().value("src").toString();
                 }
             } else if(name == "image") {
                 QStringRef imagetype = reader.attributes().value("type");
-                if(imagetype == "back"){
+                if(imagetype == "back") {
                     m_back_img = reader.attributes().value("src").toString();
                 }
-                else if(reader.attributes().value("type") == "trasparent_back"){
+                else if(reader.attributes().value("type") == "trasparent_back") {
                     m_backtrasp_img = reader.attributes().value("src").toString();
                 }
-                else if(reader.attributes().value("type") == "bakcground"){
+                else if(reader.attributes().value("type") == "bakcground") {
                     m_background_img = reader.attributes().value("src").toString();
                 }
             } else if(name=="element") {
@@ -124,13 +124,13 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
     QStringList commonname;
     QXmlStreamReader::TokenType type = reader.readNext();
     ThemeElement item;
-    while(!reader.atEnd()){
+    while(!reader.atEnd()) {
         if(type==QXmlStreamReader::EndElement && reader.name().toString() == "element") {
 
 
-            for (int i = 0; i < CARD_MAX_TYPE; i++){
-                if(!common[i].isEmpty()){
-                    foreach (const QString &str, m_cardtypes.keys()){
+            for (int i = 0; i < CARD_MAX_TYPE; i++) {
+                if(!common[i].isEmpty()) {
+                    foreach (const QString &str, m_cardtypes.keys()) {
                         if(item.name[i][str].isEmpty())
                             item.name[i][str].append(common[i]);
                     }
@@ -138,7 +138,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                 common[i].clear();
 //                 qDebug() << "ITEM" << item.name[i]  << "/ITEM";
             }
-            foreach (const QString &str, m_cardtypes.keys()){
+            foreach (const QString &str, m_cardtypes.keys()) {
                 m_cardtypes[str].append(commonname);
                 m_cardtypes[str].removeDuplicates();
                 m_cardtypes[str].sort();
@@ -151,10 +151,10 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
         if(type==QXmlStreamReader::StartElement) {
             QString name = reader.name().toString();
             QString l = reader.attributes().value("lang").toString();
-            if(!l.isEmpty() && !m_languages.contains(l)){
+            if(!l.isEmpty() && !m_languages.contains(l)) {
                 m_languages.append(l);
             }
-            if(name != "element"){
+            if(name != "element") {
                 if(l.isEmpty() && commonname.count(name) == 0)
                     commonname.append(name);
                 if(!l.isEmpty()  && m_cardtypes[l].count(name) == 0)
@@ -175,25 +175,24 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
             }
             else if(name == "word") {
                 current_type = CARD_WORD;
+                QString src = reader.readElementText();
                 if(l.isEmpty()) {
-                    common[current_type] = reader.readElementText();
-                }
-                else{
+                    common[current_type] = src;
+                } else {
                     if(current_type == m_main_type)
-                        common[current_type] = reader.readElementText();
-                    item.name[current_type][l] = reader.readElementText();
+                        common[current_type] = src;
+                    item.name[current_type][l] = src;
                 }
             }
             
             if(name != "element" && name != "word") {
+                QString src = reader.attributes().value("src").toString();
                 if(l.isEmpty()) {
-
-                    common[current_type] = reader.attributes().value("src").toString();
-                }
-                else{
+                    common[current_type] = src;
+                } else {
                     if(current_type == m_main_type)
-                        common[current_type] = reader.attributes().value("src").toString();
-                    item.name[current_type][l] = reader.attributes().value("src").toString();
+                        common[current_type] = src;
+                    item.name[current_type][l] = src;
                 }
             }
         }
@@ -201,13 +200,13 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
     }
 }
 
-bool PairsTheme::isValid(const KArchiveFile* file){
+bool PairsTheme::isValid(const KArchiveFile* file) {
 
     QUrl schemaUrl(KGlobal::dirs()->findResource("appdata", QLatin1String( "themes/game.xsd" )));
     QXmlSchema schema;
     schema.load(schemaUrl);
 
-    if(!schema.isValid()){
+    if(!schema.isValid()) {
         qWarning() << "game Schema not valid";
         return false;
     }
