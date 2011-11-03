@@ -23,9 +23,11 @@
 #define PAIRSTHEME_H
 #include <QString>
 #include <QMap>
+#include <QVariant>
 #include <QList>
 #include <KTar>
 #include <QXmlStreamReader>
+#include <QStandardItem>
 #include "cardtype.h"
 
 class ThemeElement {
@@ -39,9 +41,15 @@ public:
 
 };
 
-class PairsTheme
+class PairsTheme : public QStandardItem
 {
     public:
+        enum ThemeRoles {
+             TitleRole = Qt::UserRole + 1,
+             IconRole,
+             TypeRole
+         };
+
         PairsTheme(const QString& path);
 
         QString title() const { return m_title; }
@@ -56,7 +64,11 @@ class PairsTheme
         void parseElement(QXmlStreamReader &reader);
         CardType mainType() const { return m_main_type; };
         QStringList languages() const  { return m_languages; };
-        QMap<QString, QStringList> cardTypes() const  { return m_cardtypes; };
+        QStringList cardTypes() const { return m_cardtypes.begin().value(); };
+
+        virtual QVariant data (int role) const;
+        QHash<int, QByteArray> roleNames() const;
+
     private:
 
         bool isValid(const KArchiveFile* file);

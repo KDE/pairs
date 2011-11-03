@@ -95,8 +95,8 @@ PairsTheme NewPairsDialog::theme() const
 QString NewPairsDialog::language() const
 {
     return m_ui->comboLanguages->currentText();
-    m_ui->comboCardTypes->clear();
-    m_ui->comboCardTypes->addItems(m_themes[m_row].cardTypes()[m_ui->comboLanguages->currentText()]);
+//    m_ui->comboCardTypes->clear();
+//    m_ui->comboCardTypes->addItems(m_themes[m_row].cardTypes()[m_ui->comboLanguages->currentText()]);
 }
 
 QString NewPairsDialog::cardType() const
@@ -111,7 +111,7 @@ void NewPairsDialog::themeSelected(QListWidgetItem *item)
 	m_ui->comboCardTypes->clear();
 	
 	m_ui->comboLanguages->addItems(m_themes[m_row].languages());
-	m_ui->comboCardTypes->addItems(m_themes[m_row].cardTypes()[m_ui->comboLanguages->currentText()]);
+//	m_ui->comboCardTypes->addItems(m_themes[m_row].cardTypes()[m_ui->comboLanguages->currentText()]);
 }
 
 QStringList NewPairsDialog::players()

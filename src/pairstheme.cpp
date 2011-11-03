@@ -29,7 +29,10 @@
 #include "cardtype.h"
 
 PairsTheme::PairsTheme(const QString& path)
+: QStandardItem()
 {
+
+
 	KTar archive(path);
 	m_path = path;
 	bool b = archive.open(QIODevice::ReadOnly);
@@ -116,6 +119,20 @@ PairsTheme::PairsTheme(const QString& path)
     qDebug() << m_title << m_description << m_author << m_date << m_version << m_missed_snd << m_found_snd
              << m_turn_snd << m_back_img << m_background_img << m_backtrasp_img << m_main << m_languages;
     if (reader.hasError()) {}
+
+    setData(title(), TitleRole);
+    setData(cardTypes(), TypeRole);
+    setData(backImage(), IconRole);
+
+}
+
+QHash<int, QByteArray> PairsTheme::roleNames() const
+{
+  QHash<int, QByteArray> names;
+  names[TitleRole] = "title";
+  names[IconRole] = "icon";
+  names[TypeRole] = "type";
+  return names;
 }
 
 void PairsTheme::parseElement(QXmlStreamReader &reader)
@@ -223,4 +240,18 @@ bool PairsTheme::isValid(const KArchiveFile* file){
     }
     QXmlSchemaValidator validator(schema);
     return validator.validate(file->data());
+}
+
+QVariant PairsTheme::data(int role) const
+{
+  switch(role) {
+  case TitleRole:
+    return title();
+  case TypeRole:
+    return (cardTypes());
+  case IconRole:
+    return backImage();
+  default:
+    return QVariant();
+  }
 }

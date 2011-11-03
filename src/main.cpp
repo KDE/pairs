@@ -23,6 +23,12 @@
 #include <KDE/KAboutData>
 #include <KDE/KCmdLineArgs>
 #include <KDE/KLocale>
+#include <KStandardDirs>
+#include "pairstheme.h"
+#include <QDebug>
+#include <QDeclarativeView>
+#include <QStandardItemModel>
+#include <QDeclarativeContext>
 
 static const char description[] =
     I18N_NOOP("A game to enhance your memory for KDE!");
@@ -43,33 +49,25 @@ int main(int argc, char **argv)
     KCmdLineArgs::addCmdLineOptions(options);
     KApplication app;
 
-    Pairs *widget = new Pairs;
+    QStandardItemModel themes_model;
 
-    // see if we are starting with session management
-    if (app.isSessionRestored())
-    {
-        RESTORE(Pairs);
-    }
-    else
-    {
-        // no session.. just start up normally
-        KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-        if (args->count() == 0)
-        {
-            //Pairs *widget = new Pairs;
-            widget->show();
+    const QStringList themes = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "themes/*.pairs.*" ));
+
+    Q_FOREACH(const QString& themePath, themes) {
+        PairsTheme theme(themePath);
+
+        if(!theme.isCorrect()) {
+            qWarning() << "uncorrect theme:" << themePath << theme.error();
+        } else {
+            themes_model.appendRow(&theme);
         }
-        else
-        {
-            int i = 0;
-            for (; i < args->count(); i++)
-            {
-                //Pairs *widget = new Pairs;
-                widget->show();
-            }
-        }
-        args->clear();
     }
+
+    QDeclarativeView view;
+    QDeclarativeContext *ctxt = view.rootContext();
+    ctxt->setContextProperty("themeModel", &themes_model);
+    view.setSource(QUrl::fromLocalFile("qml/Main.qml"));
+    view.show();
 
     return app.exec();
 }
