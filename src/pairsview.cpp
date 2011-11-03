@@ -25,21 +25,26 @@
 #include <QDebug>
 #include <QPropertyAnimation>
 #include <QGraphicsRotation>
-#include "pairstheme.h"
 #include <QDate>
 #include <QTimer>
 #include <QSvgRenderer>
+#include <QDeclarativeEngine>
+#include <QDeclarativeComponent>
+#include <QDeclarativeItem>
 #include <KTar>
 #include <Phonon/MediaObject>
+#include "pairstheme.h"
 
 PairsView::PairsView(QWidget *parent)
-    : QGraphicsView(parent), m_last(0), m_cardsSize(128,128)
+    : QDeclarativeView(parent), m_last(0), m_cardsSize(128,128)
 {
     QObject::connect(this, SIGNAL(pair_missed()), parent, SLOT(inc_missed()));
     QObject::connect(this, SIGNAL(pair_found()), parent, SLOT(inc_found()));
-    setScene(new QGraphicsScene(this));
     
     qsrand(QTime::currentTime().msec()*QTime::currentTime().second());
+    
+    setSource(QUrl("qrc:/qml/Main.qml"));
+    setResizeMode(SizeRootObjectToView);
 }
 
 PairsView::~PairsView()
@@ -97,6 +102,10 @@ void PairsView::newGame(const PairsTheme& theme, const QString language, const Q
     bool b = archive.open(QIODevice::ReadOnly);
     Q_ASSERT(b && "could not open the file");
     
+    QDeclarativeItem* cardsParent=rootObject()->findChild<QDeclarativeItem*>("board");
+    
+    Q_ASSERT(cardsParent);
+    
     QList<ThemeElement> items = theme.items();
     //int num=qMin(((rows*columns)/2)*2, items.size()); //we make it %2
     int num = items.size();
@@ -106,11 +115,11 @@ void PairsView::newGame(const PairsTheme& theme, const QString language, const Q
 
 //         qDebug() << theme.mainType() << titem.name[1] << titem.name[2] << titem.name[3] << titem.name[4] << titem.name[5];
 
-        CardItem* item = new CardItem(&backRenderer, m_cardsSize, 0, scene());
+        CardItem* item = new CardItem(&backRenderer, m_cardsSize, cardsParent, scene());
         item->setData(0, i);
         item->setType(theme.mainType(), titem.name[theme.mainType()][language], archive);
 
-        CardItem* item1 = new CardItem(&backRenderer, m_cardsSize, 0, scene());
+        CardItem* item1 = new CardItem(&backRenderer, m_cardsSize, cardsParent, scene());
         item1->setData(0, i);
         //for now  fixed to test sound
         CardType type = CARD_IMAGE;

@@ -80,7 +80,7 @@ Pairs::Pairs()
     // toolbar position, icon size, etc.
     setupGUI();
     
-    QMetaObject::invokeMethod(this, "newGame", Qt::QueuedConnection);
+//     QMetaObject::invokeMethod(this, "newGame", Qt::QueuedConnection);
 }
 
 Pairs::~Pairs()

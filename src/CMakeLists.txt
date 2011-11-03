@@ -27,12 +27,12 @@ set(pairs_SRCS pairstheme.cpp newpairsdialog.cpp carditem.cpp
  )
 
 kde4_add_ui_files(pairs_SRCS newpairsdialog.ui)
-
+qt4_add_resources(pairs_SRCS resources.qrc)
 kde4_add_kcfg_files(pairs_SRCS settings.kcfgc )
 
 kde4_add_executable(pairs ${pairs_SRCS})
 
-target_link_libraries(pairs ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} phonon ${QT_QTXMLPATTERNS_LIBRARY} ${KDE4_KNEWSTUFF3_LIBS})
+target_link_libraries(pairs ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} phonon ${QT_QTXMLPATTERNS_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY} ${KDE4_KNEWSTUFF3_LIBS})
 
 install(TARGETS pairs ${INSTALL_TARGETS_DEFAULT_ARGS} )
 

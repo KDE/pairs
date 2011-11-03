@@ -23,12 +23,14 @@
 #ifndef PAIRSVIEW_H
 #define PAIRSVIEW_H
 
-#include <QtGui/QGraphicsView>
+#include <QDeclarativeView>
+
 namespace Phonon { class MediaObject;}
 
+class QDeclarativeItem;
 class PairsTheme;
 class CardItem;
-class PairsView : public QGraphicsView
+class PairsView : public QDeclarativeView
 {
     Q_OBJECT
 public:
