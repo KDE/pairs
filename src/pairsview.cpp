@@ -34,6 +34,7 @@
 #include <KTar>
 #include <Phonon/MediaObject>
 #include "pairstheme.h"
+#include "themesmodel.h"
 
 PairsView::PairsView(QWidget *parent)
     : QDeclarativeView(parent), m_last(0), m_cardsSize(128,128)
@@ -42,6 +43,8 @@ PairsView::PairsView(QWidget *parent)
     QObject::connect(this, SIGNAL(pair_found()), parent, SLOT(inc_found()));
     
     qsrand(QTime::currentTime().msec()*QTime::currentTime().second());
+    
+    qmlRegisterType<ThemesModel>("org.kde.edu.pairs", 1, 0, "ThemesModel");
     
     setSource(QUrl("qrc:/qml/Main.qml"));
     setResizeMode(SizeRootObjectToView);

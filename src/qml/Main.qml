@@ -1,4 +1,5 @@
 import QtQuick 1.0
+import org.kde.edu.pairs 1.0
 
 Rectangle
 {
@@ -27,12 +28,8 @@ Rectangle
             id: options
             anchors.fill: parent
             
-            ListModel {
-                id: fruitModel
-
-                ListElement { name: "Apple";  cost: 2.45 }
-                ListElement { name: "Orange"; cost: 3.25 }
-                ListElement { name: "Banana"; cost: 1.95 }
+            ThemesModel {
+                id: themesModel
             }
             
             Row {
@@ -42,8 +39,8 @@ Rectangle
                     Text { text: "Themes:" }
                     
                     Repeater {
-                        model: fruitModel
-                        Text { text: fruitModel.get(index).name }
+                        model: themesModel
+                        Text { text: index }
                     }
                 }
                 
@@ -51,8 +48,8 @@ Rectangle
                     Text { text: "Players:" }
                     
                     Repeater {
-                        model: fruitModel
-                        Text { text: fruitModel.get(index).cost }
+                        model: themesModel
+                        delegate: Text { text: display }
                     }
                 }
             }

@@ -29,7 +29,7 @@
 #include "cardtype.h"
 
 PairsTheme::PairsTheme(const QString& path)
-: QStandardItem()
+    : QStandardItem()
 {
 
 
@@ -120,19 +120,9 @@ PairsTheme::PairsTheme(const QString& path)
              << m_turn_snd << m_back_img << m_background_img << m_backtrasp_img << m_main << m_languages;
     if (reader.hasError()) {}
 
-    setData(title(), TitleRole);
+    setText(title());
+    setIcon(QIcon(backImage()));
     setData(cardTypes(), TypeRole);
-    setData(backImage(), IconRole);
-
-}
-
-QHash<int, QByteArray> PairsTheme::roleNames() const
-{
-  QHash<int, QByteArray> names;
-  names[TitleRole] = "title";
-  names[IconRole] = "icon";
-  names[TypeRole] = "type";
-  return names;
 }
 
 void PairsTheme::parseElement(QXmlStreamReader &reader)
@@ -240,18 +230,4 @@ bool PairsTheme::isValid(const KArchiveFile* file){
     }
     QXmlSchemaValidator validator(schema);
     return validator.validate(file->data());
-}
-
-QVariant PairsTheme::data(int role) const
-{
-  switch(role) {
-  case TitleRole:
-    return title();
-  case TypeRole:
-    return (cardTypes());
-  case IconRole:
-    return backImage();
-  default:
-    return QVariant();
-  }
 }

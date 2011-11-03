@@ -45,9 +45,7 @@ class PairsTheme : public QStandardItem
 {
     public:
         enum ThemeRoles {
-             TitleRole = Qt::UserRole + 1,
-             IconRole,
-             TypeRole
+             TypeRole = Qt::UserRole + 1
          };
 
         PairsTheme(const QString& path);
@@ -65,9 +63,6 @@ class PairsTheme : public QStandardItem
         CardType mainType() const { return m_main_type; };
         QStringList languages() const  { return m_languages; };
         QStringList cardTypes() const { return m_cardtypes.begin().value(); };
-
-        virtual QVariant data (int role) const;
-        QHash<int, QByteArray> roleNames() const;
 
     private:
 

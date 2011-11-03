@@ -84,8 +84,7 @@ Pairs::Pairs()
 }
 
 Pairs::~Pairs()
-{
-}
+{}
 
 void Pairs::setupActions()
 {
