@@ -61,54 +61,46 @@ PairsTheme::PairsTheme(const QString& path)
             QString name = reader.name().toString();
             if(name == "title") {
                 m_title = reader.readElementText();
-            }
-            if(name == "description") {
+            } else if(name == "description") {
                 m_description = reader.readElementText();
-            }
-            if(name == "author") {
+            } else if(name == "author") {
                 m_author = reader.readElementText();
-            }
-            if(name == "version") {
+            } else if(name == "version") {
                 m_version = reader.readElementText();
-            }
-            if(name == "date") {
+            } else if(name == "date") {
                 m_date = reader.readElementText();
-            }
-            if(name == "main") {
+            } else if(name == "main") {
                 m_main = reader.attributes().value("type").toString();
                 if (m_main == "image") m_main_type = CARD_IMAGE;
-                if (m_main == "image2") m_main_type = CARD_IMAGE2;
-                if (m_main == "sound") m_main_type = CARD_SOUND;
-                if (m_main == "video") m_main_type = CARD_VIDEO;
-                if (m_main == "word") m_main_type = CARD_WORD;
+                else if (m_main == "image2") m_main_type = CARD_IMAGE2;
+                else if (m_main == "sound") m_main_type = CARD_SOUND;
+                else if (m_main == "video") m_main_type = CARD_VIDEO;
+                else if (m_main == "word") m_main_type = CARD_WORD;
 
 
-            }
-            if(name == "sound") {
-                if(reader.attributes().value("type") == "missed"){
+            } else if(name == "sound") {
+                QStringRef soundtype=reader.attributes().value("type");
+                if(soundtype == "missed"){
                     m_missed_snd = reader.attributes().value("src").toString();
                 }
-                if(reader.attributes().value("type") == "found"){
+                else if(soundtype == "found"){
                     m_found_snd = reader.attributes().value("src").toString();
                 }
-                if(reader.attributes().value("type") == "turn"){
+                else if(soundtype == "turn"){
                     m_turn_snd = reader.attributes().value("src").toString();
                 }
-            }
-
-            if(name == "image") {
-                if(reader.attributes().value("type") == "back"){
+            } else if(name == "image") {
+                QStringRef imagetype = reader.attributes().value("type");
+                if(imagetype == "back"){
                     m_back_img = reader.attributes().value("src").toString();
                 }
-                if(reader.attributes().value("type") == "trasparent_back"){
+                else if(reader.attributes().value("type") == "trasparent_back"){
                     m_backtrasp_img = reader.attributes().value("src").toString();
                 }
-                if(reader.attributes().value("type") == "bakcground"){
+                else if(reader.attributes().value("type") == "bakcground"){
                     m_background_img = reader.attributes().value("src").toString();
                 }
-            }
-
-            if(name=="element") {
+            } else if(name=="element") {
                 parseElement(reader);
             }
         }
@@ -130,11 +122,6 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
     QString common[CARD_MAX_TYPE];
     CardType current_type = CARD_IMAGE;
     QStringList commonname;
-    common[CARD_IMAGE] = "";
-    common[CARD_IMAGE2] = "";
-    common[CARD_SOUND] = "";
-    common[CARD_VIDEO] = "";
-    common[CARD_WORD] = "";
     QXmlStreamReader::TokenType type = reader.readNext();
     ThemeElement item;
     while(!reader.atEnd()){
@@ -148,7 +135,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                             item.name[i][str].append(common[i]);
                     }
                 }
-                common[i] = "";
+                common[i].clear();
 //                 qDebug() << "ITEM" << item.name[i]  << "/ITEM";
             }
             foreach (const QString &str, m_cardtypes.keys()){
@@ -164,7 +151,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
         if(type==QXmlStreamReader::StartElement) {
             QString name = reader.name().toString();
             QString l = reader.attributes().value("lang").toString();
-            if(!l.isEmpty() && m_languages.lastIndexOf(l) == -1){
+            if(!l.isEmpty() && !m_languages.contains(l)){
                 m_languages.append(l);
             }
             if(name != "element"){
@@ -173,19 +160,20 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                 if(!l.isEmpty()  && m_cardtypes[l].count(name) == 0)
                     m_cardtypes[l].append(name);
             }
+            
             if(name == "image") {
                 if(common[CARD_IMAGE].isEmpty() && item.name[CARD_IMAGE][l].isEmpty())
                     current_type = CARD_IMAGE;
                 else
                     current_type = CARD_IMAGE2;
             }
-            if(name == "sound") {
+            else if(name == "sound") {
                 current_type = CARD_SOUND;
             }
-            if(name == "video") {
+            else if(name == "video") {
                 current_type = CARD_VIDEO;
             }
-            if(name == "word") {
+            else if(name == "word") {
                 current_type = CARD_WORD;
                 if(l.isEmpty()) {
                     common[current_type] = reader.readElementText();
@@ -196,6 +184,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                     item.name[current_type][l] = reader.readElementText();
                 }
             }
+            
             if(name != "element" && name != "word") {
                 if(l.isEmpty()) {
 
@@ -210,12 +199,6 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
         }
         type = reader.readNext();
     }
-
-        
-
-   // qDebug() << m_languages << m_cardtypes;
-   
-   
 }
 
 bool PairsTheme::isValid(const KArchiveFile* file){
