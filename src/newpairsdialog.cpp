@@ -60,10 +60,10 @@ NewPairsDialog::NewPairsDialog(QWidget* parent)
 	}
 }
 
-void NewPairsDialog::download(){
+void NewPairsDialog::download()
+{
     Pairs *anch = static_cast<Pairs*> (this->parent());
     anch->download();
-	m_themesModel->reload();
 }
 
 PairsTheme* NewPairsDialog::theme() const

@@ -23,10 +23,13 @@
 
 class ThemesModel : public QStandardItemModel
 {
+    Q_OBJECT
     public:
         explicit ThemesModel(QObject* parent = 0);
         
         QHash< int, QByteArray > roleNames() const;
+        
+    private slots:
         void reload();
 };
 

@@ -21,10 +21,16 @@
 #include <KStandardDirs>
 #include <KGlobal>
 #include <QDebug>
+#include <QFileSystemWatcher>
 
 ThemesModel::ThemesModel(QObject* parent): QStandardItemModel(parent)
 {
     reload();
+    
+    QStringList themesdirs=KGlobal::dirs()->findDirs("appdata", "themes");
+    QFileSystemWatcher* fs=new QFileSystemWatcher(this);
+    fs->addPaths(themesdirs);
+    connect(fs, SIGNAL(directoryChanged(QString)), SLOT(reload()));
 }
 
 void ThemesModel::reload()
