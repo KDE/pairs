@@ -24,6 +24,12 @@
 
 ThemesModel::ThemesModel(QObject* parent): QStandardItemModel(parent)
 {
+    reload();
+}
+
+void ThemesModel::reload()
+{
+    clear();
     const QStringList themes = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "themes/*.pairs.*" ));
 
     Q_FOREACH(const QString& themePath, themes) {

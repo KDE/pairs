@@ -96,12 +96,12 @@ void PairsView::setRowSize(int itemsPerRow)
     }
 }
 
-void PairsView::newGame(const PairsTheme& theme, const QString language, const QString cardType)
+void PairsView::newGame(const PairsTheme* theme, const QString language, const QString cardType)
 {
     qDeleteAll(m_cards);
     m_cards.clear();
     QList<CardItem*> cards;
-    KTar archive(theme.path());
+    KTar archive(theme->path());
     bool b = archive.open(QIODevice::ReadOnly);
     Q_ASSERT(b && "could not open the file");
     
@@ -109,10 +109,10 @@ void PairsView::newGame(const PairsTheme& theme, const QString language, const Q
     
     Q_ASSERT(cardsParent);
     
-    QList<ThemeElement> items = theme.items();
+    QList<ThemeElement> items = theme->items();
     //int num=qMin(((rows*columns)/2)*2, items.size()); //we make it %2
     int num = items.size();
-    QSvgRenderer backRenderer(static_cast<const KArchiveFile*>(archive.directory()->entry(theme.backImage()))->data());
+    QSvgRenderer backRenderer(static_cast<const KArchiveFile*>(archive.directory()->entry(theme->backImage()))->data());
     for(int i=0; i<num; i++) {
         ThemeElement titem = items.at(i);
 
@@ -120,7 +120,7 @@ void PairsView::newGame(const PairsTheme& theme, const QString language, const Q
 
         CardItem* item = new CardItem(&backRenderer, m_cardsSize, cardsParent, scene());
         item->setData(0, i);
-        item->setType(theme.mainType(), titem.name[theme.mainType()][language], archive);
+        item->setType(theme->mainType(), titem.name[theme->mainType()][language], archive);
 
         CardItem* item1 = new CardItem(&backRenderer, m_cardsSize, cardsParent, scene());
         item1->setData(0, i);

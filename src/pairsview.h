@@ -45,7 +45,7 @@ public:
     virtual ~PairsView();
     
     void setRowSize(int itemsPerRow);
-    void newGame(const PairsTheme& theme, const QString language, const QString cardType);
+    void newGame(const PairsTheme* theme, const QString language, const QString cardType);
     int cardsNum();
 
 signals:

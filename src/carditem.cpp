@@ -77,8 +77,8 @@ m_back(size.toSize())
 CardItem::~CardItem()
 {}
 
-
-void CardItem::setType(CardType type, QString& file, KTar& archive){
+void CardItem::setType(CardType type, QString& file, KTar& archive)
+{
     m_type = type;
     switch(type){
         case CARD_SOUND:
@@ -97,7 +97,8 @@ void CardItem::setType(CardType type, QString& file, KTar& archive){
         }
         case CARD_IMAGE:
         {
-            QSvgRenderer imageRenderer(static_cast<const KArchiveFile*>(archive.directory()->entry(file))->data());
+            const KArchiveFile* thefile=static_cast<const KArchiveFile*>(archive.directory()->entry(file));
+            QSvgRenderer imageRenderer(thefile->data());
             setCardPixmap(&imageRenderer);
             break;
         }
@@ -132,7 +133,7 @@ void CardItem::setType(CardType type, QString& file, KTar& archive){
             double dx, dy;
             dx = (m_color.rect().width() - myPath.boundingRect().width())/2;
             dy = (m_color.rect().height() - myPath.boundingRect().height())/2 +  myPath.boundingRect().height()/2;
-            qDebug() << dx << dy << m_color.rect().width() << myPath.boundingRect().width();
+//             qDebug() << dx << dy << m_color.rect().width() << myPath.boundingRect().width();
             myPath = QPainterPath();
             myPath.addText(dx, dy, myFont, file);
             myPath.setFillRule(Qt::OddEvenFill);

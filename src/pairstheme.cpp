@@ -116,12 +116,13 @@ PairsTheme::PairsTheme(const QString& path)
             m_error = i18n("%1:%2 Unknown token in theme file", reader.lineNumber(), reader.columnNumber());
         }
     }
-    qDebug() << m_title << m_description << m_author << m_date << m_version << m_missed_snd << m_found_snd
-             << m_turn_snd << m_back_img << m_background_img << m_backtrasp_img << m_main << m_languages;
+//     qDebug() << m_title << m_description << m_author << m_date << m_version << m_missed_snd << m_found_snd
+//              << m_turn_snd << m_back_img << m_background_img << m_backtrasp_img << m_main << m_languages;
     if (reader.hasError()) {}
 
+    qDebug() << "lololo --" << m_back_img;
     setText(title());
-    setIcon(QIcon(backImage()));
+//     setIcon(QIcon(backImage()));
     setData(cardTypes(), TypeRole);
 }
 

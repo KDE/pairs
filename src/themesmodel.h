@@ -27,6 +27,7 @@ class ThemesModel : public QStandardItemModel
         explicit ThemesModel(QObject* parent = 0);
         
         QHash< int, QByteArray > roleNames() const;
+        void reload();
 };
 
 #endif // THEMESMODEL_H

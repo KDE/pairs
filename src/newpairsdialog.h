@@ -25,6 +25,7 @@
 #include <QListWidgetItem>
 #include "pairstheme.h"
 
+class ThemesModel;
 namespace Ui { class NewPairsDialog; }
 
 class NewPairsDialog
@@ -33,7 +34,7 @@ class NewPairsDialog
     Q_OBJECT
     public:
         explicit NewPairsDialog(QWidget* parent = 0);
-        PairsTheme theme() const;
+        PairsTheme* theme() const;
         QStringList players();
         void setPlayer(const QString &name);
         QString language() const;
@@ -44,17 +45,16 @@ class NewPairsDialog
         void addUser(const QString& name);
         void deleteUser();
         void playerNameChanged(const QString & newname);
-        void themeSelected(QListWidgetItem *item);
+        void themeSelected(const QModelIndex& idx);
         void dialogAccepted();
 
     private slots:
         void download();
 
     private:
-        void loadThemesList();
         Ui::NewPairsDialog* m_ui;
+		ThemesModel* m_themesModel;
         QList<PairsTheme> m_themes;
-        int m_row;
 };
 
 #endif // NEWPairsDialog_H

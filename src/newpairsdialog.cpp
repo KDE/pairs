@@ -30,26 +30,26 @@
 
 #include "ui_newpairsdialog.h"
 #include "pairs.h"
-#include "pairstheme.h"
+#include "themesmodel.h"
 #include <KApplication>
-
 
 NewPairsDialog::NewPairsDialog(QWidget* parent)
     : QDialog(parent)
     , m_ui(new Ui::NewPairsDialog)
 {
-	m_ui->setupUi(this);
+    m_themesModel = new ThemesModel(this);
+    
+    m_ui->setupUi(this);
     m_ui->add->setIcon(KIcon("list-add"));
     m_ui->remove->setIcon(KIcon("list-remove"));
+    m_ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+    m_ui->themesList->setModel(m_themesModel);
     connect(m_ui->add, SIGNAL(clicked()), this, SLOT(addUser()));
     connect(m_ui->remove, SIGNAL(clicked()), this, SLOT(deleteUser()));
     connect(m_ui->playerName, SIGNAL(textChanged(QString)), SLOT(playerNameChanged(QString)));
-    connect(m_ui->themesList, SIGNAL(itemClicked(QListWidgetItem *)), SLOT(themeSelected(QListWidgetItem *)));
+    connect(m_ui->themesList, SIGNAL(clicked(QModelIndex)), SLOT(themeSelected(QModelIndex)));
 	connect(this, SIGNAL(accepted()), SLOT(dialogAccepted()));
     connect(m_ui->theme, SIGNAL(clicked(bool)), SLOT(download()));
-    m_ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
-
-    loadThemesList();
 
 	KConfig config;
 	KConfigGroup group(&config, "NewGame");
@@ -63,34 +63,12 @@ NewPairsDialog::NewPairsDialog(QWidget* parent)
 void NewPairsDialog::download(){
     Pairs *anch = static_cast<Pairs*> (this->parent());
     anch->download();
-    m_ui->themesList->clear();
-    loadThemesList();
+	m_themesModel->reload();
 }
 
-void NewPairsDialog::loadThemesList(){
-    const QStringList themes = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "themes/*.pairs.*" ));
-    
-    Q_FOREACH(const QString& themePath, themes) {
-        PairsTheme theme(themePath);
-        
-        if(!theme.isCorrect()) {
-            qWarning() << "uncorrect theme:" << themePath << theme.error();
-        } else {
-            m_ui->themesList->addItem(theme.title());
-            m_themes += theme;
-        }
-    }
-    m_ui->playerName->setClickMessage(i18n("Player name..."));
-    m_ui->themesList->setCurrentRow(0);
-    themeSelected(m_ui->themesList->currentItem());
-
-
-}
-
-PairsTheme NewPairsDialog::theme() const
+PairsTheme* NewPairsDialog::theme() const
 {
-    int row = m_ui->themesList->currentRow();
-    return m_themes[row];
+    return static_cast<PairsTheme*>(m_themesModel->item(m_ui->themesList->currentIndex().row()));
 }
 QString NewPairsDialog::language() const
 {
@@ -104,14 +82,14 @@ QString NewPairsDialog::cardType() const
     return m_ui->comboCardTypes->currentText();
 }
 
-void NewPairsDialog::themeSelected(QListWidgetItem *item)
+void NewPairsDialog::themeSelected(const QModelIndex& idx)
 {
-	m_row = m_ui->themesList->row(item);
     m_ui->comboLanguages->clear();
 	m_ui->comboCardTypes->clear();
 	
-	m_ui->comboLanguages->addItems(m_themes[m_row].languages());
-//	m_ui->comboCardTypes->addItems(m_themes[m_row].cardTypes()[m_ui->comboLanguages->currentText()]);
+    PairsTheme* it=static_cast<PairsTheme*>(m_themesModel->item(m_ui->themesList->currentIndex().row()));
+	m_ui->comboLanguages->addItems(it->languages());
+	m_ui->comboCardTypes->addItems(it->cardTypes());
 }
 
 QStringList NewPairsDialog::players()
