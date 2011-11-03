@@ -120,7 +120,6 @@ PairsTheme::PairsTheme(const QString& path)
 //              << m_turn_snd << m_back_img << m_background_img << m_backtrasp_img << m_main << m_languages;
     if (reader.hasError()) {}
 
-    qDebug() << "lololo --" << m_back_img;
     setText(title());
 //     setIcon(QIcon(backImage()));
     setData(cardTypes(), TypeRole);
@@ -150,14 +149,14 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                     }
                 }
                 common[i] = "";
-                qDebug() << "ITEM" << item.name[i]  << "/ITEM";
+//                 qDebug() << "ITEM" << item.name[i]  << "/ITEM";
             }
             foreach (const QString &str, m_cardtypes.keys()){
                 m_cardtypes[str].append(commonname);
                 m_cardtypes[str].removeDuplicates();
                 m_cardtypes[str].sort();
             }
-            qDebug() << "CTYPES" << m_cardtypes << "/CTYPES";
+//             qDebug() << "CTYPES" << m_cardtypes << "/CTYPES";
             m_items += item;
             item.reset();
         }
