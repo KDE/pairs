@@ -36,11 +36,13 @@
 #include <Phonon/MediaObject>
 #include "pairstheme.h"
 #include "themesmodel.h"
+#include "themeiconsprovider.h"
 
 PairsView::PairsView(QWidget *parent)
     : QDeclarativeView(parent), m_last(0), m_cardsSize(128,128)
 {
-    m_model = new ThemesModel(this);
+    m_themicons = new ThemeIconsProvider(QDeclarativeImageProvider::Pixmap);
+    m_model = new ThemesModel(this, m_themicons);
     
     QObject::connect(this, SIGNAL(pair_missed()), parent, SLOT(inc_missed()));
     QObject::connect(this, SIGNAL(pair_found()), parent, SLOT(inc_found()));
@@ -54,6 +56,8 @@ PairsView::PairsView(QWidget *parent)
     
     rootContext()->setContextProperty("fgame", this);
     rootContext()->setContextProperty("themesModel", m_model);
+    engine()->addImageProvider("themeicons", m_themicons);
+
     Q_ASSERT(errors().isEmpty());
 }
 

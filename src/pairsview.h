@@ -30,6 +30,7 @@ namespace Phonon { class MediaObject;}
 class ThemesModel;
 class PairsTheme;
 class CardItem;
+class ThemeIconsProvider;
 class PairsView : public QDeclarativeView
 {
     Q_OBJECT
@@ -61,6 +62,7 @@ private:
     CardItem* m_last;
     QList<CardItem*> m_cards;
     QSizeF m_cardsSize;
+    ThemeIconsProvider *m_themicons;
 };
 
 #endif // kpairsVIEW_H

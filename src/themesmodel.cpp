@@ -17,14 +17,16 @@
 */
 
 #include "themesmodel.h"
+#include "themeiconsprovider.h"
 #include "pairstheme.h"
 #include <KStandardDirs>
 #include <KGlobal>
 #include <QDebug>
 #include <QFileSystemWatcher>
 
-ThemesModel::ThemesModel(QObject* parent): QStandardItemModel(parent)
+ThemesModel::ThemesModel(QObject* parent, ThemeIconsProvider *themeicons): QStandardItemModel(parent)
 {
+    m_themeicons = themeicons;
     reload();
     
     QStringList themesdirs=KGlobal::dirs()->findDirs("appdata", "themes");
@@ -46,6 +48,8 @@ void ThemesModel::reload()
             delete theme;
         } else {
             appendRow(theme);
+            if(m_themeicons != 0)
+                m_themeicons->addTheme(theme->title(), theme);
         }
     }
 }

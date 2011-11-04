@@ -20,12 +20,13 @@
 #define THEMESMODEL_H
 
 #include <QStandardItemModel>
+class ThemeIconsProvider;
 
 class ThemesModel : public QStandardItemModel
 {
     Q_OBJECT
     public:
-        explicit ThemesModel(QObject* parent = 0);
+        explicit ThemesModel(QObject* parent = 0, ThemeIconsProvider *themeicons = 0);
         
         QHash< int, QByteArray > roleNames() const;
         
@@ -34,6 +35,8 @@ class ThemesModel : public QStandardItemModel
         
     private slots:
         void reload();
+    private:
+        ThemeIconsProvider *m_themeicons;
 };
 
 #endif // THEMESMODEL_H
