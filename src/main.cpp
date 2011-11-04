@@ -36,7 +36,7 @@ int main(int argc, char **argv)
     KAboutData about("pairs", 0, ki18n("pairs"), version, ki18n(description),
                      KAboutData::License_GPL, ki18n("(C) 2011 Aleix Pol Gonzalez"), KLocalizedString(), 0, "aleixpol@kde.org");
     about.addAuthor( ki18n("Aleix Pol Gonzalez"), ki18n("Initial implementation and maintainer"), "aleixpol@kde.org" );
-    about.addAuthor( ki18n("Marco Calignano"), ki18n("Theme support enhancement and general feature development"), "marco.calignano@gmail.com");
+    about.addAuthor( ki18n("Marco Calignano"), ki18n("Theme support enhancement and general feature development"), "marco.calignano@googlemail.com");
     about.addAuthor( ki18n("Albert Astals Cid"), ki18n("Initial project setup and ideas"), "aacid@kde.org" );
     KCmdLineArgs::init(argc, argv, &about);
 
