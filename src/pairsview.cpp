@@ -31,6 +31,7 @@
 #include <QDeclarativeEngine>
 #include <QDeclarativeComponent>
 #include <QDeclarativeItem>
+#include <QDeclarativeContext>
 #include <KTar>
 #include <Phonon/MediaObject>
 #include "pairstheme.h"
@@ -39,15 +40,21 @@
 PairsView::PairsView(QWidget *parent)
     : QDeclarativeView(parent), m_last(0), m_cardsSize(128,128)
 {
+    m_model = new ThemesModel(this);
+    
     QObject::connect(this, SIGNAL(pair_missed()), parent, SLOT(inc_missed()));
     QObject::connect(this, SIGNAL(pair_found()), parent, SLOT(inc_found()));
     
     qsrand(QTime::currentTime().msec()*QTime::currentTime().second());
     
-    qmlRegisterType<ThemesModel>("org.kde.edu.pairs", 1, 0, "ThemesModel");
+//     qmlRegisterType<ThemesModel>("org.kde.edu.pairs", 1, 0, "ThemesModel");
     
     setSource(QUrl("qrc:/qml/Main.qml"));
     setResizeMode(SizeRootObjectToView);
+    
+    rootContext()->setContextProperty("fgame", this);
+    rootContext()->setContextProperty("themesModel", m_model);
+    Q_ASSERT(errors().isEmpty());
 }
 
 PairsView::~PairsView()
@@ -96,7 +103,13 @@ void PairsView::setRowSize(int itemsPerRow)
     }
 }
 
-void PairsView::newGame(const PairsTheme* theme, const QString language, const QString cardType)
+void PairsView::newGame(int row, const QString& language, const QString& cardType)
+{
+    PairsTheme* theme=static_cast<PairsTheme*>(m_model->item(row));
+    newGame(theme, language, cardType);
+}
+
+void PairsView::newGame(const PairsTheme* theme, const QString& language, const QString& cardType)
 {
     qDeleteAll(m_cards);
     m_cards.clear();

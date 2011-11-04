@@ -2,5 +2,7 @@
  <qresource>
     <file>qml/Main.qml</file>
     <file>qml/Button.qml</file>
+    <file>qml/OptionsPage.qml</file>
+    <file>qml/SelectableListView.qml</file>
  </qresource>
 </RCC>

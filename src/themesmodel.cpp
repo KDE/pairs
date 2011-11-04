@@ -50,6 +50,12 @@ void ThemesModel::reload()
     }
 }
 
+QVariant ThemesModel::info(int row, const QByteArray& role)
+{
+    QHash<int, QByteArray> roles=roleNames();
+    return QStandardItemModel::data(index(row, 0), roles.key(role));
+}
+
 QHash< int, QByteArray> ThemesModel::roleNames() const
 {
     QHash<int, QByteArray> names=QStandardItemModel::roleNames();

@@ -29,6 +29,9 @@ class ThemesModel : public QStandardItemModel
         
         QHash< int, QByteArray > roleNames() const;
         
+    public slots:
+        QVariant info(int row, const QByteArray& role);
+        
     private slots:
         void reload();
 };

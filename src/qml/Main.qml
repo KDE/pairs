@@ -1,5 +1,4 @@
 import QtQuick 1.0
-import org.kde.edu.pairs 1.0
 
 Rectangle
 {
@@ -23,36 +22,11 @@ Rectangle
             anchors.fill: parent
         }
         
-        Rectangle {
-            color: 'green'
+        OptionsPage {
             id: options
             anchors.fill: parent
             
-            ThemesModel {
-                id: themesModel
-            }
-            
-            Row {
-                anchors.fill: parent
-                
-                Column {
-                    Text { text: "Themes:" }
-                    
-                    Repeater {
-                        model: themesModel
-                        Text { text: index }
-                    }
-                }
-                
-                Column {
-                    Text { text: "Players:" }
-                    
-                    Repeater {
-                        model: themesModel
-                        delegate: Text { text: display }
-                    }
-                }
-            }
+            onGameStarted: game.state="playing"
         }
     }
     

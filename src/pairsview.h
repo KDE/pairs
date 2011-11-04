@@ -27,7 +27,7 @@
 
 namespace Phonon { class MediaObject;}
 
-class QDeclarativeItem;
+class ThemesModel;
 class PairsTheme;
 class CardItem;
 class PairsView : public QDeclarativeView
@@ -45,9 +45,10 @@ public:
     virtual ~PairsView();
     
     void setRowSize(int itemsPerRow);
-    void newGame(const PairsTheme* theme, const QString language, const QString cardType);
     int cardsNum();
-
+    void newGame(const PairsTheme* theme, const QString& language, const QString& cardType);
+    
+    Q_SCRIPTABLE void newGame(int row, const QString& language, const QString& cardType);
 signals:
     void pair_missed();
     void pair_found();
@@ -56,6 +57,7 @@ public slots:
     void cardSelected(CardItem* cardData);
     
 private:
+    ThemesModel* m_model;
     CardItem* m_last;
     QList<CardItem*> m_cards;
     QSizeF m_cardsSize;
