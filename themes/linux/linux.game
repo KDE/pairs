@@ -12,50 +12,60 @@
         <image src='centos_logo.svg' lang='en'></image>
         <sound src='centos.ogg' lang='en'></sound>
         <word lang='en'>centos</word>
+        <word lang='it'>centos</word>
     </element>
     <element>
         <image src='debian-logo.svg' lang='en'></image>
         <sound src='debian.ogg' lang='en'></sound>
         <word lang='en'>debian</word>
+        <word lang='it'>debian</word>
     </element>
     <element>
         <image src='fedora-logo.svg' lang='en'></image>
         <sound src='fedora.ogg' lang='en'></sound>
         <word lang='en'>fedora</word>
+        <word lang='it'>fedora</word>
     </element>
     <element>
         <image src='gentoo-logo.svg' lang='en'></image>
         <sound src='gentoo.ogg' lang='en'></sound>
         <word lang='en'>gentoo</word>
+        <word lang='it'>gentoo</word>
     </element>
     <element>
         <image src='knoppix-logo.svg' lang='en'></image>
         <sound src='knoppix.ogg' lang='en'></sound>
         <word lang='en'>knoppix</word>
+        <word lang='it'>knoppix</word>
     </element>
     <element>
         <image src='mandrake_logo.svg' lang='en'></image>
         <sound src='mandrake.ogg' lang='en'></sound>
         <word lang='en'>mandrake</word>
+        <word lang='it'>mandrake</word>
     </element>
     <element>
         <image src='mint-logo.svg' lang='en'></image>
         <sound src='mint.ogg' lang='en'></sound>
         <word lang='en'>mint</word>
+        <word lang='it'>mint</word>
     </element>
     <element>
         <image src='redhat-logo.svg' lang='en'></image>
         <sound src='redhat.ogg' lang='en'></sound>
         <word lang='en'>redhat</word>
+        <word lang='it'>redhat</word>
     </element>
     <element>
         <image src='suse_logo.svg' lang='en'></image>
         <sound src='suse.ogg' lang='en'></sound>
         <word lang='en'>suse</word>
+        <word lang='it'>suse</word>
     </element>
     <element>
         <image src='ubuntu-logo.svg' lang='en'></image>
         <sound src='ubuntu.ogg' lang='en'></sound>
         <word lang='en'>ubuntu</word>
+        <word lang='it'>ubuntu</word>
     </element>
 </pairs>
