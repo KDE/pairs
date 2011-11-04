@@ -25,6 +25,7 @@ set(pairs_SRCS pairstheme.cpp newpairsdialog.cpp carditem.cpp
    pairsview.cpp
    pairsplayer.cpp
    themesmodel.cpp
+   playersmodel.cpp
    themeiconsprovider.cpp
  )
 

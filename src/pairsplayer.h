@@ -22,12 +22,19 @@
 #define KPAIRSPLAYER_H
 
 #include <QString>
+#include <QStandardItem>
 
-class PairsPlayer
+class PairsPlayer : public QStandardItem
 {
 
 public:
-    PairsPlayer(const QString &name);
+    enum PlayerRoles {
+         Missed = Qt::UserRole + 1,
+         Found,
+         Time
+     };
+
+    PairsPlayer(const QString &name, const QString &icon);
     ~PairsPlayer(){};
     void reset();
     void incMissed() {m_missed++; };
@@ -40,6 +47,7 @@ public:
 
 private:
     QString m_name;
+    QString m_icon;
     int m_missed;
     int m_found;
     int m_seconds;

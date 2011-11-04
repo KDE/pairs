@@ -117,7 +117,7 @@ void Pairs::newGame()
     m_players.clear();
     for(int i= 0; i < dialog.players().count(); i++)
     {
-        m_players.append(PairsPlayer(dialog.players().at(i)));
+        m_players.append(PairsPlayer(dialog.players().at(i), "get-hot-new-stuff"));
     }
     m_view->newGame(dialog.theme(), dialog.language(), dialog.cardType());
 

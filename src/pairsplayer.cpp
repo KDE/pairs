@@ -19,11 +19,19 @@
  */
 
 #include "pairsplayer.h"
+#include "KIcon"
 
-PairsPlayer::PairsPlayer(const QString &name)
- : m_name(name)
+PairsPlayer::PairsPlayer(const QString &name, const QString &icon):
+QStandardItem(),
+m_name(name),
+m_icon(icon)
 {
     reset();
+    setText(name);
+    setData(m_missed, Missed);
+    setData(m_found, Found);
+    setData(m_seconds, Time);
+    setIcon(KIcon(m_icon));
 }
 
 void PairsPlayer::reset()
