@@ -38,6 +38,9 @@
 #include "themesmodel.h"
 #include "themeiconsprovider.h"
 
+#include <knewstuff3/downloaddialog.h>
+#include <knewstuff3/entry.h>
+
 PairsView::PairsView(QWidget *parent)
     : QDeclarativeView(parent), m_last(0), m_cardsSize(128,128)
 {
@@ -164,5 +167,12 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     else
     	setRowSize((2*num)/3);
 }
+
+void PairsView::download()
+{
+    KNS3::DownloadDialog dialog("pairs.knsrc", this);
+    dialog.exec();
+}
+
 
 #include "pairsview.moc"

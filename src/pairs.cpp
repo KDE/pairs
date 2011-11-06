@@ -38,8 +38,6 @@
 #include <kactioncollection.h>
 #include <kstandardaction.h>
 #include <kstandarddirs.h>
-#include <knewstuff3/downloaddialog.h>
-#include <knewstuff3/entry.h>
 #include <KDE/KLocale>
 
 #include <Phonon/MediaObject>
@@ -92,7 +90,7 @@ void Pairs::setupActions()
     KAction *theme = new KAction("Get new theme", actionCollection());
     theme->setIcon(KIcon("get-hot-new-stuff"));
     actionCollection()->addAction("theme", theme);
-    connect(theme, SIGNAL(triggered(bool)), this, SLOT(download()));
+    connect(theme, SIGNAL(triggered(bool)), m_view, SLOT(download()));
 
 
     KStandardAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
@@ -185,11 +183,6 @@ void Pairs::setScore()
         }
         KMessageBox::information(this, final_line, i18n("Congratulations"));
    }
-}
-
-void Pairs::download(){
-    KNS3::DownloadDialog dialog("pairs.knsrc", this);
-    dialog.exec();
 }
 
 #include "pairs.moc"

@@ -79,6 +79,14 @@ Rectangle {
                     fgame.newGame(themesView.currentIndex, languagesView.currentItem.text, typesView.currentItem.text)
                 }
             }
+            
+            Button {
+                text: "Download Themes"
+                
+                onClicked: {
+                    fgame.download()
+                }
+            }
         }
     }
 }

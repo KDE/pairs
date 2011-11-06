@@ -32,6 +32,7 @@
 #include "pairs.h"
 #include "themesmodel.h"
 #include <KApplication>
+#include "pairsview.h"
 
 NewPairsDialog::NewPairsDialog(QWidget* parent)
     : QDialog(parent)
@@ -63,7 +64,7 @@ NewPairsDialog::NewPairsDialog(QWidget* parent)
 void NewPairsDialog::download()
 {
     Pairs *anch = static_cast<Pairs*> (this->parent());
-    anch->download();
+    anch->view()->download();
 }
 
 PairsTheme* NewPairsDialog::theme() const

@@ -55,6 +55,7 @@ signals:
     void pair_found();
     
 public slots:
+    void download();
     void cardSelected(CardItem* cardData);
     
 private:

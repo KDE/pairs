@@ -45,11 +45,12 @@ public:
      */
     virtual ~Pairs();
     void Play(QIODevice * ioDevice);
+    PairsView* view() const { return m_view; }
+    
 public slots:
     void inc_missed();
     void inc_found();
     void update();
-    void download();
 
 private slots:
     void newGame();
