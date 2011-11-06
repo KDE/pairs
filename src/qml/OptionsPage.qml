@@ -33,10 +33,13 @@ Rectangle {
                 }
                 
                 model: themesModel
-                delegate: Text {
-                    font.pixelSize: 25 
-                    
-                    text: display
+                delegate: Row {
+                    Image { source: "image://theme/"+display; fillMode: Image.PreserveAspectFit; height: 20 } 
+                    Text {
+                        font.pixelSize: 25 
+                        
+                        text: display
+                    }
                 }
             }
         }

@@ -24,9 +24,8 @@
 #include <QDebug>
 #include <QFileSystemWatcher>
 
-ThemesModel::ThemesModel(QObject* parent, ThemeIconsProvider *themeicons): QStandardItemModel(parent)
+ThemesModel::ThemesModel(QObject* parent): QStandardItemModel(parent)
 {
-    m_themeicons = themeicons;
     reload();
     
     QStringList themesdirs=KGlobal::dirs()->findDirs("appdata", "themes");
@@ -48,10 +47,19 @@ void ThemesModel::reload()
             delete theme;
         } else {
             appendRow(theme);
-            if(m_themeicons != 0)
-                m_themeicons->addTheme(theme->title(), theme);
         }
     }
+}
+
+PairsTheme* ThemesModel::themeForName(const QString& title) const
+{
+    PairsTheme* ret=0;
+    for(int i=0; !ret && i<rowCount(); ++i) {
+        PairsTheme* theme=static_cast<PairsTheme*>(item(i, 0));
+        if(theme->title()==title)
+            ret=theme;
+    }
+    return ret;
 }
 
 QVariant ThemesModel::info(int row, const QByteArray& role)

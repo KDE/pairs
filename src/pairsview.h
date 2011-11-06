@@ -62,7 +62,7 @@ private:
     CardItem* m_last;
     QList<CardItem*> m_cards;
     QSizeF m_cardsSize;
-    ThemeIconsProvider *m_themicons;
+    ThemeIconsProvider *m_themeImagesProvider;
 };
 
 #endif // kpairsVIEW_H

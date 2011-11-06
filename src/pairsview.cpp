@@ -41,8 +41,8 @@
 PairsView::PairsView(QWidget *parent)
     : QDeclarativeView(parent), m_last(0), m_cardsSize(128,128)
 {
-    m_themicons = new ThemeIconsProvider(QDeclarativeImageProvider::Pixmap);
-    m_model = new ThemesModel(this, m_themicons);
+    m_model = new ThemesModel(this);
+    m_themeImagesProvider = new ThemeIconsProvider(QDeclarativeImageProvider::Pixmap, m_model);
     
     QObject::connect(this, SIGNAL(pair_missed()), parent, SLOT(inc_missed()));
     QObject::connect(this, SIGNAL(pair_found()), parent, SLOT(inc_found()));
@@ -51,13 +51,13 @@ PairsView::PairsView(QWidget *parent)
     
 //     qmlRegisterType<ThemesModel>("org.kde.edu.pairs", 1, 0, "ThemesModel");
     
-    setSource(QUrl("qrc:/qml/Main.qml"));
     setResizeMode(SizeRootObjectToView);
     
     rootContext()->setContextProperty("fgame", this);
     rootContext()->setContextProperty("themesModel", m_model);
-    engine()->addImageProvider("themeicons", m_themicons);
+    engine()->addImageProvider("theme", m_themeImagesProvider);
 
+    setSource(QUrl("qrc:/qml/Main.qml"));
     Q_ASSERT(errors().isEmpty());
 }
 

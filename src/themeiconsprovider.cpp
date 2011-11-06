@@ -22,57 +22,34 @@
 #include <KTar>
 #include <QPainter>
 #include <QSvgRenderer>
+#include "themesmodel.h"
+#include <QDebug>
 
 
-ThemeIconsProvider::ThemeIconsProvider(QDeclarativeImageProvider::ImageType type) :
-    QDeclarativeImageProvider(type)
-{
-    // This space intentionally left blank.
-}
+ThemeIconsProvider::ThemeIconsProvider(QDeclarativeImageProvider::ImageType type, ThemesModel* themes) :
+    QDeclarativeImageProvider(type), m_themes(themes)
+{}
 
 ThemeIconsProvider::~ThemeIconsProvider()
-{
-    // This space intentionally left blank.
-}
-
-void ThemeIconsProvider::addTheme(const QString &name, const PairsTheme* th)
-{
-    m_themesPaths[name] = th;
-}
-
-
-QImage ThemeIconsProvider::requestImage(const QString& id, QSize* size, const QSize& requestedSize)
-{
-    QImage image;
-    QImage result;
-    if (requestedSize.isValid()) {
-        result = image.scaled(requestedSize, Qt::KeepAspectRatio);
-    } else {
-        result = image;
-    }
-    *size = result.size();
-    return result;
-}
+{}
 
 QPixmap ThemeIconsProvider::requestPixmap(const QString& id, QSize* size, const QSize& requestedSize)
 {
-    QPixmap image;
-    QPixmap result;
-    if(m_themesPaths.contains(id)){
-        const PairsTheme *theme = m_themesPaths[id];
+    const PairsTheme *theme = m_themes->themeForName(id);
+    if(theme){
         KTar archive(theme->path());
+        bool b = archive.open(QIODevice::ReadOnly);
+        Q_ASSERT(b);
         QSvgRenderer pixRenderer(static_cast<const KArchiveFile*>(archive.directory()->entry(theme->backImage()))->data());
-        QPainter p(&image);
+        if(size) {
+            *size = pixRenderer.viewBox().size();
+        }
+        QPixmap px(requestedSize.isValid() ? requestedSize : pixRenderer.viewBox().size());
+        px.fill(Qt::transparent);
+        QPainter p(&px);
         pixRenderer.render(&p);
+        return px;
     }
 
-    if (requestedSize.isValid()) {
-        result = image.scaled(requestedSize, Qt::KeepAspectRatio);
-    } else {
-        result = image;
-    }
-    *size = result.size();
-    return result;
+    return QPixmap();
 }
-
-

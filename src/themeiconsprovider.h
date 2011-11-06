@@ -24,16 +24,16 @@
 #include <QDeclarativeImageProvider>
 #include "pairstheme.h"
 
+class ThemesModel;
 class ThemeIconsProvider : public QDeclarativeImageProvider
 {
     public:
-        ThemeIconsProvider(QDeclarativeImageProvider::ImageType type);
+        ThemeIconsProvider(QDeclarativeImageProvider::ImageType type, ThemesModel* themes);
         ~ThemeIconsProvider();
-        QImage requestImage(const QString& id, QSize* size, const QSize& requestedSize);
         QPixmap requestPixmap(const QString& id, QSize* size, const QSize& requestedSize);
-        void addTheme(const QString &name, const PairsTheme* th);
-    private:
-        QMap<QString, const PairsTheme*> m_themesPaths;
+
+	private:
+        ThemesModel* m_themes;
 };
 
 
