@@ -83,9 +83,7 @@ Rectangle {
             Button {
                 text: "Download Themes"
                 
-                onClicked: {
-                    fgame.download()
-                }
+                onClicked: fgame.download()
             }
         }
     }

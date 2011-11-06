@@ -25,6 +25,7 @@
 
 #include <QDeclarativeView>
 
+namespace KNS3 { class DownloadDialog; }
 namespace Phonon { class MediaObject;}
 
 class ThemesModel;
@@ -64,6 +65,7 @@ private:
     QList<CardItem*> m_cards;
     QSizeF m_cardsSize;
     ThemeIconsProvider *m_themeImagesProvider;
+    KNS3::DownloadDialog *m_knsDialog;
 };
 
 #endif // kpairsVIEW_H

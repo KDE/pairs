@@ -42,7 +42,7 @@
 #include <knewstuff3/entry.h>
 
 PairsView::PairsView(QWidget *parent)
-    : QDeclarativeView(parent), m_last(0), m_cardsSize(128,128)
+    : QDeclarativeView(parent), m_last(0), m_cardsSize(128,128), m_knsDialog(0)
 {
     m_model = new ThemesModel(this);
     m_themeImagesProvider = new ThemeIconsProvider(QDeclarativeImageProvider::Pixmap, m_model);
@@ -170,8 +170,10 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
 
 void PairsView::download()
 {
-    KNS3::DownloadDialog dialog("pairs.knsrc", this);
-    dialog.exec();
+    if(!m_knsDialog)
+        m_knsDialog=new KNS3::DownloadDialog("pairs.knsrc", this);
+    
+    m_knsDialog->show();
 }
 
 
