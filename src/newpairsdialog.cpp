@@ -52,6 +52,10 @@ NewPairsDialog::NewPairsDialog(QWidget* parent)
 	connect(this, SIGNAL(accepted()), SLOT(dialogAccepted()));
     connect(m_ui->theme, SIGNAL(clicked(bool)), SLOT(download()));
 
+    if(m_themesModel->rowCount()>0) {
+        m_ui->themesList->setCurrentIndex(0);
+    }
+    
 	KConfig config;
 	KConfigGroup group(&config, "NewGame");
 	QStringList players = group.readEntry("Players", QStringList() << i18n("Player"));
