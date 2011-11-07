@@ -48,6 +48,8 @@ public:
     void Play(QIODevice * ioDevice);
     PairsView* view() const { return m_view; }
     
+    virtual QSize sizeHint() const { return QSize(800,500); }
+    
 public slots:
     void inc_missed();
     void inc_found();
