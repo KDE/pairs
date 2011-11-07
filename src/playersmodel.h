@@ -38,7 +38,6 @@ class PlayersModel : public QStandardItemModel
         PairsPlayer* player(int row);
         void addPlayer(const QString& name, const QString& decoration);
         void resetPlayers();
-        QHash< int, QByteArray > roleNames() const;
         
     public slots:
         QVariant info(int row, const QByteArray& role);

@@ -28,10 +28,17 @@
 
 PlayersModel::PlayersModel(QObject* parent): QStandardItemModel(parent)
 {
+    QHash<int, QByteArray> names=QStandardItemModel::roleNames();
+    names.insert(Missed, "missed");
+    names.insert(Found, "found");
+    names.insert(Time, "time");
+    setRoleNames(names);
+    
     KConfig config;
     KConfigGroup group(&config, "NewGame");
     QStringList players = group.readEntry("Players", QStringList() << i18n("Player"));
     QStringList icons = group.readEntry("Icons", QStringList() << "get-hot-new-stuff");
+    
     foreach(const QString& name, players) {
         int ind = players.indexOf(name, 0);
         QString icon;
@@ -66,15 +73,6 @@ QVariant PlayersModel::info(int row, const QByteArray& role)
 {
     QHash<int, QByteArray> roles=roleNames();
     return QStandardItemModel::data(index(row, 0), roles.key(role));
-}
-
-QHash< int, QByteArray> PlayersModel::roleNames() const
-{
-    QHash<int, QByteArray> names=QStandardItemModel::roleNames();
-    names.insert(Missed, "missed");
-    names.insert(Found, "found");
-    names.insert(Time, "time");
-    return names;
 }
 
 void PlayersModel::addPlayer(const QString& name, const QString& decoration)
