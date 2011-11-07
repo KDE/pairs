@@ -106,6 +106,7 @@ void PairsView::cardSelected(CardItem* card)
             card->markDone();
             emit pair_found();
             m_players->player(m_currentPlayer)->incFound();
+            QTimer::singleShot(500, this, SLOT(checkGameOver()));
         } else {
             QTimer::singleShot(500, card, SLOT(turn()));
             QTimer::singleShot(500, m_last, SLOT(turn()));
@@ -193,6 +194,11 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     else
     	setRowSize((2*num)/3);
     
+    
+    QObject* cardsContext=rootObject()->findChild<QObject*>("board");
+    Q_ASSERT(cardsContext);
+    cardsContext->setProperty("isGameOver", QVariant(false));
+
     m_currentPlayer=0;
     m_timer->start(1000);
 }
@@ -200,7 +206,10 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
 void PairsView::checkGameOver()
 {
     if(isGameOver()) {
-        emit gameOver();
+        QObject* cardsContext=rootObject()->findChild<QObject*>("board");
+        Q_ASSERT(cardsContext);
+        cardsContext->setProperty("isGameOver", true);
+        m_timer->stop();
     }
 }
 

@@ -15,11 +15,14 @@ Rectangle
         anchors.leftMargin: 200
         anchors.margins: 20
         
-        Rectangle {
-            color: 'red'
+        Board {
             id: board
-            objectName: 'board'
             anchors.fill: parent
+            
+            onIsGameOverChanged: {
+                if(isGameOver)
+                    game.state="congratulations"
+            }
         }
         
         OptionsPage {
@@ -27,6 +30,28 @@ Rectangle
             anchors.fill: parent
             
             onGameStarted: game.state="playing"
+        }
+        
+        Rectangle {
+            id: congratulations
+            anchors.fill: parent
+            color: "cyan"
+            
+            Column {
+                anchors.horizontalCenter: parent.horizontalCenter
+                Text {
+                    font.pixelSize: 100
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    
+                    text: "Congratulations!"
+                }
+                
+                Repeater {
+                    model: playersModel
+                    
+                    delegate: Text { font.pixelSize: 25; text: display+". Duration: "+time+", pairs found: "+found+", pairs missed: "+missed }
+                }
+            }
         }
     }
     
@@ -53,6 +78,13 @@ Rectangle
             onClicked: game.state="playing"
         }
         
+        Button {
+            anchors.horizontalCenter: parent.horizontalCenter
+            
+            text: "Congratulate"
+            onClicked: game.state="congratulations"
+        }
+        
         ListView {
             height: 200
             width: parent.width
@@ -68,12 +100,19 @@ Rectangle
              name: "newgame"
              PropertyChanges { target: board; visible: false }
              PropertyChanges { target: options; visible: true }
+             PropertyChanges { target: congratulations; visible: false }
          },
-         
          State {
              name: "playing"
              PropertyChanges { target: board; visible: true }
              PropertyChanges { target: options; visible: false }
+             PropertyChanges { target: congratulations; visible: false }
+         },
+         State {
+             name: "congratulations"
+             PropertyChanges { target: board; visible: false }
+             PropertyChanges { target: options; visible: false }
+             PropertyChanges { target: congratulations; visible: true }
          }
      ]
 }
