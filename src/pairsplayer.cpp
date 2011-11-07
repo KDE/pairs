@@ -20,18 +20,19 @@
 
 #include "pairsplayer.h"
 #include "KIcon"
+#include "playersmodel.h"
 
-PairsPlayer::PairsPlayer(const QString &name, const QString &icon):
-QStandardItem(),
-m_name(name),
-m_icon(icon)
+PairsPlayer::PairsPlayer(const QString &name, const QString &icon)
+    : QStandardItem(name),
+    m_name(name),
+    m_icon(icon)
 {
     reset();
     setText(name);
-    setData(m_missed, Missed);
-    setData(m_found, Found);
-    setData(m_seconds, Time);
-    setIcon(KIcon(m_icon));
+    setData(m_missed, PlayersModel::Missed);
+    setData(m_found, PlayersModel::Found);
+    setData(m_seconds, PlayersModel::Time);
+    setData(m_icon, Qt::DecorationRole);
 }
 
 void PairsPlayer::reset()

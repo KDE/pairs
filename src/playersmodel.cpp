@@ -31,42 +31,31 @@ PlayersModel::PlayersModel(QObject* parent): QStandardItemModel(parent)
     KConfig config;
     KConfigGroup group(&config, "NewGame");
     QStringList players = group.readEntry("Players", QStringList() << i18n("Player"));
-    QStringList icons = group.readEntry("Icons", QStringList() << i18n("get-hot-new-stuff"));
-    PairsPlayer *player;
+    QStringList icons = group.readEntry("Icons", QStringList() << "get-hot-new-stuff");
     foreach(const QString& name, players) {
         int ind = players.indexOf(name, 0);
-        const QString icon = icons.at(ind);
-        player = new PairsPlayer(name, icon);
-        appendRow(player);
+        QString icon;
+        if(ind>=0)
+            icon = icons.at(ind);
+        addPlayer(name, icon);
     }
-
-/*    QStringList themesdirs=KGlobal::dirs()->findDirs("appdata", "themes");
-    QFileSystemWatcher* fs=new QFileSystemWatcher(this);
-    fs->addPaths(themesdirs);
-    connect(fs, SIGNAL(directoryChanged(QString)), SLOT(reload()));
-    */
 }
 
-/*
-void PlayersModel::reload()
+PlayersModel::~PlayersModel()
 {
-    clear();
-    const QStringList themes = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "themes/*.pairs.*" ));
-
-    Q_FOREACH(const QString& themePath, themes) {
-        PairsTheme* theme = new PairsTheme(themePath);
-
-        if(!theme->isCorrect()) {
-            qWarning() << "uncorrect theme:" << themePath << theme->error();
-            delete theme;
-        } else {
-            appendRow(theme);
-            if(m_themeicons != 0)
-                m_themeicons->addTheme(theme->title(), theme);
-        }
+    QStringList players, icons;
+    
+    for (int i = 0; i < rowCount(); ++i) {
+        PairsPlayer* p=player(i);
+        players += p->text();
+        players += p->text();
     }
 }
-*/
+
+PairsPlayer* PlayersModel::player(int row)
+{
+    return static_cast<PairsPlayer*>(item(row));
+}
 
 QVariant PlayersModel::info(int row, const QByteArray& role)
 {
@@ -77,8 +66,20 @@ QVariant PlayersModel::info(int row, const QByteArray& role)
 QHash< int, QByteArray> PlayersModel::roleNames() const
 {
     QHash<int, QByteArray> names=QStandardItemModel::roleNames();
-    names.insert(PairsPlayer::Missed, "missed");
-    names.insert(PairsPlayer::Found, "found");
-    names.insert(PairsPlayer::Time, "time");
+    names.insert(Missed, "missed");
+    names.insert(Found, "found");
+    names.insert(Time, "time");
     return names;
+}
+
+void PlayersModel::addPlayer(const QString& name, const QString& decoration)
+{
+    appendRow(new PairsPlayer(name, decoration));
+}
+
+void PlayersModel::resetPlayers()
+{
+    for (int i = 0; i < rowCount(); ++i) {
+         player(i)->reset();
+    }
 }

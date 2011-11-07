@@ -28,22 +28,17 @@ class PairsPlayer : public QStandardItem
 {
 
 public:
-    enum PlayerRoles {
-         Missed = Qt::UserRole + 1,
-         Found,
-         Time
-     };
-
     PairsPlayer(const QString &name, const QString &icon);
-    ~PairsPlayer(){};
+    ~PairsPlayer(){}
     void reset();
-    void incMissed() {m_missed++; };
-    void incFound() {m_found++; };
-    void incSeconds() {m_seconds++; };
-    int missed() {return m_missed; };
-    int found() {return m_found; };
-    int seconds() {return m_seconds; };
-    const QString &name() {return m_name; };
+    void incMissed() {m_missed++; }
+    void incFound() {m_found++; }
+    void incSeconds() {m_seconds++; }
+    int missed() {return m_missed; }
+    int found() {return m_found; }
+    int seconds() {return m_seconds; }
+    QString name() {return m_name; }
+    
 
 private:
     QString m_name;

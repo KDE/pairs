@@ -21,12 +21,23 @@
 
 #include <QStandardItemModel>
 
+class PairsPlayer;
 class PlayersModel : public QStandardItemModel
 {
     Q_OBJECT
     public:
-        explicit PlayersModel(QObject* parent = 0);
+        enum PlayerRoles {
+            Missed = Qt::UserRole + 1,
+            Found,
+            Time
+        };
         
+        explicit PlayersModel(QObject* parent = 0);
+        virtual ~PlayersModel();
+        
+        PairsPlayer* player(int row);
+        void addPlayer(const QString& name, const QString& decoration);
+        void resetPlayers();
         QHash< int, QByteArray > roleNames() const;
         
     public slots:
