@@ -23,7 +23,7 @@
 #define PAIRS_H
 
 
-#include <kxmlguiwindow.h>
+#include <KMainWindow>
 #include <QTimer>
 #include <QList>
 #include <pairsplayer.h>
@@ -32,7 +32,7 @@ namespace Phonon { class MediaObject; }
 class PairsView;
 class KToggleAction;
 
-class Pairs : public KXmlGuiWindow
+class Pairs : public KMainWindow
 {
     Q_OBJECT
 public:
@@ -54,9 +54,6 @@ public slots:
 
 private slots:
     void newGame();
-    
-private:
-    void setupActions();
 
 private:
     PairsView *m_view;

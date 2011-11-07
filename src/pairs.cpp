@@ -30,7 +30,6 @@
 #include <QList>
 
 #include <kconfigdialog.h>
-#include <kstatusbar.h>
 
 #include <kaction.h>
 #include <KToolBar>
@@ -44,9 +43,10 @@
 #include <Phonon/AudioOutput>
 #include "newpairsdialog.h"
 #include "playersmodel.h"
+#include <kstatusbar.h>
 
 Pairs::Pairs()
-    : KXmlGuiWindow()
+    : KMainWindow()
     , m_view(new PairsView(this))
 	, m_right(KGlobal::dirs()->findResource("appdata", "themes/right.ogg"))
 	, m_wrong(KGlobal::dirs()->findResource("appdata", "themes/wrong.ogg"))
@@ -55,49 +55,19 @@ Pairs::Pairs()
     m_media = new Phonon::MediaObject(this);
     Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput(Phonon::GameCategory, this);
     createPath(m_media, audioOutput);
-
-    // accept dnd
-    setAcceptDrops(true);
-
-    // tell the KXmlGuiWindow that this is indeed the main widget
-    setCentralWidget(m_view);
-
-    // then, setup our actions
-    setupActions();
-
-    // add a status bar
-    statusBar()->show();
-
-    // a call to KXmlGuiWindow::setupGUI() populates the GUI
-    // with actions, using KXMLGUI.
-    // It also applies the saved mainwindow settings, if any, and ask the
-    // mainwindow to automatically save settings if changed: window size,
-    // toolbar position, icon size, etc.
-    setupGUI();
     
-//     QMetaObject::invokeMethod(this, "newGame", Qt::QueuedConnection);
+    setCentralWidget(m_view);
+    
+    addToolBar("main")->addAction("new game", this, SLOT(newGame()));
 }
 
 Pairs::~Pairs()
 {}
 
-void Pairs::setupActions()
-{
-    KStandardAction::open(this, SLOT(newGame()), actionCollection());
-    KAction *theme = new KAction("Get new theme", actionCollection());
-    theme->setIcon(KIcon("get-hot-new-stuff"));
-    actionCollection()->addAction("theme", theme);
-    connect(theme, SIGNAL(triggered(bool)), m_view, SLOT(download()));
-
-
-    KStandardAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
-}
-
 void Pairs::newGame()
 {
     NewPairsDialog dialog;
 
-    statusBar()->showMessage(i18n("New Game"));
     if(dialog.exec()!=QDialog::Accepted) {
         return;
     }
@@ -110,8 +80,6 @@ void Pairs::newGame()
     m_view->newGame(dialog.theme(), dialog.language(), dialog.cardType());
 
     m_view->playersModel()->resetPlayers();
-    
-    statusBar()->showMessage(i18n("New Game started"));
 }
 
 void Pairs::inc_missed()
