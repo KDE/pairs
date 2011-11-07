@@ -53,7 +53,7 @@ NewPairsDialog::NewPairsDialog(QWidget* parent)
     connect(m_ui->theme, SIGNAL(clicked(bool)), SLOT(download()));
 
     if(m_themesModel->rowCount()>0) {
-        m_ui->themesList->setCurrentIndex(0);
+        m_ui->themesList->setCurrentIndex(m_themesModel->index(0,0));
     }
     
 	KConfig config;
