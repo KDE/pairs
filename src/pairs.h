@@ -27,6 +27,7 @@
 #include <QTimer>
 #include <QList>
 #include <pairsplayer.h>
+
 namespace Phonon { class MediaObject; }
 class PairsView;
 class KToggleAction;
@@ -61,11 +62,8 @@ private:
 
 private:
     PairsView *m_view;
-    QList<PairsPlayer> m_players;
     int m_currentplayer;
     int m_found;
-    KToggleAction *m_toolbarAction;
-    KToggleAction *m_statusbarAction;
     QTimer *m_timer;
     Phonon::MediaObject *m_media;
     QString m_right;

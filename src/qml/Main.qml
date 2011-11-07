@@ -12,7 +12,7 @@ Rectangle
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.leftMargin: 400
+        anchors.leftMargin: 200
         anchors.margins: 20
         
         Rectangle {
@@ -51,6 +51,15 @@ Rectangle
             
             text: "Play"
             onClicked: game.state="playing"
+        }
+        
+        ListView {
+            height: 200
+            width: parent.width
+            anchors.horizontalCenter: parent.horizontalCenter
+            
+            delegate: Text { text: display }
+            model: playersModel
         }
     }
     

@@ -37,12 +37,17 @@
 #include "pairstheme.h"
 #include "themesmodel.h"
 #include "themeiconsprovider.h"
+#include "playersmodel.h"
 
 #include <knewstuff3/downloaddialog.h>
 #include <knewstuff3/entry.h>
 
 PairsView::PairsView(QWidget *parent)
-    : QDeclarativeView(parent), m_last(0), m_cardsSize(128,128), m_knsDialog(0)
+    : QDeclarativeView(parent)
+    , m_last(0)
+    , m_cardsSize(128,128)
+    , m_knsDialog(0)
+    , m_players(new PlayersModel(this))
 {
     m_model = new ThemesModel(this);
     m_themeImagesProvider = new ThemeIconsProvider(QDeclarativeImageProvider::Pixmap, m_model);
@@ -58,6 +63,7 @@ PairsView::PairsView(QWidget *parent)
     
     rootContext()->setContextProperty("fgame", this);
     rootContext()->setContextProperty("themesModel", m_model);
+    rootContext()->setContextProperty("playersModel", m_players);
     engine()->addImageProvider("theme", m_themeImagesProvider);
 
     setSource(QUrl("qrc:/qml/Main.qml"));

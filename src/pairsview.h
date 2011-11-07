@@ -28,6 +28,7 @@
 namespace KNS3 { class DownloadDialog; }
 namespace Phonon { class MediaObject;}
 
+class PlayersModel;
 class ThemesModel;
 class PairsTheme;
 class CardItem;
@@ -49,6 +50,7 @@ public:
     void setRowSize(int itemsPerRow);
     int cardsNum();
     void newGame(const PairsTheme* theme, const QString& language, const QString& cardType);
+    PlayersModel* playersModel() const { return m_players; }
     
     Q_SCRIPTABLE void newGame(int row, const QString& language, const QString& cardType);
 signals:
@@ -66,6 +68,7 @@ private:
     QSizeF m_cardsSize;
     ThemeIconsProvider *m_themeImagesProvider;
     KNS3::DownloadDialog *m_knsDialog;
+    PlayersModel* m_players;
 };
 
 #endif // kpairsVIEW_H

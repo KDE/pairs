@@ -43,11 +43,11 @@
 #include <Phonon/MediaObject>
 #include <Phonon/AudioOutput>
 #include "newpairsdialog.h"
+#include "playersmodel.h"
 
 Pairs::Pairs()
     : KXmlGuiWindow()
     , m_view(new PairsView(this))
-    , m_players()
     , m_found(0)
 	, m_right(KGlobal::dirs()->findResource("appdata", "themes/right.ogg"))
 	, m_wrong(KGlobal::dirs()->findResource("appdata", "themes/wrong.ogg"))
@@ -99,7 +99,7 @@ void Pairs::setupActions()
 void Pairs::update()
 {
 //    qDebug() << "update";
-	m_players[m_currentplayer].incSeconds();
+	m_view->playersModel()->player(m_currentplayer)->incSeconds();
     setScore();
 }
 
@@ -112,17 +112,16 @@ void Pairs::newGame()
         return;
     }
 
-    m_players.clear();
+    m_view->playersModel()->clear();
     for(int i= 0; i < dialog.players().count(); i++)
     {
-        m_players.append(PairsPlayer(dialog.players().at(i), "get-hot-new-stuff"));
+        m_view->playersModel()->addPlayer(dialog.players().at(i), "get-hot-new-stuff");
     }
     m_view->newGame(dialog.theme(), dialog.language(), dialog.cardType());
 
     m_found = 0;
-    for (int i = 0; i < m_players.size(); ++i) {
-         m_players[i].reset();
-    }
+    m_view->playersModel()->resetPlayers();
+    
     m_currentplayer = 0;
     m_timer->start(1000);
     statusBar()->showMessage(i18n("New Game started"));
@@ -137,8 +136,8 @@ void Pairs::inc_missed()
         m_media->play();
     }
     
-	m_players[m_currentplayer].incMissed();
-	++m_currentplayer %= m_players.size();
+	m_view->playersModel()->player(m_currentplayer)->incMissed();
+	++m_currentplayer %= m_view->playersModel()->rowCount();
 	setScore();
 }
 
@@ -152,33 +151,33 @@ void Pairs::inc_found()
     }
     
     m_found++;
-    m_players[m_currentplayer].incFound();
+    m_view->playersModel()->player(m_currentplayer)->incFound();
     setScore();
 }
 
 void Pairs::setScore()
 {
-    QTime dd(0,0, m_players[m_currentplayer].seconds());
+    QTime dd(0,0, m_view->playersModel()->player(m_currentplayer)->seconds());
     QString line = i18n("%1: Duration %2 - pairs missed: %3 pairs found: %4",
-            m_players[m_currentplayer].name(),
+            m_view->playersModel()->player(m_currentplayer)->name(),
             dd.toString("mm:ss"),
-            m_players[m_currentplayer].missed(),
-            m_players[m_currentplayer].found()
+            m_view->playersModel()->player(m_currentplayer)->missed(),
+            m_view->playersModel()->player(m_currentplayer)->found()
    );
    statusBar()->showMessage(line);
    if(m_found == m_view->cardsNum()/2 && m_view->cardsNum() != 0)
    {
         m_timer->stop();
         QString final_line (i18n("Congratulations you finished the game\n"));
-        for(int i = 0; i < m_players.size(); ++i)
+        for(int i = 0; i < m_view->playersModel()->rowCount(); ++i)
         {
             dd.setHMS(0,0,0);
 
             final_line += i18n("%1: Duration %2 - pairs missed: %3 pairs found: %4\n",
-                            m_players[i].name(),
-                            dd.addSecs(m_players[i].seconds()).toString("mm:ss"),
-                            m_players[i].missed(),
-                            m_players[i].found()
+                            m_view->playersModel()->player(i)->name(),
+                            dd.addSecs(m_view->playersModel()->player(i)->seconds()).toString("mm:ss"),
+                            m_view->playersModel()->player(i)->missed(),
+                            m_view->playersModel()->player(i)->found()
                             );
         }
         KMessageBox::information(this, final_line, i18n("Congratulations"));

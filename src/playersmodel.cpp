@@ -48,8 +48,13 @@ PlayersModel::~PlayersModel()
     for (int i = 0; i < rowCount(); ++i) {
         PairsPlayer* p=player(i);
         players += p->text();
-        players += p->text();
+        icons += p->data(Qt::DecorationRole).toString();
     }
+    
+    KConfig config;
+    KConfigGroup group(&config, "NewGame");
+    group.writeEntry("Players", players);
+    group.writeEntry("Icons", icons);
 }
 
 PairsPlayer* PlayersModel::player(int row)
