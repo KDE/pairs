@@ -48,6 +48,7 @@ class CardItem
         void setCardPixmap(QSvgRenderer *renderer);
         void markDone();
         void setType(CardType type, QString &file, KTar &archive);
+        bool isDone() const;
         
     public slots:
         void changeValue();

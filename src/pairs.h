@@ -51,20 +51,15 @@ public:
 public slots:
     void inc_missed();
     void inc_found();
-    void update();
 
 private slots:
     void newGame();
     
 private:
     void setupActions();
-    void setScore();
 
 private:
     PairsView *m_view;
-    int m_currentplayer;
-    int m_found;
-    QTimer *m_timer;
     Phonon::MediaObject *m_media;
     QString m_right;
     QString m_wrong;

@@ -41,6 +41,7 @@
 
 #include <knewstuff3/downloaddialog.h>
 #include <knewstuff3/entry.h>
+#include "pairsplayer.h"
 
 PairsView::PairsView(QWidget *parent)
     : QDeclarativeView(parent)
@@ -51,6 +52,9 @@ PairsView::PairsView(QWidget *parent)
 {
     m_model = new ThemesModel(this);
     m_themeImagesProvider = new ThemeIconsProvider(QDeclarativeImageProvider::Pixmap, m_model);
+    
+    m_timer = new QTimer(this);
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
     
     QObject::connect(this, SIGNAL(pair_missed()), parent, SLOT(inc_missed()));
     QObject::connect(this, SIGNAL(pair_found()), parent, SLOT(inc_found()));
@@ -73,6 +77,25 @@ PairsView::PairsView(QWidget *parent)
 PairsView::~PairsView()
 {}
 
+int PairsView::cardsNum()
+{
+   return m_cards.count();
+}
+
+bool PairsView::isGameOver() const
+{
+    foreach(CardItem* card, m_cards) {
+        if(!card->isDone())
+            return false;
+    }
+    return true;
+}
+
+void PairsView::update()
+{
+    m_players->player(m_currentPlayer)->incSeconds();
+}
+
 void PairsView::cardSelected(CardItem* card)
 {
     Q_ASSERT(card);
@@ -82,10 +105,13 @@ void PairsView::cardSelected(CardItem* card)
             m_last->markDone();
             card->markDone();
             emit pair_found();
+            m_players->player(m_currentPlayer)->incFound();
         } else {
             QTimer::singleShot(500, card, SLOT(turn()));
             QTimer::singleShot(500, m_last, SLOT(turn()));
             emit pair_missed();
+            m_players->player(m_currentPlayer)->incMissed();
+            ++m_currentPlayer %= m_players->rowCount();
         }
         m_last=0;
     }
@@ -93,12 +119,6 @@ void PairsView::cardSelected(CardItem* card)
         m_last=card;
     }
 }
-
-int PairsView::cardsNum()
-{
-   return m_cards.count();
-}
-
 
 void PairsView::setRowSize(int itemsPerRow)
 {
@@ -172,6 +192,16 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     	setRowSize(qMax(4, num/2));
     else
     	setRowSize((2*num)/3);
+    
+    m_currentPlayer=0;
+    m_timer->start(1000);
+}
+
+void PairsView::checkGameOver()
+{
+    if(isGameOver()) {
+        emit gameOver();
+    }
 }
 
 void PairsView::download()

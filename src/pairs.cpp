@@ -48,13 +48,10 @@
 Pairs::Pairs()
     : KXmlGuiWindow()
     , m_view(new PairsView(this))
-    , m_found(0)
 	, m_right(KGlobal::dirs()->findResource("appdata", "themes/right.ogg"))
 	, m_wrong(KGlobal::dirs()->findResource("appdata", "themes/wrong.ogg"))
 
 {
-    m_timer = new QTimer(this);
-    connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
     m_media = new Phonon::MediaObject(this);
     Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput(Phonon::GameCategory, this);
     createPath(m_media, audioOutput);
@@ -96,13 +93,6 @@ void Pairs::setupActions()
     KStandardAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
 }
 
-void Pairs::update()
-{
-//    qDebug() << "update";
-	m_view->playersModel()->player(m_currentplayer)->incSeconds();
-    setScore();
-}
-
 void Pairs::newGame()
 {
     NewPairsDialog dialog;
@@ -119,11 +109,8 @@ void Pairs::newGame()
     }
     m_view->newGame(dialog.theme(), dialog.language(), dialog.cardType());
 
-    m_found = 0;
     m_view->playersModel()->resetPlayers();
     
-    m_currentplayer = 0;
-    m_timer->start(1000);
     statusBar()->showMessage(i18n("New Game started"));
 }
 
@@ -135,10 +122,6 @@ void Pairs::inc_missed()
         m_media->setCurrentSource(m_wrong);
         m_media->play();
     }
-    
-	m_view->playersModel()->player(m_currentplayer)->incMissed();
-	++m_currentplayer %= m_view->playersModel()->rowCount();
-	setScore();
 }
 
 void Pairs::inc_found()
@@ -149,39 +132,6 @@ void Pairs::inc_found()
         m_media->setCurrentSource(m_right);
         m_media->play();
     }
-    
-    m_found++;
-    m_view->playersModel()->player(m_currentplayer)->incFound();
-    setScore();
-}
-
-void Pairs::setScore()
-{
-    QTime dd(0,0, m_view->playersModel()->player(m_currentplayer)->seconds());
-    QString line = i18n("%1: Duration %2 - pairs missed: %3 pairs found: %4",
-            m_view->playersModel()->player(m_currentplayer)->name(),
-            dd.toString("mm:ss"),
-            m_view->playersModel()->player(m_currentplayer)->missed(),
-            m_view->playersModel()->player(m_currentplayer)->found()
-   );
-   statusBar()->showMessage(line);
-   if(m_found == m_view->cardsNum()/2 && m_view->cardsNum() != 0)
-   {
-        m_timer->stop();
-        QString final_line (i18n("Congratulations you finished the game\n"));
-        for(int i = 0; i < m_view->playersModel()->rowCount(); ++i)
-        {
-            dd.setHMS(0,0,0);
-
-            final_line += i18n("%1: Duration %2 - pairs missed: %3 pairs found: %4\n",
-                            m_view->playersModel()->player(i)->name(),
-                            dd.addSecs(m_view->playersModel()->player(i)->seconds()).toString("mm:ss"),
-                            m_view->playersModel()->player(i)->missed(),
-                            m_view->playersModel()->player(i)->found()
-                            );
-        }
-        KMessageBox::information(this, final_line, i18n("Congratulations"));
-   }
 }
 
 #include "pairs.moc"

@@ -47,6 +47,7 @@ public:
      */
     virtual ~PairsView();
     
+    bool isGameOver() const;
     void setRowSize(int itemsPerRow);
     int cardsNum();
     void newGame(const PairsTheme* theme, const QString& language, const QString& cardType);
@@ -56,10 +57,15 @@ public:
 signals:
     void pair_missed();
     void pair_found();
+    void gameOver();
     
 public slots:
+    void checkGameOver();
     void download();
     void cardSelected(CardItem* cardData);
+    
+private slots:
+    void update();
     
 private:
     ThemesModel* m_model;
@@ -69,6 +75,8 @@ private:
     ThemeIconsProvider *m_themeImagesProvider;
     KNS3::DownloadDialog *m_knsDialog;
     PlayersModel* m_players;
+    int m_currentPlayer;
+    QTimer *m_timer;
 };
 
 #endif // kpairsVIEW_H

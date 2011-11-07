@@ -205,3 +205,8 @@ void CardItem::markDone()
 {
     m_opacityAnimation->start();
 }
+
+bool CardItem::isDone() const
+{
+    return opacity()<1;
+}

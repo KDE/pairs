@@ -31,13 +31,13 @@ public:
     PairsPlayer(const QString &name, const QString &icon);
     ~PairsPlayer(){}
     void reset();
-    void incMissed() {m_missed++; }
-    void incFound() {m_found++; }
-    void incSeconds() {m_seconds++; }
-    int missed() {return m_missed; }
-    int found() {return m_found; }
-    int seconds() {return m_seconds; }
-    QString name() {return m_name; }
+    void incMissed();
+    void incFound();
+    void incSeconds();
+    int missed() const {return m_missed; }
+    int found() const {return m_found; }
+    int seconds() const {return m_seconds; }
+    QString name() const {return m_name; }
     
 
 private:

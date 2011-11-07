@@ -42,3 +42,20 @@ void PairsPlayer::reset()
     m_seconds = 0;
 }
 
+void PairsPlayer::incFound()
+{
+    m_found++;
+    setData(m_found, PlayersModel::Found);
+}
+
+void PairsPlayer::incMissed()
+{
+    m_missed++;
+    setData(m_missed, PlayersModel::Missed);
+}
+
+void PairsPlayer::incSeconds()
+{
+    m_seconds++;
+    setData(m_seconds, PlayersModel::Time);
+}

@@ -57,9 +57,9 @@ Rectangle
             height: 200
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
-            
-            delegate: Text { text: display }
             model: playersModel
+            
+            delegate: Text { text: display+" "+missed+" "+found+" "+time }
         }
     }
     
