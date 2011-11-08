@@ -86,3 +86,13 @@ void PlayersModel::resetPlayers()
          player(i)->reset();
     }
 }
+
+void PlayersModel::removePlayer(const QString& player)
+{
+    for (int i = 0; i < rowCount(); ++i) {
+         if(item(i)->text()==player) {
+             removeRow(i);
+             return;
+         }
+    }
+}

@@ -91,8 +91,16 @@ Rectangle
             anchors.horizontalCenter: parent.horizontalCenter
             model: playersModel
             
-            delegate: Text { text: display+" "+missed+" "+found+" "+time }
+            delegate: Row {
+                Text { text: display+" "+missed+" "+found+" "+time }
+                Button {
+                    text: 'Remove'
+                    onClicked: { playersModel.removePlayer(display); }
+                }
+            }
         }
+        
+        Row { TextInput { id: playerName; width: 100 } Button { text: "Add"; onClicked: playersModel.addPlayer(playerName.text, "") } }
     }
     
     states: [
