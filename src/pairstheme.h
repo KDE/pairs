@@ -41,8 +41,10 @@ public:
 
 };
 
-class PairsTheme : public QStandardItem
+class PairsTheme : public QObject, public QStandardItem
 {
+    Q_OBJECT
+
     public:
         enum ThemeRoles {
              CardTypeRole = Qt::UserRole + 1,
@@ -51,6 +53,10 @@ class PairsTheme : public QStandardItem
 
         PairsTheme(const QString& path);
 
+        Q_PROPERTY(QString language READ mainLanguage WRITE setLanguage NOTIFY languageChanged);
+
+        QString mainLanguage() const { return m_mainLanguage;}
+        void setLanguage(QString &lang);
         QString title() const { return m_title; }
         QString description() const { return m_description; }
         QString backImage() const { return m_back_img; }
@@ -62,7 +68,8 @@ class PairsTheme : public QStandardItem
         QString error() const { return m_error; }
         CardType mainType() const { return m_main_type; }
         QStringList images() const;
-        
+    signals:
+        void languageChanged();
     private:
         void parseElement(QXmlStreamReader &reader);
 
@@ -88,6 +95,7 @@ class PairsTheme : public QStandardItem
         
         QString m_error;
         QString m_path;
+        QString m_mainLanguage;
         QStringList m_languages;
         QMap<QString, QStringList> m_cardtypes;
 };

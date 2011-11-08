@@ -117,6 +117,14 @@ PairsTheme::PairsTheme(const QString& path)
     setData(backImage(), Qt::DecorationRole);
 }
 
+void PairsTheme::setLanguage(QString &lang) {
+            if(lang == m_mainLanguage) return;
+            m_mainLanguage = lang;
+            setData(m_cardtypes[m_mainLanguage], CardTypeRole);
+            emit languageChanged();
+        }
+
+
 void PairsTheme::parseElement(QXmlStreamReader &reader)
 {
     QString common[CARD_MAX_TYPE];
