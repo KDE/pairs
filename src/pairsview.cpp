@@ -221,5 +221,4 @@ void PairsView::download()
     m_knsDialog->show();
 }
 
-
 #include "pairsview.moc"

@@ -213,3 +213,12 @@ bool PairsTheme::isValid(const KArchiveFile* file) {
     QXmlSchemaValidator validator(schema);
     return validator.validate(file->data());
 }
+
+QStringList PairsTheme::images() const
+{
+    KTar archive(m_path);
+    bool b = archive.open(QIODevice::ReadOnly);
+    Q_ASSERT(b);
+    QStringList files(archive.directory()->entries());
+    return files.filter(QRegExp("*.svg", Qt::CaseSensitive, QRegExp::Wildcard));
+}

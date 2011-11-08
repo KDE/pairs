@@ -52,7 +52,10 @@ Rectangle
                 Repeater {
                     model: playersModel
                     
-                    delegate: Text { font.pixelSize: 25; text: display+". Duration: "+time+", pairs found: "+found+", pairs missed: "+missed }
+                    delegate: Row {
+                        Image { height: 20; width: 20; source: decoration }
+                        Text { font.pixelSize: 25; text: display+". Duration: "+time+", pairs found: "+found+", pairs missed: "+missed }
+                    }
                 }
                 
                 Button {
@@ -102,19 +105,34 @@ Rectangle
             model: playersModel
             
             delegate: Row {
+                Image {
+                    height: 20; width: 20
+                    source: decoration
+                }
                 Text { text: display+" "+missed+" "+found+" "+time }
                 Button {
                     text: 'Remove'
                     visible: game.state=='newgame'
-                    onClicked: { playersModel.removePlayer(display); }
+                    onClicked: playersModel.removePlayer(display);
                 }
             }
         }
         
         Row {
             visible: game.state=='newgame'
+            Image {
+                id: newUserPicture
+                height: 20
+                width: 20
+                source: themesModel.randomThemesImage()
+                
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: parent.source=themesModel.randomThemesImage()
+                }
+            }
             TextInput { id: playerName; width: 100 }
-            Button { text: "Add"; onClicked: playersModel.addPlayer(playerName.text, "kalgebra") }
+            Button { text: "Add"; onClicked: playersModel.addPlayer(playerName.text, newUserPicture.source) }
         }
     }
     

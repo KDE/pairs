@@ -26,6 +26,7 @@
 
 ThemesModel::ThemesModel(QObject* parent): QStandardItemModel(parent)
 {
+    qsrand(QTime::currentTime().elapsed());
     reload();
     
     QStringList themesdirs=KGlobal::dirs()->findDirs("appdata", "themes");
@@ -74,4 +75,13 @@ QHash< int, QByteArray> ThemesModel::roleNames() const
     names.insert(PairsTheme::CardTypeRole, "type");
     names.insert(PairsTheme::LanguagesRole, "languages");
     return names;
+}
+
+QString ThemesModel::randomThemesImage() const
+{
+    int row = qrand() % rowCount();
+    PairsTheme* t = static_cast<PairsTheme*>(item(row, 0));
+    QStringList imgs = t->images();
+    
+    return QString("image://theme/%1/%2").arg(t->title()).arg(imgs[qrand() % imgs.size()]);
 }

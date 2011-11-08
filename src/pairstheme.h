@@ -61,7 +61,8 @@ class PairsTheme : public QStandardItem
         bool isCorrect() const { return m_error.isEmpty(); }
         QString error() const { return m_error; }
         CardType mainType() const { return m_main_type; }
-
+        QStringList images() const;
+        
     private:
         void parseElement(QXmlStreamReader &reader);
 
