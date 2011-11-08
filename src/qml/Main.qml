@@ -125,6 +125,7 @@ Rectangle
                 height: 20
                 width: 20
                 source: themesModel.randomThemesImage()
+                asynchronous: true
                 
                 MouseArea {
                     anchors.fill: parent
