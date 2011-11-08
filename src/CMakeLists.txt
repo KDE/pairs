@@ -44,4 +44,3 @@ install(TARGETS pairs ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES pairs.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( FILES pairs.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
-install( FILES pairsui.rc  DESTINATION  ${DATA_INSTALL_DIR}/pairs )
