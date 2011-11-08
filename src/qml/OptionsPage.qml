@@ -34,7 +34,7 @@ Rectangle {
                 
                 model: themesModel
                 delegate: Row {
-                    Image { source: "image://theme/"+display; fillMode: Image.PreserveAspectFit; height: 20 } 
+                    Image { source: "image://theme/"+display+"/"+decoration; fillMode: Image.PreserveAspectFit; height: 20 } 
                     Text {
                         font.pixelSize: 25 
                         

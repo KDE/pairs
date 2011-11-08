@@ -114,6 +114,7 @@ PairsTheme::PairsTheme(const QString& path)
 //     setIcon(QIcon(backImage()));
     setData(m_cardtypes.begin().value(), CardTypeRole);
     setData(m_languages, LanguagesRole);
+    setData(backImage(), Qt::DecorationRole);
 }
 
 void PairsTheme::parseElement(QXmlStreamReader &reader)
