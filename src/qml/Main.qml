@@ -54,6 +54,13 @@ Rectangle
                     
                     delegate: Text { font.pixelSize: 25; text: display+". Duration: "+time+", pairs found: "+found+", pairs missed: "+missed }
                 }
+                
+                Button {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: "Start New Game"
+                    
+                    onClicked: game.state="newgame"
+                }
             }
         }
     }
