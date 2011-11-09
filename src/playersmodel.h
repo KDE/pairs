@@ -21,6 +21,7 @@
 
 #include <QStandardItemModel>
 
+class ThemesModel;
 class PairsPlayer;
 class PlayersModel : public QStandardItemModel
 {
@@ -32,7 +33,7 @@ class PlayersModel : public QStandardItemModel
             Time
         };
         
-        explicit PlayersModel(QObject* parent = 0);
+        explicit PlayersModel(QObject* parent, ThemesModel* t);
         virtual ~PlayersModel();
         
         PairsPlayer* player(int row);

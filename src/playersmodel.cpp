@@ -25,8 +25,10 @@
 #include <KGlobal>
 #include <QDebug>
 #include <QFileSystemWatcher>
+#include "themesmodel.h"
 
-PlayersModel::PlayersModel(QObject* parent): QStandardItemModel(parent)
+PlayersModel::PlayersModel(QObject* parent, ThemesModel* themes)
+    : QStandardItemModel(parent)
 {
     QHash<int, QByteArray> names=QStandardItemModel::roleNames();
     names.insert(Missed, "missed");
@@ -37,14 +39,16 @@ PlayersModel::PlayersModel(QObject* parent): QStandardItemModel(parent)
     KConfig config;
     KConfigGroup group(&config, "NewGame");
     QStringList players = group.readEntry("Players", QStringList() << i18n("Player"));
-    QStringList icons = group.readEntry("Icons", QStringList() << "get-hot-new-stuff");
+    QStringList icons = group.readEntry("Icons", QStringList() << QString());
     
+    int i=0;
     foreach(const QString& name, players) {
-        int ind = players.indexOf(name, 0);
-        QString icon;
-        if(ind>=0)
-            icon = icons.at(ind);
+        QString icon = icons[i];
+        bool exists = icon.startsWith("image://theme/") && themes->exists(icon.right(icon.size()-13));
+        if(!exists)
+            icon=themes->randomThemesImage();
         addPlayer(name, icon);
+        i++;
     }
 }
 
