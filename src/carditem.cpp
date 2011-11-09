@@ -24,12 +24,12 @@
 #include <QPropertyAnimation>
 #include <QPainter>
 #include <QGraphicsOpacityEffect>
-#include <KTar>
 #include <KDE/KLocale>
 
 #include <Phonon/MediaObject>
 #include <Phonon/AudioOutput>
 #include <Phonon/VideoPlayer>
+#include "pairstheme.h"
 
 
 CardItem::CardItem(QSvgRenderer *back, const QSizeF& size, QGraphicsItem* parent, QGraphicsScene* scene) :
@@ -80,14 +80,14 @@ void CardItem::setDuration(int dur){
     m_animation->setDuration(dur);
     m_animationBack->setDuration(dur);
 }
-void CardItem::setType(CardType type, QString& file, KTar& archive){
+void CardItem::setType(CardType type, QString& file, const PairsTheme* theme){
     m_type = type;
     switch(type){
         case CARD_SOUND:
         {
             m_color.fill(Qt::blue);
             QBuffer *mediafile = new QBuffer(this);
-            mediafile->setData(static_cast<const KArchiveFile*>(archive.directory()->entry(file))->data());
+            mediafile->setData(theme->themeData(file));
             m_source = Phonon::MediaSource(mediafile);
     ///        void copy(QIODevice *source , QIODevice *target){         target->write(source->readAll());         }
         }   break;
@@ -99,19 +99,19 @@ void CardItem::setType(CardType type, QString& file, KTar& archive){
         }
         case CARD_IMAGE:
         {
-            QSvgRenderer imageRenderer(static_cast<const KArchiveFile*>(archive.directory()->entry(file))->data());
+            QSvgRenderer imageRenderer(theme->themeData(file));
             setCardPixmap(&imageRenderer);
             break;
         }
         case CARD_IMAGE2:
         {
-            QSvgRenderer imageRenderer(static_cast<const KArchiveFile*>(archive.directory()->entry(file))->data());
+            QSvgRenderer imageRenderer(theme->themeData(file));
             setCardPixmap(&imageRenderer);
             break;
         }
         case CARD_LOGIC:
         {
-            QSvgRenderer imageRenderer(static_cast<const KArchiveFile*>(archive.directory()->entry(file))->data());
+            QSvgRenderer imageRenderer(theme->themeData(file));
             setCardPixmap(&imageRenderer);
             setPixmap(m_color);
             break;

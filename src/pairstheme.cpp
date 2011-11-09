@@ -30,19 +30,19 @@
 
 PairsTheme::PairsTheme(const QString& path)
     : QStandardItem()
+    , m_archive(path)
 {
-	KTar archive(path);
 	m_path = path;
-	bool b = archive.open(QIODevice::ReadOnly);
+	bool b = m_archive.open(QIODevice::ReadOnly);
     Q_ASSERT(b);
-	QStringList files(archive.directory()->entries());
+	QStringList files(m_archive.directory()->entries());
     files = files.filter(QRegExp("*.game", Qt::CaseSensitive, QRegExp::Wildcard));
     
     Q_ASSERT(!files.isEmpty() && "no games in the theme!");
     
     QString themename(files.first()); //TODO: Support many games inside a theme
-    Q_ASSERT(archive.directory()->entry(themename)->isFile());
-    const KArchiveFile* file = static_cast<const KArchiveFile*>(archive.directory()->entry(themename));
+    Q_ASSERT(m_archive.directory()->entry(themename)->isFile());
+    const KArchiveFile* file = static_cast<const KArchiveFile*>(m_archive.directory()->entry(themename));
     if(!isValid(file)) {
         qWarning() << "Skipping game theme not valid";
         m_error = "Not valid XML file";
@@ -236,9 +236,21 @@ bool PairsTheme::isValid(const KArchiveFile* file) {
 
 QStringList PairsTheme::images() const
 {
-    KTar archive(m_path);
-    bool b = archive.open(QIODevice::ReadOnly);
-    Q_ASSERT(b);
-    QStringList files(archive.directory()->entries());
+    QStringList files(m_archive.directory()->entries());
     return files.filter(QRegExp("*.svg", Qt::CaseSensitive, QRegExp::Wildcard));
+}
+
+QByteArray PairsTheme::themeData(const QString& path) const
+{
+    const KArchiveEntry* entry = m_archive.directory()->entry(path);
+    if(!entry)
+        return QByteArray();
+    
+    return static_cast<const KArchiveFile*>(entry)->data();
+}
+
+bool PairsTheme::hasFile(const QString& path) const
+{
+    const KArchiveEntry* entry = m_archive.directory()->entry(path);
+    return entry;
 }

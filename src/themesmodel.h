@@ -30,6 +30,8 @@ class ThemesModel : public QStandardItemModel
         
         PairsTheme* themeForName(const QString& title) const;
         QHash< int, QByteArray > roleNames() const;
+        bool exists(const QString& icon);
+        QByteArray themeData(const QString& path) const;
         
     public slots:
         QVariant info(int row, const QByteArray& role);

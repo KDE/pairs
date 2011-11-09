@@ -32,7 +32,6 @@
 #include <QDeclarativeComponent>
 #include <QDeclarativeItem>
 #include <QDeclarativeContext>
-#include <KTar>
 #include <Phonon/MediaObject>
 #include "pairstheme.h"
 #include "themesmodel.h"
@@ -48,9 +47,9 @@ PairsView::PairsView(QWidget *parent)
     , m_last(0)
     , m_cardsSize(128,128)
     , m_knsDialog(0)
-    , m_players(new PlayersModel(this))
 {
     m_model = new ThemesModel(this);
+    m_players = new PlayersModel(this, m_model);
     m_themeImagesProvider = new ThemeIconsProvider(QDeclarativeImageProvider::Pixmap, m_model);
     
     m_timer = new QTimer(this);
@@ -148,9 +147,6 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     qDeleteAll(m_cards);
     m_cards.clear();
     QList<CardItem*> cards;
-    KTar archive(theme->path());
-    bool b = archive.open(QIODevice::ReadOnly);
-    Q_ASSERT(b && "could not open the file");
     
     QDeclarativeItem* cardsParent=rootObject()->findChild<QDeclarativeItem*>("board");
     
@@ -159,7 +155,8 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     QList<ThemeElement> items = theme->items();
     //int num=qMin(((rows*columns)/2)*2, items.size()); //we make it %2
     int num = items.size();
-    QSvgRenderer backRenderer(static_cast<const KArchiveFile*>(archive.directory()->entry(theme->backImage()))->data());
+    
+    QSvgRenderer backRenderer(theme->themeData(theme->backImage()));
     for(int i=0; i<num; i++) {
         ThemeElement titem = items.at(i);
 
@@ -168,10 +165,10 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
         CardItem* item = new CardItem(&backRenderer, m_cardsSize, cardsParent, scene());
         item->setData(0, i);
         if(cardType == "logic"){
-            item->setType(CARD_LOGIC, titem.name[theme->mainType()][language], archive);
+            item->setType(CARD_LOGIC, titem.name[theme->mainType()][language], theme);
         }
         else{
-            item->setType(theme->mainType(), titem.name[theme->mainType()][language], archive);
+            item->setType(theme->mainType(), titem.name[theme->mainType()][language], theme);
         }
 
         CardItem* item1 = new CardItem(&backRenderer, m_cardsSize, cardsParent, scene());
@@ -183,7 +180,7 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
         else if(cardType == "video") type = CARD_VIDEO;
         else if(cardType == "word") type = CARD_WORD;
         if(cardType == "logic") type = CARD_LOGIC;
-        item1->setType(type, titem.name[type][language], archive);
+        item1->setType(type, titem.name[type][language], theme);
         if(type == CARD_LOGIC){
             item->setDuration(0);
             item1->setDuration(0);

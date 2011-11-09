@@ -19,7 +19,6 @@
  */
 
 #include "themeiconsprovider.h"
-#include <KTar>
 #include <QPainter>
 #include <QSvgRenderer>
 #include "themesmodel.h"
@@ -35,18 +34,10 @@ ThemeIconsProvider::~ThemeIconsProvider()
 
 QPixmap ThemeIconsProvider::requestPixmap(const QString& id, QSize* size, const QSize& requestedSize)
 {
-    int firstSlash = id.indexOf('/');
+    QByteArray data = m_themes->themeData(id);
     
-    const PairsTheme *theme = 0;
-    if(firstSlash>=0)
-        theme = m_themes->themeForName(id.left(firstSlash));
-    
-    if(theme){
-        QString path = id.right(id.size()-firstSlash-1);
-        KTar archive(theme->path());
-        bool b = archive.open(QIODevice::ReadOnly);
-        Q_ASSERT(b);
-        QSvgRenderer pixRenderer(static_cast<const KArchiveFile*>(archive.directory()->entry(path))->data());
+    if(!data.isNull()) {
+        QSvgRenderer pixRenderer(data);
         if(size) {
             *size = pixRenderer.viewBox().size();
         }

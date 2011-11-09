@@ -26,10 +26,10 @@
 #include <QSvgRenderer>
 #include <QBuffer>
 
-#include <KTar>
 #include "cardtype.h"
 #include <phonon/mediasource.h>
 
+class PairsTheme;
 namespace Phonon { class MediaObject; class MediaSource;}
 
 class QPropertyAnimation;
@@ -47,7 +47,7 @@ class CardItem
         virtual void mousePressEvent(QGraphicsSceneMouseEvent*) {}
         void setCardPixmap(QSvgRenderer *renderer);
         void markDone();
-        void setType(CardType type, QString &file, KTar &archive);
+        void setType(CardType type, QString& file, const PairsTheme* theme);
         bool isDone() const;
         void setDuration(int dur);
     public slots:

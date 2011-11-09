@@ -68,6 +68,9 @@ class PairsTheme : public QObject, public QStandardItem
         QString error() const { return m_error; }
         CardType mainType() const { return m_main_type; }
         QStringList images() const;
+        QByteArray themeData(const QString& path) const;
+        bool hasFile(const QString& path) const;
+        
     signals:
         void languageChanged();
     private:
@@ -98,6 +101,7 @@ class PairsTheme : public QObject, public QStandardItem
         QString m_mainLanguage;
         QStringList m_languages;
         QMap<QString, QStringList> m_cardtypes;
+        KTar m_archive;
 };
 
 #endif // PAIRSTHEME_H

@@ -85,3 +85,33 @@ QString ThemesModel::randomThemesImage() const
     
     return QString("image://theme/%1/%2").arg(t->title()).arg(imgs[qrand() % imgs.size()]);
 }
+
+bool ThemesModel::exists(const QString& id)
+{
+    int firstSlash = id.indexOf('/');
+    
+    const PairsTheme *theme = 0;
+    if(firstSlash>=0)
+        theme = themeForName(id.left(firstSlash));
+    
+    if(!theme)
+        return false;
+
+    QString path = id.right(id.size()-firstSlash-1);
+    return theme && theme->hasFile(path);
+}
+
+QByteArray ThemesModel::themeData(const QString& id) const
+{
+    int firstSlash = id.indexOf('/');
+    
+    const PairsTheme *theme = 0;
+    if(firstSlash>=0)
+        theme = themeForName(id.left(firstSlash));
+    
+    if(!theme)
+        return QByteArray();
+
+    QString path = id.right(id.size()-firstSlash-1);
+    return theme->themeData(path);
+}
