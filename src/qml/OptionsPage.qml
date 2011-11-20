@@ -54,46 +54,30 @@ Rectangle {
                     }
                 }
             }
-            SelectableListView {
-                width: 200
+            GridView {
+                width: 400
                 id: themesView
                 height: parent.height
-                
-                onCurrentItemChanged: {
-                    languagesView.model=themesModel.info(currentIndex, 'languages')
-                    typesView.model=themesModel.info(currentIndex, 'type')
-                }
-                Grid {
-                    columns: 4
-                    spacing: 20         
-                    Repeater {
-                        model: themesModel
-                        delegate: Column {
-                            Image { source: "image://theme/"+display+"/"+decoration; fillMode: Image.PreserveAspectFit; height: 100 } 
-                            Text {
-                                font.pixelSize: 25 
-                                text: display
-                            }
-                        }
+                MouseArea {
+                    anchors.fill: parent
+                    
+                    onClicked: {
+                        var idx=themesView.indexAt(mouse.x, mouse.y)
+                        gameStarted()
+                        fgame.newGame(idx, gamelanguage, gametype)
                     }
-                }    
-            }
-        }
-                
-        Column {
-            Button {
-                text: "New Game!"
-                
-                onClicked: {
-                    gameStarted()
-                    fgame.newGame(themesView.currentIndex, languagesView.currentItem.text, typesView.currentItem.text)
                 }
-            }
-            
-            Button {
-                text: "Download Themes"
-                
-                onClicked: fgame.download()
+                model: themesModel
+                delegate: Column {
+                    Image { source: "image://theme/"+display+"/"+decoration; fillMode: Image.PreserveAspectFit; width: 100; height: 100 } 
+                    Text {
+                        width: 100                                
+                        wrapMode: Text.WordWrap
+                        font.pixelSize: 20 
+                        horizontalAlignment: Text.AlignHCenter
+                        text: display
+                    }
+                }
             }
         }
     }
