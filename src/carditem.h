@@ -40,16 +40,18 @@ class CardItem
     Q_OBJECT
     Q_PROPERTY(QPointF position READ pos WRITE setPos);
     public:
-        CardItem(QSvgRenderer* back, const QSizeF& size, QGraphicsItem* parent, QGraphicsScene* scene = 0);
+        CardItem(const QSharedPointer<QSvgRenderer>& back, QGraphicsItem* parent, QGraphicsScene* scene = 0);
         virtual ~CardItem();
         
         virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
         virtual void mousePressEvent(QGraphicsSceneMouseEvent*) {}
-        void setCardPixmap(QSvgRenderer *renderer);
+        void setCardPixmap(const QSharedPointer<QSvgRenderer>& renderer);
         void markDone();
         void setType(CardType type, QString& file, const PairsTheme* theme);
         bool isDone() const;
         void setDuration(int dur);
+        void setSize(const QSizeF& newSize);
+        
     public slots:
         void changeValue();
         void turn();
@@ -63,12 +65,15 @@ class CardItem
         QPropertyAnimation* m_animationBack;
         
         CardType m_type;
-        QSizeF m_size;
         bool m_activated;
         QPixmap m_color;
         QPixmap m_back;
         QPropertyAnimation* m_opacityAnimation;
         Phonon::MediaSource m_source;
+        QSharedPointer<QSvgRenderer> m_frontRenderer;
+        QSharedPointer<QSvgRenderer> m_backRenderer;
+        QString m_text;
+    QGraphicsRotation* m_rotation;
 };
 
 #endif // CARDITEM_H

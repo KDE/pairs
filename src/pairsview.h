@@ -54,6 +54,8 @@ public:
     PlayersModel* playersModel() const { return m_players; }
     
     Q_SCRIPTABLE void newGame(int row, const QString& language, const QString& cardType);
+	
+    virtual void resizeEvent(QResizeEvent* ev);
 signals:
     void pair_missed();
     void pair_found();
@@ -66,17 +68,19 @@ public slots:
     
 private slots:
     void update();
+    void reorganizeCards(bool starting=false);
     
 private:
     ThemesModel* m_model;
     CardItem* m_last;
     QList<CardItem*> m_cards;
-    QSizeF m_cardsSize;
     ThemeIconsProvider *m_themeImagesProvider;
     KNS3::DownloadDialog *m_knsDialog;
     PlayersModel* m_players;
     int m_currentPlayer;
     QTimer *m_timer;
+    int m_itemsPerRow;
+    QTimer* m_resizeTimer;
 };
 
 #endif // kpairsVIEW_H

@@ -24,8 +24,6 @@
 #include "settings.h"
 
 #include <QtGui/QDropEvent>
-#include <QtGui/QPainter>
-#include <QtGui/QPrinter>
 #include <QtCore/QCoreApplication>
 #include <QList>
 

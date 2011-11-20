@@ -30,35 +30,28 @@
 #include <Phonon/AudioOutput>
 #include <Phonon/VideoPlayer>
 #include "pairstheme.h"
+#include <kfontutils.h>
 
-
-CardItem::CardItem(QSvgRenderer *back, const QSizeF& size, QGraphicsItem* parent, QGraphicsScene* scene) :
-QGraphicsPixmapItem(parent, scene),
-m_type(CARD_NONE),
-m_size(size),
-m_activated(false),
-m_color(size.toSize()),
-m_back(size.toSize())
+CardItem::CardItem(const QSharedPointer<QSvgRenderer>& back, QGraphicsItem* parent, QGraphicsScene* scene)
+    : QGraphicsPixmapItem(parent, scene)
+    , m_type(CARD_NONE)
+    , m_activated(false)
+    , m_backRenderer(back)
 {
 
-    QGraphicsRotation* rotation = new QGraphicsRotation(this);
-    rotation->setAxis(Qt::YAxis);
-    rotation->setOrigin(QVector3D(m_back.rect().center()));
+    m_rotation = new QGraphicsRotation(this);
+    m_rotation->setAxis(Qt::YAxis);
     
-    m_back.fill(Qt::transparent);
-    QPainter p(&m_back);
-    back->render(&p);
-    
-    m_animation = new QPropertyAnimation(rotation, "angle", rotation);
+    m_animation = new QPropertyAnimation(m_rotation, "angle", m_rotation);
     m_animation->setStartValue(0);
     m_animation->setEndValue(90);
     connect(m_animation, SIGNAL(finished()), SLOT(changeValue()));
     
-    m_animationBack = new QPropertyAnimation(rotation, "angle", rotation);
+    m_animationBack = new QPropertyAnimation(m_rotation, "angle", m_rotation);
     m_animationBack->setStartValue(90);
     m_animationBack->setEndValue(0);
     
-    setTransformations(QList<QGraphicsTransform*>() << rotation);
+    setTransformations(QList<QGraphicsTransform*>() << m_rotation);
     
     QGraphicsOpacityEffect* opacity = new QGraphicsOpacityEffect(this);
     opacity->setOpacity(1.);
@@ -68,18 +61,43 @@ m_back(size.toSize())
     m_opacityAnimation->setEndValue(0.2);
     setGraphicsEffect(opacity);
     
-    Q_ASSERT(!m_back.isNull());
-    setPixmap(m_back);
     setDuration(200);
 }
 
 CardItem::~CardItem()
 {}
 
-void CardItem::setDuration(int dur){
+void CardItem::setSize(const QSizeF& newSize)
+{
+    if(newSize==m_back.size())
+        return;
+    
+    m_back=QPixmap(newSize.toSize());
+    m_back.fill(Qt::transparent);
+    QPainter p(&m_back);
+    m_backRenderer->render(&p);
+    m_rotation->setOrigin(QVector3D(m_back.rect().center()));
+    
+    m_color=QPixmap(newSize.toSize());
+    m_color.fill(Qt::transparent);
+    if(m_type==CARD_WORD) {
+        QPainter paint(&m_color);
+        KFontUtils::adaptFontSize(paint, m_text, newSize);
+        paint.drawText( m_color.rect(), Qt::AlignCenter, m_text);
+    } else {
+        QPainter pixPainter(&m_color);
+        m_frontRenderer->render(&pixPainter);
+    }
+    
+    setPixmap(m_back);
+}
+
+void CardItem::setDuration(int dur)
+{
     m_animation->setDuration(dur);
     m_animationBack->setDuration(dur);
 }
+
 void CardItem::setType(CardType type, QString& file, const PairsTheme* theme){
     m_type = type;
     switch(type){
@@ -93,72 +111,23 @@ void CardItem::setType(CardType type, QString& file, const PairsTheme* theme){
         }   break;
         case CARD_VIDEO:
         {
-            Phonon::VideoPlayer *videoPlayer = new Phonon::VideoPlayer(Phonon::GameCategory, NULL);
+//             Phonon::VideoPlayer *videoPlayer = new Phonon::VideoPlayer(Phonon::GameCategory, NULL);
           //  createPath(m_media, videoPlayer);
             break;
         }
         case CARD_IMAGE:
-        {
-            QSvgRenderer imageRenderer(theme->themeData(file));
-            setCardPixmap(&imageRenderer);
+            setCardPixmap(QSharedPointer<QSvgRenderer>(new QSvgRenderer(theme->themeData(file))));
             break;
-        }
         case CARD_IMAGE2:
-        {
-            QSvgRenderer imageRenderer(theme->themeData(file));
-            setCardPixmap(&imageRenderer);
+            setCardPixmap(QSharedPointer<QSvgRenderer>(new QSvgRenderer(theme->themeData(file))));
             break;
-        }
         case CARD_LOGIC:
-        {
-            QSvgRenderer imageRenderer(theme->themeData(file));
-            setCardPixmap(&imageRenderer);
-            setPixmap(m_color);
+            setCardPixmap(QSharedPointer<QSvgRenderer>(new QSvgRenderer(theme->themeData(file))));
+            setPixmap(m_color); //TODO: marco! can you explain this to me?
             break;
-        }
         case CARD_WORD:
-        {
-            double fontsize = 10.0;
-            m_color.fill(Qt::white);
-            QFont myFont;
-            myFont.setPointSizeF(fontsize);
-            myFont.setFamily("Times");
-            QPainter paint;
-            paint.begin(&m_color);
-            paint.setFont(myFont);
-            QPainterPath myPath;
-            myPath.addText(0, 0, myFont, file);
-            while(myPath.boundingRect().width() < m_color.rect().width())
-            {
-                fontsize += 1.0;
-                myFont.setPointSizeF(fontsize);
-                myPath = QPainterPath();
-                myPath.addText(0, 0, myFont, file);
-            }
-            while(myPath.boundingRect().width() > m_color.rect().width() && fontsize > 0)
-            {
-                fontsize -= 1.0;
-                myFont.setPointSizeF(fontsize);
-                myPath = QPainterPath();
-                myPath.addText(0, 0, myFont, file);
-            }
-            fontsize -= 1.0;
-            myFont.setPointSizeF(fontsize);
-            double dx, dy;
-            dx = (m_color.rect().width() - myPath.boundingRect().width())/2;
-            dy = (m_color.rect().height() - myPath.boundingRect().height())/2 +  myPath.boundingRect().height()/2;
-//             qDebug() << dx << dy << m_color.rect().width() << myPath.boundingRect().width();
-            myPath = QPainterPath();
-            myPath.addText(dx, dy, myFont, file);
-            myPath.setFillRule(Qt::OddEvenFill);
-            QBrush myBrush(Qt::SolidPattern);
-            myBrush.setColor(Qt::blue);
-            paint.setBrush(myBrush);
-            paint.setPen(Qt::blue);
-            paint.drawPath(myPath);
-//            paint.drawText( m_color.rect(), Qt::AlignCenter, file);
-            paint.end();
-        }   break;
+            m_text = file;
+            break;
         default:
             break;
     }
@@ -180,11 +149,9 @@ void CardItem::turn()
     m_animation->start();
 }
 
-void CardItem::setCardPixmap(QSvgRenderer* renderer)
+void CardItem::setCardPixmap(const QSharedPointer<QSvgRenderer>& renderer)
 {
-    m_color.fill(Qt::transparent);
-    QPainter pixPainter(&m_color);
-    renderer->render(&pixPainter);
+    m_frontRenderer=renderer;
 }
 
 void CardItem::changeValue()

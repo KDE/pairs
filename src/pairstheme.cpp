@@ -243,7 +243,7 @@ QStringList PairsTheme::images() const
 QByteArray PairsTheme::themeData(const QString& path) const
 {
     const KArchiveEntry* entry = m_archive.directory()->entry(path);
-    if(!entry)
+    if(!entry || !entry->isFile())
         return QByteArray();
     
     return static_cast<const KArchiveFile*>(entry)->data();

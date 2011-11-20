@@ -40,13 +40,15 @@
 
 #include <knewstuff3/downloaddialog.h>
 #include <knewstuff3/entry.h>
+#include <QResizeEvent>
+#include <cmath>
 #include "pairsplayer.h"
 
 PairsView::PairsView(QWidget *parent)
     : QDeclarativeView(parent)
     , m_last(0)
-    , m_cardsSize(128,128)
     , m_knsDialog(0)
+    , m_itemsPerRow(1)
 {
     m_model = new ThemesModel(this);
     m_players = new PlayersModel(this, m_model);
@@ -71,6 +73,10 @@ PairsView::PairsView(QWidget *parent)
 
     setSource(QUrl("qrc:/qml/Main.qml"));
     Q_ASSERT(errors().isEmpty());
+    
+    m_resizeTimer = new QTimer(this);
+    m_resizeTimer->setSingleShot(true);
+    connect(m_resizeTimer, SIGNAL(timeout()), SLOT(reorganizeCards()));
 }
 
 PairsView::~PairsView()
@@ -120,22 +126,6 @@ void PairsView::cardSelected(CardItem* card)
     }
 }
 
-void PairsView::setRowSize(int itemsPerRow)
-{
-    int i=0;
-    
-    foreach(CardItem* card, m_cards) {
-        QPointF p((i%itemsPerRow)*(m_cardsSize.width()+10), (i/itemsPerRow)*(m_cardsSize.height()+10));
-        
-        QPropertyAnimation* anim = new QPropertyAnimation(card, "position", card);
-        anim->setEndValue(p);
-        anim->setDuration(1000);
-        
-        anim->start(QAbstractAnimation::DeleteWhenStopped);
-        i++;
-    }
-}
-
 void PairsView::newGame(int row, const QString& language, const QString& cardType)
 {
     PairsTheme* theme=static_cast<PairsTheme*>(m_model->item(row));
@@ -156,13 +146,13 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     //int num=qMin(((rows*columns)/2)*2, items.size()); //we make it %2
     int num = items.size();
     
-    QSvgRenderer backRenderer(theme->themeData(theme->backImage()));
+    QSharedPointer<QSvgRenderer> backRenderer(new QSvgRenderer(theme->themeData(theme->backImage())));
     for(int i=0; i<num; i++) {
         ThemeElement titem = items.at(i);
 
 //         qDebug() << theme.mainType() << titem.name[1] << titem.name[2] << titem.name[3] << titem.name[4] << titem.name[5];
 
-        CardItem* item = new CardItem(&backRenderer, m_cardsSize, cardsParent, scene());
+        CardItem* item = new CardItem(backRenderer, cardsParent, scene());
         item->setData(0, i);
         if(cardType == "logic"){
             item->setType(CARD_LOGIC, titem.name[theme->mainType()][language], theme);
@@ -171,7 +161,7 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
             item->setType(theme->mainType(), titem.name[theme->mainType()][language], theme);
         }
 
-        CardItem* item1 = new CardItem(&backRenderer, m_cardsSize, cardsParent, scene());
+        CardItem* item1 = new CardItem(backRenderer, cardsParent, scene());
         item1->setData(0, i);
 
         CardType type = CARD_IMAGE;
@@ -225,6 +215,48 @@ void PairsView::download()
         m_knsDialog=new KNS3::DownloadDialog("pairs.knsrc", this);
     
     m_knsDialog->show();
+}
+
+void PairsView::resizeEvent(QResizeEvent* ev)
+{
+    QDeclarativeView::resizeEvent(ev);
+    
+    m_resizeTimer->start(100);
+}
+
+void PairsView::setRowSize(int itemsPerRow)
+{
+    m_itemsPerRow = itemsPerRow;
+    
+    reorganizeCards(true);
+}
+
+void PairsView::reorganizeCards(bool starting)
+{
+    QDeclarativeItem* cardsParent=rootObject()->findChild<QDeclarativeItem*>("board");
+    QSizeF s(cardsParent->width(), cardsParent->height());
+    
+    Q_ASSERT(m_itemsPerRow>0);
+    
+    int i=0;
+    qreal rowCount = std::ceil(double(m_cards.size())/m_itemsPerRow);
+    int minspacing = 5;
+    qreal side = qMin((s.width()-m_itemsPerRow*minspacing)/m_itemsPerRow, (s.height()-rowCount*minspacing)/rowCount);
+    
+    qreal hspacing=(s.width()-m_itemsPerRow*side)/m_itemsPerRow;
+    qreal vspacing=(s.height()-rowCount*side)/rowCount;
+    
+    foreach(CardItem* card, m_cards) {
+        card->setSize(QSizeF(side, side));
+        QPointF p(hspacing/2+(i%m_itemsPerRow)*(side+hspacing), vspacing/2+(i/m_itemsPerRow)*(side+vspacing));
+        
+        QPropertyAnimation* anim = new QPropertyAnimation(card, "position", card);
+        anim->setEndValue(p);
+        anim->setDuration(starting ? 1000 : 0);
+        
+        anim->start(QAbstractAnimation::DeleteWhenStopped);
+        i++;
+    }
 }
 
 #include "pairsview.moc"
