@@ -27,7 +27,7 @@ class ThemesModel : public QStandardItemModel
     Q_OBJECT
     public:
         explicit ThemesModel(QObject* parent = 0);
-        
+
         PairsTheme* themeForName(const QString& title) const;
         QHash< int, QByteArray > roleNames() const;
         bool exists(const QString& icon);
@@ -35,6 +35,7 @@ class ThemesModel : public QStandardItemModel
         
     public slots:
         QVariant info(int row, const QByteArray& role);
+        void refresh(const QString &type, const QString &lang);
         
         /** @returns a random image from any theme */
         QString randomThemesImage() const;
