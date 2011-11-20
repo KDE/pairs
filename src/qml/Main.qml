@@ -1,10 +1,10 @@
 import QtQuick 1.0
 
+
 Rectangle
 {
     id: game
     color: 'blue'
-    
     Item {
         id: main
         
@@ -12,7 +12,7 @@ Rectangle
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.leftMargin: 200
+        anchors.leftMargin: 250
         anchors.margins: 20
         
         Board {
@@ -99,27 +99,33 @@ Rectangle
         }
         
         ListView {
+            id: players
             height: 200
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
-            model: playersModel
-            
-            delegate: Row {
-                Image {
-                    height: 20; width: 20
-                    source: decoration
-                }
-                Text { text: display+" "+missed+" "+found+" "+time }
-                Button {
-                    text: 'Remove'
-                    visible: game.state=='newgame'
-                    onClicked: playersModel.removePlayer(display);
+            Grid {
+                columns : 2            
+                Repeater {
+                    model: playersModel
+                    delegate: Column { 
+                        Image {
+                            height: 100; width: 100
+                            source: decoration
+                        }
+                        Text { text: display+" "+missed+" "+found+" "+time }
+                        Button {
+                            text: 'Remove'
+                            visible: game.state=='newgame'
+                            onClicked: playersModel.removePlayer(display);
+                        }
+                    }
                 }
             }
         }
         
         Row {
             visible: game.state=='newgame'
+            anchors.bottom: parent.bottom
             Image {
                 id: newUserPicture
                 height: 20
