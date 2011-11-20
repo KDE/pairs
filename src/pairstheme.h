@@ -52,11 +52,7 @@ class PairsTheme : public QObject, public QStandardItem
          };
 
         PairsTheme(const QString& path);
-
-        Q_PROPERTY(QString language READ mainLanguage WRITE setLanguage NOTIFY languageChanged);
-
-        QString mainLanguage() const { return m_mainLanguage;}
-        void setLanguage(QString &lang);
+        bool isPertinent(const QString &type,const QString &lang);
         QString title() const { return m_title; }
         QString description() const { return m_description; }
         QString backImage() const { return m_back_img; }
@@ -71,8 +67,6 @@ class PairsTheme : public QObject, public QStandardItem
         QByteArray themeData(const QString& path) const;
         bool hasFile(const QString& path) const;
         
-    signals:
-        void languageChanged();
     private:
         void parseElement(QXmlStreamReader &reader);
 
@@ -98,7 +92,6 @@ class PairsTheme : public QObject, public QStandardItem
         
         QString m_error;
         QString m_path;
-        QString m_mainLanguage;
         QStringList m_languages;
         QMap<QString, QStringList> m_cardtypes;
         KTar m_archive;

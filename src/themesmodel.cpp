@@ -35,6 +35,25 @@ ThemesModel::ThemesModel(QObject* parent): QStandardItemModel(parent)
     connect(fs, SIGNAL(directoryChanged(QString)), SLOT(reload()));
 }
 
+void ThemesModel::refresh(const QString &type, const QString &lang)
+{
+    emit layoutAboutToBeChanged();
+    clear();
+    const QStringList themes = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "themes/*.pairs.*" ));
+
+    Q_FOREACH(const QString& themePath, themes) {
+        PairsTheme* theme = new PairsTheme(themePath);
+
+        if(!theme->isCorrect() || !theme->isPertinent(type, lang)) {
+            qWarning() << "uncorrect theme:" << themePath << theme->error();
+            delete theme;
+        } else {
+            appendRow(theme);
+        }
+    }
+    changePersistentIndex(index(0,0), index(rowCount(),columnCount()));
+    emit layoutChanged();
+}
 void ThemesModel::reload()
 {
     clear();
