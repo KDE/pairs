@@ -42,6 +42,7 @@
 #include <knewstuff3/entry.h>
 #include <QResizeEvent>
 #include <cmath>
+#include <KRandom>
 #include "pairsplayer.h"
 
 PairsView::PairsView(QWidget *parent)
@@ -57,10 +58,9 @@ PairsView::PairsView(QWidget *parent)
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
     
-    QObject::connect(this, SIGNAL(pair_missed()), parent, SLOT(inc_missed()));
-    QObject::connect(this, SIGNAL(pair_found()), parent, SLOT(inc_found()));
-    
-    qsrand(QTime::currentTime().msec()*QTime::currentTime().second());
+    connect(this, SIGNAL(pair_missed()), parent, SLOT(inc_missed()));
+    connect(this, SIGNAL(pair_found()), parent, SLOT(inc_found()));
+    connect(m_players, SIGNAL(rowsRemoved(QModelIndex, int, int)), m_timer, SLOT(stop()));
     
 //     qmlRegisterType<ThemesModel>("org.kde.edu.pairs", 1, 0, "ThemesModel");
     
@@ -183,7 +183,7 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     }
     
     while(!cards.isEmpty())
-        m_cards += cards.takeAt(qrand()%cards.size());
+        m_cards += cards.takeAt(KRandom::random()%cards.size());
     
     if(num % 2 == 0)
     	setRowSize(qMax(4, num/2));
