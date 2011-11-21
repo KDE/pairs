@@ -1,5 +1,5 @@
 import QtQuick 1.0
-
+import '.'
 
 Rectangle
 {
@@ -78,26 +78,57 @@ Rectangle
         anchors.left: parent.left
         
         Button {
-            anchors.horizontalCenter: parent.horizontalCenter
-            
-            text: "New Game"
-            onClicked: game.state="newgame"
+                text: "Download Themes"
+                
+                onClicked: fgame.download()
         }
         
-        Button {
-            anchors.horizontalCenter: parent.horizontalCenter
-            
-            text: "Play"
-            onClicked: game.state="playing"
+        Component {
+            id: togglebutton
+            //width: 200; height: 200
+            Rectangle {
+                id: container; 
+                width: 100; 
+                height: 120
+                function toggle() {
+                    if(state == "on") { state = "off" } else { state = "on" }
+                }
+                property bool on: false // variable for outside world
+                state: "on"
+                states: [
+                    State {
+                        name: "on";
+                        PropertyChanges{ target: container; color: "blue" }
+                        PropertyChanges{ on: true } // change on variable
+                    },
+                    State {
+                        name: "off";
+                        PropertyChanges{ target: container; color: "lightblue" }
+                        PropertyChanges{ on: false } // change on variable
+                    }
+                ]
+                MouseArea { id: region; anchors.fill: parent; onClicked: container.toggle() }
+                // some fanciness
+                //color: Behavior { ColorAnimation { duration: 500 } }
+                    
+                Image {
+                    id: image
+                    width: 100
+                    height: 100
+                    anchors.top: parent.top
+                    //anchors.centerIn: parent
+                    source: decoration
+                }
+                Text {
+                    id: text
+                    anchors.top: image.bottom
+                  //  anchors.centerIn: parent
+                    horizontalAlignment: Text.AlignHCenter
+                    font.pointSize: 12
+                    text: display+" "+missed+" "+found+" "+time
+                }
+            }
         }
-        
-        Button {
-            anchors.horizontalCenter: parent.horizontalCenter
-            
-            text: "Congratulate"
-            onClicked: game.state="congratulations"
-        }
-        
         ListView {
             id: players
             height: 200
@@ -107,18 +138,7 @@ Rectangle
                 columns : 2            
                 Repeater {
                     model: playersModel
-                    delegate: Column { 
-                        Image {
-                            height: 100; width: 100
-                            source: decoration
-                        }
-                        Text { text: display+" "+missed+" "+found+" "+time }
-                        Button {
-                            text: 'Remove'
-                            visible: game.state=='newgame'
-                            onClicked: playersModel.removePlayer(display);
-                        }
-                    }
+                    delegate: togglebutton  
                 }
             }
         }
