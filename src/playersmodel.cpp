@@ -35,6 +35,7 @@ PlayersModel::PlayersModel(QObject* parent, ThemesModel* themes)
     names.insert(Found, "found");
     names.insert(Time, "time");
     setRoleNames(names);
+    QStringList player_pics = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "players/*.svg"));
     
     KConfig config;
     KConfigGroup group(&config, "NewGame");
@@ -44,9 +45,12 @@ PlayersModel::PlayersModel(QObject* parent, ThemesModel* themes)
     int i=0;
     foreach(const QString& name, players) {
         QString icon = icons[i];
-        bool exists = icon.startsWith("image://theme/") && themes->exists(icon.right(icon.size()-13));
+        bool exists = player_pics.count(icon) > 0;
         if(!exists)
-            icon=themes->randomThemesImage();
+        {
+            int row = qrand() % player_pics.count();
+            icon = "file://" + player_pics[row];
+        }
         addPlayer(name, icon);
         i++;
     }

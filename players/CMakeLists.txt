@@ -1,5 +1,4 @@
-#  Copyright (C) <2010>       <Albert Astals Cid>   <aacid@kde.org>
-#  Copyright (C) <2010>       <Aleix Pol>           <aleixpol@kde.org>
+#  Copyright (C) <2011>       <Marco Calignano>     <marco.calignano@gmail.com>
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License as
@@ -18,15 +17,6 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-project(kpairs)
-
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
-
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
-
-add_subdirectory( doc )
-add_subdirectory( src )
-add_subdirectory( icons )
-add_subdirectory( players )
-add_subdirectory( themes )
+install(FILES angel.svg  ball.svg  bear.svg  boat.svg  butterfly.svg  candle.svg  clock.svg  fish.svg  flowers.svg  
+              heart.svg  ladybird.svg  mashroom.svg  moon.svg  pear.svg  plane.svg  scissors.svg  snowman.svg  
+              sun.svg  train.svg  umbrella.svg DESTINATION  ${DATA_INSTALL_DIR}/pairs/players )
