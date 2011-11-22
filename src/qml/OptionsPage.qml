@@ -14,8 +14,6 @@ Rectangle {
         
         Column {
             height: parent.height
-            Text { text: "Themes:"; font.bold: true; font.pixelSize: 25 }
-
             Row {
                 spacing: 20
                 Button {

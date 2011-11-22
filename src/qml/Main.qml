@@ -12,7 +12,7 @@ Rectangle
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.leftMargin: 250
+        anchors.leftMargin: 400
         anchors.margins: 20
         
         Board {
@@ -78,9 +78,9 @@ Rectangle
         anchors.left: parent.left
         
         Button {
-                text: "Download Themes"
-                
-                onClicked: fgame.download()
+            source: "file:///usr/share/icons/oxygen/128x128/apps/kmail2.png"
+            text: "Download Themes"
+            onClicked: fgame.download()
         }
         
         Component {
@@ -113,8 +113,8 @@ Rectangle
                     
                 Image {
                     id: image
-                    width: 100
-                    height: 100
+                    width: 95
+                    height: 95
                     anchors.top: parent.top
                     //anchors.centerIn: parent
                     source: decoration
@@ -135,7 +135,7 @@ Rectangle
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
             Grid {
-                columns : 2            
+                columns : 3            
                 Repeater {
                     model: playersModel
                     delegate: togglebutton  
