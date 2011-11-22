@@ -43,6 +43,10 @@ class PlayersModel : public QStandardItemModel
         
     public slots:
         QVariant info(int row, const QByteArray& role);
+        QString randomIcon();
+    
+    private:
+        QStringList m_playerIcons;
         
 };
 

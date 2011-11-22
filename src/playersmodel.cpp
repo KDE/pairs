@@ -35,7 +35,7 @@ PlayersModel::PlayersModel(QObject* parent, ThemesModel* themes)
     names.insert(Found, "found");
     names.insert(Time, "time");
     setRoleNames(names);
-    QStringList player_pics = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "players/*.svg"));
+    m_playerIcons = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "players/*.svg"));
     
     KConfig config;
     KConfigGroup group(&config, "NewGame");
@@ -45,11 +45,10 @@ PlayersModel::PlayersModel(QObject* parent, ThemesModel* themes)
     int i=0;
     foreach(const QString& name, players) {
         QString icon = icons[i];
-        bool exists = player_pics.count(icon) > 0;
+        bool exists = (m_playerIcons.count(icon) > 0);
         if(!exists)
         {
-            int row = qrand() % player_pics.count();
-            icon = "file://" + player_pics[row];
+            icon = randomIcon();
         }
         addPlayer(name, icon);
         i++;
@@ -75,6 +74,13 @@ PlayersModel::~PlayersModel()
 PairsPlayer* PlayersModel::player(int row)
 {
     return static_cast<PairsPlayer*>(item(row));
+}
+
+QString PlayersModel::randomIcon()
+{
+    int row = qrand() % m_playerIcons.count();
+    QString result = "file://" + m_playerIcons[row];                           
+    return result;
 }
 
 QVariant PlayersModel::info(int row, const QByteArray& role)

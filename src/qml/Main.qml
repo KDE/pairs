@@ -150,7 +150,7 @@ Rectangle
                 id: newUserPicture
                 height: 20
                 width: 20
-                source: themesModel.randomThemesImage()
+                source: playersModel.randomIcon()
                 asynchronous: true
                 
                 MouseArea {
