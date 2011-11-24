@@ -40,6 +40,7 @@ void PairsPlayer::reset()
     m_found = 0;
     m_missed = 0;
     m_seconds = 0;
+    m_selected = false;
 }
 
 void PairsPlayer::incFound()

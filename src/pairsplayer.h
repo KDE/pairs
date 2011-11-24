@@ -38,7 +38,8 @@ public:
     int found() const {return m_found; }
     int seconds() const {return m_seconds; }
     QString name() const {return m_name; }
-    
+    void setSelected() { m_selected = !m_selected; }
+    bool isSelected() { return m_selected; }
 
 private:
     QString m_name;
@@ -46,6 +47,7 @@ private:
     int m_missed;
     int m_found;
     int m_seconds;
+    bool m_selected;
 
 };
 

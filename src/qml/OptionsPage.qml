@@ -63,6 +63,7 @@ Rectangle {
                         var idx=themesView.indexAt(mouse.x, mouse.y)
                         gameStarted()
                         fgame.newGame(idx, gamelanguage, gametype)
+                        playersModel.gameStarted();
                     }
                 }
                 model: themesModel

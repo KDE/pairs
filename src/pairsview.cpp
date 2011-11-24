@@ -52,7 +52,7 @@ PairsView::PairsView(QWidget *parent)
     , m_itemsPerRow(1)
 {
     m_model = new ThemesModel(this);
-    m_players = new PlayersModel(this, m_model);
+    m_players = new PlayersModel(this);
     m_themeImagesProvider = new ThemeIconsProvider(QDeclarativeImageProvider::Pixmap, m_model);
     
     m_timer = new QTimer(this);

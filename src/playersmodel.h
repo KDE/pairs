@@ -33,7 +33,7 @@ class PlayersModel : public QStandardItemModel
             Time
         };
         
-        explicit PlayersModel(QObject* parent, ThemesModel* t);
+        explicit PlayersModel(QObject* parent);
         virtual ~PlayersModel();
         
         PairsPlayer* player(int row);
@@ -43,11 +43,13 @@ class PlayersModel : public QStandardItemModel
         
     public slots:
         QVariant info(int row, const QByteArray& role);
+        void setSelected(int row);
         QString randomIcon();
+        void gameStarted();
     
     private:
         QStringList m_playerIcons;
-        
 };
+
 
 #endif // PLAYERSMODEL_H

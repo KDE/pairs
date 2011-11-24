@@ -27,7 +27,7 @@
 #include <QFileSystemWatcher>
 #include "themesmodel.h"
 
-PlayersModel::PlayersModel(QObject* parent, ThemesModel* themes)
+PlayersModel::PlayersModel(QObject* parent)
     : QStandardItemModel(parent)
 {
     QHash<int, QByteArray> names=QStandardItemModel::roleNames();
@@ -94,6 +94,27 @@ void PlayersModel::addPlayer(const QString& name, const QString& decoration)
     appendRow(new PairsPlayer(name, decoration));
 }
 
+void PlayersModel::setSelected(int row)
+{
+     qDebug() << row << player(row);
+     player(row)->setSelected();
+}
+
+void PlayersModel::gameStarted()
+{
+     emit layoutAboutToBeChanged();
+     int i = 0;
+     while (i < rowCount())
+     {
+         if(!player(i)->isSelected())
+             removeRows(i, 1);
+         else
+             i++;             
+     }
+     changePersistentIndex(index(0,0), index(rowCount(),columnCount()));
+     emit layoutChanged();
+}                        
+                                                                                                
 void PlayersModel::resetPlayers()
 {
     for (int i = 0; i < rowCount(); ++i) {

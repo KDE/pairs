@@ -85,13 +85,20 @@ Rectangle
         
         Component {
             id: togglebutton
-            //width: 200; height: 200
             Rectangle {
                 id: container; 
                 width: 100; 
                 height: 120
                 function toggle() {
-                    if(state == "on") { state = "off" } else { state = "on" }
+                    playersModel.setSelected(index)
+                    if(state == "on") 
+                    { 
+                        state = "off"
+                    } 
+                    else 
+                    { 
+                        state = "on" 
+                    }
                 }
                 property bool on: false // variable for outside world
                 state: "on"
@@ -99,15 +106,19 @@ Rectangle
                     State {
                         name: "on";
                         PropertyChanges{ target: container; color: "blue" }
-                        PropertyChanges{ on: true } // change on variable
                     },
                     State {
                         name: "off";
                         PropertyChanges{ target: container; color: "lightblue" }
-                        PropertyChanges{ on: false } // change on variable
                     }
                 ]
-                MouseArea { id: region; anchors.fill: parent; onClicked: container.toggle() }
+                MouseArea { 
+                    id: region; 
+                    anchors.fill: parent; 
+                    onClicked: {  
+                        container.toggle() 
+                    }
+                }
                 // some fanciness
                 //color: Behavior { ColorAnimation { duration: 500 } }
                     
@@ -122,7 +133,6 @@ Rectangle
                 Text {
                     id: text
                     anchors.top: image.bottom
-                  //  anchors.centerIn: parent
                     horizontalAlignment: Text.AlignHCenter
                     font.pointSize: 12
                     text: display+" "+missed+" "+found+" "+time
