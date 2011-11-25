@@ -46,9 +46,14 @@ class PlayersModel : public QStandardItemModel
         void setSelected(int row);
         QString randomIcon();
         void gameStarted();
+        void newGame();
+        QString iconsDir(){return m_gameicons;};
+
     
     private:
+        void refresh();
         QStringList m_playerIcons;
+        QString m_gameicons;
 };
 
 

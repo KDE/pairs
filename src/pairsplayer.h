@@ -38,6 +38,7 @@ public:
     int found() const {return m_found; }
     int seconds() const {return m_seconds; }
     QString name() const {return m_name; }
+    QString icon() const {return m_icon; }
     void setSelected() { m_selected = !m_selected; }
     bool isSelected() { return m_selected; }
 

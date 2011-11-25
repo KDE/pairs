@@ -77,10 +77,21 @@ Rectangle
         anchors.right: main.left
         anchors.left: parent.left
         
-        Button {
-            source: "file:///usr/share/icons/oxygen/128x128/apps/kmail2.png"
-            text: "Download Themes"
-            onClicked: fgame.download()
+        Row{
+            Button {
+                source: "file://"+playersModel.iconsDir()+"gameicons/get-hot-new-stuff.png"
+                text: "Download Themes"
+                onClicked: fgame.download()
+            }
+            Button {
+                source: "file://"+playersModel.iconsDir()+"gameicons/newgame.png"
+                text: "New Game"
+                visible: game.state=="playing"
+                onClicked: {
+                    playersModel.newGame()
+                    game.state="newgame"
+                }
+            }
         }
         
         Component {
@@ -156,20 +167,29 @@ Rectangle
         Row {
             visible: game.state=='newgame'
             anchors.bottom: parent.bottom
-            Image {
-                id: newUserPicture
-                height: 20
-                width: 20
-                source: playersModel.randomIcon()
-                asynchronous: true
-                
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: parent.source=themesModel.randomThemesImage()
+            Column {
+                Image {
+                    id: newUserPicture
+                    height: 50
+                    width: 50
+                    source: playersModel.randomIcon()
+                    asynchronous: true
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: parent.source=playersModel.randomIcon()
+                    }
+                }
+                TextInput { 
+                    id: playerName; 
+                    width: 100 
+                    color: "white"
                 }
             }
-            TextInput { id: playerName; width: 100 }
-            Button { text: "Add"; onClicked: playersModel.addPlayer(playerName.text, newUserPicture.source) }
+            Button { 
+                text: "Add"; 
+                source: "file://"+playersModel.iconsDir()+"gameicons/list-add-user.png"
+                onClicked: playersModel.addPlayer(playerName.text, newUserPicture.source) 
+            }
         }
     }
     

@@ -35,24 +35,10 @@ PlayersModel::PlayersModel(QObject* parent)
     names.insert(Found, "found");
     names.insert(Time, "time");
     setRoleNames(names);
-    m_playerIcons = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "players/*.svg"));
-    
-    KConfig config;
-    KConfigGroup group(&config, "NewGame");
-    QStringList players = group.readEntry("Players", QStringList() << i18n("Player"));
-    QStringList icons = group.readEntry("Icons", QStringList() << QString());
-    
-    int i=0;
-    foreach(const QString& name, players) {
-        QString icon = icons[i];
-        bool exists = (m_playerIcons.count(icon) > 0);
-        if(!exists)
-        {
-            icon = randomIcon();
-        }
-        addPlayer(name, icon);
-        i++;
-    }
+    m_playerIcons = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "players/*.png"));
+    m_gameicons = KGlobal::dirs()->findResourceDir("appdata", QLatin1String( "gameicons/pairs.png"));
+
+    refresh();
 }
 
 PlayersModel::~PlayersModel()
@@ -69,6 +55,26 @@ PlayersModel::~PlayersModel()
     KConfigGroup group(&config, "NewGame");
     group.writeEntry("Players", players);
     group.writeEntry("Icons", icons);
+}
+
+void PlayersModel::refresh()
+{
+    KConfig config;
+    KConfigGroup group(&config, "NewGame");
+    QStringList players = group.readEntry("Players", QStringList() << i18n("Player"));
+    QStringList icons = group.readEntry("Icons", QStringList() << QString());
+
+    int i=0;
+    foreach(const QString& name, players) {
+        QString icon = icons[i];
+        bool exists = (m_playerIcons.count(icon) > 0);
+        if(!exists)
+        {
+            icon = randomIcon();
+        }
+        addPlayer(name, icon);
+        i++;
+    }
 }
 
 PairsPlayer* PlayersModel::player(int row)
@@ -114,7 +120,16 @@ void PlayersModel::gameStarted()
      changePersistentIndex(index(0,0), index(rowCount(),columnCount()));
      emit layoutChanged();
 }                        
-                                                                                                
+
+void PlayersModel::newGame()
+{
+     emit layoutAboutToBeChanged();
+     removeRows(0, rowCount());
+     refresh();
+     changePersistentIndex(index(0,0), index(rowCount(),columnCount()));
+     emit layoutChanged();
+}
+
 void PlayersModel::resetPlayers()
 {
     for (int i = 0; i < rowCount(); ++i) {
