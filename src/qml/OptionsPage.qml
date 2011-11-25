@@ -28,7 +28,7 @@ Rectangle {
                     source: "file://"+playersModel.iconsDir()+"gameicons/pairs2.png"
                     text: "Pairs 2"
                     onClicked: {
-                        gametype = 'sec image';
+                        gametype = 'image2';
                         themesModel.refresh(gametype, gamelanguage)
                     }
                 }

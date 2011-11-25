@@ -152,7 +152,7 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     for(int i=0; i<num; i++) {
         ThemeElement titem = items.at(i);
 
-//         qDebug() << theme.mainType() << titem.name[1] << titem.name[2] << titem.name[3] << titem.name[4] << titem.name[5];
+         qDebug() << "first" << titem.name[1] << titem.name[2] << titem.name[3] << titem.name[4] << titem.name[5];
 
         CardItem* item = new CardItem(backRenderer, cardsParent, scene());
         item->setData(0, i);
@@ -165,13 +165,16 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
 
         CardItem* item1 = new CardItem(backRenderer, cardsParent, scene());
         item1->setData(0, i);
-
         CardType type = CARD_IMAGE;
         if(cardType == "image") type = CARD_IMAGE;
+        else if(cardType == "image2") type = CARD_IMAGE2;
         else if(cardType == "sound") type = CARD_SOUND;
         else if(cardType == "video") type = CARD_VIDEO;
         else if(cardType == "word") type = CARD_WORD;
         if(cardType == "logic") type = CARD_LOGIC;
+
+        qDebug() << cardType << titem.name[type][language];
+
         item1->setType(type, titem.name[type][language], theme);
         if(type == CARD_LOGIC){
             item->setDuration(0);

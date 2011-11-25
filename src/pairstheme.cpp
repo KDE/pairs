@@ -173,7 +173,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                 }
                 else{
                     current_type = CARD_IMAGE2;
-                    commonname.append("sec image");
+                    commonname.append("image2");
                     commonname.append("logic");
                 }
             }
