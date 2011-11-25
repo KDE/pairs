@@ -17,6 +17,7 @@ Rectangle {
             Row {
                 spacing: 20
                 Button {
+                    source: "file://"+playersModel.iconsDir()+"gameicons/pairs.png"
                     text: "Pairs"
                     onClicked: {
                         gametype = 'image';
@@ -24,6 +25,7 @@ Rectangle {
                     }
                 }
                 Button {
+                    source: "file://"+playersModel.iconsDir()+"gameicons/pairs2.png"
                     text: "Pairs 2"
                     onClicked: {
                         gametype = 'sec image';
@@ -31,6 +33,7 @@ Rectangle {
                     }
                 }
                 Button {
+                    source: "file://"+playersModel.iconsDir()+"gameicons/logic.png"
                     text: "Logic"
                     onClicked: {
                         gametype = 'logic';
@@ -38,6 +41,7 @@ Rectangle {
                     }
                 }
                 Button {
+                    source: "file://"+playersModel.iconsDir()+"gameicons/sound.png"
                     text: "Sound"
                     onClicked: {
                         gametype = 'sound';
