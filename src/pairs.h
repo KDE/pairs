@@ -53,7 +53,6 @@ public:
 public slots:
     void inc_missed();
     void inc_found();
-
 private slots:
     void newGame();
 

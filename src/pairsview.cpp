@@ -31,6 +31,7 @@
 #include <QDeclarativeEngine>
 #include <QDeclarativeComponent>
 #include <QDeclarativeItem>
+#include <QCoreApplication>
 #include <QDeclarativeContext>
 #include <Phonon/MediaObject>
 #include "pairstheme.h"
@@ -77,6 +78,7 @@ PairsView::PairsView(QWidget *parent)
     m_resizeTimer = new QTimer(this);
     m_resizeTimer->setSingleShot(true);
     connect(m_resizeTimer, SIGNAL(timeout()), SLOT(reorganizeCards()));
+    connect(engine(), SIGNAL(quit()), QCoreApplication::instance(), SLOT(quit()));
 }
 
 PairsView::~PairsView()

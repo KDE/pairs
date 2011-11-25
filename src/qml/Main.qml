@@ -92,6 +92,13 @@ Rectangle
                     game.state="newgame"
                 }
             }
+            Button {
+                source: "file://"+playersModel.iconsDir()+"gameicons/quit.png"
+                text: "Quit"
+                onClicked: {
+                    Qt.quit()
+                }
+            }
         }
         
         Component {
