@@ -152,8 +152,6 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     for(int i=0; i<num; i++) {
         ThemeElement titem = items.at(i);
 
-         qDebug() << "first" << titem.name[1] << titem.name[2] << titem.name[3] << titem.name[4] << titem.name[5];
-
         CardItem* item = new CardItem(backRenderer, cardsParent, scene());
         item->setData(0, i);
         if(cardType == "logic"){

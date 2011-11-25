@@ -89,7 +89,14 @@ void CardItem::setSize(const QSizeF& newSize)
         m_frontRenderer->render(&pixPainter);
     }
     
-    setPixmap(m_back);
+    if(m_type == CARD_LOGIC)
+    {
+        setPixmap(m_color);
+    }
+    else
+    {
+        setPixmap(m_back);
+    }
 }
 
 void CardItem::setDuration(int dur)
@@ -123,7 +130,6 @@ void CardItem::setType(CardType type, QString& file, const PairsTheme* theme){
             break;
         case CARD_LOGIC:
             setCardPixmap(QSharedPointer<QSvgRenderer>(new QSvgRenderer(theme->themeData(file))));
-            setPixmap(m_color); //TODO: marco! can you explain this to me?
             break;
         case CARD_WORD:
             m_text = file;
