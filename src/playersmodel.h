@@ -38,7 +38,7 @@ class PlayersModel : public QStandardItemModel
         
         PairsPlayer* player(int row);
         Q_SCRIPTABLE void addPlayer(const QString& player, const QString& decoration);
-        Q_SCRIPTABLE void removePlayer(const QString& player);
+        Q_SCRIPTABLE void removePlayers();
         void resetPlayers();
         
     public slots:

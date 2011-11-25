@@ -170,8 +170,8 @@ Rectangle
             Column {
                 Image {
                     id: newUserPicture
-                    height: 50
-                    width: 50
+                    height: 100
+                    width: 100
                     source: playersModel.randomIcon()
                     asynchronous: true
                     MouseArea {
@@ -183,12 +183,18 @@ Rectangle
                     id: playerName; 
                     width: 100 
                     color: "white"
+                    text: "Player"
                 }
             }
             Button { 
                 text: "Add"; 
                 source: "file://"+playersModel.iconsDir()+"gameicons/list-add-user.png"
                 onClicked: playersModel.addPlayer(playerName.text, newUserPicture.source) 
+            }
+            Button { 
+                text: "Delete Selected"; 
+                source: "file://"+playersModel.iconsDir()+"gameicons/list-remove-user.png"
+                onClicked: playersModel.removePlayers() 
             }
         }
     }

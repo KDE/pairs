@@ -137,12 +137,17 @@ void PlayersModel::resetPlayers()
     }
 }
 
-void PlayersModel::removePlayer(const QString& player)
+void PlayersModel::removePlayers()
 {
-    for (int i = 0; i < rowCount(); ++i) {
-         if(item(i)->text()==player) {
-             removeRow(i);
-             return;
-         }
-    }
+     emit layoutAboutToBeChanged();
+     int i = 0;
+     while (i < rowCount())
+     {
+         if(player(i)->isSelected())
+             removeRows(i, 1);
+         else
+             i++;             
+     }
+     changePersistentIndex(index(0,0), index(rowCount(),columnCount()));
+     emit layoutChanged();
 }

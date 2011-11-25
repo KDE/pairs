@@ -49,6 +49,7 @@ Rectangle {
                     }
                 }
                 Button {
+                    source: "file://"+playersModel.iconsDir()+"gameicons/words.png"
                     text: "Words"
                     onClicked: {
                         gametype = 'word';
