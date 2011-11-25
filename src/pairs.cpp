@@ -56,7 +56,7 @@ Pairs::Pairs()
     
     setCentralWidget(m_view);
     
-    addToolBar("main")->addAction("new game", this, SLOT(newGame()));
+//    addToolBar("main")->addAction("new game", this, SLOT(newGame()));
 }
 
 Pairs::~Pairs()
