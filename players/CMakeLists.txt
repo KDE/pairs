@@ -17,6 +17,6 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-install(FILES angel.svg  ball.svg  bear.svg  boat.svg  butterfly.svg  candle.svg  clock.svg  fish.svg  flowers.svg  
-              heart.svg  ladybird.svg  mashroom.svg  moon.svg  pear.svg  plane.svg  scissors.svg  snowman.svg  
-              sun.svg  train.svg  umbrella.svg DESTINATION  ${DATA_INSTALL_DIR}/pairs/players )
+install(FILES angel.png  ball.png  bear.png  boat.png  butterfly.png  candle.png  clock.png  fish.png  flowers.png  
+              heart.png  ladybird.png  mashroom.png  moon.png  pear.png  plane.png  scissors.png  snowman.png  
+              sun.png  train.png  umbrella.png DESTINATION  ${DATA_INSTALL_DIR}/pairs/players )
