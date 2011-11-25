@@ -25,6 +25,7 @@
 #include <QPainter>
 #include <QGraphicsOpacityEffect>
 #include <KDE/KLocale>
+#include <KStandardDirs>
 
 #include <Phonon/MediaObject>
 #include <Phonon/AudioOutput>
@@ -110,7 +111,9 @@ void CardItem::setType(CardType type, QString& file, const PairsTheme* theme){
     switch(type){
         case CARD_SOUND:
         {
-            m_color.fill(Qt::blue);
+            QString dir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String( "gameicons/pairs.png"));
+            setCardPixmap(QSharedPointer<QSvgRenderer>(new QSvgRenderer(dir+"gameicons/sound.svg")));
+//            m_color.fill(Qt::blue);
             QBuffer *mediafile = new QBuffer(this);
             mediafile->setData(theme->themeData(file));
             m_source = Phonon::MediaSource(mediafile);
