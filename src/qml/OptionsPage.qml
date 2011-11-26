@@ -49,6 +49,14 @@ Rectangle {
                     }
                 }
                 Button {
+                    source: "file://"+playersModel.iconsDir()+"gameicons/sound.png"
+                    text: "SoundLogic"
+                    onClicked: {
+                        gametype = 'soundlogic';
+                        themesModel.refresh(gametype, gamelanguage)
+                    }
+                }
+                Button {
                     source: "file://"+playersModel.iconsDir()+"gameicons/words.png"
                     text: "Words"
                     onClicked: {

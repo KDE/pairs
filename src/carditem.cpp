@@ -90,7 +90,7 @@ void CardItem::setSize(const QSizeF& newSize)
         m_frontRenderer->render(&pixPainter);
     }
     
-    if(m_type == CARD_LOGIC)
+    if(m_type == CARD_LOGIC || m_type == CARD_SOUNDLOGIC)
     {
         setPixmap(m_color);
     }
@@ -108,7 +108,9 @@ void CardItem::setDuration(int dur)
 
 void CardItem::setType(CardType type, QString& file, const PairsTheme* theme){
     m_type = type;
+    qDebug() << type << file;
     switch(type){
+        case CARD_SOUNDLOGIC:
         case CARD_SOUND:
         {
             QString dir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String( "gameicons/pairs.png"));
@@ -125,12 +127,8 @@ void CardItem::setType(CardType type, QString& file, const PairsTheme* theme){
           //  createPath(m_media, videoPlayer);
             break;
         }
-        case CARD_IMAGE:
-            setCardPixmap(QSharedPointer<QSvgRenderer>(new QSvgRenderer(theme->themeData(file))));
-            break;
         case CARD_IMAGE2:
-            setCardPixmap(QSharedPointer<QSvgRenderer>(new QSvgRenderer(theme->themeData(file))));
-            break;
+        case CARD_IMAGE:
         case CARD_LOGIC:
             setCardPixmap(QSharedPointer<QSvgRenderer>(new QSvgRenderer(theme->themeData(file))));
             break;
@@ -168,13 +166,13 @@ void CardItem::changeValue()
     if(m_activated)
         setPixmap(m_color);
     else{
-        if(m_type == CARD_LOGIC)
+        if(m_type == CARD_LOGIC || m_type == CARD_SOUNDLOGIC)
             setPixmap(m_color);
         else
             setPixmap(m_back);
     }
 
-    if(m_type==CARD_SOUND && m_activated) {
+    if((m_type==CARD_SOUND || m_type==CARD_SOUNDLOGIC)  && m_activated) {
         Phonon::MediaObject* object = new Phonon::MediaObject(this);
         Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput(Phonon::GameCategory, object);
         createPath(object, audioOutput);

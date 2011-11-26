@@ -179,6 +179,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
             }
             else if(name == "sound") {
                 current_type = CARD_SOUND;
+                commonname.append("soundlogic");
             }
             else if(name == "video") {
                 current_type = CARD_VIDEO;
@@ -200,7 +201,9 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                 if(l.isEmpty()) {
                     common[current_type] = src;
                     if(current_type == CARD_IMAGE2)
-                        common[CARD_LOGIC] = reader.attributes().value("src").toString();
+                        common[CARD_LOGIC] = src;
+                    if(current_type == CARD_SOUND)
+                        common[CARD_SOUNDLOGIC] = src;
                 }
                 else {
                     if(current_type == m_main_type){
@@ -210,6 +213,8 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                     item.name[current_type][l] = src;
                     if(current_type == CARD_IMAGE2)
                         item.name[CARD_LOGIC][l] = src;
+                    if(current_type == CARD_SOUND)
+                        item.name[CARD_SOUNDLOGIC][l] = src;
                 }
             }
         }
