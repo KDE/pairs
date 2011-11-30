@@ -6,9 +6,9 @@ branch (new_qml2)
 2) Fix icon for users always change any time the user is reloaded
 3) put some scrollbar if the players are more than the space  on the monitor so that the add and remove button are no ovelapping
 4) Do not start a game if no players is selected
-5) Congratulation screen still not working
+*5) Congratulation screen still not working
 6) Button text should be multilingual
-7) Start the game always full screen
-8) Eliminate the window border
-9) change a bit the backgorund colors  
+7) Start the game always full screen <-- no! if you're on a tablet it will be managed by the window manager anyway. if you need it we can add a parameter for this
+8) Eliminate the window border <-- there's none
+9) change a bit the backgorund colors 
    
