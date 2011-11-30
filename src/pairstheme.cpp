@@ -118,7 +118,7 @@ PairsTheme::PairsTheme(const QString& path)
 }
 
 bool PairsTheme::isPertinent(const QString &type,const QString &lang) {
-    qDebug() << type << lang << m_cardtypes[lang].count(type);
+//     qDebug() << type << lang << m_cardtypes[lang].count(type);
     return (m_cardtypes[lang].count(type) > 0);
 }
                         
