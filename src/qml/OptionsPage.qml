@@ -2,12 +2,14 @@ import QtQuick 1.0
 
 Rectangle {
     id: gameSettings
-    property string gamelanguage;
-    property string gametype;   
-    gametype: 'image'
-    gamelanguage: 'en'
+    property string gameLanguage: 'en'
+    property string gameType: 'image'
+    
     color: 'green'
     signal gameStarted;
+    
+    onGameTypeChanged: themesModel.refresh(gameType, gameLanguage)
+    
     Row {
         anchors.margins: 30
         anchors.fill: parent
@@ -19,50 +21,32 @@ Rectangle {
                 Button {
                     source: playersModel.iconsDir("gameicons/pairs.png")
                     text: "Pairs"
-                    onClicked: {
-                        gametype = 'image';
-                        themesModel.refresh(gametype, gamelanguage)
-                    }
+                    onClicked: gameType = 'image'
                 }
                 Button {
                     source: playersModel.iconsDir("gameicons/pairs2.png")
                     text: "Pairs 2"
-                    onClicked: {
-                        gametype = 'image2';
-                        themesModel.refresh(gametype, gamelanguage)
-                    }
+                    onClicked: gameType = 'image2'
                 }
                 Button {
                     source: playersModel.iconsDir("gameicons/logic.png")
                     text: "Logic"
-                    onClicked: {
-                        gametype = 'logic';
-                        themesModel.refresh(gametype, gamelanguage)
-                    }
+                    onClicked: gameType = 'logic'
                 }
                 Button {
                     source: playersModel.iconsDir("gameicons/sound.png")
                     text: "Sound"
-                    onClicked: {
-                        gametype = 'sound';
-                        themesModel.refresh(gametype, gamelanguage)
-                    }
+                    onClicked: gameType = 'sound'
                 }
                 Button {
                     source: playersModel.iconsDir("gameicons/sound.png")
                     text: "SoundLogic"
-                    onClicked: {
-                        gametype = 'soundlogic';
-                        themesModel.refresh(gametype, gamelanguage)
-                    }
+                    onClicked: gameType = 'soundlogic'
                 }
                 Button {
                     source: playersModel.iconsDir("gameicons/words.png")
                     text: "Words"
-                    onClicked: {
-                        gametype = 'word';
-                        themesModel.refresh(gametype, gamelanguage)
-                    }
+                    onClicked: gameType = 'word'
                 }
             }
             GridView {
@@ -75,7 +59,7 @@ Rectangle {
                     onClicked: {
                         var idx=themesView.indexAt(mouse.x, mouse.y)
                         gameStarted()
-                        fgame.newGame(idx, gamelanguage, gametype)
+                        fgame.newGame(idx, gameLanguage, gameType)
                         playersModel.gameStarted();
                     }
                 }
