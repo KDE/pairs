@@ -200,5 +200,5 @@ void CardItem::markDone()
 
 bool CardItem::isDone() const
 {
-    return opacity()<1;
+    return m_opacityAnimation->currentTime()!=0;
 }
