@@ -78,6 +78,7 @@ Rectangle
         anchors.left: parent.left
         
         Row{
+            id: tools
             Button {
                 source: playersModel.iconsDir("gameicons/get-hot-new-stuff.png")
                 text: "Download Themes"
@@ -87,10 +88,7 @@ Rectangle
                 source: playersModel.iconsDir("gameicons/newgame.png")
                 text: "New Game"
                 visible: game.state=="playing"
-                onClicked: {
-                    playersModel.newGame()
-                    game.state="newgame"
-                }
+                onClicked: game.state="newgame"
             }
             Button {
                 source: playersModel.iconsDir("gameicons/quit.png")
@@ -101,70 +99,36 @@ Rectangle
             }
         }
         
-        Component {
-            id: togglebutton
-            Rectangle {
-                id: container; 
-                width: 100; 
-                height: 120
-                function toggle() {
-                    playersModel.setSelected(index)
-                    state = state=="on" ? "off" : "on"
-                }
-                property bool on: false // variable for outside world
-                state: "on"
-                states: [
-                    State {
-                        name: "on";
-                        PropertyChanges{ target: container; color: "blue" }
-                    },
-                    State {
-                        name: "off";
-                        PropertyChanges{ target: container; color: "lightblue" }
-                    }
-                ]
-                MouseArea { 
-                    id: region; 
-                    anchors.fill: parent; 
-                    onClicked: {  
-                        container.toggle() 
-                    }
-                }
-                // some fanciness
-                //color: Behavior { ColorAnimation { duration: 500 } }
-                    
-                Image {
-                    id: image
-                    width: 95
-                    height: 95
-                    anchors.top: parent.top
-                    //anchors.centerIn: parent
-                    source: decoration
-                }
-                Text {
-                    id: text
-                    anchors.top: image.bottom
-                    horizontalAlignment: Text.AlignHCenter
-                    font.pointSize: 12
-                    text: display+" "+missed+" "+found+" "+time
-                }
-            }
-        }
         ListView {
             id: players
-            height: 200
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: tools.bottom
+            anchors.bottom: controls.top
+            
+            clip: true
+            
             Grid {
-                columns : 3            
+                columns: 3
+                spacing: 10
+                
                 Repeater {
                     model: playersModel
-                    delegate: togglebutton  
+                    delegate: TogglableButton {
+                        text: display+" "+missed+" "+found+" "+time
+                        source: decoration
+                        overlaySource: playersModel.iconsDir("gameicons/list-remove-user.png")
+                        visible: game.state=="newgame" || selected
+                        
+                        enabled: selected
+                        onClicked: playersModel.toggleSelection(index)
+                    }
                 }
             }
         }
         
         Row {
+            id: controls
             visible: game.state=='newgame'
             anchors.bottom: parent.bottom
             Column {
@@ -190,11 +154,6 @@ Rectangle
                 text: "Add"; 
                 source: playersModel.iconsDir("gameicons/list-add-user.png")
                 onClicked: playersModel.addPlayer(playerName.text, newUserPicture.source) 
-            }
-            Button { 
-                text: "Delete Selected"; 
-                source: playersModel.iconsDir("gameicons/list-remove-user.png")
-                onClicked: playersModel.removePlayers() 
             }
         }
     }

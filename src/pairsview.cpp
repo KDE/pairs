@@ -119,7 +119,11 @@ void PairsView::cardSelected(CardItem* card)
             QTimer::singleShot(500, m_last, SLOT(turn()));
             emit pair_missed();
             m_players->player(m_currentPlayer)->incMissed();
-            ++m_currentPlayer %= m_players->rowCount();
+            
+            //next player
+            do {
+                ++m_currentPlayer %= m_players->rowCount();
+            } while(!m_players->player(m_currentPlayer)->isSelected());
         }
         m_last=0;
     }

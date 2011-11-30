@@ -34,6 +34,7 @@ PlayersModel::PlayersModel(QObject* parent)
     names.insert(Missed, "missed");
     names.insert(Found, "found");
     names.insert(Time, "time");
+    names.insert(Selected, "selected");
     setRoleNames(names);
     m_playerIcons = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "players/*.png"));
 
@@ -66,11 +67,9 @@ void PlayersModel::refresh()
     int i=0;
     foreach(const QString& name, players) {
         QString icon = icons[i];
-        bool exists = (m_playerIcons.count(icon) > 0);
-        if(!exists)
-        {
+        if(!m_playerIcons.contains(icon))
             icon = randomIcon();
-        }
+        
         addPlayer(name, icon);
         i++;
     }
@@ -84,7 +83,7 @@ PairsPlayer* PlayersModel::player(int row)
 QString PlayersModel::randomIcon()
 {
     int row = qrand() % m_playerIcons.count();
-    QString result = "file://" + m_playerIcons[row];                           
+    QString result = "file://" + m_playerIcons[row];
     return result;
 }
 
@@ -99,34 +98,10 @@ void PlayersModel::addPlayer(const QString& name, const QString& decoration)
     appendRow(new PairsPlayer(name, decoration));
 }
 
-void PlayersModel::setSelected(int row)
+void PlayersModel::toggleSelection(int row)
 {
-//      qDebug() << row << player(row);
-     player(row)->setSelected();
-}
-
-void PlayersModel::gameStarted()
-{
-     emit layoutAboutToBeChanged();
-     int i = 0;
-     while (i < rowCount())
-     {
-         if(!player(i)->isSelected())
-             removeRows(i, 1);
-         else
-             i++;             
-     }
-     changePersistentIndex(index(0,0), index(rowCount(),columnCount()));
-     emit layoutChanged();
-}                        
-
-void PlayersModel::newGame()
-{
-     emit layoutAboutToBeChanged();
-     removeRows(0, rowCount());
-     refresh();
-     changePersistentIndex(index(0,0), index(rowCount(),columnCount()));
-     emit layoutChanged();
+     PairsPlayer* p=player(row);
+     p->setSelected(!p->isSelected());
 }
 
 void PlayersModel::resetPlayers()
@@ -136,19 +111,9 @@ void PlayersModel::resetPlayers()
     }
 }
 
-void PlayersModel::removePlayers()
+void PlayersModel::removePlayer(int p)
 {
-     emit layoutAboutToBeChanged();
-     int i = 0;
-     while (i < rowCount())
-     {
-         if(player(i)->isSelected())
-             removeRows(i, 1);
-         else
-             i++;             
-     }
-     changePersistentIndex(index(0,0), index(rowCount(),columnCount()));
-     emit layoutChanged();
+    invisibleRootItem()->removeRow(p);
 }
 
 QString PlayersModel::iconsDir(const QString& path)

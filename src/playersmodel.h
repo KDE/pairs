@@ -30,7 +30,8 @@ class PlayersModel : public QStandardItemModel
         enum PlayerRoles {
             Missed = Qt::UserRole + 1,
             Found,
-            Time
+            Time,
+            Selected
         };
         
         explicit PlayersModel(QObject* parent);
@@ -38,15 +39,13 @@ class PlayersModel : public QStandardItemModel
         
         PairsPlayer* player(int row);
         Q_SCRIPTABLE void addPlayer(const QString& player, const QString& decoration);
-        Q_SCRIPTABLE void removePlayers();
+        Q_SCRIPTABLE void removePlayer(int index);
         void resetPlayers();
         
     public slots:
         QVariant info(int row, const QByteArray& role);
-        void setSelected(int row);
+        void toggleSelection(int row);
         QString randomIcon();
-        void gameStarted();
-        void newGame();
         QString iconsDir(const QString& path);
 
     

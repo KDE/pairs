@@ -33,6 +33,7 @@ PairsPlayer::PairsPlayer(const QString &name, const QString &icon)
     setData(m_found, PlayersModel::Found);
     setData(m_seconds, PlayersModel::Time);
     setData(m_icon, Qt::DecorationRole);
+    setSelected(true);
 }
 
 void PairsPlayer::reset()
@@ -59,4 +60,10 @@ void PairsPlayer::incSeconds()
 {
     m_seconds++;
     setData(m_seconds, PlayersModel::Time);
+}
+
+void PairsPlayer::setSelected(bool s)
+{
+    m_selected = s;
+    setData(m_selected, PlayersModel::Selected);
 }

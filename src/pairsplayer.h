@@ -26,7 +26,6 @@
 
 class PairsPlayer : public QStandardItem
 {
-
 public:
     PairsPlayer(const QString &name, const QString &icon);
     ~PairsPlayer(){}
@@ -39,7 +38,7 @@ public:
     int seconds() const {return m_seconds; }
     QString name() const {return m_name; }
     QString icon() const {return m_icon; }
-    void setSelected() { m_selected = !m_selected; }
+    void setSelected(bool s);
     bool isSelected() { return m_selected; }
 
 private:
@@ -49,7 +48,6 @@ private:
     int m_found;
     int m_seconds;
     bool m_selected;
-
 };
 
 #endif
