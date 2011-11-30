@@ -53,6 +53,8 @@ Rectangle {
                 width: 400
                 id: themesView
                 height: parent.height
+                model: themesModel
+                
                 MouseArea {
                     anchors.fill: parent
                     
@@ -63,13 +65,19 @@ Rectangle {
                         playersModel.gameStarted();
                     }
                 }
-                model: themesModel
+                
                 delegate: Column {
-                    Image { source: "image://theme/"+display+"/"+decoration; fillMode: Image.PreserveAspectFit; width: 100; height: 100 } 
+                    Image {
+                        source: "image://theme/"+display+"/"+decoration
+                        fillMode: Image.PreserveAspectFit
+                        width: 100
+                        height: 100
+                    }
+                    
                     Text {
-                        width: 100                                
+                        width: 100
                         wrapMode: Text.WordWrap
-                        font.pixelSize: 20 
+                        font.pixelSize: 20
                         horizontalAlignment: Text.AlignHCenter
                         text: display
                     }
