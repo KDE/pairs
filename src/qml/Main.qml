@@ -79,12 +79,12 @@ Rectangle
         
         Row{
             Button {
-                source: "file://"+playersModel.iconsDir()+"gameicons/get-hot-new-stuff.png"
+                source: playersModel.iconsDir("gameicons/get-hot-new-stuff.png")
                 text: "Download Themes"
                 onClicked: fgame.download()
             }
             Button {
-                source: "file://"+playersModel.iconsDir()+"gameicons/newgame.png"
+                source: playersModel.iconsDir("gameicons/newgame.png")
                 text: "New Game"
                 visible: game.state=="playing"
                 onClicked: {
@@ -93,7 +93,7 @@ Rectangle
                 }
             }
             Button {
-                source: "file://"+playersModel.iconsDir()+"gameicons/quit.png"
+                source: playersModel.iconsDir("gameicons/quit.png")
                 text: "Quit"
                 onClicked: {
                     Qt.quit()
@@ -109,14 +109,7 @@ Rectangle
                 height: 120
                 function toggle() {
                     playersModel.setSelected(index)
-                    if(state == "on") 
-                    { 
-                        state = "off"
-                    } 
-                    else 
-                    { 
-                        state = "on" 
-                    }
+                    state = state=="on" ? "off" : "on"
                 }
                 property bool on: false // variable for outside world
                 state: "on"
@@ -195,12 +188,12 @@ Rectangle
             }
             Button { 
                 text: "Add"; 
-                source: "file://"+playersModel.iconsDir()+"gameicons/list-add-user.png"
+                source: playersModel.iconsDir("gameicons/list-add-user.png")
                 onClicked: playersModel.addPlayer(playerName.text, newUserPicture.source) 
             }
             Button { 
                 text: "Delete Selected"; 
-                source: "file://"+playersModel.iconsDir()+"gameicons/list-remove-user.png"
+                source: playersModel.iconsDir("gameicons/list-remove-user.png")
                 onClicked: playersModel.removePlayers() 
             }
         }

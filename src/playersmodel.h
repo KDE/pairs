@@ -47,13 +47,12 @@ class PlayersModel : public QStandardItemModel
         QString randomIcon();
         void gameStarted();
         void newGame();
-        QString iconsDir(){return m_gameicons;};
+        QString iconsDir(const QString& path);
 
     
     private:
         void refresh();
         QStringList m_playerIcons;
-        QString m_gameicons;
 };
 
 

@@ -17,7 +17,7 @@ Rectangle {
             Row {
                 spacing: 20
                 Button {
-                    source: "file://"+playersModel.iconsDir()+"gameicons/pairs.png"
+                    source: playersModel.iconsDir("gameicons/pairs.png")
                     text: "Pairs"
                     onClicked: {
                         gametype = 'image';
@@ -25,7 +25,7 @@ Rectangle {
                     }
                 }
                 Button {
-                    source: "file://"+playersModel.iconsDir()+"gameicons/pairs2.png"
+                    source: playersModel.iconsDir("gameicons/pairs2.png")
                     text: "Pairs 2"
                     onClicked: {
                         gametype = 'image2';
@@ -33,7 +33,7 @@ Rectangle {
                     }
                 }
                 Button {
-                    source: "file://"+playersModel.iconsDir()+"gameicons/logic.png"
+                    source: playersModel.iconsDir("gameicons/logic.png")
                     text: "Logic"
                     onClicked: {
                         gametype = 'logic';
@@ -41,7 +41,7 @@ Rectangle {
                     }
                 }
                 Button {
-                    source: "file://"+playersModel.iconsDir()+"gameicons/sound.png"
+                    source: playersModel.iconsDir("gameicons/sound.png")
                     text: "Sound"
                     onClicked: {
                         gametype = 'sound';
@@ -49,7 +49,7 @@ Rectangle {
                     }
                 }
                 Button {
-                    source: "file://"+playersModel.iconsDir()+"gameicons/sound.png"
+                    source: playersModel.iconsDir("gameicons/sound.png")
                     text: "SoundLogic"
                     onClicked: {
                         gametype = 'soundlogic';
@@ -57,7 +57,7 @@ Rectangle {
                     }
                 }
                 Button {
-                    source: "file://"+playersModel.iconsDir()+"gameicons/words.png"
+                    source: playersModel.iconsDir("gameicons/words.png")
                     text: "Words"
                     onClicked: {
                         gametype = 'word';

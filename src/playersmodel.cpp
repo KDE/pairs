@@ -36,7 +36,6 @@ PlayersModel::PlayersModel(QObject* parent)
     names.insert(Time, "time");
     setRoleNames(names);
     m_playerIcons = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "players/*.png"));
-    m_gameicons = KGlobal::dirs()->findResourceDir("appdata", QLatin1String( "gameicons/pairs.png"));
 
     refresh();
 }
@@ -150,4 +149,9 @@ void PlayersModel::removePlayers()
      }
      changePersistentIndex(index(0,0), index(rowCount(),columnCount()));
      emit layoutChanged();
+}
+
+QString PlayersModel::iconsDir(const QString& path)
+{
+    return "file://"+KGlobal::dirs()->findResource("appdata", path);
 }
