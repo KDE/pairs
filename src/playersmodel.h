@@ -48,9 +48,10 @@ class PlayersModel : public QStandardItemModel
         QString randomIcon();
         QString iconsDir(const QString& path);
 
-    
-    private:
+    private slots:
         void refresh();
+        
+    private:
         QStringList m_playerIcons;
 };
 

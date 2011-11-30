@@ -38,7 +38,7 @@ PlayersModel::PlayersModel(QObject* parent)
     setRoleNames(names);
     m_playerIcons = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "players/*.png"));
 
-    refresh();
+    QMetaObject::invokeMethod(this, "refresh", Qt::QueuedConnection);
 }
 
 PlayersModel::~PlayersModel()

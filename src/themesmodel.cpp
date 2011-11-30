@@ -27,12 +27,13 @@
 ThemesModel::ThemesModel(QObject* parent): QStandardItemModel(parent)
 {
     qsrand(QTime::currentTime().elapsed());
-    reload();
     
     QStringList themesdirs=KGlobal::dirs()->findDirs("appdata", "themes");
     QFileSystemWatcher* fs=new QFileSystemWatcher(this);
     fs->addPaths(themesdirs);
     connect(fs, SIGNAL(directoryChanged(QString)), SLOT(reload()));
+    
+    QMetaObject::invokeMethod(this, "reload", Qt::QueuedConnection);
 }
 
 void ThemesModel::refresh(const QString &type, const QString &lang)
