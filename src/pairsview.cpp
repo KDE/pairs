@@ -169,10 +169,10 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
         else if(cardType == "sound") type = CARD_SOUND;
         else if(cardType == "video") type = CARD_VIDEO;
         else if(cardType == "word") type = CARD_WORD;
-        if(cardType == "logic") type = CARD_LOGIC;
-        if(cardType == "soundlogic") type = CARD_SOUNDLOGIC;
+        else if(cardType == "logic") type = CARD_LOGIC;
+        else if(cardType == "soundlogic") type = CARD_SOUNDLOGIC;
 
-        qDebug() << cardType << titem.name[type][language];
+//         qDebug() << cardType << titem.name[type][language];
 
         item1->setType(type, titem.name[type][language], theme);
         if(type == CARD_LOGIC || type == CARD_SOUNDLOGIC){
