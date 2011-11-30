@@ -101,7 +101,7 @@ void PlayersModel::addPlayer(const QString& name, const QString& decoration)
 
 void PlayersModel::setSelected(int row)
 {
-     qDebug() << row << player(row);
+//      qDebug() << row << player(row);
      player(row)->setSelected();
 }
 

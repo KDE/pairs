@@ -108,7 +108,7 @@ void CardItem::setDuration(int dur)
 
 void CardItem::setType(CardType type, QString& file, const PairsTheme* theme){
     m_type = type;
-    qDebug() << type << file;
+//     qDebug() << type << file;
     switch(type){
         case CARD_SOUNDLOGIC:
         case CARD_SOUND:
