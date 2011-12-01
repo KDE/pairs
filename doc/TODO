@@ -3,7 +3,7 @@ Pairs to do Update to 2011-11-26
 branch (new_qml2)
 
 1) Make new icons for all the button (already asked plasma or oxigen channel no answare!)
-2) Fix icon for users always change any time the user is reloaded
+*2) Fix icon for users always change any time the user is reloaded
 3) put some scrollbar if the players are more than the space  on the monitor so that the add and remove button are no ovelapping
 4) Do not start a game if no players is selected
 *5) Congratulation screen still not working
