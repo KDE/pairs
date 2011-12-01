@@ -26,6 +26,11 @@
 
 ThemesModel::ThemesModel(QObject* parent): QStandardItemModel(parent)
 {
+    QHash<int, QByteArray> names=QStandardItemModel::roleNames();
+    names.insert(PairsTheme::CardTypeRole, "type");
+    names.insert(PairsTheme::LanguagesRole, "languages");
+    setRoleNames(names);
+    
     qsrand(QTime::currentTime().elapsed());
     
     QStringList themesdirs=KGlobal::dirs()->findDirs("appdata", "themes");
@@ -36,25 +41,6 @@ ThemesModel::ThemesModel(QObject* parent): QStandardItemModel(parent)
     QMetaObject::invokeMethod(this, "reload", Qt::QueuedConnection);
 }
 
-void ThemesModel::refresh(const QString &type, const QString &lang)
-{
-    emit layoutAboutToBeChanged();
-    clear();
-    const QStringList themes = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "themes/*.pairs.*" ));
-
-    Q_FOREACH(const QString& themePath, themes) {
-        PairsTheme* theme = new PairsTheme(themePath);
-
-        if(!theme->isCorrect() || !theme->isPertinent(type, lang)) {
-            qWarning() << "uncorrect theme:" << themePath << theme->error();
-            delete theme;
-        } else {
-            appendRow(theme);
-        }
-    }
-    changePersistentIndex(index(0,0), index(rowCount(),columnCount()));
-    emit layoutChanged();
-}
 void ThemesModel::reload()
 {
     clear();
@@ -89,12 +75,10 @@ QVariant ThemesModel::info(int row, const QByteArray& role)
     return QStandardItemModel::data(index(row, 0), roles.key(role));
 }
 
-QHash< int, QByteArray> ThemesModel::roleNames() const
+bool ThemesModel::isPertinent(int row, const QString& type, const QString& lang)
 {
-    QHash<int, QByteArray> names=QStandardItemModel::roleNames();
-    names.insert(PairsTheme::CardTypeRole, "type");
-    names.insert(PairsTheme::LanguagesRole, "languages");
-    return names;
+    PairsTheme* theme=static_cast<PairsTheme*>(item(row, 0));
+    return theme->isPertinent(type, lang);
 }
 
 QString ThemesModel::randomThemesImage() const

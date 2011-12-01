@@ -8,8 +8,6 @@ Rectangle {
     color: 'green'
     signal gameStarted;
     
-    onGameTypeChanged: themesModel.refresh(gameType, gameLanguage)
-    
     Row {
         anchors.margins: 30
         anchors.fill: parent
@@ -49,36 +47,24 @@ Rectangle {
                     onClicked: gameType = 'word'
                 }
             }
-            GridView {
-                width: 400
+            
+            Flow {
                 id: themesView
                 height: parent.height
-                model: themesModel
+                width: parent.width
                 
-                MouseArea {
-                    anchors.fill: parent
+                Repeater {
+                    model: themesModel
                     
-                    onClicked: {
-                        var idx=themesView.indexAt(mouse.x, mouse.y)
-                        gameStarted()
-                        fgame.newGame(idx, gameLanguage, gameType)
-                    }
-                }
-                
-                delegate: Column {
-                    Image {
+                    delegate: Button {
+                        visible: themesModel.isPertinent(index, gameType, gameLanguage)
                         source: "image://theme/"+display+"/"+decoration
-                        fillMode: Image.PreserveAspectFit
-                        width: 100
-                        height: 100
-                    }
-                    
-                    Text {
-                        width: 100
-                        wrapMode: Text.WordWrap
-                        font.pixelSize: 20
-                        horizontalAlignment: Text.AlignHCenter
                         text: display
+                        
+                        onClicked: {
+                            gameStarted()
+                            fgame.newGame(index, gameLanguage, gameType)
+                        }
                     }
                 }
             }

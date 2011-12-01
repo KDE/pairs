@@ -29,13 +29,12 @@ class ThemesModel : public QStandardItemModel
         explicit ThemesModel(QObject* parent = 0);
 
         PairsTheme* themeForName(const QString& title) const;
-        QHash< int, QByteArray > roleNames() const;
         bool exists(const QString& icon);
         QByteArray themeData(const QString& path) const;
         
     public slots:
         QVariant info(int row, const QByteArray& role);
-        void refresh(const QString &type, const QString &lang);
+        bool isPertinent(int row, const QString &type,const QString &lang);
         
         /** @returns a random image from any theme */
         QString randomThemesImage() const;
