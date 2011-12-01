@@ -11,6 +11,7 @@ Rectangle {
     Column {
         anchors.fill: parent
         anchors.margins: 20
+        spacing: 50
         Flow {
             width: parent.width
             spacing: 20
@@ -49,6 +50,7 @@ Rectangle {
         Flow {
             id: themesView
             width: parent.width
+            spacing: 20
             
             Repeater {
                 model: themesModel
