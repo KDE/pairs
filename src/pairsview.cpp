@@ -204,6 +204,9 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     cardsContext->setProperty("isGameOver", QVariant(false));
 
     m_currentPlayer=0;
+    do {
+        ++m_currentPlayer %= m_players->rowCount();
+    } while(!m_players->player(m_currentPlayer)->isSelected());
     m_timer->start(1000);
 }
 
