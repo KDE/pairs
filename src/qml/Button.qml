@@ -5,6 +5,7 @@ Rectangle{
     width: 100
     height: 100
     color: "transparent"
+    
     signal clicked;
     signal overlayClicked;
     
@@ -12,6 +13,7 @@ Rectangle{
     property alias source: icon.source
     property alias overlaySource: ovelay.source
     property alias hoverEnabled: mouse.hoverEnabled
+    property alias font: caption.font
     Image {
         id: icon
         anchors.top: parent.top

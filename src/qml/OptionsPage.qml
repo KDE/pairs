@@ -10,6 +10,7 @@ Rectangle {
     
     Column {
         anchors.fill: parent
+        anchors.margins: 20
         Flow {
             width: parent.width
             spacing: 20
@@ -56,6 +57,7 @@ Rectangle {
                     visible: themesModel.isPertinent(index, gameType, gameLanguage)
                     source: "image://theme/"+display+"/"+decoration
                     text: display
+                    font.pointSize: 12
                     
                     onClicked: {
                         gameStarted()
