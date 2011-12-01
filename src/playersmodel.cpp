@@ -37,6 +37,9 @@ PlayersModel::PlayersModel(QObject* parent)
     names.insert(Selected, "selected");
     setRoleNames(names);
     m_playerIcons = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "players/*.png"));
+    for(QStringList::iterator it=m_playerIcons.begin(), itEnd=m_playerIcons.end(); it!=itEnd; ++it) {
+        *it = "file://"+*it;
+    }
 
     QMetaObject::invokeMethod(this, "refresh", Qt::QueuedConnection);
 }
@@ -83,8 +86,7 @@ PairsPlayer* PlayersModel::player(int row)
 QString PlayersModel::randomIcon()
 {
     int row = qrand() % m_playerIcons.count();
-    QString result = "file://" + m_playerIcons[row];
-    return result;
+    return m_playerIcons[row];
 }
 
 QVariant PlayersModel::info(int row, const QByteArray& role)
