@@ -36,7 +36,7 @@ Rectangle{
         id: mouse
         anchors.fill: parent
         hoverEnabled: true
-        onClicked: { button.clicked(); button.state="clicked"; }
+        onClicked: button.clicked()
         onEntered: button.state="hovered"
         onExited: button.state="default"
     }
@@ -52,7 +52,7 @@ Rectangle{
         
         MouseArea {
             anchors.fill: parent
-            onClicked: { button.overlayClicked(); button.state="ovcli"; }
+            onClicked: button.overlayClicked()
         }
     }
     
@@ -64,14 +64,6 @@ Rectangle{
         State {
             name: "hovered"
             PropertyChanges { target: caption; color: "red" }
-        },
-        State {
-            name: "clicked"
-            PropertyChanges { target: caption; color: "green" }
-        },
-        State {
-            name: "ovcli"
-            PropertyChanges { target: caption; color: "white" }
         }
     ]
 }

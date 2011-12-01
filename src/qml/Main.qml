@@ -122,6 +122,7 @@ Rectangle
                         
                         enabled: selected
                         onClicked: playersModel.toggleSelection(index)
+                        onOverlayClicked: playersModel.removePlayer(index)
                     }
                 }
             }
