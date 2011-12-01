@@ -75,14 +75,23 @@ FancyBackground
         anchors.bottom: parent.bottom
         anchors.right: main.left
         anchors.left: parent.left
+        spacing: 40
         
         Row{
             id: tools
+            spacing: 20
+            
+            Button {
+                source: playersModel.iconsDir("gameicons/quit.png")
+                onClicked: Qt.quit()
+            }
+            
             Button {
                 source: playersModel.iconsDir("gameicons/get-hot-new-stuff.png")
-                text: "Download Themes"
+                text: "Get Themes"
                 onClicked: fgame.download()
             }
+            
             Button {
                 source: playersModel.iconsDir("gameicons/newgame.png")
                 text: "New Game"
@@ -92,40 +101,23 @@ FancyBackground
                     fgame.stopGame()
                 }
             }
-            Button {
-                source: playersModel.iconsDir("gameicons/quit.png")
-                text: "Quit"
-                onClicked: {
-                    Qt.quit()
-                }
-            }
         }
         
-        ListView {
-            id: players
+        Flow {
             width: parent.width
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: tools.bottom
-            anchors.bottom: controls.top
+            spacing: 10
             
-            clip: true
-            
-            Grid {
-                columns: 3
-                spacing: 10
-                
-                Repeater {
-                    model: playersModel
-                    delegate: TogglableButton {
-                        text: display+ (game.state=="playing" ? "<br/>"+missed+" "+found+" "+time : "")
-                        source: decoration
-                        overlaySource: playersModel.iconsDir("gameicons/list-remove-user.png")
-                        visible: game.state=="newgame" || selected
-                        
-                        enabled: selected
-                        onClicked: playersModel.toggleSelection(index)
-                        onOverlayClicked: playersModel.removePlayer(index)
-                    }
+            Repeater {
+                model: playersModel
+                delegate: TogglableButton {
+                    text: display+ (game.state=="playing" ? "<br/>"+missed+" "+found+" "+time : "")
+                    source: decoration
+                    overlaySource: playersModel.iconsDir("gameicons/list-remove-user.png")
+                    visible: game.state=="newgame" || selected
+                    
+                    enabled: selected
+                    onClicked: playersModel.toggleSelection(index)
+                    onOverlayClicked: playersModel.removePlayer(index)
                 }
             }
         }
