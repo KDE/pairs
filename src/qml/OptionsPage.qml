@@ -21,7 +21,7 @@ Rectangle {
             }
             Button {
                 source: playersModel.iconsDir("gameicons/pairs2.png")
-                text: "Pairs 2"
+                text: "Similar"
                 onClicked: gameType = 'image2'
             }
             Button {
