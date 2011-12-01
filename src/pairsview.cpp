@@ -216,8 +216,13 @@ void PairsView::checkGameOver()
         QObject* cardsContext=rootObject()->findChild<QObject*>("board");
         Q_ASSERT(cardsContext);
         cardsContext->setProperty("isGameOver", true);
-        m_timer->stop();
+        stopGame();
     }
+}
+
+void PairsView::stopGame()
+{
+    m_timer->stop();
 }
 
 void PairsView::download()

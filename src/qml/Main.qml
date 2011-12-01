@@ -1,9 +1,9 @@
 import QtQuick 1.0
 
-Rectangle
+FancyBackground
 {
     id: game
-    color: 'blue'
+    
     Item {
         id: main
         
@@ -87,7 +87,10 @@ Rectangle
                 source: playersModel.iconsDir("gameicons/newgame.png")
                 text: "New Game"
                 visible: game.state=="playing"
-                onClicked: game.state="newgame"
+                onClicked: {
+                    game.state="newgame"
+                    fgame.stopGame()
+                }
             }
             Button {
                 source: playersModel.iconsDir("gameicons/quit.png")
@@ -114,7 +117,7 @@ Rectangle
                 Repeater {
                     model: playersModel
                     delegate: TogglableButton {
-                        text: display+" "+missed+" "+found+" "+time
+                        text: display+ (game.state=="playing" ? "<br/>"+missed+" "+found+" "+time : "")
                         source: decoration
                         overlaySource: playersModel.iconsDir("gameicons/list-remove-user.png")
                         visible: game.state=="newgame" || selected

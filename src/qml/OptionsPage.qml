@@ -1,11 +1,10 @@
 import QtQuick 1.0
 
-Rectangle {
+Page {
     id: gameSettings
     property string gameLanguage: 'en'
     property string gameType: 'image'
     
-    color: 'green'
     signal gameStarted;
     
     Column {

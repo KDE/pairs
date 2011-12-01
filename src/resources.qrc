@@ -1,10 +1,12 @@
 <!DOCTYPE RCC><RCC version="1.0">
  <qresource>
     <file>qml/Main.qml</file>
+    <file>qml/Page.qml</file>
     <file>qml/Board.qml</file>
     <file>qml/Button.qml</file>
     <file>qml/OptionsPage.qml</file>
     <file>qml/TogglableButton.qml</file>
+    <file>qml/FancyBackground.qml</file>
     <file>qml/SelectableListView.qml</file>
  </qresource>
 </RCC>

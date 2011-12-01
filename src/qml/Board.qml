@@ -1,8 +1,7 @@
 import QtQuick 1.1
 
-Rectangle
+Page
 {
-    color: 'red'
     objectName: 'board'
     
     property bool isGameOver; //Changed from C++ code

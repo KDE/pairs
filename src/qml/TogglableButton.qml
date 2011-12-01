@@ -6,6 +6,11 @@ Rectangle
     width: 100; 
     height: 120
     
+    gradient: Gradient {
+        GradientStop { id: from; position: 0 }
+        GradientStop { position: 1; color: "transparent" }
+    }
+    
     property bool enabled: true
     property alias text: button.text
     property alias source: button.source
@@ -13,15 +18,15 @@ Rectangle
     signal overlayClicked
     signal clicked
     
-    state: enabled ? "off" : "on"
+    state: enabled ? "on" : "off"
     states: [
         State {
             name: "on";
-            PropertyChanges{ target: container; color: "blue" }
+            PropertyChanges{ target: from; color: "#77FFFFFF" }
         },
         State {
             name: "off";
-            PropertyChanges{ target: container; color: "lightblue" }
+            PropertyChanges{ target: from; color: "transparent" }
         }
     ]
     

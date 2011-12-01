@@ -65,6 +65,7 @@ public slots:
     void checkGameOver();
     void download();
     void cardSelected(CardItem* cardData);
+    void stopGame();
     
 private slots:
     void update();
