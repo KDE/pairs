@@ -1,5 +1,4 @@
-#  Copyright (C) <2010>       <Albert Astals Cid>   <aacid@kde.org>
-#  Copyright (C) <2010>       <Aleix Pol>           <aleixpol@kde.org>
+#  Copyright (C) <2011>       <Marco Calignano>     <marco.calignano@gmail.com>
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License as
@@ -17,18 +16,17 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+macro(create_translation _baseName)
 
-project(kpairs)
+    set(_source ${CMAKE_CURRENT_SOURCE_DIR}/${_baseName}.ts)
+    set(_endfile ${CMAKE_CURRENT_SOURCE_DIR}/${_baseName}.qm)
+    add_custom_target(${_baseName} ALL DEPENDS ${_endfile})
+    add_custom_command(OUTPUT ${_endfile}
+            COMMAND lrelease ${_source}
+            WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+    )
+    install(FILES ${_endfile} DESTINATION ${DATA_INSTALL_DIR}/pairs/trans)
+endmacro(create_translation)
 
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
-
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
-
-add_subdirectory( doc )
-add_subdirectory( src )
-add_subdirectory( icons )
-add_subdirectory( players )
-add_subdirectory( gameicons )
-add_subdirectory( themes )
-add_subdirectory( src/qml/transl )
+create_translation(lang_it)
+create_translation(lang_de)
