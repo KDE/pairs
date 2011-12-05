@@ -60,6 +60,18 @@ PlayersModel::~PlayersModel()
     group.writeEntry("Icons", icons);
 }
 
+bool PlayersModel::isAnySelected()
+{
+    bool res = false;
+    PairsPlayer* p;
+    for (int i = 0; i < rowCount(); ++i) {
+       p=player(i);
+       res |= p->isSelected();
+    }          
+    return res;                             
+}
+
+
 void PlayersModel::refresh()
 {
     KConfig config;

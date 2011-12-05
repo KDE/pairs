@@ -61,8 +61,14 @@ Page {
                     font.pointSize: 12
                     
                     onClicked: {
-                        gameStarted()
-                        fgame.newGame(index, gameLanguage, gameType)
+                        if(playersModel.isAnySelected()){
+                            gameStarted()
+                            fgame.newGame(index, gameLanguage, gameType)
+                        }
+                        else
+                        {
+                            //animation
+                        }
                     }
                 }
             }
