@@ -45,7 +45,7 @@ FancyBackground
                     font.pixelSize: 100
                     anchors.horizontalCenter: parent.horizontalCenter
                     
-                    text: "Congratulations!"
+                    text: qsTr("Congratulations!")
                 }
                 
                 Repeater {
@@ -59,8 +59,8 @@ FancyBackground
                 
                 Button {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: "Start New Game"
-                    
+                    source: playersModel.iconsDir("gameicons/newgame.png")
+                    text: qsTr("New Game")
                     onClicked: game.state="newgame"
                 }
             }
@@ -88,13 +88,13 @@ FancyBackground
             
             Button {
                 source: playersModel.iconsDir("gameicons/get-hot-new-stuff.png")
-                text: "Get Themes"
+                text: qsTr("Get Themes")
                 onClicked: fgame.download()
             }
             
             Button {
                 source: playersModel.iconsDir("gameicons/newgame.png")
-                text: "New Game"
+                text: qsTr("New Game")
                 visible: game.state=="playing"
                 onClicked: {
                     game.state="newgame"
@@ -146,7 +146,7 @@ FancyBackground
                 }
             }
             Button { 
-                text: "Add"; 
+                text: qsTr("Add"); 
                 source: playersModel.iconsDir("gameicons/list-add-user.png")
                 onClicked: playersModel.addPlayer(playerName.text, newUserPicture.source) 
             }

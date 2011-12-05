@@ -24,12 +24,14 @@
 #include <KDE/KCmdLineArgs>
 #include <KDE/KLocale>
 #include <KStandardDirs>
+#include <QTranslator>
+#include <QDebug>
 #include "pairstheme.h"
 
 static const char description[] =
     I18N_NOOP("A game to enhance your memory for KDE!");
 
-static const char version[] = "0.1";
+static const char version[] = "0.2";
 
 int main(int argc, char **argv)
 {
@@ -41,7 +43,8 @@ int main(int argc, char **argv)
     KCmdLineArgs::init(argc, argv, &about);
 
     KCmdLineOptions options;
-    options.add("+[URL]", ki18n( "Document to open" ));
+    options.add("language <lang>", ki18n( "application main language"), KGlobal::locale()->language().toAscii());
+//    options.add("+[URL]", ki18n( "Document to open" ));
     KCmdLineArgs::addCmdLineOptions(options);
     KApplication app;
     
@@ -52,10 +55,21 @@ int main(int argc, char **argv)
     }
     else
     {
-        Pairs *widget = new Pairs;
-        
         // no session.. just start up normally
         KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+        QString lang = args->getOption("language");
+        qDebug() << "language" << lang << KGlobal::dirs()->findResource("appdata", "trans/lang_" + lang + ".qm");
+        QTranslator translator;
+        if (translator.load(KGlobal::dirs()->findResource("appdata", "trans/lang_" + lang + ".qm")))
+        {
+            app.installTranslator(&translator);
+            qDebug() << "FOUND";
+        }
+        args->clear();
+        Pairs *widget = new Pairs;
+        widget->show();
+    }
+/*        
         if (args->count() == 0)
         {
             //Pairs *widget = new Pairs;
@@ -70,9 +84,6 @@ int main(int argc, char **argv)
                 widget->show();
             }
         }
-        args->clear();
-    }
-
-    
+        */
     return app.exec();
 }

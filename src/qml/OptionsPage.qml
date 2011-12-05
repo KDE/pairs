@@ -16,32 +16,32 @@ Page {
             spacing: 20
             Button {
                 source: playersModel.iconsDir("gameicons/pairs.png")
-                text: "Pairs"
+                text: qsTr("Pairs")
                 onClicked: gameType = 'image'
             }
             Button {
                 source: playersModel.iconsDir("gameicons/pairs2.png")
-                text: "Similar"
+                text: qsTr("Similar")
                 onClicked: gameType = 'image2'
             }
             Button {
                 source: playersModel.iconsDir("gameicons/logic.png")
-                text: "Logic"
+                text: qsTr("Logic")
                 onClicked: gameType = 'logic'
             }
             Button {
                 source: playersModel.iconsDir("gameicons/sound.png")
-                text: "Sound"
+                text: qsTr("Sound")
                 onClicked: gameType = 'sound'
             }
             Button {
                 source: playersModel.iconsDir("gameicons/sound.png")
-                text: "SoundLogic"
+                text: qsTr("SoundLogic")
                 onClicked: gameType = 'soundlogic'
             }
             Button {
                 source: playersModel.iconsDir("gameicons/words.png")
-                text: "Words"
+                text: qsTr("Words")
                 onClicked: gameType = 'word'
             }
         }
