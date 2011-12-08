@@ -6,7 +6,7 @@ branch (new_qml2)
 2) put some scrollbar if the players are more than the space  on the monitor so that the add and remove button are no ovelapping
 *3) Do not start a game if no players is selected
 *4) Button text should be multilingual <-- Deafult is the language from the "locale" setting. There is also a command-line parameter --language to set it
-5) Start the game always full screen <-- no! if you're on a tablet it will be managed by the window manager anyway. if you need it we can add a parameter for this
+*5) Start the game full screen <-- add a parameter for this
 6) Eliminate the window border <-- there's none
 7) In the game Logic and SoundLogic we need to highlight the first selected card of each turn
 

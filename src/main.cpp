@@ -44,6 +44,7 @@ int main(int argc, char **argv)
 
     KCmdLineOptions options;
     options.add("language <lang>", ki18n( "application main language"), KGlobal::locale()->language().toAscii());
+    options.add("fullscreen", ki18n( "start in fullscreen mode"));
 //    options.add("+[URL]", ki18n( "Document to open" ));
     KCmdLineArgs::addCmdLineOptions(options);
     KApplication app;
@@ -58,6 +59,7 @@ int main(int argc, char **argv)
         // no session.. just start up normally
         KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
         QString lang = args->getOption("language");
+        bool fsMode = KCmdLineArgs::parsedArgs()->isSet("fullscreen");
         qDebug() << "language" << lang << KGlobal::dirs()->findResource("appdata", "trans/lang_" + lang + ".qm");
         QTranslator translator;
         if (translator.load(KGlobal::dirs()->findResource("appdata", "trans/lang_" + lang + ".qm")))
@@ -67,7 +69,14 @@ int main(int argc, char **argv)
         }
         args->clear();
         Pairs *widget = new Pairs;
-        widget->show();
+        if (fsMode) 
+        {
+            widget->showFullScreen();
+        }
+        else
+        {
+            widget->show();
+        }
     }
 /*        
         if (args->count() == 0)
