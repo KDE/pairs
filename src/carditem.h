@@ -39,6 +39,7 @@ class CardItem
 {
     Q_OBJECT
     Q_PROPERTY(QPointF position READ pos WRITE setPos);
+    Q_PROPERTY(qreal opacity READ opacity WRITE setOpacity);
     public:
         CardItem(const QSharedPointer<QSvgRenderer>& back, QGraphicsItem* parent, QGraphicsScene* scene = 0);
         virtual ~CardItem();
@@ -69,6 +70,8 @@ class CardItem
         QPixmap m_color;
         QPixmap m_back;
         QPropertyAnimation* m_opacityAnimation;
+        QPropertyAnimation* m_colorAnimation;
+        QPropertyAnimation* m_backColorAnimation;
         Phonon::MediaSource m_source;
         QSharedPointer<QSvgRenderer> m_frontRenderer;
         QSharedPointer<QSvgRenderer> m_backRenderer;

@@ -24,6 +24,7 @@
 #include <QPropertyAnimation>
 #include <QPainter>
 #include <QGraphicsOpacityEffect>
+#include <QGraphicsColorizeEffect>
 #include <KDE/KLocale>
 #include <KStandardDirs>
 
@@ -53,15 +54,22 @@ CardItem::CardItem(const QSharedPointer<QSvgRenderer>& back, QGraphicsItem* pare
     m_animationBack->setEndValue(0);
     
     setTransformations(QList<QGraphicsTransform*>() << m_rotation);
-    
-    QGraphicsOpacityEffect* opacity = new QGraphicsOpacityEffect(this);
-    opacity->setOpacity(1.);
-    
-    m_opacityAnimation=new QPropertyAnimation(opacity, "opacity", opacity);
-//     m_opacityAnimation->setEasingCurve(QEasingCurve::InExpo);
+    m_opacityAnimation=new QPropertyAnimation(this, "opacity", this);
+    m_opacityAnimation->setStartValue(1.0);
     m_opacityAnimation->setEndValue(0.2);
-    setGraphicsEffect(opacity);
-    
+    QGraphicsColorizeEffect *colorize = new QGraphicsColorizeEffect(this);
+    colorize->setColor(Qt::white);
+    colorize->setStrength(0);
+    m_colorAnimation = new QPropertyAnimation(colorize, "strength", colorize);
+    m_colorAnimation->setStartValue(1);
+    m_colorAnimation->setEndValue(0.6);
+    m_colorAnimation->setDuration(200);
+    m_backColorAnimation = new QPropertyAnimation(colorize, "strength", colorize);
+    m_backColorAnimation->setStartValue(0.6);
+    m_backColorAnimation->setEndValue(0);
+    m_backColorAnimation->setDuration(0);
+    setGraphicsEffect(colorize);
+
     setDuration(200);
 }
 
@@ -163,13 +171,20 @@ void CardItem::setCardPixmap(const QSharedPointer<QSvgRenderer>& renderer)
 
 void CardItem::changeValue()
 {
-    if(m_activated)
+    if(m_activated){
         setPixmap(m_color);
+        if(m_type == CARD_LOGIC || m_type == CARD_SOUNDLOGIC){
+            m_colorAnimation->start();
+        }
+    }
     else{
-        if(m_type == CARD_LOGIC || m_type == CARD_SOUNDLOGIC)
+        if(m_type == CARD_LOGIC || m_type == CARD_SOUNDLOGIC){
             setPixmap(m_color);
-        else
+            m_backColorAnimation->start();
+        }
+        else{
             setPixmap(m_back);
+        }
     }
 
     if((m_type==CARD_SOUND || m_type==CARD_SOUNDLOGIC)  && m_activated) {
