@@ -132,10 +132,10 @@ void PairsView::cardSelected(CardItem* card)
     }
 }
 
-void PairsView::newGame(int row, const QString& language, const QString& cardType)
+void PairsView::newGame(int row, const QString& cardType)
 {
     PairsTheme* theme=static_cast<PairsTheme*>(m_model->item(row));
-    newGame(theme, language, cardType);
+    newGame(theme, m_language, cardType);
 }
 
 void PairsView::newGame(const PairsTheme* theme, const QString& language, const QString& cardType)

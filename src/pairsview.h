@@ -52,8 +52,10 @@ public:
     int cardsNum();
     void newGame(const PairsTheme* theme, const QString& language, const QString& cardType);
     PlayersModel* playersModel() const { return m_players; }
+    void setLanguage(const QString &l) {m_language = l;};
     
-    Q_SCRIPTABLE void newGame(int row, const QString& language, const QString& cardType);
+    Q_SCRIPTABLE void newGame(int row, const QString& cardType);
+    Q_SCRIPTABLE QString language(){return m_language;};
 	
     virtual void resizeEvent(QResizeEvent* ev);
 signals:
@@ -82,6 +84,7 @@ private:
     QTimer *m_timer;
     int m_itemsPerRow;
     QTimer* m_resizeTimer;
+    QString m_language;
 };
 
 #endif // kpairsVIEW_H

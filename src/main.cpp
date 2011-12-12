@@ -19,6 +19,7 @@
  */
 
 #include "pairs.h"
+#include "pairsview.h"
 #include <KDE/KApplication>
 #include <KDE/KAboutData>
 #include <KDE/KCmdLineArgs>
@@ -69,6 +70,7 @@ int main(int argc, char **argv)
         }
         args->clear();
         Pairs *widget = new Pairs;
+        widget->view()->setLanguage(lang.left(2));
         if (fsMode) 
         {
             widget->showFullScreen();

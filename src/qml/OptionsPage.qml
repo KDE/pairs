@@ -2,7 +2,6 @@ import QtQuick 1.0
 
 Page {
     id: gameSettings
-    property string gameLanguage: 'en'
     property string gameType: 'image'
     
     signal gameStarted;
@@ -55,7 +54,7 @@ Page {
                 model: themesModel
                 
                 delegate: Button {
-                    visible: themesModel.isPertinent(index, gameType, gameLanguage)
+                    visible: themesModel.isPertinent(index, gameType, fgame.language())
                     source: "image://theme/"+display+"/"+decoration
                     text: display
                     font.pointSize: 12
@@ -63,7 +62,7 @@ Page {
                     onClicked: {
                         if(playersModel.isAnySelected()){
                             gameStarted()
-                            fgame.newGame(index, gameLanguage, gameType)
+                            fgame.newGame(index, gameType)
                         }
                         else
                         {
