@@ -119,7 +119,7 @@ PairsTheme::PairsTheme(const QString& path)
 
 bool PairsTheme::isPertinent(const QString &type,const QString &lang) {
 //     qDebug() << type << lang << m_cardtypes[lang].count(type);
-    return (m_cardtypes[lang].count(type) > 0);
+    return (m_cardtypes[lang].count(type) > 0 || m_cardtypes["any"].count(type) > 0);
 }
                         
 void PairsTheme::parseElement(QXmlStreamReader &reader)
