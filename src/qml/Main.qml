@@ -114,6 +114,7 @@ FancyBackground
                     source: decoration
                     overlaySource: playersModel.iconsDir("gameicons/list-remove-user.png")
                     visible: game.state=="newgame" || selected
+                    overlayVisible: game.state=="newgame"
                     
                     enabled: selected
                     onClicked: playersModel.toggleSelection(index)

@@ -15,6 +15,8 @@ Rectangle
     property alias text: button.text
     property alias source: button.source
     property alias overlaySource: button.overlaySource
+    property alias overlayVisible: button.overlayVisible
+    
     signal overlayClicked
     signal clicked
     

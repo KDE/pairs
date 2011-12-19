@@ -11,9 +11,10 @@ Rectangle{
     
     property alias text: caption.text
     property alias source: icon.source
-    property alias overlaySource: ovelay.source
+    property alias overlaySource: overlay.source
     property alias hoverEnabled: mouse.hoverEnabled
     property alias font: caption.font
+    property bool overlayVisible: true
     Image {
         id: icon
         anchors.top: parent.top
@@ -44,9 +45,9 @@ Rectangle{
     }
     
     Image { 
-        id: ovelay
+        id: overlay
         
-        visible: mouse.containsMouse
+        visible: mouse.containsMouse && overlayVisible
         width: parent.width/3
         height: parent.height/3
         anchors.top: parent.top
