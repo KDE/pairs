@@ -141,6 +141,7 @@ void PairsView::newGame(int row, const QString& cardType)
 void PairsView::newGame(const PairsTheme* theme, const QString& language, const QString& cardType)
 {
     qDeleteAll(m_cards);
+    m_last = 0;
     m_cards.clear();
     QList<CardItem*> cards;
     
