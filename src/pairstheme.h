@@ -56,7 +56,7 @@ class PairsTheme : public QObject, public QStandardItem
         QString title() const { return m_title; }
         QString description() const { return m_description; }
         QString backImage() const { return m_back_img; }
-        QString path() const { return m_path; }
+        QString path() const;
         
         QList<ThemeElement> items() const { return m_items; }
         
@@ -91,9 +91,8 @@ class PairsTheme : public QObject, public QStandardItem
         QList<ThemeElement> m_items;
         
         QString m_error;
-        QString m_path;
         QStringList m_languages;
-        QMap<QString, QStringList> m_cardtypes;
+        QMap<QString, QSet<QString> > m_cardtypes;
         KTar m_archive;
 };
 
