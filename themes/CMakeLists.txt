@@ -17,7 +17,17 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-macro(create_theme _baseName)
+macro(filter_strings output regex)
+    set(${output} "")
+    foreach(a IN ITEMS ${ARGN})
+        if(NOT a MATCHES ${regex})
+            message(STATUS "---- ${a}")
+            list(APPEND ${output} ${a})
+        endif()
+    endforeach(a)
+endmacro(filter_strings)
+
+function(create_theme _baseName)
     if(WIN32)
         set(_template ${CMAKE_CURRENT_BINARY_DIR}/${_baseName}.pairs.zip)
     else(WIN32)
@@ -25,6 +35,7 @@ macro(create_theme _baseName)
     endif(WIN32)
     
     file(GLOB _files RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/${_baseName}/" "${CMAKE_CURRENT_SOURCE_DIR}/${_baseName}/*" )
+    filter_strings(_files "~" ${_files})
     add_custom_target(${_baseName} ALL DEPENDS ${_template})
 
     if(WIN32)
@@ -44,7 +55,7 @@ macro(create_theme _baseName)
     endif(WIN32)
     
     install(FILES ${_template} DESTINATION ${DATA_INSTALL_DIR}/pairs/themes)
-endmacro(create_theme)
+endfunction(create_theme)
 
 create_theme(animals)
 create_theme(kde)
