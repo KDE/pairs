@@ -152,35 +152,26 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     QList<ThemeElement> items = theme->items();
     //int num=qMin(((rows*columns)/2)*2, items.size()); //we make it %2
     int num = items.size();
-    
+    const CardType type = PairsTheme::cardNameToType(cardType);
     QSharedPointer<QSvgRenderer> backRenderer(new QSvgRenderer(theme->themeData(theme->backImage())));
     for(int i=0; i<num; i++) {
         ThemeElement titem = items.at(i);
 
         CardItem* item = new CardItem(backRenderer, cardsParent, scene());
         item->setData(0, i);
-        if(cardType == "logic" || cardType == "soundlogic"){
-            item->setType(CARD_LOGIC, titem.name[theme->mainType()][language], theme);
-        }
-        else{
-            item->setType(theme->mainType(), titem.name[theme->mainType()][language], theme);
+        if(type == CARD_LOGIC || type == CARD_SOUNDLOGIC) {
+            item->setType(CARD_LOGIC, titem.value(theme->mainType(), language), theme);
+        } else {
+            item->setType(theme->mainType(), titem.value(theme->mainType(), language), theme);
         }
 
         CardItem* item1 = new CardItem(backRenderer, cardsParent, scene());
         item1->setData(0, i);
-        CardType type = CARD_IMAGE;
-        if(cardType == "image") type = CARD_IMAGE;
-        else if(cardType == "image2") type = CARD_IMAGE2;
-        else if(cardType == "sound") type = CARD_SOUND;
-        else if(cardType == "video") type = CARD_VIDEO;
-        else if(cardType == "word") type = CARD_WORD;
-        else if(cardType == "logic") type = CARD_LOGIC;
-        else if(cardType == "soundlogic") type = CARD_SOUNDLOGIC;
 
 //         qDebug() << cardType << titem.name[type][language];
 
-        item1->setType(type, titem.name[type][language], theme);
-        if(type == CARD_LOGIC || type == CARD_SOUNDLOGIC){
+        item1->setType(type, titem.value(type, language), theme);
+        if(type == CARD_LOGIC || type == CARD_SOUNDLOGIC) {
             item->setDuration(0);
             item1->setDuration(0);
         }

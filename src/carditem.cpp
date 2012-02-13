@@ -114,9 +114,8 @@ void CardItem::setDuration(int dur)
     m_animationBack->setDuration(dur);
 }
 
-void CardItem::setType(CardType type, QString& file, const PairsTheme* theme){
+void CardItem::setType(CardType type, const QString& file, const PairsTheme* theme){
     m_type = type;
-//     qDebug() << type << file;
     switch(type){
         case CARD_SOUNDLOGIC:
         case CARD_SOUND:
@@ -129,12 +128,6 @@ void CardItem::setType(CardType type, QString& file, const PairsTheme* theme){
             m_source = Phonon::MediaSource(mediafile);
     ///        void copy(QIODevice *source , QIODevice *target){         target->write(source->readAll());         }
         }   break;
-        case CARD_VIDEO:
-        {
-//             Phonon::VideoPlayer *videoPlayer = new Phonon::VideoPlayer(Phonon::GameCategory, NULL);
-          //  createPath(m_media, videoPlayer);
-            break;
-        }
         case CARD_IMAGE2:
         case CARD_IMAGE:
         case CARD_LOGIC:

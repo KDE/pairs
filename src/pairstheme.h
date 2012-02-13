@@ -25,6 +25,7 @@
 #include <QMap>
 #include <QVariant>
 #include <QList>
+#include <QSet>
 #include <KTar>
 #include <QXmlStreamReader>
 #include <QStandardItem>
@@ -33,12 +34,14 @@
 class ThemeElement {
 public:
     QMap<QString, QString>  name[CARD_MAX_TYPE];
+    
     ThemeElement(){ reset(); };
-    ~ThemeElement(){};
+    
     void reset() {
         for(int i = 0; i < CARD_MAX_TYPE; i++) name[i].clear();
     };
-
+    
+    QString value(CardType type, const QString& language) const;
 };
 
 class PairsTheme : public QObject, public QStandardItem
@@ -67,11 +70,11 @@ class PairsTheme : public QObject, public QStandardItem
         QByteArray themeData(const QString& path) const;
         bool hasFile(const QString& path) const;
         
+        static CardType cardNameToType(const QString& name);
     private:
         void parseElement(QXmlStreamReader &reader);
 
         bool isValid(const KArchiveFile* file);
-        QString m_data;
         QString m_title;
         QString m_description;
         QString m_author;
@@ -91,7 +94,7 @@ class PairsTheme : public QObject, public QStandardItem
         QList<ThemeElement> m_items;
         
         QString m_error;
-        QStringList m_languages;
+        QSet<QString> m_languages;
         QMap<QString, QSet<QString> > m_cardtypes;
         KTar m_archive;
 };

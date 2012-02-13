@@ -48,7 +48,7 @@ class CardItem
         virtual void mousePressEvent(QGraphicsSceneMouseEvent*) {}
         void setCardPixmap(const QSharedPointer<QSvgRenderer>& renderer);
         void markDone();
-        void setType(CardType type, QString& file, const PairsTheme* theme);
+        void setType(CardType type, const QString& file, const PairsTheme* theme);
         bool isDone() const;
         void setDuration(int dur);
         void setSize(const QSizeF& newSize);

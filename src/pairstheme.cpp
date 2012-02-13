@@ -28,6 +28,18 @@
 #include <QXmlSchema>
 #include "cardtype.h"
 
+CardType PairsTheme::cardNameToType(const QString& name)
+{
+    if (name == "image")      return CARD_IMAGE;
+    else if (name == "image2")return CARD_IMAGE2;
+    else if (name == "sound") return CARD_SOUND;
+    else if (name == "word")  return CARD_WORD;
+    else if (name == "logic") return CARD_LOGIC;
+    else if (name == "soundlogic") return CARD_SOUNDLOGIC;
+    Q_ASSERT(false);
+    return CARD_NONE;
+}
+
 PairsTheme::PairsTheme(const QString& path)
     : QStandardItem()
     , m_archive(path)
@@ -68,13 +80,7 @@ PairsTheme::PairsTheme(const QString& path)
                 m_date = reader.readElementText();
             } else if(name == "main") {
                 m_main = reader.attributes().value("type").toString();
-                if (m_main == "image") m_main_type = CARD_IMAGE;
-                else if (m_main == "image2") m_main_type = CARD_IMAGE2;
-                else if (m_main == "sound") m_main_type = CARD_SOUND;
-                else if (m_main == "video") m_main_type = CARD_VIDEO;
-                else if (m_main == "word") m_main_type = CARD_WORD;
-
-
+                m_main_type = cardNameToType(m_main);
             } else if(name == "sound") {
                 QStringRef soundtype=reader.attributes().value("type");
                 if(soundtype == "missed") {
@@ -107,12 +113,14 @@ PairsTheme::PairsTheme(const QString& path)
     }
 //     qDebug() << m_title << m_description << m_author << m_date << m_version << m_missed_snd << m_found_snd
 //              << m_turn_snd << m_back_img << m_background_img << m_backtrasp_img << m_main << m_languages;
-    if (reader.hasError()) {}
+    if (reader.hasError()) {
+        m_error += reader.errorString();
+    }
 
     setText(title());
 //     setIcon(QIcon(backImage()));
-    setData(qVariantFromValue<QStringList>(m_cardtypes.begin()->toList()), CardTypeRole);
-    setData(m_languages, LanguagesRole);
+    setData(qVariantFromValue<QStringList>(m_cardtypes["any"].toList()), CardTypeRole);
+    setData(qVariantFromValue<QStringList>(m_languages.toList()), LanguagesRole);
     setData(backImage(), Qt::DecorationRole);
 }
 
@@ -120,12 +128,11 @@ bool PairsTheme::isPertinent(const QString &type,const QString &lang) {
 //     qDebug() << type << lang << m_cardtypes[lang].count(type);
     return (m_cardtypes[lang].contains(type) || m_cardtypes["any"].contains(type));
 }
-                        
+
 void PairsTheme::parseElement(QXmlStreamReader &reader)
 {
     QString common[CARD_MAX_TYPE];
     CardType current_type = CARD_IMAGE;
-    QSet<QString> commonname;
     common[CARD_LOGIC] = "";
     QXmlStreamReader::TokenType type = reader.readNext();
     ThemeElement item;
@@ -135,88 +142,63 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                 if(!common[i].isEmpty()) {
                     foreach (const QString &str, m_cardtypes.keys()) {
                         if(item.name[i][str].isEmpty())
-                            item.name[i][str].append(common[i]);
+                            item.name[i][str]=common[i];
                     }
                 }
                 common[i].clear();
 //                 qDebug() << "ITEM" << item.name[i]  << "/ITEM";
             }
-            foreach (const QString &str, m_cardtypes.keys()) {
-                foreach(const QString& name, commonname)
-                    m_cardtypes[str].insert(name);
-            }
+            
 //             qDebug() << "CTYPES" << m_cardtypes << "/CTYPES";
             m_items += item;
             item.reset();
         }
-        else
-        if(type==QXmlStreamReader::StartElement) {
+        else if(type==QXmlStreamReader::StartElement) {
             QString name = reader.name().toString();
-            QString l = reader.attributes().value("lang").toString();
-            if(!l.isEmpty() && !m_languages.contains(l)) {
-                m_languages.append(l);
-            }
+            QString lang = reader.attributes().hasAttribute("lang") ? reader.attributes().value("lang").toString() : "any";
+            m_languages.insert(lang);
+            
             if(name != "element") {
-                if(l.isEmpty() && !commonname.contains(name))
-                    commonname.insert(name);
-                else if(!l.isEmpty()  && !m_cardtypes[l].contains(name))
-                    m_cardtypes[l].insert(name);
-            }
+                m_cardtypes[lang].insert(name);
             
-            if(name == "image") {
-                if(common[CARD_IMAGE].isEmpty() && item.name[CARD_IMAGE][l].isEmpty()){
-                    current_type = CARD_IMAGE;
-                } else {
-                    current_type = CARD_IMAGE2;
-                    commonname.insert("image2");
-                    commonname.insert("logic");
+                current_type = cardNameToType(name);
+                switch(current_type) {
+                    case CARD_IMAGE:
+                        if(!common[CARD_IMAGE].isEmpty() || !item.name[CARD_IMAGE][lang].isEmpty()) {
+                            current_type = CARD_IMAGE2;
+                            m_cardtypes["any"].insert("image2");
+                            m_cardtypes["any"].insert("logic");
+                        }
+                        break;
+                    case CARD_SOUND:
+                        m_cardtypes["any"].insert("soundlogic");
+                        break;
+                    case CARD_WORD:
+                        QString src = reader.readElementText();
+                        if(current_type == m_main_type)
+                            common[current_type] = src;
+                        item.name[current_type][lang] = src;
+                        break;
                 }
-            }
-            else if(name == "sound") {
-                current_type = CARD_SOUND;
-                commonname.insert("soundlogic");
-            }
-            else if(name == "video") {
-                current_type = CARD_VIDEO;
-            }
-            else if(name == "word") {
-                current_type = CARD_WORD;
-                QString src = reader.readElementText();
-                if(l.isEmpty()) {
-                    common[current_type] = src;
-                } else {
-                    if(current_type == m_main_type)
-                        common[current_type] = src;
-                    item.name[current_type][l] = src;
-                }
-            }
-            
-            if(name != "element" && name != "word") {
-                QString src = reader.attributes().value("src").toString();
-                if(l.isEmpty()) {
-                    common[current_type] = src;
-                    if(current_type == CARD_IMAGE2)
-                        common[CARD_LOGIC] = src;
-                    if(current_type == CARD_SOUND)
-                        common[CARD_SOUNDLOGIC] = src;
-                }
-                else {
-                    if(current_type == m_main_type){
+                
+                if(current_type!=CARD_WORD) {
+                    QString src = reader.attributes().value("src").toString();
+                    if(current_type == m_main_type) {
                         common[current_type] = src;
                         common[CARD_LOGIC] = src;
                     }
-                    item.name[current_type][l] = src;
+
                     if(current_type == CARD_IMAGE2)
-                        item.name[CARD_LOGIC][l] = src;
-                    if(current_type == CARD_SOUND)
-                        item.name[CARD_SOUNDLOGIC][l] = src;
+                        item.name[CARD_LOGIC][lang] = src;
+                    else if(current_type == CARD_SOUND)
+                        item.name[CARD_SOUNDLOGIC][lang] = src;
+                    else
+                        item.name[current_type][lang] = src;
                 }
             }
         }
         type = reader.readNext();
     }
-    
-    qDebug() << "lalala" << m_main << commonname;
 }
 
 bool PairsTheme::isValid(const KArchiveFile* file) {
@@ -250,11 +232,19 @@ QByteArray PairsTheme::themeData(const QString& path) const
 
 bool PairsTheme::hasFile(const QString& path) const
 {
-    const KArchiveEntry* entry = m_archive.directory()->entry(path);
-    return entry;
+    return m_archive.directory()->entries().contains(path);
 }
 
 QString PairsTheme::path() const
 {
     return m_archive.fileName();
+}
+
+QString ThemeElement::value(CardType type, const QString& language) const
+{
+    QString ret = name[type][language];
+    if(ret.isEmpty())
+        return name[type]["any"];
+
+    return ret;
 }

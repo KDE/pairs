@@ -27,7 +27,6 @@ enum CardType {
     CARD_IMAGE,
     CARD_IMAGE2,
     CARD_SOUND,
-    CARD_VIDEO,
     CARD_WORD,
     CARD_LOGIC,
     CARD_SOUNDLOGIC,
