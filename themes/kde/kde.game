@@ -2,18 +2,18 @@
 
 <pairs xmlns="http://edu.kde.org/game">
   <title>KDE Programs</title>
-  <description lang='en'>Helps you learn KDE programs</description>
+  <description lang='any'>Helps you learn KDE programs</description>
   <author>Aleix Pol</author>
   <date>23/9/2011</date>
   <version>0.1</version>
-  <image type='back' src='kde.svg'></image>
+  <image type='back' src='kde.svg'/>
   <main type='image' />
   
-  <element><image src='ktuberling.svg' lang='en'></image><word lang='en'>KTuberling</word></element>
-  <element><image src='kalgebra.svg' lang='en'></image><word lang='en'>KAlgebra</word></element>
-  <element><image src='okular.svg' lang='en'></image><word lang='en'>Okular</word></element>
-  <element><image src='kdevelop.svg' lang='en'></image><word lang='en'>KDevelop</word></element>
-  <element><image src='kopete.svg' lang='en'></image><word lang='en'>Kopete</word></element>
-  <element><image src='konqueror.svg' lang='en'></image><word lang='en'>Konqueror</word></element>
-  <element><image src='dolphin.svg' lang='en'></image><word lang='en'>Dolphin</word></element>
+  <element><image src='ktuberling.svg' lang='any'/><word lang='any'>KTuberling</word></element>
+  <element><image src='kalgebra.svg' lang='any'/><word lang='any'>KAlgebra</word></element>
+  <element><image src='okular.svg' lang='any'/><word lang='any'>Okular</word></element>
+  <element><image src='kdevelop.svg' lang='any'/><word lang='any'>KDevelop</word></element>
+  <element><image src='kopete.svg' lang='any'/><word lang='any'>Kopete</word></element>
+  <element><image src='konqueror.svg' lang='any'/><word lang='any'>Konqueror</word></element>
+  <element><image src='dolphin.svg' lang='any'/><word lang='any'>Dolphin</word></element>
 </pairs>
