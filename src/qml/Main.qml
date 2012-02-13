@@ -118,7 +118,10 @@ FancyBackground
                     
                     enabled: selected
                     onClicked: playersModel.toggleSelection(index)
-                    onOverlayClicked: playersModel.removePlayer(index)
+                    onOverlayClicked: {
+                        mouseEnabled: false
+                        playersModel.removePlayer(index)
+                    }
                 }
             }
         }

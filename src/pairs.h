@@ -51,8 +51,8 @@ public:
     virtual QSize sizeHint() const { return QSize(800,500); }
     
 public slots:
-    void inc_missed();
-    void inc_found();
+    void inc_missed(QString &wrong);
+    void inc_found(QString &found);
 private slots:
     void newGame();
 

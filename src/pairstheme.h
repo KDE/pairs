@@ -34,11 +34,12 @@
 class ThemeElement {
 public:
     QMap<QString, QString>  name[CARD_MAX_TYPE];
-    
+    QMap<QString, QString> found;
     ThemeElement(){ reset(); };
     
     void reset() {
         for(int i = 0; i < CARD_MAX_TYPE; i++) name[i].clear();
+        found.clear();
     };
     
     QString value(CardType type, const QString& language) const;

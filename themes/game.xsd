@@ -53,8 +53,13 @@ elementFormDefault="qualified">
     </xsd:complexType>
 
     <xsd:complexType name="el_sound">
-        <xsd:attribute name="src" type="xsd:string" use="required"/>
+    	<xsd:attribute name="src" type="xsd:string" use="required" />
         <xsd:attribute name="lang" type="xsd:string" use="optional"></xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="el_found">
+        <xsd:attribute name="src" type="xsd:string" use="required" />
+        <xsd:attribute name="lang" type="xsd:string" use="required"></xsd:attribute>
     </xsd:complexType>
 
     <xsd:complexType name="el_video">
@@ -81,6 +86,7 @@ elementFormDefault="qualified">
             <xsd:element name="sound" type="tns:el_sound" minOccurs="0" maxOccurs="unbounded"></xsd:element>
             <xsd:element name="video" type="tns:el_video" minOccurs="0" maxOccurs="unbounded"></xsd:element>
             <xsd:element name="word" type="tns:el_word" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+            <xsd:element name="found" type="tns:el_found" minOccurs="0" maxOccurs="unbounded"></xsd:element>
     	</xsd:sequence>
     </xsd:complexType>
 

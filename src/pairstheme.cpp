@@ -55,7 +55,7 @@ PairsTheme::PairsTheme(const QString& path)
     Q_ASSERT(m_archive.directory()->entry(themename)->isFile());
     const KArchiveFile* file = static_cast<const KArchiveFile*>(m_archive.directory()->entry(themename));
     if(!isValid(file)) {
-        qWarning() << "Skipping game theme not valid";
+        qWarning() << "Skipping game theme not valid: " << themename;
         m_error = "Not valid XML file";
     }
 
@@ -132,6 +132,7 @@ bool PairsTheme::isPertinent(const QString &type,const QString &lang) {
 void PairsTheme::parseElement(QXmlStreamReader &reader)
 {
     QString common[CARD_MAX_TYPE];
+    QString common_found("");
     CardType current_type = CARD_IMAGE;
     common[CARD_LOGIC] = "";
     QXmlStreamReader::TokenType type = reader.readNext();
@@ -174,6 +175,9 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                         m_cardtypes["any"].insert("soundlogic");
                         break;
                     case CARD_WORD:
+            else if(name == "found") {
+                current_type = CARD_FOUND;
+            }
                         QString src = reader.readElementText();
                         if(current_type == m_main_type)
                             common[current_type] = src;
@@ -183,6 +187,9 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                 
                 if(current_type!=CARD_WORD) {
                     QString src = reader.attributes().value("src").toString();
+                    if(current_type == CARD_FOUND)
+                        common_found = src;
+
                     if(current_type == m_main_type) {
                         common[current_type] = src;
                         common[CARD_LOGIC] = src;
@@ -192,6 +199,8 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                         item.name[CARD_LOGIC][lang] = src;
                     else if(current_type == CARD_SOUND)
                         item.name[CARD_SOUNDLOGIC][lang] = src;
+                    else if(current_type == CARD_FOUND)
+                        item.name[CARD_FOUND][lang] = src;
                     else
                         item.name[current_type][lang] = src;
                 }

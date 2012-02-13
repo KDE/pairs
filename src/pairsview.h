@@ -59,8 +59,8 @@ public:
 	
     virtual void resizeEvent(QResizeEvent* ev);
 signals:
-    void pair_missed();
-    void pair_found();
+    void pair_missed(QString wrong);
+    void pair_found(QString found);
     void gameOver();
     
 public slots:
