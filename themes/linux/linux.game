@@ -2,68 +2,68 @@
 
 <pairs xmlns="http://edu.kde.org/game">
     <title>Linux Flavours</title>
-    <description lang='en'>'Some of Linux Distributions'</description> 
+    <description lang='en'>Some of Linux Distributions</description> 
     <author>Marco Calignano</author>
     <date>20/09/2011</date>
     <version>0.3</version>
     <image type='back' src='Tux.svg'></image>
     <main type='image'></main>
     <element>
-        <image src='centos_logo.svg' lang='en'></image>
+        <image src='centos_logo.svg' />
         <sound src='centos.ogg' lang='en'></sound>
         <word lang='en'>centos</word>
         <word lang='it'>centos</word>
     </element>
     <element>
-        <image src='debian-logo.svg' lang='en'></image>
+        <image src='debian-logo.svg' />
         <sound src='debian.ogg' lang='en'></sound>
         <word lang='en'>debian</word>
         <word lang='it'>debian</word>
     </element>
     <element>
-        <image src='fedora-logo.svg' lang='en'></image>
+        <image src='fedora-logo.svg' />
         <sound src='fedora.ogg' lang='en'></sound>
         <word lang='en'>fedora</word>
         <word lang='it'>fedora</word>
     </element>
     <element>
-        <image src='gentoo-logo.svg' lang='en'></image>
+        <image src='gentoo-logo.svg' />
         <sound src='gentoo.ogg' lang='en'></sound>
         <word lang='en'>gentoo</word>
         <word lang='it'>gentoo</word>
     </element>
     <element>
-        <image src='knoppix-logo.svg' lang='en'></image>
+        <image src='knoppix-logo.svg' />
         <sound src='knoppix.ogg' lang='en'></sound>
         <word lang='en'>knoppix</word>
         <word lang='it'>knoppix</word>
     </element>
     <element>
-        <image src='mandrake_logo.svg' lang='en'></image>
+        <image src='mandrake_logo.svg' />
         <sound src='mandrake.ogg' lang='en'></sound>
         <word lang='en'>mandrake</word>
         <word lang='it'>mandrake</word>
     </element>
     <element>
-        <image src='mint-logo.svg' lang='en'></image>
+        <image src='mint-logo.svg' />
         <sound src='mint.ogg' lang='en'></sound>
         <word lang='en'>mint</word>
         <word lang='it'>mint</word>
     </element>
     <element>
-        <image src='redhat-logo.svg' lang='en'></image>
+        <image src='redhat-logo.svg' />
         <sound src='redhat.ogg' lang='en'></sound>
         <word lang='en'>redhat</word>
         <word lang='it'>redhat</word>
     </element>
     <element>
-        <image src='suse_logo.svg' lang='en'></image>
+        <image src='suse_logo.svg' />
         <sound src='suse.ogg' lang='en'></sound>
         <word lang='en'>suse</word>
         <word lang='it'>suse</word>
     </element>
     <element>
-        <image src='ubuntu-logo.svg' lang='en'></image>
+        <image src='ubuntu-logo.svg' />
         <sound src='ubuntu.ogg' lang='en'></sound>
         <word lang='en'>ubuntu</word>
         <word lang='it'>ubuntu</word>
