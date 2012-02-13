@@ -24,22 +24,21 @@ macro(create_theme _baseName)
         set(_template ${CMAKE_CURRENT_BINARY_DIR}/${_baseName}.pairs.tar.bz2)
     endif(WIN32)
     
-    file(GLOB _files "${CMAKE_CURRENT_SOURCE_DIR}/${_template}/*")
-    
+    file(GLOB _files RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/${_baseName}/" "${CMAKE_CURRENT_SOURCE_DIR}/${_baseName}/*" )
     add_custom_target(${_baseName} ALL DEPENDS ${_template})
 
     if(WIN32)
         add_custom_command(OUTPUT ${_template}
             COMMAND zip ARGS -r
-                ${_template} ${CMAKE_CURRENT_SOURCE_DIR}/${_baseName}
-            DEPENDS ${_deps}
+                ${_template} ${_files}
+            DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/${_baseName}"
             WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/${_baseName}"
         )
     else(WIN32)
         add_custom_command(OUTPUT ${_template}
             COMMAND tar ARGS cjf
-                ${_template} .
-            DEPENDS ${_deps}
+                ${_template} ${_files}
+            DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/${_baseName}"
             WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/${_baseName}"
         )
     endif(WIN32)
