@@ -52,6 +52,8 @@ class CardItem
         bool isDone() const;
         void setDuration(int dur);
         void setSize(const QSizeF& newSize);
+        void setFound(const QString & found) { m_found = found; } ;
+        QString found() const { return m_found; };
         
     public slots:
         void changeValue();
@@ -76,6 +78,7 @@ class CardItem
         QSharedPointer<QSvgRenderer> m_frontRenderer;
         QSharedPointer<QSvgRenderer> m_backRenderer;
         QString m_text;
+        QString m_found;
     QGraphicsRotation* m_rotation;
 };
 

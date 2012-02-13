@@ -13,6 +13,7 @@ Rectangle{
     property alias source: icon.source
     property alias overlaySource: overlay.source
     property alias hoverEnabled: mouse.hoverEnabled
+    property alias mouseEnabled: mouse.enabled
     property alias font: caption.font
     property bool overlayVisible: true
     Image {

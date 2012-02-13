@@ -59,8 +59,8 @@ PairsView::PairsView(QWidget *parent)
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
     
-    connect(this, SIGNAL(pair_missed()), parent, SLOT(inc_missed()));
-    connect(this, SIGNAL(pair_found()), parent, SLOT(inc_found()));
+    connect(this, SIGNAL(pair_missed(QString wrong)), parent, SLOT(inc_missed(QString &wrong)));
+    connect(this, SIGNAL(pair_found(QString found)), parent, SLOT(inc_found(QString &found)));
     connect(m_players, SIGNAL(rowsRemoved(QModelIndex, int, int)), m_timer, SLOT(stop()));
     
 //     qmlRegisterType<ThemesModel>("org.kde.edu.pairs", 1, 0, "ThemesModel");
@@ -111,13 +111,13 @@ void PairsView::cardSelected(CardItem* card)
         if(m_last->data(0)==card->data(0)) {
             m_last->markDone();
             card->markDone();
-            emit pair_found();
+            emit pair_found(card->found());
             m_players->player(m_currentPlayer)->incFound();
             QTimer::singleShot(500, this, SLOT(checkGameOver()));
         } else {
             QTimer::singleShot(500, card, SLOT(turn()));
             QTimer::singleShot(500, m_last, SLOT(turn()));
-            emit pair_missed();
+            emit pair_missed("");
             m_players->player(m_currentPlayer)->incMissed();
             
             //next player
@@ -184,6 +184,9 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
             item->setDuration(0);
             item1->setDuration(0);
         }
+
+        item->setFound(titem.found[language]);
+        item1->setFound(titem.found[language]);
         connect(item,  SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
         connect(item1, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
         cards += item;

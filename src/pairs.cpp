@@ -80,22 +80,36 @@ void Pairs::newGame()
     m_view->playersModel()->resetPlayers();
 }
 
-void Pairs::inc_missed()
+void Pairs::inc_missed(QString &wrong)
 {
+    QString to_play("");
+    if (wrong != "")
+    {
+        to_play = wrong;
+    }
+    else
+    {
+        to_play = m_wrong;
+    }
     if(m_media->state()==Phonon::PlayingState) {
-        m_media->setQueue(QList<Phonon::MediaSource>() << m_wrong);
+        m_media->setQueue(QList<Phonon::MediaSource>() << to_play);
     } else {
-        m_media->setCurrentSource(m_wrong);
+        m_media->setCurrentSource(to_play);
         m_media->play();
     }
 }
 
-void Pairs::inc_found()
+void Pairs::inc_found(QString &found)
 {
+    QString to_play("");
+    if (found != "")
+        to_play = found;
+    else
+        to_play = m_right;
     if(m_media->state()==Phonon::PlayingState) {
-        m_media->setQueue(QList<Phonon::MediaSource>() << m_right);
+        m_media->setQueue(QList<Phonon::MediaSource>() << to_play);
     } else {
-        m_media->setCurrentSource(m_right);
+        m_media->setCurrentSource(to_play);
         m_media->play();
     }
 }

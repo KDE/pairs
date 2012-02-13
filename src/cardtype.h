@@ -32,7 +32,9 @@ enum CardType {
     CARD_LOGIC,
     CARD_SOUNDLOGIC,
     
-    CARD_MAX_TYPE
+    CARD_MAX_TYPE,
+    CARD_FOUND
+
 };
 
 #endif /* CARDTYPE_H_ */

@@ -43,7 +43,7 @@ PairsTheme::PairsTheme(const QString& path)
     Q_ASSERT(m_archive.directory()->entry(themename)->isFile());
     const KArchiveFile* file = static_cast<const KArchiveFile*>(m_archive.directory()->entry(themename));
     if(!isValid(file)) {
-        qWarning() << "Skipping game theme not valid";
+        qWarning() << "Skipping game theme not valid: " << themename;
         m_error = "Not valid XML file";
     }
 
@@ -124,6 +124,7 @@ bool PairsTheme::isPertinent(const QString &type,const QString &lang) {
 void PairsTheme::parseElement(QXmlStreamReader &reader)
 {
     QString common[CARD_MAX_TYPE];
+    QString common_found("");
     CardType current_type = CARD_IMAGE;
     QSet<QString> commonname;
     common[CARD_LOGIC] = "";
@@ -179,6 +180,9 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
             else if(name == "video") {
                 current_type = CARD_VIDEO;
             }
+            else if(name == "found") {
+                current_type = CARD_FOUND;
+            }
             else if(name == "word") {
                 current_type = CARD_WORD;
                 QString src = reader.readElementText();
@@ -199,6 +203,9 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                         common[CARD_LOGIC] = src;
                     if(current_type == CARD_SOUND)
                         common[CARD_SOUNDLOGIC] = src;
+                    if(current_type == CARD_FOUND)
+                        common_found = src;
+
                 }
                 else {
                     if(current_type == m_main_type){
@@ -210,6 +217,8 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                         item.name[CARD_LOGIC][l] = src;
                     if(current_type == CARD_SOUND)
                         item.name[CARD_SOUNDLOGIC][l] = src;
+                    if(current_type == CARD_FOUND)
+                        item.found[l] = src;
                 }
             }
         }

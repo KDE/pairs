@@ -9,11 +9,11 @@
   <image type='back' src='kde.svg'/>
   <main type='image' />
   
-  <element><image src='ktuberling.svg' lang='any'/><word lang='any'>KTuberling</word></element>
-  <element><image src='kalgebra.svg' lang='any'/><word lang='any'>KAlgebra</word></element>
-  <element><image src='okular.svg' lang='any'/><word lang='any'>Okular</word></element>
-  <element><image src='kdevelop.svg' lang='any'/><word lang='any'>KDevelop</word></element>
-  <element><image src='kopete.svg' lang='any'/><word lang='any'>Kopete</word></element>
-  <element><image src='konqueror.svg' lang='any'/><word lang='any'>Konqueror</word></element>
-  <element><image src='dolphin.svg' lang='any'/><word lang='any'>Dolphin</word></element>
+  <element><image src='ktuberling.svg' lang='any'/><word lang='any'>KTuberling</word><found src='test.ogg' lang='en'/></element>
+  <element><image src='kalgebra.svg' lang='any'/><word lang='any'>KAlgebra</word><found src='test.ogg' lang='en'/></element>
+  <element><image src='okular.svg' lang='any'/><word lang='any'>Okular</word><found src='test.ogg' lang='en'/></element>
+  <element><image src='kdevelop.svg' lang='any'/><word lang='any'>KDevelop</word><found src='test.ogg' lang='en'/></element>
+  <element><image src='kopete.svg' lang='any'/><word lang='any'>Kopete</word><found src='test.ogg' lang='en'/></element>
+  <element><image src='konqueror.svg' lang='any'/><word lang='any'>Konqueror</word><found src='test.ogg' lang='en'/></element>
+  <element><image src='dolphin.svg' lang='any'/><word lang='any'>Dolphin</word><found src='test.ogg' lang='en'/></element>
 </pairs>
