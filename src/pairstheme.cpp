@@ -36,6 +36,7 @@ CardType PairsTheme::cardNameToType(const QString& name)
     else if (name == "word")  return CARD_WORD;
     else if (name == "logic") return CARD_LOGIC;
     else if (name == "soundlogic") return CARD_SOUNDLOGIC;
+    else if (name == "pfound") return CARD_FOUND;
     Q_ASSERT(false);
     return CARD_NONE;
 }
@@ -175,9 +176,6 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                         m_cardtypes["any"].insert("soundlogic");
                         break;
                     case CARD_WORD:
-            else if(name == "pfound") {
-                current_type = CARD_FOUND;
-            }
                         QString src = reader.readElementText();
                         if(current_type == m_main_type)
                             common[current_type] = src;
@@ -195,14 +193,17 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                         common[CARD_LOGIC] = src;
                     }
 
-                    if(current_type == CARD_IMAGE2)
-                        item.name[CARD_LOGIC][lang] = src;
-                    else if(current_type == CARD_SOUND)
-                        item.name[CARD_SOUNDLOGIC][lang] = src;
-                    else if(current_type == CARD_FOUND)
+
+                    if(current_type == CARD_FOUND)
                         item.found[lang] = src;
                     else
+                    {
                         item.name[current_type][lang] = src;
+                        if(current_type == CARD_IMAGE2)
+                            item.name[CARD_LOGIC][lang] = src;
+                        else if(current_type == CARD_SOUND)
+                            item.name[CARD_SOUNDLOGIC][lang] = src;
+                    }
                 }
             }
         }
