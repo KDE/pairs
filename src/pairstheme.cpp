@@ -175,7 +175,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                         m_cardtypes["any"].insert("soundlogic");
                         break;
                     case CARD_WORD:
-            else if(name == "found") {
+            else if(name == "pfound") {
                 current_type = CARD_FOUND;
             }
                         QString src = reader.readElementText();
@@ -200,7 +200,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                     else if(current_type == CARD_SOUND)
                         item.name[CARD_SOUNDLOGIC][lang] = src;
                     else if(current_type == CARD_FOUND)
-                        item.name[CARD_FOUND][lang] = src;
+                        item.found[lang] = src;
                     else
                         item.name[current_type][lang] = src;
                 }

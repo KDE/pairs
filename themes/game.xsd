@@ -6,16 +6,16 @@ xmlns:tns="http://edu.kde.org/game"
 elementFormDefault="qualified">
 
     <xsd:complexType name="Sound">
-    	<xsd:attribute name="type" use="required">
-    		<xsd:simpleType>
-    			<xsd:restriction base="xsd:string">
-    				<xsd:enumeration value="missed"></xsd:enumeration>
-    				<xsd:enumeration value="found"></xsd:enumeration>
-    				<xsd:enumeration value="turn"></xsd:enumeration>
-    			</xsd:restriction>
-    		</xsd:simpleType>
-    	</xsd:attribute>
-    	<xsd:attribute name="src" type="xsd:string"></xsd:attribute>
+        <xsd:attribute name="type" use="required">
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="missed"></xsd:enumeration>
+                    <xsd:enumeration value="found"></xsd:enumeration>
+                    <xsd:enumeration value="turn"></xsd:enumeration>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="src" type="xsd:string"></xsd:attribute>
     </xsd:complexType>
 
     <xsd:complexType name="Image">
@@ -47,28 +47,13 @@ elementFormDefault="qualified">
     <xsd:complexType name="Description">
         <xsd:simpleContent>
             <xsd:extension base="xsd:string">
-         	  <xsd:attribute name="lang" type="xsd:string" />
+              <xsd:attribute name="lang" type="xsd:string" />
             </xsd:extension>
         </xsd:simpleContent>
     </xsd:complexType>
 
-    <xsd:complexType name="el_sound">
-    	<xsd:attribute name="src" type="xsd:string" use="required" />
-        <xsd:attribute name="lang" type="xsd:string" use="optional"></xsd:attribute>
-    </xsd:complexType>
-
-    <xsd:complexType name="el_found">
+    <xsd:complexType name="el_file">
         <xsd:attribute name="src" type="xsd:string" use="required" />
-        <xsd:attribute name="lang" type="xsd:string" use="required"></xsd:attribute>
-    </xsd:complexType>
-
-    <xsd:complexType name="el_video">
-        <xsd:attribute name="src" type="xsd:string" use="required"/>
-        <xsd:attribute name="lang" type="xsd:string" use="optional"></xsd:attribute>
-    </xsd:complexType>
-
-    <xsd:complexType name="el_image">
-        <xsd:attribute name="src" type="xsd:string" use="required"/>
         <xsd:attribute name="lang" type="xsd:string" use="optional"></xsd:attribute>
     </xsd:complexType>
 
@@ -81,13 +66,13 @@ elementFormDefault="qualified">
     </xsd:complexType>
 
     <xsd:complexType name="Element">
-    	<xsd:sequence>
-    		<xsd:element name="image" type="tns:el_image" minOccurs="0" maxOccurs="unbounded"></xsd:element>
-            <xsd:element name="sound" type="tns:el_sound" minOccurs="0" maxOccurs="unbounded"></xsd:element>
-            <xsd:element name="video" type="tns:el_video" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+        <xsd:sequence>
+            <xsd:element name="image" type="tns:el_file" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+            <xsd:element name="sound" type="tns:el_file" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+            <xsd:element name="pfound" type="tns:el_file" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+            <xsd:element name="video" type="tns:el_file" minOccurs="0" maxOccurs="unbounded"></xsd:element>
             <xsd:element name="word" type="tns:el_word" minOccurs="0" maxOccurs="unbounded"></xsd:element>
-            <xsd:element name="found" type="tns:el_found" minOccurs="0" maxOccurs="unbounded"></xsd:element>
-    	</xsd:sequence>
+        </xsd:sequence>
     </xsd:complexType>
 
 <xsd:element name="pairs">
@@ -105,11 +90,5 @@ elementFormDefault="qualified">
     </xsd:sequence>
   </xsd:complexType>
 </xsd:element>
-
-
-
-
-    <xsd:simpleType name="NewSimpleType">
-    	<xsd:restriction base="xsd:string"></xsd:restriction>
-    </xsd:simpleType>
 </xsd:schema>
+
