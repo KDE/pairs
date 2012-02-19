@@ -176,6 +176,9 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                         m_cardtypes["any"].insert("soundlogic");
                         break;
                     case CARD_WORD:
+            else if(name == "found") {
+                current_type = CARD_FOUND;
+            }
                         QString src = reader.readElementText();
                         if(current_type == m_main_type)
                             common[current_type] = src;
@@ -185,6 +188,9 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                 
                 if(current_type!=CARD_WORD) {
                     QString src = reader.attributes().value("src").toString();
+                    if(current_type == CARD_FOUND)
+                        common_found = src;
+
                     if(current_type == CARD_FOUND)
                         common_found = src;
 
