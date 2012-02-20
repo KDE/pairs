@@ -59,8 +59,8 @@ PairsView::PairsView(QWidget *parent)
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
     
-    connect(this, SIGNAL(pair_missed(QString wrong)), parent, SLOT(inc_missed(QString &wrong)));
-    connect(this, SIGNAL(pair_found(QString found)), parent, SLOT(inc_found(QString &found)));
+    connect(this, SIGNAL(pair_missed(QString)), parent, SLOT(inc_missed(QString)));
+    connect(this, SIGNAL(pair_found(QString)), parent, SLOT(inc_found(QString)));
     connect(m_players, SIGNAL(rowsRemoved(QModelIndex, int, int)), m_timer, SLOT(stop()));
     
 //     qmlRegisterType<ThemesModel>("org.kde.edu.pairs", 1, 0, "ThemesModel");

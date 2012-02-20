@@ -45,18 +45,20 @@ public:
      * Default Destructor
      */
     virtual ~Pairs();
-    void Play(QIODevice * ioDevice);
     PairsView* view() const { return m_view; }
     
     virtual QSize sizeHint() const { return QSize(800,500); }
     
 public slots:
-    void inc_missed(QString &wrong);
-    void inc_found(QString &found);
+    void inc_missed(const QString& wrong);
+    void inc_found(const QString& found);
+
 private slots:
     void newGame();
 
 private:
+    void playSound() const;
+    
     PairsView *m_view;
     Phonon::MediaObject *m_media;
     QString m_right;

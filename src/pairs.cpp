@@ -46,8 +46,8 @@
 Pairs::Pairs()
     : KMainWindow()
     , m_view(new PairsView(this))
-	, m_right(KGlobal::dirs()->findResource("appdata", "themes/right.ogg"))
-	, m_wrong(KGlobal::dirs()->findResource("appdata", "themes/wrong.ogg"))
+    , m_right(KGlobal::dirs()->findResource("appdata", "themes/right.ogg"))
+    , m_wrong(KGlobal::dirs()->findResource("appdata", "themes/wrong.ogg"))
 
 {
     m_media = new Phonon::MediaObject(this);
@@ -55,8 +55,6 @@ Pairs::Pairs()
     createPath(m_media, audioOutput);
     
     setCentralWidget(m_view);
-    
-//    addToolBar("main")->addAction("new game", this, SLOT(newGame()));
 }
 
 Pairs::~Pairs()
@@ -80,36 +78,22 @@ void Pairs::newGame()
     m_view->playersModel()->resetPlayers();
 }
 
-void Pairs::inc_missed(QString &wrong)
+void Pairs::inc_missed(const QString& wrong)
 {
-    QString to_play("");
-    if (wrong != "")
-    {
-        to_play = wrong;
-    }
-    else
-    {
-        to_play = m_wrong;
-    }
-    if(m_media->state()==Phonon::PlayingState) {
-        m_media->setQueue(QList<Phonon::MediaSource>() << to_play);
-    } else {
-        m_media->setCurrentSource(to_play);
-        m_media->play();
-    }
+    playSound(wrong.isEmpty() ? m_wrong : wrong);
 }
 
-void Pairs::inc_found(QString &found)
+void Pairs::inc_found(const QString& found)
 {
-    QString to_play("");
-    if (found != "")
-        to_play = found;
-    else
-        to_play = m_right;
+    playSound(found.isEmpty() ? m_right : found);
+}
+
+void Pairs::playSound(const QString& sound) const
+{
     if(m_media->state()==Phonon::PlayingState) {
-        m_media->setQueue(QList<Phonon::MediaSource>() << to_play);
+        m_media->setQueue(QList<Phonon::MediaSource>() << sound);
     } else {
-        m_media->setCurrentSource(to_play);
+        m_media->setCurrentSource(sound);
         m_media->play();
     }
 }
