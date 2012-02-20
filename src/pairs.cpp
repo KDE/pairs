@@ -69,13 +69,11 @@ void Pairs::newGame()
     }
 
     m_view->playersModel()->clear();
-    for(int i= 0; i < dialog.players().count(); i++)
+    foreach(const QString& player, dialog.players())
     {
-        m_view->playersModel()->addPlayer(dialog.players().at(i), "get-hot-new-stuff");
+        m_view->playersModel()->addPlayer(player, "get-hot-new-stuff");
     }
     m_view->newGame(dialog.theme(), dialog.language(), dialog.cardType());
-
-    m_view->playersModel()->resetPlayers();
 }
 
 void Pairs::inc_missed(const QString& wrong)

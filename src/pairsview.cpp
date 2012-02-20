@@ -146,7 +146,7 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     QList<CardItem*> cards;
     
     QDeclarativeItem* cardsParent=rootObject()->findChild<QDeclarativeItem*>("board");
-    
+    playersModel()->resetPlayers();
     Q_ASSERT(cardsParent);
     
     QList<ThemeElement> items = theme->items();

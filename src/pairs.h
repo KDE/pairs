@@ -57,7 +57,7 @@ private slots:
     void newGame();
 
 private:
-    void playSound() const;
+    void playSound(const QString& sound) const;
     
     PairsView *m_view;
     Phonon::MediaObject *m_media;
