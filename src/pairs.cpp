@@ -66,6 +66,7 @@ void Pairs::inc_missed(const QString& wrong)
 
 void Pairs::inc_found(const QString& found)
 {
+    qDebug() << "playing" << found;
     playSound(found.isEmpty() ? m_right : found);
 }
 

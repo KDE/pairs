@@ -213,6 +213,7 @@ bool CardItem::isDone() const
 
 void CardItem::setFoundSound(const QString& found)
 {
+    qDebug() << "receiving" << found;
     m_found = found;
 }
 

@@ -175,7 +175,7 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
             item->setDuration(0);
             item1->setDuration(0);
         }
-
+        qDebug() << titem.found["any"];
         item->setFoundSound(titem.foundSound(language));
         item1->setFoundSound(titem.foundSound(language));
         connect(item,  SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));

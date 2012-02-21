@@ -152,28 +152,52 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
             }
             
 //             qDebug() << "CTYPES" << m_cardtypes << "/CTYPES";
+            qDebug() << item.foundSound("en");
             m_items += item;
             item.reset();
         }
         else if(type==QXmlStreamReader::StartElement) {
             QString name = reader.name().toString();
             QString lang = reader.attributes().hasAttribute("lang") ? reader.attributes().value("lang").toString() : "any";
+            QString src = "";
             m_languages.insert(lang);
             
             if(name != "element") {
                 m_cardtypes[lang].insert(name);
             
                 current_type = cardNameToType(name);
+                if(current_type != CARD_WORD)
+                    src = reader.attributes().value("src").toString();
+                qDebug() << name << src;
                 switch(current_type) {
                     case CARD_IMAGE:
-                        if(!common[CARD_IMAGE].isEmpty() || !item.name[CARD_IMAGE][lang].isEmpty()) {
-                            current_type = CARD_IMAGE2;
-                            m_cardtypes["any"].insert("image2");
-                            m_cardtypes["any"].insert("logic");
+                        if(common[CARD_IMAGE].isEmpty() && item.name[CARD_IMAGE][lang].isEmpty()){
+                            item.name[CARD_IMAGE][lang] = src;
+                            break;
                         }
+                        else {
+                            current_type = CARD_IMAGE2;
+                            m_cardtypes[lang].insert("image2");
+                            m_cardtypes[lang].insert("logic");
+                        }
+                    case CARD_IMAGE2:
+                        item.name[CARD_IMAGE2][lang] = src;
+                        item.name[CARD_LOGIC][lang] = src;
+                        break;
+                    case CARD_SOUNDLOGIC:
+                        item.name[CARD_SOUNDLOGIC][lang] = src;
+                        break;
+                    case CARD_LOGIC:
+                        item.name[CARD_LOGIC][lang] = src;
                         break;
                     case CARD_SOUND:
-                        m_cardtypes["any"].insert("soundlogic");
+                        m_cardtypes[lang].insert("soundlogic");
+                        item.name[CARD_SOUND][lang] = src;
+                        item.name[CARD_SOUNDLOGIC][lang] = src;
+                        break;
+                    case CARD_FOUND:
+                        item.found[lang] = src;
+                        qDebug() << lang << src << item.found[lang] << item.foundSound("en");
                         break;
                     case CARD_WORD:
                         QString src = reader.readElementText();
@@ -183,32 +207,11 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                         break;
                 }
                 
-                if(current_type!=CARD_WORD) {
-                    QString src = reader.attributes().value("src").toString();
-                    if(current_type == CARD_FOUND)
-                        common_found = src;
-
-                    if(current_type == CARD_FOUND)
-                        common_found = src;
-
-                    if(current_type == m_main_type) {
-                        common[current_type] = src;
-                        common[CARD_LOGIC] = src;
-                    }
-
-
-                    if(current_type == CARD_FOUND)
-                        item.found[lang] = src;
-                    else
-                    {
-                        item.name[current_type][lang] = src;
-                        if(current_type == CARD_IMAGE2)
-                            item.name[CARD_LOGIC][lang] = src;
-                        else if(current_type == CARD_SOUND)
-                            item.name[CARD_SOUNDLOGIC][lang] = src;
-                    }
+                if(current_type == m_main_type) {
+                    common[current_type] = src;
+                    common[CARD_LOGIC] = src;
                 }
-            }
+             }
         }
         type = reader.readNext();
     }
@@ -267,6 +270,6 @@ QString ThemeElement::foundSound(const QString& lang) const
     QString ret = found[lang];
     if(ret.isEmpty())
         ret = found["any"];
-    
+    qDebug() << "giving" << ret;
     return ret;
 }
