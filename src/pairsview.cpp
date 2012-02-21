@@ -111,7 +111,7 @@ void PairsView::cardSelected(CardItem* card)
         if(m_last->data(0)==card->data(0)) {
             m_last->markDone();
             card->markDone();
-            emit pair_found(card->found());
+            emit pair_found(card->foundSound());
             m_players->player(m_currentPlayer)->incFound();
             QTimer::singleShot(500, this, SLOT(checkGameOver()));
         } else {
@@ -176,8 +176,8 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
             item1->setDuration(0);
         }
 
-        item->setFound(titem.found[language]);
-        item1->setFound(titem.found[language]);
+        item->setFoundSound(titem.foundSound(language));
+        item1->setFoundSound(titem.foundSound(language));
         connect(item,  SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
         connect(item1, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
         cards += item;

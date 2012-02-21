@@ -52,8 +52,8 @@ class CardItem
         bool isDone() const;
         void setDuration(int dur);
         void setSize(const QSizeF& newSize);
-        void setFound(const QString & found) { m_found = found; } ;
-        QString found() const { return m_found; };
+        void setFoundSound(const QString & found);
+        QString foundSound() const;
         
     public slots:
         void changeValue();

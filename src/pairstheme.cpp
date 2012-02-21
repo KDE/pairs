@@ -261,3 +261,12 @@ QString ThemeElement::value(CardType type, const QString& language) const
 
     return ret;
 }
+
+QString ThemeElement::foundSound(const QString& lang) const
+{
+    QString ret = found[lang];
+    if(ret.isEmpty())
+        ret = found["any"];
+    
+    return ret;
+}

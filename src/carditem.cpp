@@ -210,3 +210,13 @@ bool CardItem::isDone() const
 {
     return m_opacityAnimation->currentTime()!=0;
 }
+
+void CardItem::setFoundSound(const QString& found)
+{
+    m_found = found;
+}
+
+QString CardItem::foundSound() const
+{
+    return m_found;
+}

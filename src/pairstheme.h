@@ -43,6 +43,7 @@ public:
     };
     
     QString value(CardType type, const QString& language) const;
+    QString foundSound(const QString& lang) const;
 };
 
 class PairsTheme : public QObject, public QStandardItem
