@@ -53,9 +53,6 @@ public slots:
     void inc_missed(const QString& wrong);
     void inc_found(const QString& found);
 
-private slots:
-    void newGame();
-
 private:
     void playSound(const QString& sound) const;
     

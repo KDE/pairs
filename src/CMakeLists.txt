@@ -19,7 +19,7 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-set(pairs_SRCS pairstheme.cpp newpairsdialog.cpp carditem.cpp
+set(pairs_SRCS pairstheme.cpp carditem.cpp
    pairs.cpp
    main.cpp
    pairsview.cpp
@@ -29,7 +29,6 @@ set(pairs_SRCS pairstheme.cpp newpairsdialog.cpp carditem.cpp
    themeiconsprovider.cpp
  )
 
-kde4_add_ui_files(pairs_SRCS newpairsdialog.ui)
 qt4_add_resources(pairs_SRCS resources.qrc)
 kde4_add_kcfg_files(pairs_SRCS settings.kcfgc )
 

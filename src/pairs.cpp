@@ -39,7 +39,6 @@
 
 #include <Phonon/MediaObject>
 #include <Phonon/AudioOutput>
-#include "newpairsdialog.h"
 #include "playersmodel.h"
 #include <kstatusbar.h>
 
@@ -59,22 +58,6 @@ Pairs::Pairs()
 
 Pairs::~Pairs()
 {}
-
-void Pairs::newGame()
-{
-    NewPairsDialog dialog;
-
-    if(dialog.exec()!=QDialog::Accepted) {
-        return;
-    }
-
-    m_view->playersModel()->clear();
-    foreach(const QString& player, dialog.players())
-    {
-        m_view->playersModel()->addPlayer(player, "get-hot-new-stuff");
-    }
-    m_view->newGame(dialog.theme(), dialog.language(), dialog.cardType());
-}
 
 void Pairs::inc_missed(const QString& wrong)
 {
