@@ -41,7 +41,6 @@ void PairsPlayer::reset()
     m_found = 0;
     m_missed = 0;
     m_seconds = 0;
-    m_selected = false;
 }
 
 void PairsPlayer::incFound()
@@ -64,6 +63,10 @@ void PairsPlayer::incSeconds()
 
 void PairsPlayer::setSelected(bool s)
 {
-    m_selected = s;
-    setData(m_selected, PlayersModel::Selected);
+    setData(s, PlayersModel::Selected);
+}
+
+bool PairsPlayer::isSelected() const
+{
+    return data(PlayersModel::Selected).toBool();
 }

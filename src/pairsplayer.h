@@ -39,7 +39,7 @@ public:
     QString name() const {return m_name; }
     QString icon() const {return m_icon; }
     void setSelected(bool s);
-    bool isSelected() { return m_selected; }
+    bool isSelected() const;
 
 private:
     QString m_name;
@@ -47,7 +47,6 @@ private:
     int m_missed;
     int m_found;
     int m_seconds;
-    bool m_selected;
 };
 
 #endif
