@@ -198,10 +198,15 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     Q_ASSERT(cardsContext);
     cardsContext->setProperty("isGameOver", QVariant(false));
 
-    m_currentPlayer=0;
-    do {
-        ++m_currentPlayer %= m_players->rowCount();
-    } while(!m_players->player(m_currentPlayer)->isSelected());
+    m_currentPlayer=-1;
+    for(int i=0; i<m_players->rowCount(); i++) {
+        if(m_players->player(i)->isSelected()) {
+            m_currentPlayer = i;
+            break;
+        }
+    }
+    
+    Q_ASSERT(m_currentPlayer>=0 && "some player must be selected first");
     m_timer->start(1000);
 }
 

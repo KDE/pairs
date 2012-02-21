@@ -62,13 +62,11 @@ PlayersModel::~PlayersModel()
 
 bool PlayersModel::isAnySelected()
 {
-    bool res = false;
-    PairsPlayer* p;
     for (int i = 0; i < rowCount(); ++i) {
-       p=player(i);
-       res |= p->isSelected();
-    }          
-    return res;                             
+        if(player(i)->isSelected())
+            return true;
+    }
+    return false;
 }
 
 
