@@ -22,6 +22,7 @@
 #include "carditem.h"
 #include <QGraphicsRotation>
 #include <QPropertyAnimation>
+#include <QFile>
 #include <QPainter>
 #include <QGraphicsOpacityEffect>
 #include <QGraphicsColorizeEffect>
@@ -211,12 +212,33 @@ bool CardItem::isDone() const
     return m_opacityAnimation->currentTime()!=0;
 }
 
-void CardItem::setFoundSound(const QString& found)
+void CardItem::setFoundSound(const QByteArray& found)
 {
     m_found = found;
 }
 
-QString CardItem::foundSound() const
+QByteArray readFile(const QString& path)
 {
-    return m_found;
+    QFile f(path);
+    bool r = f.open(QFile::ReadOnly);
+    Q_ASSERT(r);
+    return f.readAll();
+}
+
+QByteArray CardItem::foundSound() const
+{
+    if(m_found.isEmpty()) {
+        static QByteArray defaultCorrectSound;
+        if(defaultCorrectSound.isEmpty()) {
+            defaultCorrectSound = readFile(KGlobal::dirs()->findResource("appdata", "themes/right.ogg"));
+        }
+        return defaultCorrectSound;
+    } else
+        return m_found;
+}
+
+QByteArray CardItem::missedSound() const
+{
+    static QByteArray defaultMissedSound = readFile(KGlobal::dirs()->findResource("appdata", "themes/wrong.ogg"));
+    return defaultMissedSound;
 }

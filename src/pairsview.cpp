@@ -38,12 +38,15 @@
 #include "themesmodel.h"
 #include "themeiconsprovider.h"
 #include "playersmodel.h"
+#include <Phonon/MediaObject>
+#include <Phonon/AudioOutput>
 
 #include <knewstuff3/downloaddialog.h>
 #include <knewstuff3/entry.h>
 #include <QResizeEvent>
 #include <cmath>
 #include <KRandom>
+#include <KStandardDirs>
 #include "pairsplayer.h"
 
 PairsView::PairsView(QWidget *parent)
@@ -59,8 +62,6 @@ PairsView::PairsView(QWidget *parent)
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
     
-    connect(this, SIGNAL(pair_missed(QString)), parent, SLOT(inc_missed(QString)));
-    connect(this, SIGNAL(pair_found(QString)), parent, SLOT(inc_found(QString)));
     connect(m_players, SIGNAL(rowsRemoved(QModelIndex, int, int)), m_timer, SLOT(stop()));
     
 //     qmlRegisterType<ThemesModel>("org.kde.edu.pairs", 1, 0, "ThemesModel");
@@ -79,6 +80,10 @@ PairsView::PairsView(QWidget *parent)
     m_resizeTimer->setSingleShot(true);
     connect(m_resizeTimer, SIGNAL(timeout()), SLOT(reorganizeCards()));
     connect(engine(), SIGNAL(quit()), QCoreApplication::instance(), SLOT(quit()));
+    
+    m_media = new Phonon::MediaObject(this);
+    Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput(Phonon::GameCategory, this);
+    createPath(m_media, audioOutput);
 }
 
 PairsView::~PairsView()
@@ -111,13 +116,13 @@ void PairsView::cardSelected(CardItem* card)
         if(m_last->data(0)==card->data(0)) {
             m_last->markDone();
             card->markDone();
-            emit pair_found(card->foundSound());
+            playSound(card->foundSound());
             m_players->player(m_currentPlayer)->incFound();
             QTimer::singleShot(500, this, SLOT(checkGameOver()));
         } else {
             QTimer::singleShot(500, card, SLOT(turn()));
             QTimer::singleShot(500, m_last, SLOT(turn()));
-            emit pair_missed("");
+            playSound(card->missedSound());
             m_players->player(m_currentPlayer)->incMissed();
             
             //next player
@@ -176,8 +181,8 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
             item1->setDuration(0);
         }
 
-        item->setFoundSound(titem.foundSound(language));
-        item1->setFoundSound(titem.foundSound(language));
+        item->setFoundSound(theme->themeData(titem.foundSound(language)));
+        item1->setFoundSound(theme->themeData(titem.foundSound(language)));
         connect(item,  SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
         connect(item1, SIGNAL(selected(CardItem*)), SLOT(cardSelected(CardItem*)));
         cards += item;
@@ -275,4 +280,16 @@ void PairsView::reorganizeCards(bool starting)
     }
 }
 
-#include "pairsview.moc"
+void PairsView::playSound(const QByteArray& sound) const
+{
+    QBuffer* b = new QBuffer;
+    b->setData(sound);
+    Phonon::MediaSource media(b);
+    if(m_media->state()==Phonon::PlayingState) {
+        m_media->setQueue(QList<Phonon::MediaSource>() << media);
+    } else {
+        m_media->setCurrentSource(media);
+        m_media->play();
+    }
+    connect(m_media, SIGNAL(finished()), b, SLOT(deleteLater()));
+}

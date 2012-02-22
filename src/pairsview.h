@@ -59,8 +59,6 @@ public:
 	
     virtual void resizeEvent(QResizeEvent* ev);
 signals:
-    void pair_missed(QString wrong);
-    void pair_found(QString found);
     void gameOver();
     
 public slots:
@@ -74,6 +72,8 @@ private slots:
     void reorganizeCards(bool starting=false);
     
 private:
+    void playSound(const QByteArray& sound) const;
+    
     ThemesModel* m_model;
     CardItem* m_last;
     QList<CardItem*> m_cards;
@@ -85,6 +85,7 @@ private:
     int m_itemsPerRow;
     QTimer* m_resizeTimer;
     QString m_language;
+    Phonon::MediaObject *m_media;
 };
 
 #endif // kpairsVIEW_H

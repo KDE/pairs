@@ -49,15 +49,8 @@ public:
     
     virtual QSize sizeHint() const { return QSize(800,500); }
     
-public slots:
-    void inc_missed(const QString& wrong);
-    void inc_found(const QString& found);
-
 private:
-    void playSound(const QString& sound) const;
-    
     PairsView *m_view;
-    Phonon::MediaObject *m_media;
     QString m_right;
     QString m_wrong;
 };

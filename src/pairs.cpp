@@ -37,46 +37,17 @@
 #include <kstandarddirs.h>
 #include <KDE/KLocale>
 
-#include <Phonon/MediaObject>
-#include <Phonon/AudioOutput>
 #include "playersmodel.h"
 #include <kstatusbar.h>
 
 Pairs::Pairs()
     : KMainWindow()
     , m_view(new PairsView(this))
-    , m_right(KGlobal::dirs()->findResource("appdata", "themes/right.ogg"))
-    , m_wrong(KGlobal::dirs()->findResource("appdata", "themes/wrong.ogg"))
-
 {
-    m_media = new Phonon::MediaObject(this);
-    Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput(Phonon::GameCategory, this);
-    createPath(m_media, audioOutput);
-    
     setCentralWidget(m_view);
 }
 
 Pairs::~Pairs()
 {}
-
-void Pairs::inc_missed(const QString& wrong)
-{
-    playSound(wrong.isEmpty() ? m_wrong : wrong);
-}
-
-void Pairs::inc_found(const QString& found)
-{
-    playSound(found.isEmpty() ? m_right : found);
-}
-
-void Pairs::playSound(const QString& sound) const
-{
-    if(m_media->state()==Phonon::PlayingState) {
-        m_media->setQueue(QList<Phonon::MediaSource>() << sound);
-    } else {
-        m_media->setCurrentSource(sound);
-        m_media->play();
-    }
-}
 
 #include "pairs.moc"
