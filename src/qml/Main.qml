@@ -3,16 +3,17 @@ import QtQuick 1.0
 FancyBackground
 {
     id: game
-    
     Item {
         id: main
         
-        anchors.right: parent.right
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.leftMargin: 400
-        anchors.margins: 20
+        anchors {
+            right: parent.right
+            left: parent.left
+            top: parent.top
+            bottom: parent.bottom
+            leftMargin: 400
+            margins: 20
+        }
         
         Board {
             id: board
@@ -33,51 +34,26 @@ FancyBackground
             onGameStarted: game.state="playing"
         }
         
-        Rectangle {
-            id: congratulations
+        ResultsPage {
             anchors.fill: parent
-            color: "cyan"
             visible: game.state=="congratulations"
-            
-            Column {
-                anchors.horizontalCenter: parent.horizontalCenter
-                Text {
-                    font.pixelSize: 100
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    
-                    text: qsTr("Congratulations!")
-                }
-                
-                Repeater {
-                    model: playersModel
-                    
-                    delegate: Row {
-                        Image { height: 20; width: 20; source: decoration }
-                        Text { font.pixelSize: 25; text: display+". Duration: "+time+", pairs found: "+found+", pairs missed: "+missed }
-                    }
-                }
-                
-                Button {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    source: playersModel.iconsDir("gameicons/newgame.png")
-                    text: qsTr("New Game")
-                    onClicked: game.state="newgame"
-                }
-            }
         }
     }
     
     Component.onCompleted: game.state="newgame"
     
-    Column {
-        anchors.margins:20
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: main.left
-        anchors.left: parent.left
-        spacing: 40
+    Page {
+        id: toolbar
+        anchors {
+            top: parent.top
+            right: main.left
+            left: game.left
+            margins: 20
+        }
+        height: 100
         
-        Row{
+        Row {
+            anchors.fill: parent
             id: tools
             spacing: 20
             
@@ -102,9 +78,29 @@ FancyBackground
                 }
             }
         }
+    }
+    
+    Page {
+        id: playersView
+        anchors {
+            left: parent.left
+            right: main.left
+            top: toolbar.bottom
+            bottom: playersControl.top
+            margins: 20
+        }
+        Text {
+            anchors.right: parent.right
+            font.pointSize: 14
+            text: qsTr("Players")
+        }
         
         Flow {
-            width: parent.width
+            anchors {
+                top: label.bottom
+                left: parent.left
+                right: parent.right
+            }
             spacing: 10
             
             Repeater {
@@ -125,10 +121,29 @@ FancyBackground
                 }
             }
         }
+    }
+    
+    Page {
+        id: playersControl
+        visible: game.state=='newgame'
+        anchors {
+            left: parent.left
+            right: main.left
+            bottom: parent.bottom
+            margins: 20
+        }
         
+        Text {
+            id: label
+            anchors.right: parent.right
+            anchors.top: parent.top
+            font.pointSize: 14
+            text: qsTr("Join!")
+        }
+        
+        height: 100
         Row {
             id: controls
-            visible: game.state=='newgame'
             anchors.bottom: parent.bottom
             Column {
                 Image {
@@ -161,5 +176,5 @@ FancyBackground
          State { name: "newgame" },
          State { name: "playing" },
          State { name: "congratulations" }
-     ]
+    ]
 }

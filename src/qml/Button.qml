@@ -33,7 +33,7 @@ Rectangle{
        anchors.horizontalCenter: button.horizontalCenter
        horizontalAlignment: Text.AlignHCenter
        wrapMode: Text.WordWrap
-       font.pointSize: 18
+       font.pointSize: 14
     }
     
     MouseArea {
