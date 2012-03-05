@@ -60,14 +60,12 @@ Page {
                     font.pointSize: 12
                     
                     onClicked: {
-                        if(playersModel.isAnySelected()){
-                            gameStarted()
-                            fgame.newGame(index, gameType)
+                        if(!playersModel.isAnySelected()){
+                            addPlayer()
                         }
-                        else
-                        {
-                            //animation
-                        }
+                        
+                        gameStarted()
+                        fgame.newGame(index, gameType)
                     }
                 }
             }
