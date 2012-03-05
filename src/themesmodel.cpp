@@ -21,6 +21,7 @@
 #include "pairstheme.h"
 #include <KStandardDirs>
 #include <KGlobal>
+#include <krandom.h>
 #include <QDebug>
 #include <QFileSystemWatcher>
 
@@ -30,8 +31,6 @@ ThemesModel::ThemesModel(QObject* parent): QStandardItemModel(parent)
     names.insert(PairsTheme::CardTypeRole, "type");
     names.insert(PairsTheme::LanguagesRole, "languages");
     setRoleNames(names);
-    
-    qsrand(QTime::currentTime().elapsed());
     
     QStringList themesdirs=KGlobal::dirs()->findDirs("appdata", "themes");
     QFileSystemWatcher* fs=new QFileSystemWatcher(this);
@@ -83,7 +82,7 @@ bool ThemesModel::isPertinent(int row, const QString& type, const QString& lang)
 
 QString ThemesModel::randomThemesImage() const
 {
-    int row = qrand() % rowCount();
+    int row = KRandom::random() % rowCount();
     PairsTheme* t = static_cast<PairsTheme*>(item(row, 0));
     QStringList imgs = t->images();
     

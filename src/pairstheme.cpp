@@ -152,7 +152,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
             }
             
 //             qDebug() << "CTYPES" << m_cardtypes << "/CTYPES";
-            qDebug() << item.foundSound("en");
+//             qDebug() << item.foundSound("en");
             m_items += item;
             item.reset();
         }
@@ -168,7 +168,6 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                 current_type = cardNameToType(name);
                 if(current_type != CARD_WORD)
                     src = reader.attributes().value("src").toString();
-                qDebug() << name << src;
                 switch(current_type) {
                     case CARD_IMAGE:
                         if(common[CARD_IMAGE].isEmpty() && item.name[CARD_IMAGE][lang].isEmpty()){
@@ -270,6 +269,5 @@ QString ThemeElement::foundSound(const QString& lang) const
     QString ret = found[lang];
     if(ret.isEmpty())
         ret = found["any"];
-    qDebug() << "giving" << ret;
     return ret;
 }

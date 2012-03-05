@@ -23,6 +23,7 @@
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KGlobal>
+#include <krandom.h>
 #include <QDebug>
 #include <QFileSystemWatcher>
 #include "themesmodel.h"
@@ -95,7 +96,7 @@ PairsPlayer* PlayersModel::player(int row)
 
 QString PlayersModel::randomIcon()
 {
-    int row = qrand() % m_playerIcons.count();
+    int row = KRandom::random() % m_playerIcons.count();
     return m_playerIcons[row];
 }
 
