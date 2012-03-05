@@ -129,6 +129,7 @@ void PairsView::cardSelected(CardItem* card)
             do {
                 ++m_currentPlayer %= m_players->rowCount();
             } while(!m_players->player(m_currentPlayer)->isSelected());
+            emit currentPlayerChanged();
         }
         m_last=0;
     }
@@ -210,6 +211,7 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
             break;
         }
     }
+    emit currentPlayerChanged();
     
     Q_ASSERT(m_currentPlayer>=0 && "some player must be selected first");
     m_timer->start(1000);

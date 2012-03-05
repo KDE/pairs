@@ -36,6 +36,7 @@ class ThemeIconsProvider;
 class PairsView : public QDeclarativeView
 {
     Q_OBJECT
+    Q_PROPERTY(int currentPlayer READ currentPlayer NOTIFY currentPlayerChanged)
 public:
     /**
      * Default constructor
@@ -52,7 +53,8 @@ public:
     int cardsNum();
     void newGame(const PairsTheme* theme, const QString& language, const QString& cardType);
     PlayersModel* playersModel() const { return m_players; }
-    void setLanguage(const QString &l) {m_language = l;};
+    void setLanguage(const QString &l) { m_language = l; }
+    int currentPlayer() const { return m_currentPlayer; }
     
     Q_SCRIPTABLE void newGame(int row, const QString& cardType);
     Q_SCRIPTABLE QString language(){return m_language;};
@@ -60,6 +62,7 @@ public:
     virtual void resizeEvent(QResizeEvent* ev);
 signals:
     void gameOver();
+    void currentPlayerChanged();
     
 public slots:
     void checkGameOver();
