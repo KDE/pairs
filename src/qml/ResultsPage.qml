@@ -17,9 +17,8 @@ Page {
                 Image { height: 50; width: 50; source: decoration }
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
                     font.pixelSize: 25
-                    text: display+". Time: "+time+"\", results: "+found+"/"+missed
+                    text: qsTr(display+". Time: "+time+"\", results: "+found+"/"+missed)
                 }
             }
         }

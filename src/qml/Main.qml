@@ -162,6 +162,8 @@ FancyBackground
                     width: 100 
                     color: "white"
                     text: "Player"
+                    Component.onCompleted: selectAll()
+                    focus: true
                 }
             }
             Button { 

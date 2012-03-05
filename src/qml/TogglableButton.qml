@@ -6,6 +6,7 @@ Rectangle
     width: 100
     height: 120
     radius: 20
+    smooth: true
     
     gradient: Gradient {
         GradientStop { id: from; position: 0 }
