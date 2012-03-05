@@ -14,11 +14,13 @@ Page {
             model: playersModel
             
             delegate: Row {
-                Image { height: 50; width: 50; source: decoration }
+                anchors.margins: 20
+                spacing: 20
+                Image { height: 200; width: 200; source: decoration }
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 25
-                    text: qsTr(display+". Time: "+time+"\", results: "+found+"/"+missed)
+                    text: qsTr(display+". Time: "+time+"\", results: "+found+"/"+(found+missed))
                 }
             }
         }
