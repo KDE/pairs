@@ -90,6 +90,7 @@ FancyBackground
             margins: 20
         }
         Text {
+            id: playersLabel
             anchors.right: parent.right
             font.pointSize: 14
             text: qsTr("Players")
@@ -97,7 +98,7 @@ FancyBackground
         
         Flow {
             anchors {
-                top: label.bottom
+                top: playersLabel.bottom
                 left: parent.left
                 right: parent.right
             }
@@ -145,21 +146,24 @@ FancyBackground
         height: 100
         Row {
             id: controls
-            anchors.bottom: parent.bottom
+            anchors.top: label.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            Button {
+                id: newUserPicture
+                anchors.verticalCenter: parent.verticalCenter
+                source: playersModel.randomIcon()
+                onClicked: source=playersModel.randomIcon()
+            }
+            
             Column {
-                Button {
-                    id: newUserPicture
-                    height: 100
-                    width: 100
-                    source: playersModel.randomIcon()
-//                     asynchronous: true
-                    onClicked: source=playersModel.randomIcon()
-                }
+                Text { text: qsTr("Player Name:") }
+                
                 TextInput { 
                     id: playerName
                     width: 100 
                     color: "white"
-                    text: "Player"
+                    text: qsTr("Player")
                     focus: true
                     
                     Component.onCompleted: selectAll()
