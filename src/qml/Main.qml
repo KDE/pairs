@@ -147,32 +147,37 @@ FancyBackground
             id: controls
             anchors.bottom: parent.bottom
             Column {
-                Image {
+                Button {
                     id: newUserPicture
                     height: 100
                     width: 100
                     source: playersModel.randomIcon()
-                    asynchronous: true
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: parent.source=playersModel.randomIcon()
-                    }
+//                     asynchronous: true
+                    onClicked: source=playersModel.randomIcon()
                 }
                 TextInput { 
-                    id: playerName; 
+                    id: playerName
                     width: 100 
                     color: "white"
                     text: "Player"
-                    Component.onCompleted: selectAll()
                     focus: true
+                    
+                    Component.onCompleted: selectAll()
+                    onAccepted: addPlayer()
                 }
             }
             Button { 
                 text: qsTr("Add"); 
                 source: playersModel.iconsDir("gameicons/list-add-user.png")
-                onClicked: playersModel.addPlayer(playerName.text, newUserPicture.source) 
+                onClicked: addPlayer()
             }
         }
+    }
+    
+    function addPlayer() {
+        playersModel.addPlayer(playerName.text, newUserPicture.source)
+        newUserPicture.source=playersModel.randomIcon()
+        playerName.selectAll()
     }
     
     states: [
