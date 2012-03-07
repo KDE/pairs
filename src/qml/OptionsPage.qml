@@ -60,8 +60,13 @@ Page {
                     font.pointSize: 12
                     
                     onClicked: {
-                        if(!playersModel.isAnySelected()){
-                            addPlayer()
+                        if(!playersModel.isAnySelected()) {
+                            //if there are no selected players, select the first one
+                            //if there's none, just create one
+                            if(playersModel.count>0)
+                                playersModel.toggleSelection(0)
+                            else
+                                addPlayer()
                         }
                         
                         gameStarted()
