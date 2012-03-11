@@ -38,6 +38,16 @@ FancyBackground
             anchors.fill: parent
             visible: game.state=="congratulations"
         }
+        InfoPage {
+            anchors.fill: parent
+            visible: game.state=="info"
+            MouseArea {
+                id: mouse
+                anchors.fill: parent
+                onClicked: game.state="newgame"
+            }
+            
+        }
     }
     
     Component.onCompleted: game.state="newgame"
@@ -68,6 +78,14 @@ FancyBackground
                 onClicked: fgame.download()
             }
             
+            Button {
+                source: playersModel.iconsDir("gameicons/info.png")
+                text: qsTr("Info")
+                visible: game.state=="newgame"
+                onClicked: {
+                    game.state="info"
+                }
+            }
             Button {
                 source: playersModel.iconsDir("gameicons/newgame.png")
                 text: qsTr("New Game")
@@ -187,6 +205,7 @@ FancyBackground
     states: [
          State { name: "newgame" },
          State { name: "playing" },
-         State { name: "congratulations" }
+         State { name: "congratulations" },
+         State { name: "info" }
     ]
 }
