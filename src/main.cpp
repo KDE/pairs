@@ -25,7 +25,6 @@
 #include <KDE/KCmdLineArgs>
 #include <KDE/KLocale>
 #include <KStandardDirs>
-#include <QTranslator>
 #include <QDebug>
 #include "pairstheme.h"
 
@@ -45,7 +44,6 @@ int main(int argc, char **argv)
 
     KCmdLineOptions options;
     options.add("fullscreen", ki18n( "start in fullscreen mode"));
-//    options.add("+[URL]", ki18n( "Document to open" ));
     KCmdLineArgs::addCmdLineOptions(options);
     KApplication app;
     
@@ -71,21 +69,5 @@ int main(int argc, char **argv)
             widget->show();
         }
     }
-/*        
-        if (args->count() == 0)
-        {
-            //Pairs *widget = new Pairs;
-            widget->show();
-        }
-        else
-        {
-            int i = 0;
-            for (; i < args->count(); i++)
-            {
-                //Pairs *widget = new Pairs;
-                widget->show();
-            }
-        }
-        */
     return app.exec();
 }
