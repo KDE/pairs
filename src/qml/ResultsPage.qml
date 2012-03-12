@@ -7,7 +7,7 @@ Page {
             font.pixelSize: 70
             anchors.horizontalCenter: parent.horizontalCenter
             
-            text: qsTr("Congratulations!")
+            text: i18n("Congratulations!")
         }
         
         Repeater {
@@ -20,7 +20,7 @@ Page {
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 25
-                    text: qsTr(display+". Time: "+time+"\", results: "+found+"/"+(found+missed))
+                    text: i18n(display+". Time: "+time+"\", results: "+found+"/"+(found+missed))
                 }
             }
         }
@@ -28,7 +28,7 @@ Page {
         Button {
             anchors.horizontalCenter: parent.horizontalCenter
             source: playersModel.iconsDir("gameicons/newgame.png")
-            text: qsTr("New Game")
+            text: i18n("New Game")
             onClicked: game.state="newgame"
         }
     }

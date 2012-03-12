@@ -74,13 +74,13 @@ FancyBackground
             
             Button {
                 source: playersModel.iconsDir("gameicons/get-hot-new-stuff.png")
-                text: qsTr("Get Themes")
+                text: i18n("Get Themes")
                 onClicked: fgame.download()
             }
             
             Button {
                 source: playersModel.iconsDir("gameicons/info.png")
-                text: qsTr("Info")
+                text: i18n("Info")
                 visible: game.state=="newgame"
                 onClicked: {
                     game.state="info"
@@ -88,7 +88,7 @@ FancyBackground
             }
             Button {
                 source: playersModel.iconsDir("gameicons/newgame.png")
-                text: qsTr("New Game")
+                text: i18n("New Game")
                 visible: game.state=="playing"
                 onClicked: {
                     game.state="newgame"
@@ -111,7 +111,7 @@ FancyBackground
             id: playersLabel
             anchors.right: parent.right
             font.pointSize: 14
-            text: qsTr("Players")
+            text: i18n("Players")
         }
         
         Flow {
@@ -158,7 +158,7 @@ FancyBackground
             anchors.right: parent.right
             anchors.top: parent.top
             font.pointSize: 14
-            text: qsTr("Join!")
+            text: i18n("Join!")
         }
         
         height: 100
@@ -175,13 +175,13 @@ FancyBackground
             }
             
             Column {
-                Text { text: qsTr("Player Name:") }
+                Text { text: i18n("Player Name:") }
                 
                 TextInput { 
                     id: playerName
                     width: 100 
                     color: "white"
-                    text: qsTr("Player")
+                    text: i18n("Player")
                     focus: true
                     
                     Component.onCompleted: selectAll()
@@ -189,7 +189,7 @@ FancyBackground
                 }
             }
             Button { 
-                text: qsTr("Add"); 
+                text: i18n("Add"); 
                 source: playersModel.iconsDir("gameicons/list-add-user.png")
                 onClicked: addPlayer()
             }
