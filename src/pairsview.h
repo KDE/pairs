@@ -24,6 +24,7 @@
 #define PAIRSVIEW_H
 
 #include <QDeclarativeView>
+#include <kdeclarative.h>
 
 namespace KNS3 { class DownloadDialog; }
 namespace Phonon { class MediaObject;}
@@ -89,6 +90,7 @@ private:
     QTimer* m_resizeTimer;
     QString m_language;
     Phonon::MediaObject *m_media;
+    KDeclarative m_kdeclarative;
 };
 
 #endif // kpairsVIEW_H

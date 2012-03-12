@@ -57,6 +57,7 @@ PairsView::PairsView(QWidget *parent)
     , m_last(0)
     , m_knsDialog(0)
     , m_itemsPerRow(1)
+    , m_kdeclarative()
 {
 #ifndef QT_NO_OPENGL
     setViewport(new QGLWidget);
@@ -79,6 +80,13 @@ PairsView::PairsView(QWidget *parent)
     rootContext()->setContextProperty("themesModel", m_model);
     rootContext()->setContextProperty("playersModel", m_players);
     engine()->addImageProvider("theme", m_themeImagesProvider);
+
+
+    m_kdeclarative.setDeclarativeEngine(engine());
+    m_kdeclarative.initialize();
+    //binds things like kconfig and icons
+    m_kdeclarative.setupBindings();
+
 
     setSource(QUrl("qrc:/qml/Main.qml"));
     Q_ASSERT(errors().isEmpty());
