@@ -1,5 +1,6 @@
 /* This file is part of Pairs
     Copyright 2011 Aleix Pol Gonzalez <aleixpol@kde.org>
+    Copyright 2011 Marco Calignano    <marco.calignano@googlemail.com>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
