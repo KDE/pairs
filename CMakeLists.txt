@@ -1,3 +1,5 @@
+#  This file is part of Pairs
+#
 #  Copyright (C) <2010>       <Albert Astals Cid>   <aacid@kde.org>
 #  Copyright (C) <2010>       <Aleix Pol>           <aleixpol@kde.org>
 #

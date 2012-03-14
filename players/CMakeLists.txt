@@ -1,3 +1,5 @@
+#  This file is part of Pairs
+#
 #  Copyright (C) <2011>       <Marco Calignano>     <marco.calignano@gmail.com>
 #
 #  This program is free software; you can redistribute it and/or
