@@ -51,6 +51,7 @@
 #include <cmath>
 #include <KRandom>
 #include <KStandardDirs>
+#include <kdeclarative.h>
 #include "pairsplayer.h"
 
 PairsView::PairsView(QWidget *parent)
@@ -83,6 +84,7 @@ PairsView::PairsView(QWidget *parent)
     engine()->addImageProvider("theme", m_themeImagesProvider);
 
 
+    KDeclarative m_kdeclarative;
     m_kdeclarative.setDeclarativeEngine(engine());
     m_kdeclarative.initialize();
     //binds things like kconfig and icons
