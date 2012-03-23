@@ -59,7 +59,6 @@ PairsView::PairsView(QWidget *parent)
     , m_last(0)
     , m_knsDialog(0)
     , m_itemsPerRow(1)
-    , m_kdeclarative()
 {
 #ifndef QT_NO_OPENGL
     setViewport(new QGLWidget);
