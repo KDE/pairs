@@ -41,7 +41,7 @@ Page {
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 25
-                    text: i18n(display+". Time: "+time+"\", results: "+found+"/"+(found+missed))
+                    text: i18n("%1. Time: %2. results: %3/%4", display, time, found, (found+missed))
                 }
             }
         }
