@@ -32,7 +32,6 @@ set(pairs_SRCS pairstheme.cpp carditem.cpp
  )
 
 qt4_add_resources(pairs_SRCS resources.qrc)
-kde4_add_kcfg_files(pairs_SRCS settings.kcfgc )
 
 kde4_add_executable(pairs ${pairs_SRCS})
 
@@ -47,4 +46,3 @@ install(TARGETS pairs ${INSTALL_TARGETS_DEFAULT_ARGS} )
 ########### install files ###############
 
 install( FILES pairs.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
-install( FILES pairs.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
