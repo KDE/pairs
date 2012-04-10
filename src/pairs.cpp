@@ -23,7 +23,6 @@
 
 #include "pairs.h"
 #include "pairsview.h"
-#include "settings.h"
 
 #include <QtGui/QDropEvent>
 #include <QtCore/QCoreApplication>
