@@ -22,31 +22,72 @@ import QtQuick 1.0
 
 Page {
     Column {
-        anchors.fill: parent
+ //       anchors.fill: parent
+        anchors.horizontalCenter: parent.horizontalCenter
         Text {
-            font.pixelSize: 20
+            font.pixelSize: 26
             anchors.horizontalCenter: parent.horizontalCenter
-            text: i18n("pairs v 0.2.0")
+            text: i18n("<b>pairs v 0.2.0</b>")
+        }
+        Text {
+            font.pixelSize: 14
+            horizontalAlignment: Text.AlignLeft 
+            text: " "
         }
         Text {
             font.pixelSize: 20
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: i18n("Aleix Pol Gonzalez - Initial implementation and maintainer - aleixpol@kde.org")
+            horizontalAlignment: Text.AlignLeft 
+            text: i18n("<b>Aleix Pol Gonzalez</b> - aleixpol@kde.org")
+        }
+        Text {
+            font.pixelSize: 18
+            horizontalAlignment: Text.AlignLeft 
+            text: i18n("<i>Initial implementation and maintainer</i>")
+        }
+        Text {
+            font.pixelSize: 12
+            horizontalAlignment: Text.AlignLeft 
+            text: " "
         }
         Text {
             font.pixelSize: 20
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: i18n("Marco Calignano - Theme support enhancement and general feature development - marco.calignano@googlemail.com")
+            horizontalAlignment: Text.AlignLeft 
+            text: i18n("<b>Marco Calignano</b> - marco.calignano@googlemail.com")
+        }
+        Text {
+            font.pixelSize: 18
+            horizontalAlignment: Text.AlignLeft 
+            text: i18n("<i>Theme support enhancement and general feature development</i>")
+        }
+        Text {
+            font.pixelSize: 12
+            horizontalAlignment: Text.AlignLeft 
+            text: " "
         }
         Text {
             font.pixelSize: 20
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: i18n("Albert Astals Cid - Initial project setup and ideas - aacid@kde.org")
+            horizontalAlignment: Text.AlignLeft 
+            text: i18n("<b>Albert Astals Cid</b> - aacid@kde.org")
+        }
+        Text {
+            font.pixelSize: 18
+            horizontalAlignment: Text.AlignLeft 
+            text: i18n("<i>Initial project setup and ideas</i>")
+        }
+        Text {
+            font.pixelSize: 12
+            horizontalAlignment: Text.AlignLeft 
+            text: " "
         }
         Text {
             font.pixelSize: 20
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: i18n("Abhash Bikram Thapa - Graphic design and icons - abhash@pixelpinch.com")
+            horizontalAlignment: Text.AlignLeft 
+            text: i18n("<b>Abhash Bikram Thapa</b> - abhash@pixelpinch.com")
+        }
+        Text {
+            font.pixelSize: 18
+            horizontalAlignment: Text.AlignLeft 
+            text: i18n("<i>Graphic design and icons</i>")
         }
     }
 }
