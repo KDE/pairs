@@ -43,5 +43,10 @@ Page {
             anchors.horizontalCenter: parent.horizontalCenter
             text: i18n("Albert Astals Cid - Initial project setup and ideas - aacid@kde.org")
         }
+        Text {
+            font.pixelSize: 20
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: i18n("Abhash Bikram Thapa - Graphic design and icons - abhash@pixelpinch.com")
+        }
     }
 }
