@@ -53,7 +53,7 @@ void ThemesModel::reload()
         PairsTheme* theme = new PairsTheme(themePath);
 
         if(!theme->isCorrect()) {
-            qWarning() << "uncorrect theme:" << themePath << theme->error();
+            qWarning() << "Incorrect theme:" << themePath << theme->error();
             delete theme;
         } else {
             appendRow(theme);
