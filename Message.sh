@@ -31,4 +31,4 @@ $EXTRACTRC `find . -name \*.rc -o -name \*.ui -o -name \*.kcfg` >> rc.cpp
 
 # call xgettext on all source files. If your sources have other filename
 # extensions besides .cc, .cpp, and .h, just add them in the find call.
-$XGETTEXT --keyword=i18n `find . -name \*.cc -o -name \*.cpp -o -name \*.h -o -name \*.qml` -o pairs.pot
+$XGETTEXT --keyword=i18n `find . -name \*.cc -o -name \*.cpp -o -name \*.h -o -name \*.qml` -o $podir/pairs.pot
