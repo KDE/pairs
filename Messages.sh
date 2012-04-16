@@ -21,4 +21,4 @@
 
 #!/bin/bash
 
-$XGETTEXT --keyword=i18n `find . -name \*.cpp -o -name \*.qml` -o $podir/pairs.pot
+$XGETTEXT `find . -name \*.cpp -o -name \*.qml` -o $podir/pairs.pot
