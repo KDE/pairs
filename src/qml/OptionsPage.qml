@@ -34,35 +34,41 @@ Page {
         Flow {
             width: parent.width
             spacing: 20
-            Button {
+            TogglableButton {
                 source: playersModel.iconsDir("gameicons/pairs.png")
                 text: i18n("Pairs")
                 onClicked: gameType = 'image'
+                enabled: gameType == 'image'
             }
-            Button {
+            TogglableButton {
                 source: playersModel.iconsDir("gameicons/pairs2.png")
                 text: i18n("Similar")
                 onClicked: gameType = 'image2'
+                enabled: gameType == 'image2'
             }
-            Button {
+            TogglableButton {
                 source: playersModel.iconsDir("gameicons/logic.png")
                 text: i18n("Logic")
                 onClicked: gameType = 'logic'
+                enabled: gameType == 'logic'
             }
-            Button {
+            TogglableButton {
                 source: playersModel.iconsDir("gameicons/sound.png")
                 text: i18n("Sound")
                 onClicked: gameType = 'sound'
+                enabled: gameType == 'sound'
             }
-            Button {
+            TogglableButton {
                 source: playersModel.iconsDir("gameicons/sound.png")
                 text: i18n("SoundLogic")
                 onClicked: gameType = 'soundlogic'
+                enabled: gameType == 'soundlogic'
             }
-            Button {
+            TogglableButton {
                 source: playersModel.iconsDir("gameicons/words.png")
                 text: i18n("Words")
                 onClicked: gameType = 'word'
+                enabled: gameType == 'word'
             }
         }
         

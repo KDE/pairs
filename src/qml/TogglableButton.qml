@@ -39,7 +39,7 @@ Item
         smooth: true
         anchors.fill: parent
         opacity: container.enabled ? 0.7 : 0
-        Behavior on opacity { NumberAnimation { duration: 100 } }
+        Behavior on opacity { NumberAnimation { duration: 200 } }
         
         gradient: Gradient {
             GradientStop { position: 0; color: "white" }
