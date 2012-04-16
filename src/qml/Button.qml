@@ -21,11 +21,10 @@
 
 import QtQuick 1.1
 
-Rectangle{
+Item {
     id: button
     width: 100
     height: 100
-    color: "transparent"
     
     signal clicked;
     signal overlayClicked;
@@ -56,6 +55,8 @@ Rectangle{
        horizontalAlignment: Text.AlignHCenter
        wrapMode: Text.WordWrap
        font.pointSize: 14
+       
+       Behavior on color { ColorAnimation { duration: 200 } }
     }
     
     MouseArea {

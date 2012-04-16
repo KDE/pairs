@@ -20,19 +20,11 @@
 
 import QtQuick 1.0
 
-Rectangle
+Item
 {
     id: container
     width: 100
     height: 120
-    radius: 20
-    smooth: true
-    
-    gradient: Gradient {
-        GradientStop { id: from; position: 0 }
-        GradientStop { position: 1; color: "transparent" }
-    }
-    
     property bool enabled: true
     property alias text: button.text
     property alias source: button.source
@@ -42,17 +34,18 @@ Rectangle
     signal overlayClicked
     signal clicked
     
-    state: enabled ? "on" : "off"
-    states: [
-        State {
-            name: "on";
-            PropertyChanges{ target: from; color: "#77FFFFFF" }
-        },
-        State {
-            name: "off";
-            PropertyChanges{ target: from; color: "transparent" }
+    Rectangle {
+        radius: 20
+        smooth: true
+        anchors.fill: parent
+        opacity: container.enabled ? 0.7 : 0
+        Behavior on opacity { NumberAnimation { duration: 100 } }
+        
+        gradient: Gradient {
+            GradientStop { position: 0; color: "white" }
+            GradientStop { position: 1; color: "transparent" }
         }
-    ]
+    }
     
     Button {
         id: button
