@@ -20,5 +20,5 @@
 
 
 install(FILES  get-hot-new-stuff.png  list-add-user.png  list-remove-user.png  logic.png info.png  
-               newgame.png  pairs2.png  pairs.png  sound.png words.png quit.png sound.svg background.png
+               newgame.png  pairs2.png  pairs.png  sound.png words.png quit.png sound.svg background.svg
               DESTINATION  ${DATA_INSTALL_DIR}/pairs/gameicons )
