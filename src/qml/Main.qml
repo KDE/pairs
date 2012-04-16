@@ -132,6 +132,7 @@ FancyBackground
             id: playersLabel
             anchors.right: parent.right
             font.pointSize: 14
+            color : "white"
             text: i18n("Players")
         }
         
@@ -179,6 +180,7 @@ FancyBackground
             anchors.right: parent.right
             anchors.top: parent.top
             font.pointSize: 14
+            color: "white"
             text: i18n("Join!")
         }
         
@@ -196,7 +198,10 @@ FancyBackground
             }
             
             Column {
-                Text { text: i18n("Player Name:") }
+                Text {
+                    color: "white" 
+                    text: i18n("Player Name:") 
+                }
                 
                 TextInput { 
                     id: playerName

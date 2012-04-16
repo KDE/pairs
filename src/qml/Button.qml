@@ -50,6 +50,7 @@ Rectangle{
     Text {
        id: caption
        width: 100
+       color: "white"
        anchors.top: icon.bottom
        anchors.horizontalCenter: button.horizontalCenter
        horizontalAlignment: Text.AlignHCenter
@@ -84,7 +85,7 @@ Rectangle{
     states: [
         State {
             name: "default"
-            PropertyChanges { target: caption; color: "black" }
+            PropertyChanges { target: caption; color: "white" }
         },
         State {
             name: "hovered"

@@ -27,7 +27,7 @@ Page {
         Text {
             font.pixelSize: 70
             anchors.horizontalCenter: parent.horizontalCenter
-            
+            color: "white"
             text: i18n("Congratulations!")
         }
         
@@ -41,6 +41,7 @@ Page {
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 25
+                    color: "white"
                     text: i18n("%1. Time: %2. results: %3/%4", display, time, found, (found+missed))
                 }
             }

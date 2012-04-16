@@ -27,66 +27,79 @@ Page {
         Text {
             font.pixelSize: 26
             anchors.horizontalCenter: parent.horizontalCenter
+            color: "white"
             text: i18n("<b>pairs v 0.2.0</b>")
         }
         Text {
             font.pixelSize: 14
             horizontalAlignment: Text.AlignLeft 
+            color: "white"
             text: " "
         }
         Text {
             font.pixelSize: 20
             horizontalAlignment: Text.AlignLeft 
+            color: "white"
             text: i18n("<b>Aleix Pol Gonzalez</b> - aleixpol@kde.org")
         }
         Text {
             font.pixelSize: 18
             horizontalAlignment: Text.AlignLeft 
+            color: "white"
             text: i18n("<i>Initial implementation and maintainer</i>")
         }
         Text {
             font.pixelSize: 12
             horizontalAlignment: Text.AlignLeft 
+            color: "white"
             text: " "
         }
         Text {
             font.pixelSize: 20
             horizontalAlignment: Text.AlignLeft 
+            color: "white"
             text: i18n("<b>Marco Calignano</b> - marco.calignano@googlemail.com")
         }
         Text {
             font.pixelSize: 18
             horizontalAlignment: Text.AlignLeft 
+            color: "white"
             text: i18n("<i>Theme support enhancement and general feature development</i>")
         }
         Text {
             font.pixelSize: 12
             horizontalAlignment: Text.AlignLeft 
+            color: "white"
             text: " "
         }
         Text {
             font.pixelSize: 20
             horizontalAlignment: Text.AlignLeft 
+            color: "white"
             text: i18n("<b>Albert Astals Cid</b> - aacid@kde.org")
         }
         Text {
             font.pixelSize: 18
             horizontalAlignment: Text.AlignLeft 
+             color: "white"
             text: i18n("<i>Initial project setup and ideas</i>")
         }
         Text {
             font.pixelSize: 12
             horizontalAlignment: Text.AlignLeft 
+            color: "white"
             text: " "
         }
         Text {
             font.pixelSize: 20
             horizontalAlignment: Text.AlignLeft 
+            color: "white"
             text: i18n("<b>Abhash Bikram Thapa</b> - abhash@pixelpinch.com")
         }
         Text {
             font.pixelSize: 18
             horizontalAlignment: Text.AlignLeft 
+            color: "white"
             text: i18n("<i>Graphic design and icons</i>")
         }
     }
