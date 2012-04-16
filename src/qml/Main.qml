@@ -146,7 +146,7 @@ FancyBackground
             Repeater {
                 model: playersModel
                 delegate: TogglableButton {
-                    text: display+ (game.state=="playing" ? "<br/>"+missed+" "+found+" "+time : "")
+                    text: game.state!="playing" ? display : i18nc("name. found/tries, time seconds", "%1<br/>%2/%3, %4s", display, found, missed+found, time)
                     source: decoration
                     overlaySource: playersModel.iconsDir("gameicons/list-remove-user.png")
                     visible: game.state=="newgame" || selected
