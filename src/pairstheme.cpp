@@ -219,7 +219,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
 
 bool PairsTheme::isValid(const KArchiveFile* file) {
 
-    QUrl schemaUrl(KGlobal::dirs()->findResource("appdata", QLatin1String( "themes/game.xsd" )));
+    QUrl schemaUrl = QUrl::fromLocalFile(KGlobal::dirs()->findResource("appdata", QLatin1String( "themes/game.xsd" )));
     QXmlSchema schema;
     schema.load(schemaUrl);
 
