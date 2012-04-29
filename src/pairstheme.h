@@ -27,7 +27,11 @@
 #include <QVariant>
 #include <QList>
 #include <QSet>
+#ifdef Q_OS_WIN
+#include <KZip>
+#else
 #include <KTar>
+#endif
 #include <QXmlStreamReader>
 #include <QStandardItem>
 #include "cardtype.h"
@@ -99,7 +103,13 @@ class PairsTheme : public QObject, public QStandardItem
         QString m_error;
         QSet<QString> m_languages;
         QMap<QString, QSet<QString> > m_cardtypes;
-        KTar m_archive;
+
+//TODO: use KZip everywhere
+#ifdef Q_OS_WIN
+        KZip m_archive;
+#else
+		KTar m_archive;
+#endif
 };
 
 #endif // PAIRSTHEME_H
