@@ -46,7 +46,7 @@ class PlayersModel : public QStandardItemModel
         QVariant info(int row, const QByteArray& role);
         void toggleSelection(int row);
         QString randomIcon();
-        QString iconsDir(const QString& path);
+        QUrl iconsDir(const QString& path);
         bool isAnySelected();
 
     private slots:

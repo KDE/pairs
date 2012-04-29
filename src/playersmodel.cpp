@@ -43,7 +43,7 @@ PlayersModel::PlayersModel(QObject* parent)
     setRoleNames(names);
     m_playerIcons = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "players/*.png"));
     for(QStringList::iterator it=m_playerIcons.begin(), itEnd=m_playerIcons.end(); it!=itEnd; ++it) {
-        *it = "file://"+*it;
+        *it = QUrl::fromLocalFile(*it).toString();
     }
 
     QMetaObject::invokeMethod(this, "refresh", Qt::QueuedConnection);
@@ -133,7 +133,7 @@ void PlayersModel::removePlayer(int p)
     invisibleRootItem()->removeRow(p);
 }
 
-QString PlayersModel::iconsDir(const QString& path)
+QUrl PlayersModel::iconsDir(const QString& path)
 {
-    return "file://"+KGlobal::dirs()->findResource("appdata", path);
+    return QUrl::fromLocalFile(KGlobal::dirs()->findResource("appdata", path));
 }
