@@ -28,6 +28,7 @@
 #include <QGraphicsRotation>
 #include <QDate>
 #include <QTimer>
+#include <QFile>
 #include <QSvgRenderer>
 #include <QDeclarativeEngine>
 #include <QDeclarativeComponent>
@@ -176,7 +177,18 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     //int num=qMin(((rows*columns)/2)*2, items.size()); //we make it %2
     int num = items.size();
     const CardType type = PairsTheme::cardNameToType(cardType);
-    QSharedPointer<QSvgRenderer> backRenderer(new QSvgRenderer(theme->themeData(theme->backImage())));
+    QByteArray file_buf;
+
+    if(theme->backImage() == ""){
+        QString dir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String( "gameicons/pairs.png"));
+        QFile f(dir+"gameicons/planet.svg");
+        f.open(QIODevice::ReadOnly);
+        file_buf = f.readAll();
+    }
+    else{
+        file_buf = (theme->themeData(theme->backImage()));
+    }
+    QSharedPointer<QSvgRenderer> backRenderer(new QSvgRenderer(file_buf));
     for(int i=0; i<num; i++) {
         ThemeElement titem = items.at(i);
 

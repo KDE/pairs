@@ -25,6 +25,9 @@
 #include <QSvgRenderer>
 #include "themesmodel.h"
 #include <QDebug>
+#include <QFile>
+#include <KStandardDirs>
+
 
 
 ThemeIconsProvider::ThemeIconsProvider(QDeclarativeImageProvider::ImageType type, ThemesModel* themes) :
@@ -37,18 +40,19 @@ ThemeIconsProvider::~ThemeIconsProvider()
 QPixmap ThemeIconsProvider::requestPixmap(const QString& id, QSize* size, const QSize& requestedSize)
 {
     QByteArray data = m_themes->themeData(id);
-    
-    if(!data.isNull()) {
-        QSvgRenderer pixRenderer(data);
-        if(size) {
-            *size = pixRenderer.viewBox().size();
-        }
-        QPixmap px(requestedSize.isValid() ? requestedSize : pixRenderer.viewBox().size());
-        px.fill(Qt::transparent);
-        QPainter p(&px);
-        pixRenderer.render(&p);
-        return px;
+    if(data.isNull()) {
+        QString dir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String( "gameicons/pairs.png"));
+        QFile f(dir+"gameicons/planet.svg");
+        f.open(QIODevice::ReadOnly);
+        data = f.readAll();
     }
-
-    return QPixmap();
+    QSvgRenderer pixRenderer(data);
+    if(size) {
+        *size = pixRenderer.viewBox().size();
+    }
+    QPixmap px(requestedSize.isValid() ? requestedSize : pixRenderer.viewBox().size());
+    px.fill(Qt::transparent);
+    QPainter p(&px);
+    pixRenderer.render(&p);
+    return px;
 }

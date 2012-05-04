@@ -44,6 +44,7 @@ CardType PairsTheme::cardNameToType(const QString& name)
 
 PairsTheme::PairsTheme(const QString& path)
     : QStandardItem()
+    , m_back_img("")
     , m_archive(path)
 {
 	bool b = m_archive.open(QIODevice::ReadOnly);
