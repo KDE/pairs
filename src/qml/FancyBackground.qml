@@ -1,5 +1,6 @@
 /*
  *  Copyright (C) <2011>       <Aleix Pol>           <aleixpol@kde.org>
+ *  Copyright (C) <2012>       <Marco Calignano>     <marco.calignano@googlemail.com>
  *
  *  This program is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License as
