@@ -38,12 +38,14 @@ Item {
     property bool overlayVisible: true
     Image {
         id: icon
+        smooth: true
         anchors.top: parent.top
         anchors.horizontalCenter: button.horizontalCenter
         fillMode: Image.PreserveAspectFit
-        
         width: parent.width*2/3
         height: parent.height*2/3
+        sourceSize.width: width
+        sourceSize.height: height
     }
     
     Text {
