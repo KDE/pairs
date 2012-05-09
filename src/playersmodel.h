@@ -20,6 +20,7 @@
 #define PLAYERSMODEL_H
 
 #include <QStandardItemModel>
+#include <QUrl>
 
 class ThemesModel;
 class PairsPlayer;
