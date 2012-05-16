@@ -21,5 +21,5 @@
 
 install(FILES player1.svg player2.svg player3.svg player4.svg player5.svg player6.svg player7.svg player8.svg 
               player9.svg player10.svg player11.svg player12.svg player13.svg player14.svg player15.svg player16.svg 
-              player17.svg player18.svg player19.svg player20.svg player11.svg player22.svg player23.svg player24.svg
+              player17.svg player18.svg player19.svg player20.svg player11.svg player22.svg player23.svg
               DESTINATION  ${DATA_INSTALL_DIR}/pairs/players )
