@@ -49,7 +49,7 @@ Page {
         
         Button {
             anchors.horizontalCenter: parent.horizontalCenter
-            source: playersModel.iconsDir("gameicons/newgame.png")
+            source: playersModel.iconsDir("gameicons/newGame.svg")
             text: i18n("New Game")
             onClicked: game.state="newgame"
         }

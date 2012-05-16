@@ -41,8 +41,8 @@ QPixmap ThemeIconsProvider::requestPixmap(const QString& id, QSize* size, const 
 {
     QByteArray data = m_themes->themeData(id);
     if(data.isNull()) {
-        QString dir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String( "gameicons/pairs.png"));
-        QFile f(dir+"gameicons/planet.svg");
+        QString dir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String( "gameicons/pairs.svg"));
+        QFile f(dir+"gameicons/pairsIcon.svg");
         f.open(QIODevice::ReadOnly);
         data = f.readAll();
     }

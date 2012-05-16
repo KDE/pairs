@@ -47,25 +47,25 @@ Page {
                 enabled: gameType == 'image2'
             }
             TogglableButton {
-                source: playersModel.iconsDir("gameicons/logic.png")
+                source: playersModel.iconsDir("gameicons/logic.svg")
                 text: i18n("Logic")
                 onClicked: gameType = 'logic'
                 enabled: gameType == 'logic'
             }
             TogglableButton {
-                source: playersModel.iconsDir("gameicons/sound.png")
+                source: playersModel.iconsDir("gameicons/sound.svg")
                 text: i18n("Sound")
                 onClicked: gameType = 'sound'
                 enabled: gameType == 'sound'
             }
             TogglableButton {
-                source: playersModel.iconsDir("gameicons/sound.png")
+                source: playersModel.iconsDir("gameicons/soundLogic.svg")
                 text: i18n("SoundLogic")
                 onClicked: gameType = 'soundlogic'
                 enabled: gameType == 'soundlogic'
             }
             TogglableButton {
-                source: playersModel.iconsDir("gameicons/words.png")
+                source: playersModel.iconsDir("gameicons/words.svg")
                 text: i18n("Words")
                 onClicked: gameType = 'word'
                 enabled: gameType == 'word'

@@ -122,7 +122,7 @@ void CardItem::setType(CardType type, const QString& file, const PairsTheme* the
         case CARD_SOUNDLOGIC:
         case CARD_SOUND:
         {
-            QString dir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String( "gameicons/pairs.png"));
+            QString dir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String( "gameicons/pairs.svg"));
             setCardPixmap(QSharedPointer<QSvgRenderer>(new QSvgRenderer(dir+"gameicons/sound.svg")));
 //            m_color.fill(Qt::blue);
             QBuffer *mediafile = new QBuffer(this);

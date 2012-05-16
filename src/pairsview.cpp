@@ -180,8 +180,8 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     QByteArray file_buf;
 
     if(theme->backImage() == ""){
-        QString dir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String( "gameicons/pairs.png"));
-        QFile f(dir+"gameicons/planet.svg");
+        QString dir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String( "gameicons/pairs.svg"));
+        QFile f(dir+"gameicons/pairsIcon.svg");
         f.open(QIODevice::ReadOnly);
         file_buf = f.readAll();
     }

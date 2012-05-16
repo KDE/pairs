@@ -41,7 +41,7 @@ PlayersModel::PlayersModel(QObject* parent)
     names.insert(Time, "time");
     names.insert(Selected, "selected");
     setRoleNames(names);
-    m_playerIcons = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "players/*.png"));
+    m_playerIcons = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "players/*.svg"));
     for(QStringList::iterator it=m_playerIcons.begin(), itEnd=m_playerIcons.end(); it!=itEnd; ++it) {
         *it = QUrl::fromLocalFile(*it).toString();
     }

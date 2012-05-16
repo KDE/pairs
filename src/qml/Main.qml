@@ -89,7 +89,7 @@ FancyBackground
             spacing: 20
             
             Button {
-                source: playersModel.iconsDir("gameicons/quit.png")
+                source: playersModel.iconsDir("gameicons/exit.svg")
                 onClicked: Qt.quit()
             }
             
@@ -100,7 +100,7 @@ FancyBackground
             }
             
             Button {
-                source: playersModel.iconsDir("gameicons/info.png")
+                source: playersModel.iconsDir("gameicons/info.svg")
                 text: i18n("Info")
                 visible: game.state=="newgame"
                 onClicked: {
@@ -108,7 +108,7 @@ FancyBackground
                 }
             }
             Button {
-                source: playersModel.iconsDir("gameicons/newgame.png")
+                source: playersModel.iconsDir("gameicons/newGame.svg")
                 text: i18n("New Game")
                 visible: game.state=="playing"
                 onClicked: {
@@ -149,7 +149,7 @@ FancyBackground
                 delegate: TogglableButton {
                     text: game.state!="playing" ? display : i18nc("name. found/tries, time seconds", "%1<br/>%2/%3, %4s", display, found, missed+found, time)
                     source: decoration
-                    overlaySource: playersModel.iconsDir("gameicons/list-remove-user.png")
+                    overlaySource: playersModel.iconsDir("gameicons/removeUser.svg")
                     visible: game.state=="newgame" || selected
                     overlayVisible: game.state=="newgame"
                     opacity: game.state!="playing" || fgame.currentPlayer==index ? 1 : 0.3
@@ -216,7 +216,7 @@ FancyBackground
             }
             Button { 
                 text: i18n("Add"); 
-                source: playersModel.iconsDir("gameicons/list-add-user.png")
+                source: playersModel.iconsDir("gameicons/addUser.svg")
                 onClicked: addPlayer()
             }
         }
