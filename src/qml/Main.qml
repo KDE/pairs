@@ -141,6 +141,7 @@ FancyBackground
                 top: playersLabel.bottom
                 left: parent.left
                 right: parent.right
+                margins: 5
             }
             spacing: 10
             
