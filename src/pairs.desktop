@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Pairs
+Name[de]=Paare
 Name[es]=Parejas
 Name[et]=Paarid
 Name[ga]=Pairs
@@ -16,6 +17,7 @@ Icon=pairs
 Type=Application
 GenericName=A game to enhance your memory
 GenericName[cs]=Hra pro zlepšení Vaší paměti
+GenericName[de]=Ein Spiel zum Gedächtnistraining
 GenericName[es]=Un juego para mejorar la memoria
 GenericName[et]=Mälu arendav mäng
 GenericName[nl]=Een spel om uw geheugen te verbeteren
