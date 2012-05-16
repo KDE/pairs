@@ -35,13 +35,13 @@ Page {
             width: parent.width
             spacing: 20
             TogglableButton {
-                source: playersModel.iconsDir("gameicons/pairs.png")
+                source: playersModel.iconsDir("gameicons/pairs.svg")
                 text: i18n("Pairs")
                 onClicked: gameType = 'image'
                 enabled: gameType == 'image'
             }
             TogglableButton {
-                source: playersModel.iconsDir("gameicons/pairs2.png")
+                source: playersModel.iconsDir("gameicons/relations.svg")
                 text: i18n("Relations")
                 onClicked: gameType = 'image2'
                 enabled: gameType == 'image2'

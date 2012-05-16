@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="1123px" height="1208px" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 153.616 165.245"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil8 {fill:#A40200}
+    .fil9 {fill:#FAE2E9}
+    .fil11 {fill:#FF5E91}
+    .fil10 {fill:white}
+    .fil6 {fill:url(#id0)}
+    .fil3 {fill:url(#id1)}
+    .fil4 {fill:url(#id2)}
+    .fil7 {fill:url(#id3)}
+    .fil0 {fill:url(#id4)}
+    .fil5 {fill:url(#id5)}
+    .fil2 {fill:url(#id6)}
+    .fil1 {fill:url(#id7)}
+   ]]>
+  </style>
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="39.1422" y1="137.138" x2="-17.3224" y2="131.144">
+   <stop offset="0" style="stop-color:#BD000D"/>
+   <stop offset="1" style="stop-color:#A40200"/>
+  </linearGradient>
+  <linearGradient id="id1" gradientUnits="userSpaceOnUse" x1="137.731" y1="46.2466" x2="95.3507" y2="93.4116">
+   <stop offset="0" style="stop-color:#FF97B2"/>
+   <stop offset="1" style="stop-color:#A40200"/>
+  </linearGradient>
+  <linearGradient id="id2" gradientUnits="userSpaceOnUse" x1="49.8203" y1="145.614" x2="95.0982" y2="95.2239">
+   <stop offset="0" style="stop-color:#A40200"/>
+   <stop offset="1" style="stop-color:#191919"/>
+  </linearGradient>
+  <linearGradient id="id3" gradientUnits="userSpaceOnUse" x1="35.773" y1="79.3625" x2="119.333" y2="31.9991">
+   <stop offset="0" style="stop-color:#BD000D"/>
+   <stop offset="1" style="stop-color:#FF97B2"/>
+  </linearGradient>
+  <linearGradient id="id4" gradientUnits="userSpaceOnUse" xlink:href="#id2" x1="54.43" y1="19.0104" x2="79.3735" y2="49.7067">
+  </linearGradient>
+  <linearGradient id="id5" gradientUnits="userSpaceOnUse" x1="36.7025" y1="78.8157" x2="136.595" y2="34.3232">
+   <stop offset="0" style="stop-color:#BD000D"/>
+   <stop offset="1" style="stop-color:#FF5E91"/>
+  </linearGradient>
+  <linearGradient id="id6" gradientUnits="userSpaceOnUse" x1="129.886" y1="26.5819" x2="116.596" y2="10.715">
+   <stop offset="0" style="stop-color:#FFCCD9"/>
+   <stop offset="1" style="stop-color:#FF97B2"/>
+  </linearGradient>
+  <linearGradient id="id7" gradientUnits="userSpaceOnUse" xlink:href="#id6" x1="123.375" y1="103.852" x2="110.807" y2="88.8473">
+  </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_320217824">
+   <polygon id="_318136328" class="fil0" points="39.4111,3.60846 56.5954,14.3387 87.9388,51.759 70.7544,41.029 "/>
+   <polygon id="_318136520" class="fil1" points="116.749,86.1552 99.565,75.4249 130.908,112.844 148.092,123.574 "/>
+   <polygon id="_318136712" class="fil2" points="107.621,0 124.806,10.7304 153.616,45.1266 136.432,34.3962 "/>
+   <polygon id="_318136904" class="fil3" points="136.432,34.3962 153.616,45.1266 116.749,86.1552 99.565,75.4249 "/>
+   <polygon id="_318137096" class="fil4" points="65.3647,113.486 82.549,124.217 45.6825,165.245 28.4981,154.515 "/>
+   <polygon id="_453487776" class="fil5" points="107.621,0 136.432,34.3962 99.565,75.4249 130.908,112.844 97.0196,150.558 65.6769,113.139 28.8103,154.167 -0,119.772 36.8666,78.7428 5.5229,41.3223 39.4107,3.60846 70.7544,41.029 "/>
+   <path id="_453487968" class="fil6" d="M38.4796 143.407l-9.66931 10.7609 -28.8103 -34.3961 12.1367 -13.5071c6.03354,13.4302 14.8483,26.1244 26.3429,37.1422z"/>
+   <path id="_453488160" class="fil7" d="M107.621 0l28.8103 34.3962 -36.8666 41.0286 31.3425 37.4195 -2.73988 3.04901c-5.91752,-6.99198 -12.4855,-13.7841 -19.6809,-20.2499 -30.3946,-27.3112 -65.3588,-42.9754 -95.4469,-45.3465l-7.517 -8.97477 33.8882 -37.7138 31.3433 37.4205 36.8669 -41.029z"/>
+   <polygon id="_453488352" class="fil8" points="130.908,112.844 148.092,123.575 114.204,161.288 97.0196,150.558 "/>
+   <polygon id="_453488544" class="fil9" points="106.783,0.933061 135.61,35.3102 136.431,34.3962 107.621,0 "/>
+   <polygon id="_453488736" class="fil10" points="152.778,46.0596 135.61,35.3102 136.431,34.3962 153.616,45.1266 "/>
+   <polygon id="_315647568" class="fil9" points="98.7265,76.3579 130.086,113.758 130.908,112.844 99.5649,75.4249 "/>
+   <polygon id="_315647760" class="fil10" points="147.254,124.508 130.086,113.758 130.907,112.844 148.092,123.575 "/>
+   <polygon id="_315647952" class="fil11" points="38.5725,4.54136 69.9322,41.942 70.7536,41.0278 39.4109,3.60846 "/>
+  </g>
+ </g>
+</svg>

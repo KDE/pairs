@@ -94,7 +94,7 @@ FancyBackground
             }
             
             Button {
-                source: playersModel.iconsDir("gameicons/get-hot-new-stuff.png")
+                source: playersModel.iconsDir("gameicons/getThemes.svg")
                 text: i18n("Get Themes")
                 onClicked: fgame.download()
             }

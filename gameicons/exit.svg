@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="1243px" height="1243px" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 503.568 503.567"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil4 {fill:black}
+    .fil5 {fill:white}
+    .fil2 {fill:#999999;fill-rule:nonzero}
+    .fil1 {fill:#B3B3B3;fill-rule:nonzero}
+    .fil7 {fill:url(#id0)}
+    .fil6 {fill:url(#id1)}
+    .fil3 {fill:url(#id2)}
+    .fil0 {fill:url(#id3)}
+   ]]>
+  </style>
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="252.74" y1="46.4697" x2="252.74" y2="247.603">
+   <stop offset="0" style="stop-color:red"/>
+   <stop offset="1" style="stop-color:#D70000"/>
+  </linearGradient>
+  <linearGradient id="id1" gradientUnits="userSpaceOnUse" x1="248.061" y1="87.09" x2="248.061" y2="457.185">
+   <stop offset="0" style="stop-color:red"/>
+   <stop offset="1" style="stop-color:#990000"/>
+  </linearGradient>
+  <radialGradient id="id2" gradientUnits="userSpaceOnUse" cx="251.784" cy="251.783" r="251.784" fx="251.784" fy="251.783">
+   <stop offset="0" style="stop-color:black"/>
+   <stop offset="0.701961" style="stop-color:#313131"/>
+   <stop offset="1" style="stop-color:#626262"/>
+  </radialGradient>
+  <radialGradient id="id3" gradientUnits="userSpaceOnUse" cx="251.786" cy="251.782" r="29.0037" fx="251.786" fy="251.782">
+   <stop offset="0" style="stop-color:white"/>
+   <stop offset="0.321569" style="stop-color:#E6E6E6"/>
+   <stop offset="0.619608" style="stop-color:#CCCCCC"/>
+   <stop offset="1" style="stop-color:#666666"/>
+  </radialGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <rect class="fil0" x="13.6961" y="13.6924" width="476.183" height="476.183" rx="84.9544" ry="84.9544"/>
+  <g id="_329267888">
+   <path id="_328348864" class="fil1" d="M93.0562 500.402l317.455 0c25.2425,0 48.1857,-10.1743 64.8144,-26.5647 16.0133,-15.7836 26.1766,-37.3395 26.9073,-61.1326l-8.70575 -9.28476c-0.725439,20.1372 -14.1174,47.6646 -27.7007,61.0541 -14.2011,13.9968 -33.7817,22.6848 -55.3152,22.6848l-317.455 0c-21.5335,0 -41.1141,-8.68804 -55.3152,-22.6848 -13.5833,-13.3895 -26.9752,-40.917 -27.7007,-61.0541l-8.70575 9.28476c0.730703,23.7931 10.894,45.349 26.9073,61.1326 16.6286,16.3903 39.5719,26.5647 64.8144,26.5647z"/>
+   <path id="_330988072" class="fil2" d="M93.0562 2.60077l317.455 0c25.2425,0 48.1857,10.1743 64.8144,26.5647 16.0133,15.7836 26.1766,37.3395 26.9073,61.1326l-8.70575 9.28476c-0.725439,-20.1372 -14.1174,-47.6646 -27.7007,-61.0541 -14.2011,-13.9968 -33.7817,-22.6848 -55.3152,-22.6848l-317.455 0c-21.5335,0 -41.1141,8.68804 -55.3152,22.6848 -13.5833,13.3895 -26.9752,40.917 -27.7007,61.0541l-8.70575 -9.28476c0.730703,-23.7931 10.894,-45.349 26.9073,-61.1326 16.6286,-16.3903 39.5719,-26.5647 64.8144,-26.5647z"/>
+   <path id="_326294448" class="fil3" d="M413.729 0l-323.891 0c-49.4117,0 -89.8382,40.4265 -89.8382,89.8382l0 323.891c0,49.4117 40.4265,89.8382 89.8382,89.8382l323.891 0c49.4117,0 89.8387,-40.4265 89.8387,-89.8382l0 -323.891c0,-49.4117 -40.427,-89.8382 -89.8387,-89.8382zm-8.80672 13.6924l-306.274 0c-46.7281,0 -84.9563,38.2282 -84.9563,84.9525l0 306.274c0,46.7281 38.2282,84.9563 84.9563,84.9563l306.274 0c46.7243,0 84.9525,-38.2282 84.9525,-84.9563l0 -306.274c0,-46.7243 -38.2282,-84.9525 -84.9525,-84.9525z"/>
+  </g>
+  <polygon class="fil4" points="115.6,54.1261 250.826,189.352 386.052,54.1261 452.312,120.386 317.086,255.612 452.312,390.838 386.052,457.098 250.826,321.872 115.6,457.098 49.3404,390.838 184.567,255.612 49.3409,120.386 "/>
+  <polygon class="fil5" points="117.514,42.6416 252.74,177.868 387.966,42.6416 454.226,108.902 319,244.127 454.226,379.353 387.966,445.613 252.74,310.387 117.514,445.614 51.2545,379.354 186.481,244.127 51.255,108.901 "/>
+  <polygon class="fil6" points="117.514,46.4697 252.74,181.696 387.966,46.4697 454.226,112.73 319,247.955 454.226,383.181 387.966,449.441 252.74,314.215 117.514,449.442 51.2545,383.182 186.481,247.955 51.255,112.729 "/>
+  <path class="fil7" d="M117.514 46.4697l135.226 135.226 135.226 -135.226 66.2595 66.26 -96.2887 96.2887c-62.4352,2.65149 -120.867,16.3832 -171.809,38.5847l-134.874 -134.874 66.2595 -66.2595z"/>
+ </g>
+</svg>
