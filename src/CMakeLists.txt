@@ -33,7 +33,7 @@ set(pairs_SRCS pairstheme.cpp carditem.cpp
 
 qt4_add_resources(pairs_SRCS resources.qrc)
 
-kde4_add_app_icon(pairs_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../icons/pairs.svg")
+kde4_add_app_icon(pairs_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../icons/hi*-apps-pairs*")
 
 kde4_add_executable(pairs ${pairs_SRCS})
 

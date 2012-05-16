@@ -27,6 +27,7 @@
 #include <KDE/KAboutData>
 #include <KDE/KCmdLineArgs>
 #include <KDE/KLocale>
+#include <KDE/KIcon>
 #include <KStandardDirs>
 #include <QDebug>
 #include "pairstheme.h"
@@ -62,7 +63,7 @@ int main(int argc, char **argv)
         bool fsMode = KCmdLineArgs::parsedArgs()->isSet("fullscreen");
         args->clear();
         Pairs *widget = new Pairs;
-
+        widget->setWindowIcon(KIcon("pairs"));
         if (fsMode) 
         {
             widget->showFullScreen();
