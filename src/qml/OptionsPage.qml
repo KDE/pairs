@@ -42,7 +42,7 @@ Page {
             }
             TogglableButton {
                 source: playersModel.iconsDir("gameicons/pairs2.png")
-                text: i18n("Similar")
+                text: i18n("Relations")
                 onClicked: gameType = 'image2'
                 enabled: gameType == 'image2'
             }
