@@ -41,7 +41,7 @@ Page {
                 enabled: gameType == 'image'
             }
             TogglableButton {
-                source: playersModel.iconsDir("gameicons/similar.svg")
+                source: playersModel.iconsDir("gameicons/relations.svg")
                 text: i18n("Relations")
                 onClicked: gameType = 'image2'
                 enabled: gameType == 'image2'
