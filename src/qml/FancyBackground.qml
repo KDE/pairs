@@ -21,12 +21,9 @@
 
 import QtQuick 1.1
  
-Rectangle
+Image
 {
-    Image
-    {
-        source: playersModel.iconsDir("gameicons/background.svg")
-        fillMode: Image.PreserveAspectCrop
-        sourceSize.width: (parent.width * 768 / 1366 < parent.height) ? parent.height * 1366 / 768 : parent.width
-    }
+    source: playersModel.iconsDir("gameicons/background.svg")
+    fillMode: Image.PreserveAspectCrop
+    sourceSize.width: (parent.width * 768 / 1366 < parent.height) ? parent.height * 1366 / 768 : parent.width
 }
