@@ -21,86 +21,64 @@
 import QtQuick 1.0
 
 Page {
-    Column {
- //       anchors.fill: parent
-        anchors.horizontalCenter: parent.horizontalCenter
-        Text {
+    clip: true
+    ListView {
+        anchors.margins: 5
+        anchors.fill: parent
+        spacing: 10
+        
+        header: Text {
             font.pixelSize: 26
             anchors.horizontalCenter: parent.horizontalCenter
             color: "white"
-            text: i18n("<b>pairs v 0.2.0</b>")
+            font.bold: true
+            text: i18n("Pairs 0.3")
+            height: font.pixelSize*2
         }
-        Text {
-            font.pixelSize: 14
-            horizontalAlignment: Text.AlignLeft 
-            color: "white"
-            text: " "
+        delegate: Column {
+            width: parent.width
+            spacing: 5
+            Text {
+                width: parent.width
+                wrapMode: Text.WordWrap
+                font.pixelSize: 20
+                horizontalAlignment: Text.AlignLeft 
+                color: "white"
+                text: i18n("<b>%1</b> &lt;%2&gt;", name, email)
+            }
+            Text {
+                wrapMode: Text.WordWrap
+                width: parent.width
+                font.pixelSize: 18
+                font.italic: true
+                horizontalAlignment: Text.AlignLeft 
+                color: "white"
+                text: description
+            }
         }
-        Text {
-            font.pixelSize: 20
-            horizontalAlignment: Text.AlignLeft 
-            color: "white"
-            text: i18n("<b>Aleix Pol Gonzalez</b> - aleixpol@kde.org")
-        }
-        Text {
-            font.pixelSize: 18
-            horizontalAlignment: Text.AlignLeft 
-            color: "white"
-            text: i18n("<i>Initial implementation and maintainer</i>")
-        }
-        Text {
-            font.pixelSize: 12
-            horizontalAlignment: Text.AlignLeft 
-            color: "white"
-            text: " "
-        }
-        Text {
-            font.pixelSize: 20
-            horizontalAlignment: Text.AlignLeft 
-            color: "white"
-            text: i18n("<b>Marco Calignano</b> - marco.calignano@googlemail.com")
-        }
-        Text {
-            font.pixelSize: 18
-            horizontalAlignment: Text.AlignLeft 
-            color: "white"
-            text: i18n("<i>Theme support enhancement and general feature development</i>")
-        }
-        Text {
-            font.pixelSize: 12
-            horizontalAlignment: Text.AlignLeft 
-            color: "white"
-            text: " "
-        }
-        Text {
-            font.pixelSize: 20
-            horizontalAlignment: Text.AlignLeft 
-            color: "white"
-            text: i18n("<b>Albert Astals Cid</b> - aacid@kde.org")
-        }
-        Text {
-            font.pixelSize: 18
-            horizontalAlignment: Text.AlignLeft 
-             color: "white"
-            text: i18n("<i>Initial project setup and ideas</i>")
-        }
-        Text {
-            font.pixelSize: 12
-            horizontalAlignment: Text.AlignLeft 
-            color: "white"
-            text: " "
-        }
-        Text {
-            font.pixelSize: 20
-            horizontalAlignment: Text.AlignLeft 
-            color: "white"
-            text: i18n("<b>Abhash Bikram Thapa</b> - abhash@pixelpinch.com")
-        }
-        Text {
-            font.pixelSize: 18
-            horizontalAlignment: Text.AlignLeft 
-            color: "white"
-            text: i18n("<i>Graphic design and icons</i>")
-        }
+        model: authors
+        
+        property list<Author> authors: [
+            Author {
+                name: "Aleix Pol Gonzalez"
+                email: "aleixpol@kde.org"
+                description: i18n("Initial implementation and maintainer")
+            },
+            Author {
+                name: "Marco Calignano"
+                email: "marco.calignano@googlemail.com"
+                description: i18n("Theme support enhancement and general feature development")
+            },
+            Author {
+                name: "Albert Astals Cid"
+                email: "aacid@kde.org"
+                description: i18n("Initial project setup and ideas")
+            },
+            Author {
+                name: "Abhash Bikram Thapa"
+                email: "abhash@pixelpinch.com"
+                description: i18n("Graphic design and icons")
+            }
+        ]
     }
 }

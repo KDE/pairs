@@ -10,5 +10,6 @@
         <file>qml/FancyBackground.qml</file>
         <file>qml/SelectableListView.qml</file>
         <file>qml/InfoPage.qml</file>
+        <file>qml/Author.qml</file>
     </qresource>
 </RCC>
