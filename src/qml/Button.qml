@@ -73,11 +73,12 @@ Item {
     Image { 
         id: overlay
         
-        visible: mouse.containsMouse && overlayVisible
+        opacity: mouse.containsMouse && overlayVisible ? 1 : 0
         width: parent.width/3
         height: parent.height/3
         anchors.top: parent.top
         anchors.right: parent.right
+        Behavior on opacity { NumberAnimation { duration: 200; easing.type: Easing.InQuad } }
         
         MouseArea {
             anchors.fill: parent
