@@ -130,7 +130,10 @@ FancyBackground
         }
         Text {
             id: playersLabel
-            anchors.right: parent.right
+            anchors {
+                right: parent.right
+                rightMargin: 5
+            }
             font.pointSize: 14
             color : "white"
             text: i18n("Players")
@@ -178,8 +181,11 @@ FancyBackground
         
         Text {
             id: label
-            anchors.right: parent.right
-            anchors.top: parent.top
+            anchors {
+                right: parent.right
+                top: parent.top
+                rightMargin: 5
+            }
             font.pointSize: 14
             color: "white"
             text: i18n("Join!")
