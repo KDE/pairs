@@ -93,6 +93,8 @@ void CardItem::setSize(const QSizeF& newSize)
     m_color.fill(Qt::transparent);
     if(m_type==CARD_WORD) {
         QPainter paint(&m_color);
+        QPen penHText(QColor("#ffffff"));
+        paint.setPen(penHText);
         KFontUtils::adaptFontSize(paint, m_text, newSize);
         paint.drawText( m_color.rect(), Qt::AlignCenter, m_text);
     } else {
