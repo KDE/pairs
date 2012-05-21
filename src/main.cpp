@@ -63,6 +63,7 @@ int main(int argc, char **argv)
         bool fsMode = KCmdLineArgs::parsedArgs()->isSet("fullscreen");
         args->clear();
         Pairs *widget = new Pairs;
+        widget->view()->setLanguage(KGlobal::locale()->language().left(2));
         widget->setWindowIcon(KIcon("pairs"));
         if (fsMode) 
         {
