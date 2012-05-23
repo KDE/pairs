@@ -32,7 +32,7 @@ Page {
             anchors.horizontalCenter: parent.horizontalCenter
             color: "white"
             font.bold: true
-            text: i18n("Pairs 0.3")
+            text: i18n("Pairs 1.0.0")
             height: font.pixelSize*2
         }
         delegate: Column {
