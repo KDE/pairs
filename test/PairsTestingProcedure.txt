@@ -1,0 +1,194 @@
+Pairs testing
+
+ ============================
+| Application Test Procedure |  (last updated: 2012-05-19 by Anne-Marie Mahfouf from the work of 
+                                 Andi Fischer for Umbrello)
+ ============================
+
+ See http://userbase.kde.org/Pairs to learn about Pairs design and aims.
+ 
+ Please add any test you feel are missing.
+ 
+ 
+===============================================================================
+Instructions
+===============================================================================
+ 1) Make a copy of this file.
+ 2) Open this copy in an editor.
+ 3) Enter the test data.
+ 4) Do the tests (part of it or all) and enter the result into this file.
+
+
+===============================================================================
+Test data
+===============================================================================
+Name of tester:
+Date:
+OS Version:
+Qt Version:
+KDE Version:
+
+
+===============================================================================
+Start, stop, and command line (SSC)
+===============================================================================
+
+-------------------------------------------------------------------------------
+SSC01 - Start application:                                       OK[ ]   NOK[ ]
+-------------------------------------------------------------------------------
+Testprocedure:
+  1) Start application in a konsole
+        $ pairs
+     or from the K menu: Applications - Education - Miscellaneous - Pairs.
+Testresult:
+  1) Application main window is visible.
+  2) All icons are set and visible.
+
+-------------------------------------------------------------------------------
+SSC02 - Position on screen:                                      OK[ ]   NOK[ ]
+-------------------------------------------------------------------------------
+Testprocedure:
+  1) Start application.
+  2) Move window to another location on the screen.
+  3) Close application (red cross icon).
+  4) Start application again.
+Testresult:
+  1) Verify that application comes up at the last screen position.
+
+-------------------------------------------------------------------------------
+SSC03 - Size of window:                                          OK[ ]   NOK[ ]
+-------------------------------------------------------------------------------
+Testprocedure:
+  1) Start application.
+  2) Resize application to the minimum size in width and height.
+  3) Stop application.
+  4) Start application again.
+  5) Do the same again with a user defined window size.
+  6) Do the same again by changing only width or height.
+Testresult:
+  1) Verify that application comes up again with the minimum width and height.
+  2) Verify that application comes up again with the user defined size.
+
+
+-------------------------------------------------------------------------------
+SSC10 - Command line:                                            OK[ ]   NOK[ ]
+-------------------------------------------------------------------------------
+Testprocedure:
+
+Start pairs with the command lline:
+ pairs --fullscreen
+
+Testresult: the application takes the whole screen
+
+===============================================================================
+GUI elements 
+===============================================================================
+
+-------------------------------------------------------------------------------
+TAP - Test Add Players                                           OK[ ]   NOK[ ]
+-------------------------------------------------------------------------------
+
+Add a few players
+1) Test names are different
+2) Test icons are different
+
+-------------------------------------------------------------------------------
+TGT - Test Get Themes                                            OK[ ]   NOK[ ]
+-------------------------------------------------------------------------------
+
+1) The KNewStuff dialog appears
+2) You can download the theme
+3) The theme appears on the game board
+
+
+-------------------------------------------------------------------------------
+TI - Test Info                                                   OK[ ]   NOK[ ]
+-------------------------------------------------------------------------------
+
+1) The Info dialog appears
+2) The Info dialog is readable
+3) The Info dialog closes (on click)
+
+
+-------------------------------------------------------------------------------
+TGP1 - Test Game Playing: Pairs                                  OK[ ]   NOK[ ]
+-------------------------------------------------------------------------------
+
+Test Pairs playing
+
+
+-------------------------------------------------------------------------------
+TGP2 - Test Game Playing: Relations                              OK[ ]   NOK[ ]
+-------------------------------------------------------------------------------
+
+Test Relations playing
+
+
+-------------------------------------------------------------------------------
+TGP3 - Test Game Playing: Logic                                  OK[ ]   NOK[ ]
+-------------------------------------------------------------------------------
+
+Test Logic playing
+
+
+-------------------------------------------------------------------------------
+TGP4 - Test Game Playing: Sound                                  OK[ ]   NOK[ ]
+-------------------------------------------------------------------------------
+
+Test Sound playing
+
+
+-------------------------------------------------------------------------------
+TGP5 - Test Game Playing: SoundLogic                             OK[ ]   NOK[ ]
+-------------------------------------------------------------------------------
+
+Test SoundLogic playing
+
+
+-------------------------------------------------------------------------------
+TGP6 - Test Game Playing: Words                                  OK[ ]   NOK[ ]
+-------------------------------------------------------------------------------
+
+Test Words playing: font, readability
+
+
+===============================================================================
+Check translations
+===============================================================================
+-------------------------------------------------------------------------------
+TI - Test Translation                                             OK[ ]   NOK[ ]
+-------------------------------------------------------------------------------
+
+Use the x-test translation
+Check all strings in Pairs are enclosed by xx
+
+===============================================================================
+Check Krazy output (KRZ)
+===============================================================================
+- checks
+- API documentation
+
+###############################################################################
+
+===============================================================================
+Summary / Statistics
+===============================================================================
+
+Total number of tests:              0
+                             ==========
+
+        Tests with OK:              0
+       Tests with NOK:              0
+  Not performed tests:              0
+                             ----------
+                                    0
+                             ==========
+
+
+Summary / State of application:
+-------------------------------
+
+
+
+
+
