@@ -50,8 +50,11 @@ Item {
     Text {
        id: caption
        width: parent.width
-       anchors.top: icon.bottom
-       anchors.horizontalCenter: button.horizontalCenter
+       anchors {
+            top: icon.bottom
+            topMargin: 5
+            horizontalCenter: button.horizontalCenter
+       }
        horizontalAlignment: Text.AlignHCenter
        wrapMode: Text.WordWrap
        font.pointSize: 14

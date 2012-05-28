@@ -40,7 +40,6 @@ Item
         anchors.fill: parent
         opacity: container.enabled ? 0.7 : 0
         Behavior on opacity { NumberAnimation { duration: 200 } }
-        
         gradient: Gradient {
             GradientStop { position: 0; color: "white" }
             GradientStop { position: 1; color: "transparent" }
@@ -58,6 +57,7 @@ Item
         Button {
             id: button
             anchors.centerIn: parent
+            anchors.verticalCenterOffset: -10
             
             onClicked: container.clicked()
             onOverlayClicked: container.overlayClicked()

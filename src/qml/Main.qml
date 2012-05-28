@@ -32,7 +32,7 @@ FancyBackground
             left: parent.left
             top: parent.top
             bottom: parent.bottom
-            leftMargin: 400
+            leftMargin: game.width/3
             margins: 20
         }
         
@@ -80,20 +80,22 @@ FancyBackground
             left: game.left
             margins: 20
         }
-        height: 100
+        height: 130
         
         Row {
             anchors.topMargin: 5
             anchors.fill: parent
             id: tools
-            spacing: 20
+            property real buttonWidth: Math.min(tools.width/3, 100)
             
             Button {
+                width: tools.buttonWidth
                 source: playersModel.iconsDir("gameicons/exit.svg")
                 onClicked: Qt.quit()
             }
             
             Button {
+                width: tools.buttonWidth
                 source: playersModel.iconsDir("gameicons/getThemes.svg")
                 text: i18n("Get Themes")
                 onClicked: fgame.download()
@@ -101,6 +103,7 @@ FancyBackground
             }
             
             Button {
+                width: tools.buttonWidth
                 source: playersModel.iconsDir("gameicons/info.svg")
                 text: i18n("Info")
                 visible: game.state=="newgame"
@@ -109,6 +112,7 @@ FancyBackground
                 }
             }
             Button {
+                width: tools.buttonWidth
                 source: playersModel.iconsDir("gameicons/newGame.svg")
                 text: i18n("New Game")
                 visible: game.state=="playing"
@@ -122,6 +126,7 @@ FancyBackground
     
     Page {
         id: playersView
+        clip: true
         anchors {
             left: parent.left
             right: main.left
