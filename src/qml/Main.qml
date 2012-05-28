@@ -28,11 +28,8 @@ FancyBackground
         id: main
         
         anchors {
-            right: parent.right
-            left: parent.left
-            top: parent.top
-            bottom: parent.bottom
-            leftMargin: game.width/3
+            fill: parent
+            leftMargin: Math.min(game.width/3, 320)
             margins: 20
         }
         
