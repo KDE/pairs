@@ -28,8 +28,8 @@ Item
     property bool enabled: true
     property alias text: button.text
     property alias source: button.source
-    property alias overlaySource: button.overlaySource
-    property alias overlayVisible: button.overlayVisible
+    property alias overlaySource: overlay.source
+    property bool overlayVisible: true
     
     signal overlayClicked
     signal clicked
@@ -47,11 +47,36 @@ Item
         }
     }
     
-    Button {
-        id: button
-        anchors.centerIn: parent
+    MouseArea {
+        id: mouse
+        anchors.fill: parent
+        hoverEnabled: true
+        onClicked: button.clicked()
+        onEntered: button.state="hovered"
+        onExited: button.state="default"
         
-        onClicked: container.clicked()
-        onOverlayClicked: container.overlayClicked()
+        Button {
+            id: button
+            anchors.centerIn: parent
+            
+            onClicked: container.clicked()
+            onOverlayClicked: container.overlayClicked()
+        }
+        
+        Image { 
+            id: overlay
+            
+            opacity: !container.enabled && overlayVisible ? 1 : 0
+            width: parent.width/3
+            height: parent.height/3
+            anchors.top: parent.top
+            anchors.right: parent.right
+            Behavior on opacity { NumberAnimation { duration: 200; easing.type: Easing.InQuad } }
+            
+            MouseArea {
+                anchors.fill: parent
+                onClicked: button.overlayClicked()
+            }
+        }
     }
 }
