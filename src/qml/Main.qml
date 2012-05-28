@@ -190,7 +190,7 @@ FancyBackground
         }
         
         height: 100
-        Row {
+        Item {
             id: controls
             anchors {
                 fill: parent
@@ -203,12 +203,15 @@ FancyBackground
                     top: parent.top
                     bottom: parent.bottom
                 }
+                width: height
                 source: playersModel.randomIcon()
                 onClicked: source=playersModel.randomIcon()
             }
             
             Column {
+                anchors.verticalCenterOffset: -10
                 anchors.verticalCenter: newUserPicture.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
                 Text {
                     color: "white" 
                     text: i18n("Player Name:") 
@@ -234,6 +237,7 @@ FancyBackground
                 bottom: parent.bottom
                 bottomMargin: -10
             }
+            width: height
             text: i18n("Add"); 
             source: playersModel.iconsDir("gameicons/addUser.svg")
             onClicked: addPlayer()
