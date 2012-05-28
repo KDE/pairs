@@ -46,7 +46,7 @@ Item {
     
     Text {
        id: caption
-       width: 100
+       width: parent.width
        color: "white"
        anchors.top: icon.bottom
        anchors.horizontalCenter: button.horizontalCenter
