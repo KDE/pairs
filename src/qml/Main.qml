@@ -63,7 +63,6 @@ FancyBackground
             anchors.fill: parent
             visible: game.state=="info"
             MouseArea {
-                id: mouse
                 anchors.fill: parent
                 onClicked: game.state="newgame"
             }
@@ -161,7 +160,7 @@ FancyBackground
                     opacity: game.state!="playing" || fgame.currentPlayer==index ? 1 : 0.3
                     
                     enabled: selected
-                    onClicked: playersModel.toggleSelection(index)
+                    onClicked: if(game.state=="newgame") playersModel.toggleSelection(index)
                     onOverlayClicked: playersModel.removePlayer(index)
                 }
             }
