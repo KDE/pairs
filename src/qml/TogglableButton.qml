@@ -49,6 +49,7 @@ Item
     
     Button {
         id: button
+        anchors.centerIn: parent
         
         onClicked: container.clicked()
         onOverlayClicked: container.overlayClicked()
