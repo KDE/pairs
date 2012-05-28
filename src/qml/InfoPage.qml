@@ -24,7 +24,12 @@ Page {
     clip: true
     ListView {
         anchors.margins: 5
-        anchors.fill: parent
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            bottom: backButton.top
+        }
         spacing: 10
         
         header: Text {
@@ -80,5 +85,17 @@ Page {
                 description: i18n("Graphic design and icons")
             }
         ]
+    }
+    
+    Button {
+        id: backButton
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            bottom: parent.bottom
+        }
+        width: parent.width
+        text: i18n("Go back")
+        font.pixelSize: 30
+        font.bold: true
     }
 }
