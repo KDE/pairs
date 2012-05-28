@@ -35,19 +35,21 @@ Item {
     Image {
         id: icon
         smooth: true
-        anchors.top: parent.top
-        anchors.horizontalCenter: button.horizontalCenter
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            margins: 10
+        }
+        height: width
         fillMode: Image.PreserveAspectFit
-        width: parent.width*2/3
-        height: parent.height*2/3
-        sourceSize.width: width
         sourceSize.height: height
+        sourceSize.width: width
     }
     
     Text {
        id: caption
        width: parent.width
-       color: "white"
        anchors.top: icon.bottom
        anchors.horizontalCenter: button.horizontalCenter
        horizontalAlignment: Text.AlignHCenter
@@ -62,10 +64,9 @@ Item {
         anchors.fill: parent
         hoverEnabled: true
         onClicked: button.clicked()
-        onEntered: button.state="hovered"
-        onExited: button.state="default"
     }
     
+    state: mouse.containsMouse ? "hovered" : "default"
     states: [
         State {
             name: "default"
