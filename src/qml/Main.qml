@@ -194,17 +194,23 @@ FancyBackground
         height: 100
         Row {
             id: controls
-            anchors.top: label.bottom
-            anchors.left: parent.left
-            anchors.right: parent.right
+            anchors {
+                fill: parent
+                topMargin: label.height
+            }
             Button {
                 id: newUserPicture
-                anchors.verticalCenter: parent.verticalCenter
+                anchors {
+                    left: parent.left
+                    top: parent.top
+                    bottom: parent.bottom
+                }
                 source: playersModel.randomIcon()
                 onClicked: source=playersModel.randomIcon()
             }
             
             Column {
+                anchors.verticalCenter: newUserPicture.verticalCenter
                 Text {
                     color: "white" 
                     text: i18n("Player Name:") 
@@ -221,11 +227,18 @@ FancyBackground
                     onAccepted: addPlayer()
                 }
             }
-            Button { 
-                text: i18n("Add"); 
-                source: playersModel.iconsDir("gameicons/addUser.svg")
-                onClicked: addPlayer()
+        }
+        
+        Button {
+            anchors {
+                right: parent.right
+                top: label.bottom
+                bottom: parent.bottom
+                bottomMargin: -10
             }
+            text: i18n("Add"); 
+            source: playersModel.iconsDir("gameicons/addUser.svg")
+            onClicked: addPlayer()
         }
     }
     
