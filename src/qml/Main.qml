@@ -84,6 +84,7 @@ FancyBackground
         height: 100
         
         Row {
+            anchors.topMargin: 5
             anchors.fill: parent
             id: tools
             spacing: 20
