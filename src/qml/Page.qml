@@ -26,7 +26,7 @@ Rectangle
     smooth: true
     
     gradient: Gradient {
-        GradientStop { position: 0; color: "#77FFFFFF" }
+        GradientStop { position: 0; color: "#22FFFFFF" }
         GradientStop { position: 1; color: "transparent" }
     }
 }
