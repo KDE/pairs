@@ -43,7 +43,6 @@ Item {
             margins: 10
         }
         visible: source!=""
-        height: width
         fillMode: Image.PreserveAspectFit
         sourceSize {
             height: height
@@ -53,11 +52,11 @@ Item {
     
     Text {
        id: caption
-       width: parent.width
        anchors {
             bottom: parent.bottom
             left: parent.left
             right: parent.right
+            bottomMargin: 5
        }
        horizontalAlignment: Text.AlignHCenter
 //        wrapMode: Text.WordWrap
