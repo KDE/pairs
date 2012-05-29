@@ -41,7 +41,8 @@ Item {
             right: parent.right
             margins: 10
         }
-        height: width
+        visible: source!=""
+        height: visible ? width : 0
         fillMode: Image.PreserveAspectFit
         sourceSize.height: height
         sourceSize.width: width
