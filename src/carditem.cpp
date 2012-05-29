@@ -77,6 +77,7 @@ CardItem::CardItem(const QSharedPointer<QSvgRenderer>& back, QGraphicsItem* pare
     setGraphicsEffect(colorize);
 
     setDuration(200);
+    setShapeMode(BoundingRectShape);
 }
 
 CardItem::~CardItem()
