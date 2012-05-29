@@ -23,12 +23,9 @@ import QtQuick 1.0
 Page {
     clip: true
     ListView {
-        anchors.margins: 5
         anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-            bottom: backButton.top
+            fill: parent
+            margins: 5
         }
         spacing: 10
         
@@ -85,17 +82,11 @@ Page {
                 description: i18n("Graphic design and icons")
             }
         ]
-    }
-    
-    Button {
-        id: backButton
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            bottom: parent.bottom
+        footer: Button {
+            width: parent.width
+            text: i18n("Go back")
+            font.pixelSize: 30
+            font.bold: true
         }
-        width: parent.width
-        text: i18n("Go back")
-        font.pixelSize: 30
-        font.bold: true
     }
 }
