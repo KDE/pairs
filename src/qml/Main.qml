@@ -129,7 +129,8 @@ FancyBackground
             right: main.left
             top: toolbar.bottom
             bottom: playersControl.top
-            margins: 20
+            leftMargin: 20
+            rightMargin: 20
         }
         Text {
             id: playersLabel

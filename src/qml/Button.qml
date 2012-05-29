@@ -39,26 +39,28 @@ Item {
             top: parent.top
             left: parent.left
             right: parent.right
+            bottom: caption.top
             margins: 10
         }
         visible: source!=""
-        height: visible ? width : 0
+        height: width
         fillMode: Image.PreserveAspectFit
         sourceSize.height: height
-        sourceSize.width: width
+        sourceSize.width: height
     }
     
     Text {
        id: caption
        width: parent.width
        anchors {
-            top: icon.bottom
-            topMargin: 5
-            horizontalCenter: button.horizontalCenter
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
        }
        horizontalAlignment: Text.AlignHCenter
-       wrapMode: Text.WordWrap
-       font.pointSize: 14
+//        wrapMode: Text.WordWrap
+       font.pointSize: 12
+       color: mouse.containsMouse ? "red" : "white"
        
        Behavior on color { ColorAnimation { duration: 200 } }
     }
@@ -69,16 +71,4 @@ Item {
         hoverEnabled: true
         onClicked: button.clicked()
     }
-    
-    state: mouse.containsMouse ? "hovered" : "default"
-    states: [
-        State {
-            name: "default"
-            PropertyChanges { target: caption; color: "white" }
-        },
-        State {
-            name: "hovered"
-            PropertyChanges { target: caption; color: "red" }
-        }
-    ]
 }
