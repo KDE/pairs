@@ -72,15 +72,15 @@ PairsTheme::PairsTheme(const QString& path)
         else if(type==QXmlStreamReader::StartElement) {
             QString name = reader.name().toString();
             if(name == "title") {
-                m_title = reader.readElementText();
+                m_title = reader.readElementText().trimmed();
             } else if(name == "description") {
-                m_description = reader.readElementText();
+                m_description = reader.readElementText().trimmed();
             } else if(name == "author") {
-                m_author = reader.readElementText();
+                m_author = reader.readElementText().trimmed();
             } else if(name == "version") {
-                m_version = reader.readElementText();
+                m_version = reader.readElementText().trimmed();
             } else if(name == "date") {
-                m_date = reader.readElementText();
+                m_date = reader.readElementText().trimmed();
             } else if(name == "main") {
                 m_main = reader.attributes().value("type").toString();
                 m_main_type = cardNameToType(m_main);
@@ -201,7 +201,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                         qDebug() << lang << src << item.found[lang] << item.foundSound("en");
                         break;
                     case CARD_WORD:
-                        QString src = reader.readElementText();
+                        QString src = reader.readElementText().trimmed();
                         if(current_type == m_main_type)
                             common[current_type] = src;
                         item.name[current_type][lang] = src;
