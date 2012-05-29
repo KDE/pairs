@@ -45,8 +45,10 @@ Item {
         visible: source!=""
         height: width
         fillMode: Image.PreserveAspectFit
-        sourceSize.height: height
-        sourceSize.width: height
+        sourceSize {
+            height: height
+            width: height
+        }
     }
     
     Text {

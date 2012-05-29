@@ -50,7 +50,7 @@ QPixmap ThemeIconsProvider::requestPixmap(const QString& id, QSize* size, const 
     if(size) {
         *size = pixRenderer.viewBox().size();
     }
-    QPixmap px(requestedSize.isValid() ? requestedSize : pixRenderer.viewBox().size());
+    QPixmap px(requestedSize.isValid() && !requestedSize.isEmpty() ? requestedSize : pixRenderer.viewBox().size());
     px.fill(Qt::transparent);
     QPainter p(&px);
     pixRenderer.render(&p);
