@@ -56,7 +56,7 @@ Item
         
         Button {
             id: button
-            anchors.centerIn: parent
+            anchors.fill: parent
             anchors.verticalCenterOffset: -10
             
             onClicked: container.clicked()

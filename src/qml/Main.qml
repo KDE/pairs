@@ -161,6 +161,7 @@ FancyBackground
                     visible: game.state=="newgame" || selected
                     overlayVisible: game.state=="newgame"
                     opacity: game.state!="playing" || fgame.currentPlayer==index ? 1 : 0.3
+                    width: Math.min(100, parent.width)
                     
                     enabled: selected
                     onClicked: if(game.state=="newgame") playersModel.toggleSelection(index)
