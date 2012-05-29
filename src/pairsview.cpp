@@ -35,9 +35,9 @@
 #include <QDeclarativeItem>
 #include <QCoreApplication>
 #include <QDeclarativeContext>
-#ifndef QT_NO_OPENGL
-    #include <QGLWidget>
-#endif
+// #ifndef QT_NO_OPENGL
+//     #include <QGLWidget>
+// #endif
 #include <Phonon/MediaObject>
 #include "pairstheme.h"
 #include "themesmodel.h"
@@ -61,9 +61,9 @@ PairsView::PairsView(QWidget *parent)
     , m_knsDialog(0)
     , m_itemsPerRow(1)
 {
-#ifndef QT_NO_OPENGL
-    setViewport(new QGLWidget);
-#endif
+// #ifndef QT_NO_OPENGL
+//     setViewport(new QGLWidget);
+// #endif
     
     m_model = new ThemesModel(this);
     m_players = new PlayersModel(this);
