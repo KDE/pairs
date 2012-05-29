@@ -205,19 +205,25 @@ FancyBackground
                 fill: parent
                 topMargin: label.height
             }
-            Button {
+            Image {
                 id: newUserPicture
                 anchors {
                     left: parent.left
                     top: parent.top
                     bottom: parent.bottom
+                    right: playerNameControls.left
+                    margins: 3
                 }
-                width: height
+                fillMode: Image.PreserveAspectFit
                 source: playersModel.randomIcon()
-                onClicked: source=playersModel.randomIcon()
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: newUserPicture.source=playersModel.randomIcon()
+                }
             }
             
             Column {
+                id: playerNameControls
                 anchors.verticalCenterOffset: -10
                 anchors.verticalCenter: newUserPicture.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
