@@ -173,6 +173,7 @@ FancyBackground
     Page {
         id: playersControl
         visible: game.state=='newgame'
+        height: visible ? 100 : 0
         anchors {
             left: parent.left
             right: main.left
@@ -192,7 +193,6 @@ FancyBackground
             text: i18n("Join!")
         }
         
-        height: 100
         Item {
             id: controls
             anchors {
