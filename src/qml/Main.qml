@@ -132,40 +132,45 @@ FancyBackground
             leftMargin: 20
             rightMargin: 20
         }
-        Text {
-            id: playersLabel
-            anchors {
-                right: parent.right
-                rightMargin: 5
+        Flickable {
+            anchors.fill: parent
+            contentHeight: playersLabel.height+playersFlow.height
+            Text {
+                id: playersLabel
+                anchors {
+                    right: parent.right
+                    rightMargin: 5
+                }
+                font.pointSize: 14
+                color : "white"
+                text: i18n("Players")
             }
-            font.pointSize: 14
-            color : "white"
-            text: i18n("Players")
-        }
-        
-        Flow {
-            anchors {
-                top: playersLabel.bottom
-                left: parent.left
-                right: parent.right
-                margins: 5
-            }
-            spacing: 10
             
-            Repeater {
-                model: playersModel
-                delegate: TogglableButton {
-                    text: game.state!="playing" ? display : i18nc("name. found/tries, time seconds", "%1<br/>%2/%3, %4s", display, found, missed+found, time)
-                    source: decoration
-                    overlaySource: playersModel.iconsDir("gameicons/removeUser.svg")
-                    visible: game.state=="newgame" || selected
-                    overlayVisible: game.state=="newgame"
-                    opacity: game.state!="playing" || fgame.currentPlayer==index ? 1 : 0.3
-                    width: Math.min(100, parent.width)
-                    
-                    enabled: selected
-                    onClicked: if(game.state=="newgame") playersModel.toggleSelection(index)
-                    onOverlayClicked: playersModel.removePlayer(index)
+            Flow {
+                id: playersFlow
+                anchors {
+                    top: playersLabel.bottom
+                    left: parent.left
+                    right: parent.right
+                    margins: 5
+                }
+                spacing: 10
+                
+                Repeater {
+                    model: playersModel
+                    delegate: TogglableButton {
+                        text: game.state!="playing" ? display : i18nc("name. found/tries, time seconds", "%1<br/>%2/%3, %4s", display, found, missed+found, time)
+                        source: decoration
+                        overlaySource: playersModel.iconsDir("gameicons/removeUser.svg")
+                        visible: game.state=="newgame" || selected
+                        overlayVisible: game.state=="newgame"
+                        opacity: game.state!="playing" || fgame.currentPlayer==index ? 1 : 0.3
+                        width: Math.min(100, parent.width)
+                        
+                        enabled: selected
+                        onClicked: if(game.state=="newgame") playersModel.toggleSelection(index)
+                        onOverlayClicked: playersModel.removePlayer(index)
+                    }
                 }
             }
         }
