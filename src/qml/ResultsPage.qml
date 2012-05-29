@@ -22,32 +22,28 @@
 import QtQuick 1.0
 
 Page {
-    Column {
+    ListView {
         anchors.fill: parent
-        Text {
+        
+        header: Text {
             font.pixelSize: 70
             anchors.horizontalCenter: parent.horizontalCenter
             color: "white"
             text: i18n("Congratulations!")
         }
+        model: playersModel
         
-        Repeater {
-            model: playersModel
-            
-            delegate: Row {
-                anchors.margins: 20
-                spacing: 20
-                Image { height: 200; width: 200; source: decoration }
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pixelSize: 25
-                    color: "white"
-                    text: i18n("%1. Time: %2. Results: %3", display, time, found)
-                }
+        delegate: Row {
+            spacing: 20
+            Image { height: 150; width: 150; source: decoration }
+            Text {
+                anchors.verticalCenter: parent.verticalCenter
+                font.pixelSize: 25
+                color: "white"
+                text: i18n("%1. Time: %2. Results: %3", display, time, found)
             }
         }
-        
-        Button {
+        footer: Button {
             anchors.horizontalCenter: parent.horizontalCenter
             source: playersModel.iconsDir("gameicons/newGame.svg")
             text: i18n("New Game")
