@@ -305,7 +305,7 @@ void PairsView::reorganizeCards(bool starting)
         QPropertyAnimation* anim = new QPropertyAnimation(card, "position", card);
         anim->setEndValue(p);
         anim->setDuration(starting ? 300 : 0);
-        anim->setEasingCurve(QEasingCurve::InExpo);
+        anim->setEasingCurve(QEasingCurve::InOutQuad);
         
         anim->start(QAbstractAnimation::DeleteWhenStopped);
         i++;

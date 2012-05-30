@@ -50,14 +50,14 @@ CardItem::CardItem(const QSharedPointer<QSvgRenderer>& back, QGraphicsItem* pare
     m_animation->setStartValue(0);
     m_animation->setEndValue(90);
     m_animation->setDuration(200);
-    m_animation->setEasingCurve(QEasingCurve::InCubic);
+    m_animation->setEasingCurve(QEasingCurve::InOutQuad);
     connect(m_animation, SIGNAL(finished()), SLOT(changeValue()));
     
     m_animationBack = new QPropertyAnimation(m_rotation, "angle", m_rotation);
     m_animationBack->setStartValue(90);
     m_animationBack->setEndValue(0);
     m_animationBack->setDuration(200);
-    m_animationBack->setEasingCurve(QEasingCurve::InCubic);
+    m_animationBack->setEasingCurve(QEasingCurve::InOutQuad);
     
     setTransformations(QList<QGraphicsTransform*>() << m_rotation);
     m_opacityAnimation=new QPropertyAnimation(this, "opacity", this);
