@@ -9,9 +9,9 @@
   <image type='back' src='vaca4.svg'></image>
   <main type='image' />
   
-  <element><image src='caine2.svg' lang='en'></image> <image src='caine.svg' lang='en'></image></element>
-  <element><image src='cocos2.svg' lang='en'></image> <image src='cocos.svg' lang='en'></image></element>
-  <element><image src='gaina1.svg' lang='en'></image> <image src='gaina2.svg' lang='en'></image></element>
-  <element><image src='rata1.svg' lang='en'></image> <image src='rata2.svg' lang='en'></image></element>
-  <element><image src='vaca2.svg' lang='en'></image> <image src='vaca3.svg' lang='en'></image></element>
+  <element><image src='caine2.svg' /><image src='caine.svg' /></element>
+  <element><image src='cocos2.svg' /><image src='cocos.svg' /></element>
+  <element><image src='gaina1.svg' /><image src='gaina2.svg' /></element>
+  <element><image src='rata1.svg' /><image src='rata2.svg' /></element>
+  <element><image src='vaca2.svg' /><image src='vaca3.svg' /></element>
 </pairs>
