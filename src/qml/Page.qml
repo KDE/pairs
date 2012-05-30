@@ -19,14 +19,19 @@
  */
 
 import QtQuick 1.1
-
-Rectangle
-{
-    radius: 10
-    smooth: true
-    
-    gradient: Gradient {
-        GradientStop { position: 0; color: "#22FFFFFF" }
-        GradientStop { position: 1; color: "transparent" }
+Item {
+    property alias backgroundOpacity: bg.opacity
+    Rectangle
+    {
+        id: bg
+        anchors.fill: parent
+        opacity: 0.1
+        radius: 10
+        smooth: true
+        
+        gradient: Gradient {
+            GradientStop { position: 0; color: "#FFFFFF" }
+            GradientStop { position: 1; color: "#55FFFFFF" }
+        }
     }
 }
