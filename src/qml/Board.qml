@@ -25,6 +25,4 @@ Page
     objectName: 'board'
     
     property bool isGameOver; //Changed from C++ code
-    
-    backgroundOpacity: 0.8
 }
