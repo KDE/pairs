@@ -21,83 +21,95 @@
 
 import QtQuick 1.0
 
-Page {
+Flickable {
     id: gameSettings
     property string gameType: 'image'
     
     signal gameStarted;
-    
+    contentHeight: games.height
     Column {
-        anchors.fill: parent
-        anchors.margins: 20
+        id: games
+        width: parent.width
+        anchors.margins: 10
         spacing: 50
-        Flow {
+        Page {
+            height: gameTypes.height
             width: parent.width
-            spacing: 20
-            TogglableButton {
-                source: playersModel.iconsDir("gameicons/pairs.svg")
-                text: i18n("Pairs")
-                onClicked: gameType = 'image'
-                enabled: gameType == 'image'
-            }
-            TogglableButton {
-                source: playersModel.iconsDir("gameicons/relations.svg")
-                text: i18n("Relations")
-                onClicked: gameType = 'image2'
-                enabled: gameType == 'image2'
-            }
-            TogglableButton {
-                source: playersModel.iconsDir("gameicons/logic.svg")
-                text: i18n("Logic")
-                onClicked: gameType = 'logic'
-                enabled: gameType == 'logic'
-            }
-            TogglableButton {
-                source: playersModel.iconsDir("gameicons/sound.svg")
-                text: i18n("Sound")
-                onClicked: gameType = 'sound'
-                enabled: gameType == 'sound'
-            }
-            TogglableButton {
-                source: playersModel.iconsDir("gameicons/soundLogic.svg")
-                text: i18n("SoundLogic")
-                onClicked: gameType = 'soundlogic'
-                enabled: gameType == 'soundlogic'
-            }
-            TogglableButton {
-                source: playersModel.iconsDir("gameicons/words.svg")
-                text: i18n("Words")
-                onClicked: gameType = 'word'
-                enabled: gameType == 'word'
+            Flow {
+                id: gameTypes
+                spacing: 20
+                anchors.margins: 10
+                width: parent.width
+                TogglableButton {
+                    source: playersModel.iconsDir("gameicons/pairs.svg")
+                    text: i18n("Pairs")
+                    onClicked: gameType = 'image'
+                    enabled: gameType == 'image'
+                }
+                TogglableButton {
+                    source: playersModel.iconsDir("gameicons/relations.svg")
+                    text: i18n("Relations")
+                    onClicked: gameType = 'image2'
+                    enabled: gameType == 'image2'
+                }
+                TogglableButton {
+                    source: playersModel.iconsDir("gameicons/logic.svg")
+                    text: i18n("Logic")
+                    onClicked: gameType = 'logic'
+                    enabled: gameType == 'logic'
+                }
+                TogglableButton {
+                    source: playersModel.iconsDir("gameicons/sound.svg")
+                    text: i18n("Sound")
+                    onClicked: gameType = 'sound'
+                    enabled: gameType == 'sound'
+                }
+                TogglableButton {
+                    source: playersModel.iconsDir("gameicons/soundLogic.svg")
+                    text: i18n("SoundLogic")
+                    onClicked: gameType = 'soundlogic'
+                    enabled: gameType == 'soundlogic'
+                }
+                TogglableButton {
+                    source: playersModel.iconsDir("gameicons/words.svg")
+                    text: i18n("Words")
+                    onClicked: gameType = 'word'
+                    enabled: gameType == 'word'
+                }
             }
         }
         
-        Flow {
-            id: themesView
+        Page {
             width: parent.width
-            spacing: 20
-            
-            Repeater {
-                model: themesModel
+            height: themesView.height
+            Flow {
+                id: themesView
+                width: parent.width
+                spacing: 20
+                anchors.margins: 10
                 
-                delegate: Button {
-                    visible: themesModel.isPertinent(index, gameType, fgame.language())
-                    source: "image://theme/"+display+"/"+decoration
-                    text: display
-                    font.pointSize: 12
+                Repeater {
+                    model: themesModel
                     
-                    onClicked: {
-                        if(!playersModel.isAnySelected()) {
-                            //if there are no selected players, select the first one
-                            //if there's none, just create one
-                            if(playersModel.count>0)
-                                playersModel.toggleSelection(0)
-                            else
-                                addPlayer()
-                        }
+                    delegate: Button {
+                        visible: themesModel.isPertinent(index, gameType, fgame.language())
+                        source: "image://theme/"+display+"/"+decoration
+                        text: display
+                        font.pointSize: 12
                         
-                        gameStarted()
-                        fgame.newGame(index, gameType)
+                        onClicked: {
+                            if(!playersModel.isAnySelected()) {
+                                //if there are no selected players, select the first one
+                                //if there's none, just create one
+                                if(playersModel.count>0)
+                                    playersModel.toggleSelection(0)
+                                else
+                                    addPlayer()
+                            }
+                            
+                            gameStarted()
+                            fgame.newGame(index, gameType)
+                        }
                     }
                 }
             }
