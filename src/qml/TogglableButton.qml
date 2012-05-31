@@ -24,7 +24,7 @@ Item
 {
     id: container
     width: 100
-    height: 120
+    height: 100
     property bool enabled: true
     property alias text: button.text
     property alias source: button.source
