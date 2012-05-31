@@ -30,8 +30,8 @@ Item {
         smooth: true
         
         gradient: Gradient {
-            GradientStop { position: 0; color: "#FFFFFF" }
-            GradientStop { position: 1; color: "#55FFFFFF" }
+            GradientStop { position: 0; color: "#FFFFFFFF" }
+            GradientStop { position: 1; color: "#00FFFFFF" }
         }
     }
 }
