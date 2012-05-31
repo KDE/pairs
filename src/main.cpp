@@ -64,7 +64,6 @@ int main(int argc, char **argv)
         args->clear();
         Pairs *widget = new Pairs;
         widget->view()->setLanguage(KGlobal::locale()->language().left(2));
-        widget->setWindowIcon(KIcon("pairs"));
         if (fsMode) 
         {
             widget->showFullScreen();

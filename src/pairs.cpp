@@ -37,6 +37,7 @@
 #include <kstandardaction.h>
 #include <kstandarddirs.h>
 #include <KDE/KLocale>
+#include <KApplication>
 
 #include "playersmodel.h"
 #include <kstatusbar.h>
@@ -45,7 +46,11 @@ Pairs::Pairs()
     : KMainWindow()
     , m_view(new PairsView(this))
 {
+    setWindowIcon(KIcon("pairs"));
+    setWindowTitle(qAppName());
     setCentralWidget(m_view);
+    
+    setAutoSaveSettings();
 }
 
 Pairs::~Pairs()
