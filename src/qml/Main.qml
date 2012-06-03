@@ -88,6 +88,7 @@ FancyBackground
             Button {
                 width: tools.buttonWidth
                 source: playersModel.iconsDir("gameicons/exit.svg")
+                text: i18n("Quit")
                 onClicked: Qt.quit()
             }
             
