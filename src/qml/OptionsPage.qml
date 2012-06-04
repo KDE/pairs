@@ -31,7 +31,7 @@ Flickable {
         id: games
         width: parent.width
         anchors.margins: 10
-        spacing: 50
+        spacing: 30
         Page {
             height: gameTypes.height
             width: parent.width
