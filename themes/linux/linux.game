@@ -21,12 +21,6 @@
         <word lang='it'>debian</word>
     </element>
     <element>
-        <image src='fedora-logo.svg' />
-        <sound src='fedora.ogg' lang='en'></sound>
-        <word lang='en'>fedora</word>
-        <word lang='it'>fedora</word>
-    </element>
-    <element>
         <image src='gentoo-logo.svg' />
         <sound src='gentoo.ogg' lang='en'></sound>
         <word lang='en'>gentoo</word>
@@ -49,12 +43,6 @@
         <sound src='mint.ogg' lang='en'></sound>
         <word lang='en'>mint</word>
         <word lang='it'>mint</word>
-    </element>
-    <element>
-        <image src='redhat-logo.svg' />
-        <sound src='redhat.ogg' lang='en'></sound>
-        <word lang='en'>redhat</word>
-        <word lang='it'>redhat</word>
     </element>
     <element>
         <image src='suse_logo.svg' />
