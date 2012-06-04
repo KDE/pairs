@@ -80,7 +80,6 @@ FancyBackground
         height: 130
         
         Row {
-            anchors.topMargin: 5
             anchors.fill: parent
             id: tools
             property real buttonWidth: Math.min(tools.width/3, 100)
