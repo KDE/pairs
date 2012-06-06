@@ -11,49 +11,61 @@
     <element>
         <image src='centos_logo.svg' />
         <sound src='centos.ogg' lang='en'></sound>
-        <word lang='en'>centos</word>
-        <word lang='it'>centos</word>
+        <word lang='en'>CentOS</word>
+        <word lang='it'>CentOS</word>
     </element>
     <element>
         <image src='debian-logo.svg' />
         <sound src='debian.ogg' lang='en'></sound>
-        <word lang='en'>debian</word>
-        <word lang='it'>debian</word>
+        <word lang='en'>Debian</word>
+        <word lang='it'>Debian</word>
     </element>
     <element>
         <image src='gentoo-logo.svg' />
         <sound src='gentoo.ogg' lang='en'></sound>
-        <word lang='en'>gentoo</word>
-        <word lang='it'>gentoo</word>
+        <word lang='en'>Gentoo</word>
+        <word lang='it'>Gentoo</word>
     </element>
     <element>
         <image src='knoppix-logo.svg' />
         <sound src='knoppix.ogg' lang='en'></sound>
-        <word lang='en'>knoppix</word>
-        <word lang='it'>knoppix</word>
+        <word lang='en'>Knoppix</word>
+        <word lang='it'>Knoppix</word>
     </element>
     <element>
         <image src='mandrake_logo.svg' />
         <sound src='mandrake.ogg' lang='en'></sound>
-        <word lang='en'>mandrake</word>
-        <word lang='it'>mandrake</word>
+        <word lang='en'>Mandrake</word>
+        <word lang='it'>Mandrake</word>
     </element>
     <element>
         <image src='mint-logo.svg' />
         <sound src='mint.ogg' lang='en'></sound>
-        <word lang='en'>mint</word>
-        <word lang='it'>mint</word>
+        <word lang='en'>Mint</word>
+        <word lang='it'>Mint</word>
     </element>
     <element>
         <image src='suse_logo.svg' />
         <sound src='suse.ogg' lang='en'></sound>
-        <word lang='en'>suse</word>
-        <word lang='it'>suse</word>
+        <word lang='en'>Suse</word>
+        <word lang='it'>Suse</word>
     </element>
     <element>
         <image src='ubuntu-logo.svg' />
         <sound src='ubuntu.ogg' lang='en'></sound>
-        <word lang='en'>ubuntu</word>
-        <word lang='it'>ubuntu</word>
+        <word lang='en'>Ubuntu</word>
+        <word lang='it'>Ubuntu</word>
+    </element>
+    <element>
+        <image src='archlinux-logo.svg' />
+        <sound src='archlinux.ogg' lang='en'></sound>
+        <word lang='en'>ArchLinux</word>
+        <word lang='it'>ArchLinux</word>
+    </element>
+    <element>
+        <image src='chakra-logo.svg' />
+        <sound src='chakra.ogg' lang='en'></sound>
+        <word lang='en'>Chakra</word>
+        <word lang='it'>Chakra</word>
     </element>
 </pairs>
