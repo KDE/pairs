@@ -57,6 +57,12 @@
         <word lang='it'>Ubuntu</word>
     </element>
     <element>
+        <image src='kubuntu-logo.svg' />
+        <sound src='kubuntu.ogg' lang='en'></sound>
+        <word lang='en'>Kubuntu</word>
+        <word lang='it'>Kubuntu</word>
+    </element>
+    <element>
         <image src='archlinux-logo.svg' />
         <sound src='archlinux.ogg' lang='en'></sound>
         <word lang='en'>ArchLinux</word>
