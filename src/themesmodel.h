@@ -35,7 +35,8 @@ class ThemesModel : public QStandardItemModel
         PairsTheme* themeForName(const QString& title) const;
         bool exists(const QString& icon);
         QByteArray themeData(const QString& path) const;
-        
+        bool nameExists(const QString& title) const;
+
     public slots:
         QVariant info(int row, const QByteArray& role);
         bool isPertinent(int row, const QString &type,const QString &lang);

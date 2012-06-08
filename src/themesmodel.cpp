@@ -56,6 +56,12 @@ void ThemesModel::reload()
             qWarning() << "Incorrect theme:" << themePath << theme->error();
             delete theme;
         } else {
+        	int iNumber = 0;
+        	while(nameExists(theme->title())) {
+        		iNumber++;
+        		theme->setTitle(theme->title() + "(" + QString::number(iNumber) + ")" );
+			}  // namespace )
+        	qDebug()<< theme->title();
             appendRow(theme);
         }
     }
@@ -70,6 +76,16 @@ PairsTheme* ThemesModel::themeForName(const QString& title) const
             ret=theme;
     }
     return ret;
+}
+
+bool ThemesModel::nameExists(const QString& title) const
+{
+    for(int i=0; i<rowCount(); ++i) {
+        PairsTheme* theme=static_cast<PairsTheme*>(item(i, 0));
+        if(theme->title()==title)
+            return true;
+    }
+    return false;
 }
 
 QVariant ThemesModel::info(int row, const QByteArray& role)

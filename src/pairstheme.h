@@ -64,6 +64,7 @@ class PairsTheme : public QObject, public QStandardItem
         PairsTheme(const QString& path);
         bool isPertinent(const QString &type,const QString &lang);
         QString title() const { return m_title; }
+        void setTitle(const QString &title) {m_title = title; setText(title);}
         QString description() const { return m_description; }
         QString backImage() const { return m_back_img; }
         QString path() const;
