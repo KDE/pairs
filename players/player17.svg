@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Creator: CorelDRAW -->
@@ -7,12 +8,63 @@ viewBox="0 0 0.257006 0.25383"
  <defs>
   <style type="text/css">
    <![CDATA[
+=======
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Creator: CorelDRAW -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xml:space="preserve"
+   width="3.2109201in"
+   height="3.1712301in"
+   style="fill-rule:evenodd"
+   viewBox=""
+   id="svg10090"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="player17.svg"><metadata
+   id="metadata10134"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="480"
+   id="namedview10132"
+   showgrid="false"
+   inkscape:zoom="1.0497482"
+   inkscape:cx="144.49141"
+   inkscape:cy="142.70535"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="svg10090" />
+ <defs
+   id="defs10092">
+  <style
+   type="text/css"
+   id="style10094">
+   
+>>>>>>> 174f931... fixing players icons
     .str0 {stroke:gray;stroke-width:0.000240124}
     .fil2 {fill:url(#id0)}
     .fil4 {fill:url(#id1)}
     .fil3 {fill:url(#id2)}
     .fil0 {fill:url(#id3)}
     .fil1 {fill:url(#id4)}
+<<<<<<< HEAD
    ]]>
   </style>
   <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="0.0231143" y1="0.237766" x2="0.126404" y2="0.123804">
@@ -50,3 +102,149 @@ viewBox="0 0 0.257006 0.25383"
   </g>
  </g>
 </svg>
+=======
+   
+  </style>
+  <linearGradient
+   id="id0"
+   gradientUnits="userSpaceOnUse"
+   x1="0.023114299"
+   y1="0.237766"
+   x2="0.126404"
+   y2="0.123804">
+   <stop
+   offset="0"
+   style="stop-color:#FFCC41"
+   id="stop10097" />
+   <stop
+   offset="1"
+   style="stop-color:yellow"
+   id="stop10099" />
+  </linearGradient>
+  <linearGradient
+   id="id1"
+   gradientUnits="userSpaceOnUse"
+   x1="0.0281024"
+   y1="0.21921299"
+   x2="0.0518432"
+   y2="0.19176801">
+   <stop
+   offset="0"
+   style="stop-color:red"
+   id="stop10102" />
+   <stop
+   offset="1"
+   style="stop-color:#FF6600"
+   id="stop10104" />
+  </linearGradient>
+  <linearGradient
+   id="id2"
+   gradientUnits="userSpaceOnUse"
+   x1="0.0032514499"
+   y1="0.209039"
+   x2="0.080195203"
+   y2="0.141975">
+   <stop
+   offset="0"
+   style="stop-color:#FF6600"
+   id="stop10107" />
+   <stop
+   offset="1"
+   style="stop-color:#FEBA00"
+   id="stop10109" />
+  </linearGradient>
+  <radialGradient
+   id="id3"
+   gradientUnits="userSpaceOnUse"
+   cx="0.123297"
+   cy="0.13053299"
+   r="0.17120001"
+   fx="0.123297"
+   fy="0.13053299">
+   <stop
+   offset="0"
+   style="stop-color:black"
+   id="stop10112" />
+   <stop
+   offset="0.701961"
+   style="stop-color:gray"
+   id="stop10114" />
+   <stop
+   offset="1"
+   style="stop-color:white"
+   id="stop10116" />
+  </radialGradient>
+  <radialGradient
+   id="id4"
+   gradientUnits="userSpaceOnUse"
+   cx="0.123297"
+   cy="0.13053299"
+   r="0.17120001"
+   fx="0.123297"
+   fy="0.13053299">
+   <stop
+   offset="0"
+   style="stop-color:#CC3399"
+   id="stop10119" />
+   <stop
+   offset="1"
+   style="stop-color:#000066"
+   id="stop10121" />
+  </radialGradient>
+ </defs>
+ <g
+   id="Layer_x0020_1"
+   transform="matrix(1124.6128,0,0,1127.4122,-0.13527657,3.3792367e-4)">
+  <metadata
+   id="CorelCorpID_0Corel-Layer" />
+  <g
+   id="_356458392">
+   <circle
+   id="_356471840"
+   class="fil0 str0"
+   cx="0.123297"
+   cy="0.13053299"
+   r="0.123177"
+   sodipodi:cx="0.123297"
+   sodipodi:cy="0.13053299"
+   sodipodi:rx="0.123177"
+   sodipodi:ry="0.123177"
+   style="fill:url(#id3);stroke:#808080;stroke-width:0.00024012"
+   d="m 0.246474,0.13053299 c 0,0.0680288 -0.0551482,0.123177 -0.123177,0.123177 -0.06802878,0 -0.12317700095,-0.0551482 -0.12317700095,-0.123177 0,-0.06802877 0.0551482209,-0.12317699 0.12317700095,-0.12317699 0.0680288,0 0.123177,0.05514822 0.123177,0.12317699 z" />
+   <circle
+   id="_356472032"
+   class="fil1"
+   cx="0.123297"
+   cy="0.13053299"
+   r="0.117237"
+   sodipodi:cx="0.123297"
+   sodipodi:cy="0.13053299"
+   sodipodi:rx="0.117237"
+   sodipodi:ry="0.117237"
+   style="fill:url(#id4)"
+   d="m 0.240534,0.13053299 c 0,0.0647482 -0.0524888,0.11723701 -0.117237,0.11723701 -0.06474821,0 -0.117237,-0.0524888 -0.117237,-0.11723701 0,-0.0647482 0.05248879,-0.117237 0.117237,-0.117237 0.0647482,0 0.117237,0.0524888 0.117237,0.117237 z" />
+  </g>
+  <g
+   id="_350343296">
+   <path
+   id="_359966056"
+   class="fil2"
+   d="M 0.123908,0.179463 0.1086087,0.1996186 c 0,0 -0.0429488,0.0713043 -0.0850746,0.0376853 C -0.0185929,0.2036846 0.01768982,0.1687295 0.0382311,0.1550172 0.0587718,0.1413049 0.0769696,0.1177636 0.082926,0.1062361 0.0888821,0.0947082 0.0756823,0.1215521 0.0744813,0.1332372 0.0732794,0.1449226 0.1186166,0.0908225 0.1254176,0.0765953 0.1322176,0.0623675 0.1041253,0.1146039 0.1139956,0.112785 0.1238666,0.110966 0.1606607,0.0554196 0.1735877,0.0454595 0.1865156,0.0355003 0.1487068,0.0779509 0.1687237,0.0642796 0.1887411,0.0506083 0.2570066,-3e-7 0.2570066,-3e-7 c 0,0 -0.104547,0.0855649 -0.0884728,0.0822104 0.0160745,-0.0033539 0.0703321,-0.030746 0.0703321,-0.030746 0,0 -0.109555,0.0685643 -0.0874386,0.0615802 0.0221166,-0.006984 0.0530205,-0.00938 0.0530205,-0.00938 0,0 -0.0890665,0.0337794 -0.0743194,0.0336895 0.0147468,-8.918e-5 0.040615,5.3949e-4 0.040615,5.3949e-4 0,0 -0.0435517,0.009173 -0.0503517,0.0234004 -0.006801,0.0142272 0.009059,-0.0122955 0.0358929,-0.012795 0.0268347,-4.9947e-4 -0.0100625,-0.00357 -0.0323767,0.0309644 z"
+   inkscape:connector-curvature="0"
+   style="fill:url(#id0)" />
+   <path
+   id="_359966248"
+   class="fil3"
+   d="M 0.094533,0.19281 0.0837507,0.2070155 c 0,0 -0.0302698,0.0502547 -0.0599605,0.0265608 C -0.0059004,0.2098815 0.01967122,0.1852448 0.0341486,0.175581 0.048626,0.16591679 0.0614512,0.1493246 0.0656493,0.1411998 0.0698474,0.1330758 0.0605446,0.1519947 0.0596973,0.1602307 0.05885056,0.1684667 0.0908041,0.1303365 0.0955968,0.1203099 0.1003895,0.1102817 0.0805903,0.1470979 0.0875476,0.1458157 c 0.0069564,-0.001283 0.0328885,-0.0404304 0.042,-0.0474501 0.009111,-0.00702 -0.017536,0.0228994 -0.003428,0.0132642 0.0141075,-0.009636 0.0622205,-0.0453044 0.0622205,-0.0453044 0,0 -0.0736847,0.0603049 -0.0623551,0.0579415 0.0113296,-0.002364 0.0495699,-0.0216695 0.0495699,-0.0216695 0,0 -0.0772138,0.0483236 -0.0616262,0.0434013 0.0155876,-0.004922 0.0373677,-0.006612 0.0373677,-0.006612 0,0 -0.0627733,0.0238076 -0.0523802,0.0237446 0.0103937,-6.334e-5 0.0286258,3.8004e-4 0.0286258,3.8004e-4 0,0 -0.0306943,0.006465 -0.0354873,0.0164923 -0.0047927,0.0100279 0.0063841,-0.008665 0.0252972,-0.009018 0.0189128,-3.5168e-4 -0.0120361,0.007619 -0.022819,0.0218239 z"
+   inkscape:connector-curvature="0"
+   style="fill:url(#id2)" />
+   <path
+   id="_359966440"
+   class="fil4"
+   d="M 0.0594342,0.16675 C 0.05944523,0.16763581 0.0685734,0.17264 0.0470798,0.1821214 -0.0196394,0.2115521 0.0347099,0.2442461 0.0575132,0.2293298 0.0705385,0.22080886 0.0866889,0.195304 0.0876359,0.1833183 0.08045455,0.1989573 0.064919,0.227971 0.0470691,0.2290106 0.0117579,0.23106804 0.0131905,0.1983412 0.03801528,0.1906386 0.04674988,0.18792917 0.06875718,0.1729179 0.05943428,0.16675 z"
+   inkscape:connector-curvature="0"
+   style="fill:url(#id1)" />
+  </g>
+ </g>
+</svg>
+>>>>>>> 174f931... fixing players icons
