@@ -207,6 +207,7 @@ FancyBackground
             }
             Image {
                 id: newUserPicture
+                smooth: true
                 anchors {
                     left: parent.left
                     top: parent.top
