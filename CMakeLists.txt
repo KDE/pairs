@@ -1,22 +1,32 @@
+project( ptedit_1 )
+CMAKE_MINIMUM_REQUIRED( VERSION 2.8 )
+find_package( KDE4 REQUIRED )
+SET( MAIN_PROJECT_NAME ${PROJECT_NAME})
 
-project(ptedit)
 
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
 
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
+INCLUDE_DIRECTORIES( ${KDE4_INCLUDES}  )
 
-set(ptedit_SRCS 
-   ptedit.cpp 
-   main.cpp
- )
+SET(CPACK_SET_DESTDIR "ON")
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
 
-kde4_add_ui_files(ptedit_SRCS ptedit.ui)
+include_directories( ${KDE4_INCLUDE_DIRS} ${libkdepim_INCLUDES})
 
-kde4_add_executable(ptedit ${ptedit_SRCS})
+add_definitions( ${KDE4_DEFINITIONS} )
 
-target_link_libraries(ptedit ${KDE4_KDEUI_LIBS})
+set( SOURCES ptedit_1.cpp 
+main.cpp)
 
-install(TARGETS ptedit ${INSTALL_TARGETS_DEFAULT_ARGS} )
+set( SOURCES ptedit_1.ui )
+kde4_add_ui_files( SOURCES ${UI} )
+
+kde4_add_executable( SOURCES ${SOURCES})
+
+
+target_link_libraries( ptedit_1 
+${KDE4_KDEUI_LIBS}
+)
+install(TARGETS ptedit_1 ${INSTALL_TARGETS_DEFAULT_ARGS})
+
 
 
