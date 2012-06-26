@@ -43,4 +43,4 @@ GenericName[x-test]=xxA game to enhance your memoryxx
 GenericName[zh_CN]=增强记忆力的游戏
 GenericName[zh_TW]=加強記憶的遊戲
 Terminal=false
-Categories=Qt;KDE;Education;Game;KidsGame
+Categories=Qt;KDE;Education;Game;KidsGame;
