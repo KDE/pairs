@@ -23,6 +23,73 @@
      </widget>
     </item>
     <item>
+     <widget class="QTreeWidget" name="treeWidget">
+      <column>
+       <property name="text">
+        <string>column 1</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>column 2</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>column 3</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>column 4</string>
+       </property>
+      </column>
+      <item>
+       <property name="text">
+        <string>widget 1</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>sub widget </string>
+        </property>
+       </item>
+      </item>
+      <item>
+       <property name="text">
+        <string>widget 2</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>sub widget</string>
+        </property>
+       </item>
+      </item>
+      <item>
+       <property name="text">
+        <string>widget 3</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>sub widget </string>
+        </property>
+       </item>
+      </item>
+      <item>
+       <property name="text">
+        <string>widget 4</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>sub widget</string>
+        </property>
+       </item>
+      </item>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3"/>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
        <widget class="QGroupBox" name="groupBox">
@@ -30,14 +97,14 @@
          <string>Widget changing .......</string>
         </property>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="1" column="0">
+         <item row="2" column="0">
           <widget class="QLabel" name="label_2">
            <property name="text">
             <string>Widget area</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
+         <item row="3" column="0">
           <widget class="QComboBox" name="comboBox">
            <property name="minimumSize">
             <size>
@@ -77,7 +144,7 @@
            </item>
           </widget>
          </item>
-         <item row="3" column="0">
+         <item row="4" column="0">
           <widget class="QDialogButtonBox" name="buttonBox">
            <property name="minimumSize">
             <size>
@@ -88,70 +155,6 @@
            <property name="standardButtons">
             <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
            </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QTreeWidget" name="treeWidget">
-           <column>
-            <property name="text">
-             <string>column 1</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>column 2</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>column 3</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>column 4</string>
-            </property>
-           </column>
-           <item>
-            <property name="text">
-             <string>widget 1</string>
-            </property>
-            <item>
-             <property name="text">
-              <string>sub widget </string>
-             </property>
-            </item>
-           </item>
-           <item>
-            <property name="text">
-             <string>widget 2</string>
-            </property>
-            <item>
-             <property name="text">
-              <string>sub widget</string>
-             </property>
-            </item>
-           </item>
-           <item>
-            <property name="text">
-             <string>widget 3</string>
-            </property>
-            <item>
-             <property name="text">
-              <string>sub widget </string>
-             </property>
-            </item>
-           </item>
-           <item>
-            <property name="text">
-             <string>widget 4</string>
-            </property>
-            <item>
-             <property name="text">
-              <string>sub widget</string>
-             </property>
-            </item>
-           </item>
           </widget>
          </item>
         </layout>
@@ -171,7 +174,7 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>383</width>
+           <width>119</width>
            <height>299</height>
           </rect>
          </property>
