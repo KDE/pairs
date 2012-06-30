@@ -1,4 +1,4 @@
-project( ptedit )
+project( mainwindow )
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8 )
 find_package( KDE4 REQUIRED )
 SET( MAIN_PROJECT_NAME ${PROJECT_NAME})
@@ -14,7 +14,7 @@ include_directories( ${KDE4_INCLUDE_DIRS} ${libkdepim_INCLUDES})
 
 add_definitions( ${KDE4_DEFINITIONS} )
 
-set( ptedit_SOURCES ptedit.cpp main.cpp)
+set( ptedit_SOURCES mainwindow.cpp main.cpp)
 
 #kde4_add_ui_files( SOURCES ${UI} )
 
