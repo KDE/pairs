@@ -24,6 +24,7 @@
 #define THEMESMODEL_H
 
 #include <QStandardItemModel>
+#include <QFileSystemWatcher>
 
 class PairsTheme;
 class ThemesModel : public QStandardItemModel
@@ -46,6 +47,8 @@ class ThemesModel : public QStandardItemModel
         
     private slots:
         void reload();
+    private:
+        QFileSystemWatcher* m_fs;
 };
 
 #endif // THEMESMODEL_H
