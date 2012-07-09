@@ -27,7 +27,7 @@
 #include <KGlobal>
 #include <krandom.h>
 #include <QDebug>
-#include <QFileSystemWatcher>
+
 
 ThemesModel::ThemesModel(QObject* parent): QStandardItemModel(parent)
 {
@@ -37,15 +37,16 @@ ThemesModel::ThemesModel(QObject* parent): QStandardItemModel(parent)
     setRoleNames(names);
     
     QStringList themesdirs=KGlobal::dirs()->findDirs("appdata", "themes");
-    QFileSystemWatcher* fs=new QFileSystemWatcher(this);
-    fs->addPaths(themesdirs);
-    connect(fs, SIGNAL(directoryChanged(QString)), SLOT(reload()));
+    m_fs=new QFileSystemWatcher(this);
+    m_fs->addPaths(themesdirs);
+    connect(m_fs, SIGNAL(directoryChanged(QString)), SLOT(reload()));
     
     QMetaObject::invokeMethod(this, "reload", Qt::QueuedConnection);
 }
 
 void ThemesModel::reload()
 {
+    m_fs->blockSignals(true);
     clear();
     const QStringList themes = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "themes/*.pairs.*" ));
 
@@ -65,6 +66,7 @@ void ThemesModel::reload()
             appendRow(theme);
         }
     }
+    m_fs->blockSignals(false);
 }
 
 PairsTheme* ThemesModel::themeForName(const QString& title) const
