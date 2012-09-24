@@ -138,9 +138,9 @@ void PairsView::cardSelected(CardItem* card)
             m_players->player(m_currentPlayer)->incFound();
             QTimer::singleShot(500, this, SLOT(checkGameOver()));
         } else {
-            QTimer::singleShot(500, card, SLOT(turn()));
-            QTimer::singleShot(500, m_last, SLOT(turn()));
             playSound(card->missedSound());
+            connect(m_media, SIGNAL(finished()), card, SLOT(turn()));
+            connect(m_media, SIGNAL(finished()), m_last, SLOT(turn()));
             m_players->player(m_currentPlayer)->incMissed();
             
             //next player
@@ -192,7 +192,7 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     for(int i=0; i<num; i++) {
         ThemeElement titem = items.at(i);
 
-        CardItem* item = new CardItem(backRenderer, cardsParent, scene());
+        CardItem* item = new CardItem(backRenderer, cardsParent, scene(), m_media);
         item->setData(0, i);
         if(type == CARD_LOGIC || type == CARD_SOUNDLOGIC) {
             item->setType(CARD_LOGIC, titem.value(theme->mainType(), language), theme);
@@ -200,7 +200,7 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
             item->setType(theme->mainType(), titem.value(theme->mainType(), language), theme);
         }
 
-        CardItem* item1 = new CardItem(backRenderer, cardsParent, scene());
+        CardItem* item1 = new CardItem(backRenderer, cardsParent, scene(), m_media);
         item1->setData(0, i);
 
 //         qDebug() << cardType << titem.name[type][language];

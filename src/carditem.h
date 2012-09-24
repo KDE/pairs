@@ -42,7 +42,7 @@ class CardItem
     Q_PROPERTY(QPointF position READ pos WRITE setPos);
     Q_PROPERTY(qreal opacity READ opacity WRITE setOpacity);
     public:
-        CardItem(const QSharedPointer<QSvgRenderer>& back, QGraphicsItem* parent, QGraphicsScene* scene = 0);
+        CardItem(const QSharedPointer<QSvgRenderer>& back, QGraphicsItem* parent, QGraphicsScene* scene = 0, Phonon::MediaObject *media = 0);
         virtual ~CardItem();
         
         virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
@@ -61,6 +61,8 @@ class CardItem
         void changeValue();
         void turn();
         void emitSelected();
+
+
         
     signals:
         void selected(CardItem* data);
@@ -82,6 +84,7 @@ class CardItem
         QString m_text;
         QByteArray m_found;
         QGraphicsRotation* m_rotation;
+        Phonon::MediaObject *m_media;
 };
 
 #endif // CARDITEM_H

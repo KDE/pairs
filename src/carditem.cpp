@@ -36,11 +36,12 @@
 #include "pairstheme.h"
 #include <kfontutils.h>
 
-CardItem::CardItem(const QSharedPointer<QSvgRenderer>& back, QGraphicsItem* parent, QGraphicsScene* scene)
+CardItem::CardItem(const QSharedPointer<QSvgRenderer>& back, QGraphicsItem* parent, QGraphicsScene* scene, Phonon::MediaObject *media)
     : QGraphicsPixmapItem(parent, scene)
     , m_type(CARD_NONE)
     , m_activated(false)
     , m_backRenderer(back)
+	, m_media(media)
 {
 
     m_rotation = new QGraphicsRotation(this);
@@ -153,7 +154,7 @@ void CardItem::setType(CardType type, const QString& file, const PairsTheme* the
 
 void CardItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* )
 {
-    if(!m_activated) {
+    if((!m_activated) && (m_media->state()!= Phonon::PlayingState)) {
         turn();
     }
 }
@@ -163,6 +164,7 @@ void CardItem::turn()
     m_activated=!m_activated;
     
     m_animation->start();
+    disconnect(m_media, SIGNAL(finished()), this, SLOT(turn()));
 }
 
 void CardItem::setCardPixmap(const QSharedPointer<QSvgRenderer>& renderer)
