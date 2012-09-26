@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->wordLabel->hide();
 	ui->langLabel->hide();
 	ui->comboBox_2->hide();
-	connect(ui->treeView, SIGNAL(clicked(QModelIndex)), this, SLOT(elementSelected(QModelIndex)));
+	
 	connect(ui->fileKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(fileSelected()));
 	connect(ui->backKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(backSelected()));
 }
@@ -32,12 +32,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::doOpen()
+void MainWindow::open(const QString& filename)
 {
-	QFileDialog fdialog(this);
-	QString filename = QFileDialog::getOpenFileName(this);
-	if(pt)
-		delete pt;
+	delete pt;
 	pt = new PairsTheme(filename);
 	m_model = new ThemeModel(*pt);
 	ui->treeView->setModel(m_model);
@@ -48,8 +45,7 @@ void MainWindow::doOpen()
 	ui->maintypeBox->setCurrentIndex(pt->mainType()-1);
 	ui->descriptionEdit->setText(pt->description());
 	ui->backKurl->setText(pt->backImage());
-	QPixmap image;
-	image.load(pt->path()+"/"+pt->backImage());
+	QPixmap image(pt->path()+"/"+pt->backImage());
 	ui->pixLabel->setPixmap(image.scaledToWidth(100));
 	ui->fileKurl->setStartDir(KUrl(pt->path()));
 	ui->backKurl->setStartDir(KUrl(pt->path()));
@@ -60,24 +56,41 @@ void MainWindow::doOpen()
 	ui->wordLabel->hide();
 	ui->langLabel->hide();
 	ui->comboBox_2->hide();
-
+	ui->splitter->setStretchFactor(1, 3);
+	
+	connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(selectionChanged(QItemSelection,QItemSelection)));
 }
 
-void MainWindow::elementSelected(const QModelIndex & item)
+void MainWindow::doOpen()
 {
-	m_selectedItem = m_model->item(item.row(), item.column());
-	int type = item.data(ThemeModel::CardTypeRole).toInt();
-	ui->fileKurl->setText(item.data(ThemeModel::PathRole).toString());
-	ui->wordEdit->setText(item.data(ThemeModel::PathRole).toString());
-	int index = ui->comboBox_2->findText(item.data(ThemeModel::LanguageRole).toString());
-	qDebug() << item.data(ThemeModel::LanguageRole).toString() << index;
+	QFileDialog fdialog(this);
+	QString filename = QFileDialog::getOpenFileName(this);
+	
+	if(!filename.isEmpty())
+		open(filename);
+}
+
+void MainWindow::selectionChanged(const QItemSelection& selected, const QItemSelection&  )
+{
+	if(!selected.isEmpty())
+		elementSelected(selected.indexes().first());
+}
+
+void MainWindow::elementSelected(const QModelIndex & idx)
+{
+	m_selectedItem = m_model->itemFromIndex(idx);
+	int type = idx.data(ThemeModel::CardTypeRole).toInt();
+	ui->fileKurl->setText(idx.data(ThemeModel::PathRole).toString());
+	ui->wordEdit->setText(idx.data(ThemeModel::PathRole).toString());
+	int index = ui->comboBox_2->findText(idx.data(ThemeModel::LanguageRole).toString());
+	qDebug() << idx.data(ThemeModel::LanguageRole).toString() << index;
 	if ( index != -1 )
 	{
 		ui->comboBox_2->setCurrentIndex(index);
 	}
 	else
 	{
-		ui->comboBox_2->addItem(item.data(ThemeModel::LanguageRole).toString());
+		ui->comboBox_2->addItem(idx.data(ThemeModel::LanguageRole).toString());
 	}
 	if(!type)
 	{
@@ -156,6 +169,6 @@ void MainWindow::fileSelected()
 	image.load(pt->path()+"/"+ui->fileKurl->text());
 	ui->itemLabel->setPixmap(image.scaledToWidth(100));
 	m_selectedItem->setData(ui->fileKurl->text(),ThemeModel::PathRole);
-	qDebug() << ui->fileKurl->text() << m_selectedItem->data(ThemeModel::PathRole);
+	qDebug() << ".............." << ui->fileKurl->text() << m_selectedItem->text() << m_selectedItem->data(ThemeModel::PathRole);
 
 }

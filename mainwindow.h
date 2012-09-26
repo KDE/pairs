@@ -4,6 +4,7 @@
 #include <QtGui/QMainWindow>
 #include <QtCore/QModelIndex>
 
+class QItemSelection;
 class PairsTheme;
 class QStandardItem;
 class ThemeModel;
@@ -20,11 +21,13 @@ public:
     ~MainWindow();
     
 public slots:
-
 	void elementSelected(const QModelIndex & item);
 	void backSelected();
 	void fileSelected();
 	void doOpen();
+	
+	void open(const QString& path);
+    void selectionChanged(const QItemSelection& selected, const QItemSelection&);
 
 private:
     Ui::MainWindow *ui;
