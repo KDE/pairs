@@ -4,6 +4,7 @@
 #include <QtGui/QMainWindow>
 #include <QtCore/QModelIndex>
 
+class PairsTheme;
 namespace Ui {
 class MainWindow;
 }
@@ -19,10 +20,13 @@ public:
 public slots:
 
 	void elementSelected(const QModelIndex & item);
+	void backSelected();
+	void fileSelected();
 	void doOpen();
 
 private:
     Ui::MainWindow *ui;
+    PairsTheme *pt;
 };
 
 #endif // MAINWINDOW_H

@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 
 {
+	pt = 0;
 	ui->setupUi(this);
 	connect(ui->action_open, SIGNAL(triggered()), this, SLOT(doOpen()));
 	ui->imageLabel->hide();
@@ -21,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->langLabel->hide();
 	ui->comboBox_2->hide();
 	connect(ui->treeView, SIGNAL(clicked(QModelIndex)), this, SLOT(elementSelected(QModelIndex)));
+	connect(ui->fileKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(fileSelected()));
+	connect(ui->backKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(backSelected()));
 }
 
 MainWindow::~MainWindow()
@@ -32,20 +35,23 @@ void MainWindow::doOpen()
 {
 	QFileDialog fdialog(this);
 	QString filename = QFileDialog::getOpenFileName(this);
-	PairsTheme pt(filename);
-	ThemeModel *model = new ThemeModel(pt);
+	if(pt)
+		delete pt;
+	pt = new PairsTheme(filename);
+	ThemeModel *model = new ThemeModel(*pt);
 	ui->treeView->setModel(model);
-	ui->titleEdit->setText(pt.title());
-	ui->authorEdit->setText(pt.author());
-	ui->versionEdit->setText(pt.version());
-	ui->dateEdit->setDate(QDate::fromString(pt.date(),"d/M/yyyy"));
-	ui->maintypeBox->setCurrentIndex(pt.mainType()-1);
-	ui->descriptionEdit->setText(pt.description());
-	ui->backKurl->setText(pt.backImage());
-	QByteArray file_buf = (pt.themeData(pt.backImage()));
+	ui->titleEdit->setText(pt->title());
+	ui->authorEdit->setText(pt->author());
+	ui->versionEdit->setText(pt->version());
+	ui->dateEdit->setDate(QDate::fromString(pt->date(),"d/M/yyyy"));
+	ui->maintypeBox->setCurrentIndex(pt->mainType()-1);
+	ui->descriptionEdit->setText(pt->description());
+	ui->backKurl->setText(pt->backImage());
 	QPixmap image;
-	image.loadFromData(file_buf);
+	image.load(pt->path()+"/"+pt->backImage());
 	ui->pixLabel->setPixmap(image.scaledToWidth(100));
+	ui->fileKurl->setStartDir(KUrl(pt->path()));
+	ui->backKurl->setStartDir(KUrl(pt->path()));
 
 }
 
@@ -67,6 +73,7 @@ void MainWindow::elementSelected(const QModelIndex & item)
 		return;
 	ui->langLabel->show();
 	ui->comboBox_2->show();
+	QPixmap image;
 	switch(type)
 	{
 	case CARD_IMAGE:
@@ -76,6 +83,8 @@ void MainWindow::elementSelected(const QModelIndex & item)
 		ui->fileKurl->show();
 		ui->wordEdit->hide();
 		ui->wordLabel->hide();
+		image.load(pt->path()+"/"+ui->fileKurl->text());
+		ui->itemLabel->setPixmap(image.scaledToWidth(100));
 		break;
 	case CARD_SOUND:
 	case CARD_SOUNDLOGIC:
@@ -107,9 +116,19 @@ void MainWindow::elementSelected(const QModelIndex & item)
 		break;
 
 	}
-
-
-
+}
+void MainWindow::backSelected()
+{
+	QPixmap image;
+	ui->backKurl->setText(ui->backKurl->url().fileName());
+	image.load(pt->path()+"/"+ui->backKurl->text());
+	ui->pixLabel->setPixmap(image.scaledToWidth(100));
+}
+void MainWindow::fileSelected()
+{
+	QPixmap image;
+	ui->fileKurl->setText(ui->fileKurl->url().fileName());
+	image.load(pt->path()+"/"+ui->fileKurl->text());
+	ui->itemLabel->setPixmap(image.scaledToWidth(100));
 
 }
-
