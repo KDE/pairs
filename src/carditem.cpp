@@ -161,10 +161,10 @@ void CardItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* )
 
 void CardItem::turn()
 {
+    disconnect(m_media, SIGNAL(finished()), this, SLOT(turn()));
     m_activated=!m_activated;
     
     m_animation->start();
-    disconnect(m_media, SIGNAL(finished()), this, SLOT(turn()));
 }
 
 void CardItem::setCardPixmap(const QSharedPointer<QSvgRenderer>& renderer)

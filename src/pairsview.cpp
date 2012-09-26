@@ -138,9 +138,9 @@ void PairsView::cardSelected(CardItem* card)
             m_players->player(m_currentPlayer)->incFound();
             QTimer::singleShot(500, this, SLOT(checkGameOver()));
         } else {
-            playSound(card->missedSound());
             connect(m_media, SIGNAL(finished()), card, SLOT(turn()));
             connect(m_media, SIGNAL(finished()), m_last, SLOT(turn()));
+            playSound(card->missedSound());
             m_players->player(m_currentPlayer)->incMissed();
             
             //next player
