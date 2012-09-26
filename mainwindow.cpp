@@ -88,7 +88,7 @@ void MainWindow::doSave()
 					stream.writeAttribute("src", mysubitem->data(ThemeModel::PathRole).toString());
 					break;
 				case CARD_WORD:
-					stream.writeStartElement("Word");
+					stream.writeStartElement("word");
 					break;
 
 				}

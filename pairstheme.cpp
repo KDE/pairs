@@ -264,6 +264,11 @@ QStringList ThemeElement::langlist(CardType type) const
     return name[type].keys();
 }
 
+QStringList ThemeElement::foundLanglist() const
+{
+    return found.keys();
+}
+
 QString ThemeElement::foundSound(const QString& lang) const
 {
     QString ret = found[lang];

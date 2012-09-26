@@ -52,6 +52,7 @@ public:
     
     QString value(CardType type, const QString& language) const;
     QStringList langlist(CardType type) const;
+    QStringList foundLanglist() const;
     QString foundSound(const QString& lang) const;
 };
 
