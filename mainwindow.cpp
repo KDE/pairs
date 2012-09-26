@@ -39,8 +39,8 @@ void MainWindow::doOpen()
 	if(pt)
 		delete pt;
 	pt = new PairsTheme(filename);
-	ThemeModel *model = new ThemeModel(*pt);
-	ui->treeView->setModel(model);
+	m_model = new ThemeModel(*pt);
+	ui->treeView->setModel(m_model);
 	ui->titleEdit->setText(pt->title());
 	ui->authorEdit->setText(pt->author());
 	ui->versionEdit->setText(pt->version());
@@ -65,6 +65,7 @@ void MainWindow::doOpen()
 
 void MainWindow::elementSelected(const QModelIndex & item)
 {
+	m_selectedItem = m_model->item(item.row(), item.column());
 	int type = item.data(ThemeModel::CardTypeRole).toInt();
 	ui->fileKurl->setText(item.data(ThemeModel::PathRole).toString());
 	ui->wordEdit->setText(item.data(ThemeModel::PathRole).toString());
@@ -120,6 +121,8 @@ void MainWindow::elementSelected(const QModelIndex & item)
 		ui->fileKurl->show();
 		ui->wordEdit->hide();
 		ui->wordLabel->hide();
+		image.load(pt->path()+"/"+ui->fileKurl->text());
+		ui->itemLabel->setPixmap(image.scaledToWidth(100));
 		break;
 	case CARD_WORD:
 		ui->imageLabel->hide();
@@ -152,5 +155,7 @@ void MainWindow::fileSelected()
 	ui->fileKurl->setText(ui->fileKurl->url().fileName());
 	image.load(pt->path()+"/"+ui->fileKurl->text());
 	ui->itemLabel->setPixmap(image.scaledToWidth(100));
+	m_selectedItem->setData(ui->fileKurl->text(),ThemeModel::PathRole);
+	qDebug() << ui->fileKurl->text() << m_selectedItem->data(ThemeModel::PathRole);
 
 }

@@ -5,6 +5,8 @@
 #include <QtCore/QModelIndex>
 
 class PairsTheme;
+class QStandardItem;
+class ThemeModel;
 namespace Ui {
 class MainWindow;
 }
@@ -27,6 +29,8 @@ public slots:
 private:
     Ui::MainWindow *ui;
     PairsTheme *pt;
+    QStandardItem *m_selectedItem;
+    ThemeModel *m_model;
 };
 
 #endif // MAINWINDOW_H
