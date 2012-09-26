@@ -14,7 +14,8 @@ include_directories( ${KDE4_INCLUDE_DIRS} ${CMAKE_CURRENT_BINARY_DIR})
 
 add_definitions( ${KDE4_DEFINITIONS} )
 
-set( ptedit_SOURCES mainwindow.cpp main.cpp )
+set( ptedit_SOURCES mainwindow.cpp main.cpp pairstheme.cpp thememodel.cpp elementitem.cpp
+                    featureitem.cpp )
 
 set( mainwindow_cfg_UI mainwindow.ui )
 
@@ -22,7 +23,7 @@ kde4_add_ui_files( ptedit_SOURCES ${mainwindow_cfg_UI} )
 
 kde4_add_executable( ptedit ${ptedit_SOURCES} )
 
-target_link_libraries( ptedit ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS})
+target_link_libraries( ptedit ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${QT_QTXMLPATTERNS_LIBRARY})
 install(TARGETS ptedit ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 

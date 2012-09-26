@@ -1,7 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
+#include <QtGui/QMainWindow>
+#include <QtCore/QModelIndex>
 
 namespace Ui {
 class MainWindow;
@@ -15,6 +16,11 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     
+public slots:
+
+	void elementSelected(const QModelIndex & item);
+	void doOpen();
+
 private:
     Ui::MainWindow *ui;
 };
