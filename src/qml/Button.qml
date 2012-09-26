@@ -24,7 +24,7 @@ import QtQuick 1.1
 Item {
     id: button
     width: 100
-    height: 100
+    height: icon.height + caption.height  + icon.anchors.margins * 2 + caption.anchors.bottomMargin
     
     signal clicked;
     signal overlayClicked;
@@ -39,9 +39,9 @@ Item {
             top: parent.top
             left: parent.left
             right: parent.right
-            bottom: caption.top
             margins: 10
-        }
+  		}
+        height: width
         visible: source!=""
         fillMode: Image.PreserveAspectFit
         sourceSize {
@@ -59,10 +59,9 @@ Item {
             bottomMargin: 5
        }
        horizontalAlignment: Text.AlignHCenter
-//        wrapMode: Text.WordWrap
+       wrapMode: Text.WordWrap
        font.pointSize: 12
-       color: mouse.containsMouse ? "red" : "white"
-       
+       color: mouse.containsMouse ? "red" : "white"      
        Behavior on color { ColorAnimation { duration: 200 } }
     }
     
