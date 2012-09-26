@@ -68,7 +68,8 @@ void MainWindow::elementSelected(const QModelIndex & item)
 	int type = item.data(ThemeModel::CardTypeRole).toInt();
 	ui->fileKurl->setText(item.data(ThemeModel::PathRole).toString());
 	ui->wordEdit->setText(item.data(ThemeModel::PathRole).toString());
-	int index = ui->comboBox_2->findData(item.data(ThemeModel::LanguageRole).toString());
+	int index = ui->comboBox_2->findText(item.data(ThemeModel::LanguageRole).toString());
+	qDebug() << item.data(ThemeModel::LanguageRole).toString() << index;
 	if ( index != -1 )
 	{
 		ui->comboBox_2->setCurrentIndex(index);
