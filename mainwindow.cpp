@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	pt = 0;
 	ui->setupUi(this);
 	connect(ui->action_open, SIGNAL(triggered()), this, SLOT(doOpen()));
+	connect(ui->action_save, SIGNAL(triggered()), this, SLOT(doSave()));
 	ui->imageLabel->hide();
 	ui->fileKurl->hide();
 	ui->itemLabel->show();
@@ -32,8 +33,80 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::doSave()
+{
+	QFile f(m_file+".new");
+	if (!f.open(QFile::WriteOnly | QFile::Text))
+	{
+			qWarning() << "Error: Cannot write file " << m_file;
+			return;
+	}
+
+	QXmlStreamWriter stream(&f);
+	stream.setAutoFormatting(true);
+	stream.writeStartDocument();
+	stream.writeAttribute("version", "1.0");
+	stream.writeStartElement("pairs");
+	stream.writeAttribute("xmlns", "http://edu.kde.org/game");
+	stream.writeTextElement("title", ui->titleEdit->text());
+	stream.writeTextElement("description", ui->descriptionEdit->text());
+	stream.writeTextElement("author", ui->authorEdit->text());
+	stream.writeTextElement("date", ui->dateEdit->text());
+	stream.writeTextElement("version", ui->versionEdit->text());
+	stream.writeStartElement("image");
+	stream.writeAttribute("type", "back");
+	stream.writeAttribute("src", ui->backKurl->text());
+	stream.writeEndElement(); // image
+	stream.writeStartElement("main");
+	stream.writeAttribute("type", ui->maintypeBox->currentText());
+	stream.writeEndElement(); // main
+	for (int i=0; i < m_model->rowCount(); i++)
+	{
+		QStandardItem *myitem = m_model->item(i,0);
+		if(!myitem->data(ThemeModel::CardTypeRole).toInt())
+		{
+			if(i != 0)
+				stream.writeEndElement();
+			stream.writeStartElement("element");
+			for (int i=0; i < myitem->rowCount(); i++)
+			{
+				QStandardItem *mysubitem = myitem->child(i,0);
+				switch(mysubitem->data(ThemeModel::CardTypeRole).toInt())
+				{
+				case CARD_IMAGE:
+				case CARD_LOGIC:
+					stream.writeStartElement("image");
+					stream.writeAttribute("src", mysubitem->data(ThemeModel::PathRole).toString());
+					break;
+				case CARD_SOUND:
+				case CARD_SOUNDLOGIC:
+					stream.writeStartElement("sound");
+					stream.writeAttribute("src", mysubitem->data(ThemeModel::PathRole).toString());
+					break;
+				case CARD_FOUND:
+					stream.writeStartElement("pfound");
+					stream.writeAttribute("src", mysubitem->data(ThemeModel::PathRole).toString());
+					break;
+				case CARD_WORD:
+					stream.writeStartElement("Word");
+					break;
+
+				}
+				stream.writeAttribute("lang", mysubitem->data(ThemeModel::LanguageRole).toString());
+				if(mysubitem->data(ThemeModel::CardTypeRole).toInt() == CARD_WORD)
+					stream.writeCharacters(mysubitem->data(ThemeModel::PathRole).toString());
+				stream.writeEndElement();
+			}
+		}
+	}
+	stream.writeEndElement();//last element
+	stream.writeEndElement(); // pairs
+	stream.writeEndDocument();
+}
+
 void MainWindow::open(const QString& filename)
 {
+	m_file = filename;
 	delete pt;
 	pt = new PairsTheme(filename);
 	m_model = new ThemeModel(*pt);
@@ -64,10 +137,10 @@ void MainWindow::open(const QString& filename)
 void MainWindow::doOpen()
 {
 	QFileDialog fdialog(this);
-	QString filename = QFileDialog::getOpenFileName(this);
+	m_file = QFileDialog::getOpenFileName(this);
 	
-	if(!filename.isEmpty())
-		open(filename);
+	if(!m_file.isEmpty())
+		open(m_file);
 }
 
 void MainWindow::selectionChanged(const QItemSelection& selected, const QItemSelection&  )

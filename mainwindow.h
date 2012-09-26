@@ -19,14 +19,14 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+	void open(const QString& path);
     
 public slots:
 	void elementSelected(const QModelIndex & item);
 	void backSelected();
 	void fileSelected();
 	void doOpen();
-	
-	void open(const QString& path);
+	void doSave();
     void selectionChanged(const QItemSelection& selected, const QItemSelection&);
 
 private:
@@ -34,6 +34,7 @@ private:
     PairsTheme *pt;
     QStandardItem *m_selectedItem;
     ThemeModel *m_model;
+    QString m_file;
 };
 
 #endif // MAINWINDOW_H

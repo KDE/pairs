@@ -121,6 +121,7 @@ PairsTheme::PairsTheme(const QString& path)
     }
 
     setText(title());
+    m_archive.close();
 //     setIcon(QIcon(backImage()));
 //    setData(qVariantFromValue<QStringList>(m_cardtypes["any"].toList()), CardTypeRole);
 //    setData(qVariantFromValue<QStringList>(m_languages.toList()), LanguagesRole);
