@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->action_open, SIGNAL(triggered()), this, SLOT(doOpen()));
 	ui->imageLabel->hide();
 	ui->fileKurl->hide();
+	ui->itemLabel->show();
 	ui->wordEdit->hide();
 	ui->wordLabel->hide();
 	ui->langLabel->hide();
@@ -52,6 +53,13 @@ void MainWindow::doOpen()
 	ui->pixLabel->setPixmap(image.scaledToWidth(100));
 	ui->fileKurl->setStartDir(KUrl(pt->path()));
 	ui->backKurl->setStartDir(KUrl(pt->path()));
+	ui->imageLabel->hide();
+	ui->itemLabel->hide();
+	ui->fileKurl->hide();
+	ui->wordEdit->hide();
+	ui->wordLabel->hide();
+	ui->langLabel->hide();
+	ui->comboBox_2->hide();
 
 }
 
@@ -70,16 +78,25 @@ void MainWindow::elementSelected(const QModelIndex & item)
 		ui->comboBox_2->addItem(item.data(ThemeModel::LanguageRole).toString());
 	}
 	if(!type)
+	{
+		ui->imageLabel->hide();
+		ui->itemLabel->hide();
+		ui->fileKurl->hide();
+		ui->wordEdit->hide();
+		ui->wordLabel->hide();
+		ui->langLabel->hide();
+		ui->comboBox_2->hide();
 		return;
+	}
 	ui->langLabel->show();
 	ui->comboBox_2->show();
 	QPixmap image;
 	switch(type)
 	{
 	case CARD_IMAGE:
-	case CARD_IMAGE2:
 		ui->imageLabel->setText("Image file");
 		ui->imageLabel->show();
+		ui->itemLabel->show();
 		ui->fileKurl->show();
 		ui->wordEdit->hide();
 		ui->wordLabel->hide();
@@ -89,6 +106,7 @@ void MainWindow::elementSelected(const QModelIndex & item)
 	case CARD_SOUND:
 	case CARD_SOUNDLOGIC:
 		ui->imageLabel->setText("Sound file");
+		ui->itemLabel->hide();
 		ui->imageLabel->show();
 		ui->fileKurl->show();
 		ui->wordEdit->hide();
@@ -96,6 +114,7 @@ void MainWindow::elementSelected(const QModelIndex & item)
 		break;
 	case CARD_LOGIC:
 		ui->imageLabel->setText("Logic image file");
+		ui->itemLabel->show();
 		ui->imageLabel->show();
 		ui->fileKurl->show();
 		ui->wordEdit->hide();
@@ -103,12 +122,14 @@ void MainWindow::elementSelected(const QModelIndex & item)
 		break;
 	case CARD_WORD:
 		ui->imageLabel->hide();
+		ui->itemLabel->hide();
 		ui->fileKurl->hide();
 		ui->wordEdit->show();
 		ui->wordLabel->show();
 		break;
 	case CARD_FOUND:
 		ui->imageLabel->setText("Found sound file");
+		ui->itemLabel->hide();
 		ui->imageLabel->show();
 		ui->fileKurl->show();
 		ui->wordEdit->hide();
