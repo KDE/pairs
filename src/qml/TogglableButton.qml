@@ -23,8 +23,7 @@ import QtQuick 1.0
 Item
 {
     id: container
-    width: 100
-    height: 100
+    height: button.height
     property bool enabled: true
     property alias text: button.text
     property alias source: button.source
@@ -48,7 +47,8 @@ Item
     
     MouseArea {
         id: mouse
-        anchors.fill: parent
+        width: parent.width
+        height: parent.heigth
         hoverEnabled: true
         onClicked: button.clicked()
         onEntered: button.state="hovered"
@@ -56,7 +56,7 @@ Item
         
         Button {
             id: button
-            anchors.fill: parent
+            width: parent.width
             anchors.verticalCenterOffset: -10
             
             onClicked: container.clicked()

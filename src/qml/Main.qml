@@ -179,7 +179,7 @@ FancyBackground
     Page {
         id: playersControl
         visible: game.state=='newgame'
-        height: visible ? 100 : 0
+        height: visible ? addPlayer.height + label.height : 0
         anchors {
             left: parent.left
             right: main.left
@@ -247,13 +247,13 @@ FancyBackground
         }
         
         Button {
+        	id: addPlayer
             anchors {
                 right: parent.right
-                top: label.bottom
                 bottom: parent.bottom
                 bottomMargin: -10
             }
-            width: height
+            width: 100
             text: i18n("Add"); 
             source: playersModel.iconsDir("gameicons/addUser.svg")
             onClicked: addPlayer()

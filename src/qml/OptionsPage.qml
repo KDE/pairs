@@ -37,13 +37,13 @@ Flickable {
             width: parent.width
             Flow {
                 id: gameTypes
+                height: childrenRect.height
                 spacing: 20
                 anchors.margins: 10
                 width: parent.width
                 property real buttonWidth: Math.max((width - 120) / 6, 100)
                 TogglableButton {
                 	width: parent.buttonWidth
-                	height: width
                 	source: playersModel.iconsDir("gameicons/pairs.svg")
                     text: i18n("Pairs")
                     onClicked: gameType = 'image'
@@ -51,7 +51,6 @@ Flickable {
                 }
                 TogglableButton {
                 	width: parent.buttonWidth
-                	height: width
                     source: playersModel.iconsDir("gameicons/relations.svg")
                     text: i18n("Relations")
                     onClicked: gameType = 'image2'
@@ -59,7 +58,6 @@ Flickable {
                 }
                 TogglableButton {
                 	width: parent.buttonWidth
-                	height: width
                     source: playersModel.iconsDir("gameicons/logic.svg")
                     text: i18n("Logic")
                     onClicked: gameType = 'logic'
@@ -67,7 +65,6 @@ Flickable {
                 }
                 TogglableButton {
                 	width: parent.buttonWidth
-                	height: width
                     source: playersModel.iconsDir("gameicons/sound.svg")
                     text: i18n("Sound")
                     onClicked: gameType = 'sound'
@@ -75,7 +72,6 @@ Flickable {
                 }
                 TogglableButton {
                 	width: parent.buttonWidth
-                	height: width
                     source: playersModel.iconsDir("gameicons/soundLogic.svg")
                     text: i18n("SoundLogic")
                     onClicked: gameType = 'soundlogic'
@@ -83,7 +79,6 @@ Flickable {
                 }
                 TogglableButton {
                 	width: parent.buttonWidth
-                	height: width
                     source: playersModel.iconsDir("gameicons/words.svg")
                     text: i18n("Words")
                     onClicked: gameType = 'word'
@@ -105,8 +100,7 @@ Flickable {
                     model: themesModel
                     
                     delegate: Button {
-                	width: Math.max((parent.width - 120) / 6, 100)
-                	height: width
+	                	width: Math.max((parent.width - 120) / 6, 100)
                         visible: themesModel.isPertinent(index, gameType, fgame.language())
                         source: "image://theme/"+display+"/"+decoration
                         text: display
