@@ -28,6 +28,8 @@
 #include <QtCore/QList>
 #include <QtCore/QStringList>
 #include <QtCore/QSet>
+#include <QtCore/QFile>
+#include <QtCore/QDir>
 #ifdef Q_OS_WIN
 #include <KZip>
 #else
@@ -76,14 +78,13 @@ class PairsTheme : public QObject, public QStandardItem
         QString error() const { return m_error; }
         CardType mainType() const { return m_main_type; }
         QStringList images() const;
-        QByteArray themeData(const QString& path) const;
         bool hasFile(const QString& path) const;
         
         static CardType cardNameToType(const QString& name);
     private:
         void parseElement(QXmlStreamReader &reader);
 
-        bool isValid(const KArchiveFile* file);
+        bool isValid(const QFile* file);
         QString m_title;
         QString m_description;
         QString m_author;
@@ -106,12 +107,9 @@ class PairsTheme : public QObject, public QStandardItem
         QSet<QString> m_languages;
         QMap<QString, QSet<QString> > m_cardtypes;
 
-//TODO: use KZip everywhere
-#ifdef Q_OS_WIN
-        KZip m_archive;
-#else
-		KTar m_archive;
-#endif
+		QFile m_archive;
+		QDir m_dir;
+
 };
 
 #endif // PAIRSTHEME_H

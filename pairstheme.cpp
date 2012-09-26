@@ -46,23 +46,23 @@ PairsTheme::PairsTheme(const QString& path)
     : QStandardItem()
     , m_back_img("")
     , m_archive(path)
+	, m_dir()
 {
-	bool b = m_archive.open(QIODevice::ReadOnly);
-    Q_ASSERT(b);
-	QStringList files(m_archive.directory()->entries());
-    files = files.filter(QRegExp("*.game", Qt::CaseSensitive, QRegExp::Wildcard));
-    
-    Q_ASSERT(files.count()==1 && "no games in the theme!");
-    
-    QString themename(files.first()); //TODO: Support many games inside a theme
-    Q_ASSERT(m_archive.directory()->entry(themename)->isFile());
-    const KArchiveFile* file = static_cast<const KArchiveFile*>(m_archive.directory()->entry(themename));
-    if(!isValid(file)) {
-        qWarning() << "Skipping game theme not valid: " << themename;
+	QFileInfo fi(path);
+	m_dir = fi.dir();
+	if (!m_archive.open(QFile::ReadOnly | QFile::Text))
+	{
+			qWarning() << "Error: Cannot read file " << path;
+			return;
+	}
+    if(!isValid(&m_archive))
+    {
+        qWarning() << "Skipping game theme not valid: " << path;
         m_error = "Not valid XML file";
+        return;
     }
-
-    QXmlStreamReader reader(file->data());
+    qDebug() << path << m_dir.path();
+    QXmlStreamReader reader(&m_archive);
     
     while (m_error.isEmpty() && !reader.atEnd()) {
         QXmlStreamReader::TokenType type = reader.readNext();
@@ -114,8 +114,8 @@ PairsTheme::PairsTheme(const QString& path)
             m_error = i18n("%1:%2 Unknown token in theme file", reader.lineNumber(), reader.columnNumber());
         }
     }
-//     qDebug() << m_title << m_description << m_author << m_date << m_version << m_missed_snd << m_found_snd
-//              << m_turn_snd << m_back_img << m_background_img << m_backtrasp_img << m_main << m_languages;
+  qDebug() << m_title << m_description << m_author << m_date << m_version << m_missed_snd << m_found_snd
+              << m_turn_snd << m_back_img << m_background_img << m_backtrasp_img << m_main << m_languages;
     if (reader.hasError()) {
         m_error += reader.errorString();
     }
@@ -218,7 +218,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
     }
 }
 
-bool PairsTheme::isValid(const KArchiveFile* file) {
+bool PairsTheme::isValid(const QFile* file) {
 
 	return true;
     QUrl schemaUrl = QUrl::fromLocalFile(KGlobal::dirs()->findResource("appdata", QLatin1String( "themes/game.xsd" )));
@@ -230,32 +230,23 @@ bool PairsTheme::isValid(const KArchiveFile* file) {
         return false;
     }
     QXmlSchemaValidator validator(schema);
-    return validator.validate(file->data());
+    return validator.validate((QFile*)file);
 }
 
 QStringList PairsTheme::images() const
 {
-    QStringList files(m_archive.directory()->entries());
-    return files.filter(QRegExp("*.svg", Qt::CaseSensitive, QRegExp::Wildcard));
-}
-
-QByteArray PairsTheme::themeData(const QString& path) const
-{
-    const KArchiveEntry* entry = m_archive.directory()->entry(path);
-    if(!entry || !entry->isFile())
-        return QByteArray();
-    
-    return static_cast<const KArchiveFile*>(entry)->data();
+	QStringList a("*.svg");
+    return m_dir.entryList(a, QDir::Files);
 }
 
 bool PairsTheme::hasFile(const QString& path) const
 {
-    return m_archive.directory()->entries().contains(path);
+    return m_dir.exists(path);
 }
 
 QString PairsTheme::path() const
 {
-    return m_archive.fileName();
+    return m_dir.path();
 }
 
 QString ThemeElement::value(CardType type, const QString& language) const
