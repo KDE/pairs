@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "pairstheme.h"
 #include "thememodel.h"
+#include "elementitem.h"
 #include "ui_mainwindow.h"
 #include <QtGui/QFileDialog>
 #include <QtCore/QDebug>
@@ -23,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->wordLabel->hide();
 	ui->langLabel->hide();
 	ui->comboBox_2->hide();
+	ui->moreButton->hide();
 	
 	connect(ui->fileKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(fileSelected()));
 	connect(ui->backKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(backSelected()));
@@ -32,6 +34,24 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::addElement()
+{
+	const ThemeElement el;
+	ElementItem *newItem = new ElementItem (el);
+
+	m_model->appendRow(newItem);
+	ui->treeView->update();
+	ui->treeView->update();
+
+}
+void MainWindow::deleteElement()
+{
+	QModelIndex mi = m_model->indexFromItem(m_selectedItem);
+	m_model->takeItem(mi.row(), mi.column());
+	ui->treeView->update();
+}
+
 
 void MainWindow::doSave()
 {
@@ -130,6 +150,8 @@ void MainWindow::open(const QString& filename)
 	ui->comboBox_2->hide();
 	ui->splitter->setStretchFactor(1, 3);
 	
+	connect(ui->delButton, SIGNAL(clicked()), this, SLOT(deleteElement()));
+	connect(ui->moreButton, SIGNAL(clicked()), this, SLOT(addElement()));
 	connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(selectionChanged(QItemSelection,QItemSelection)));
 }
 
@@ -172,8 +194,12 @@ void MainWindow::elementSelected(const QModelIndex & idx)
 		ui->wordLabel->hide();
 		ui->langLabel->hide();
 		ui->comboBox_2->hide();
+		ui->moreButton->show();
+
 		return;
 	}
+	ui->moreButton->hide();
+
 	ui->langLabel->show();
 	ui->comboBox_2->show();
 	QPixmap image;

@@ -10,10 +10,10 @@ include_directories( ${KDE4_INCLUDE_DIRS} ${CMAKE_CURRENT_BINARY_DIR})
 
 add_definitions( ${KDE4_DEFINITIONS} )
 
-kde4_add_ui_files( ptedit_SOURCES mainwindow.ui )
-
 set(ptedit_SOURCES  mainwindow.cpp main.cpp pairstheme.cpp            
     thememodel.cpp elementitem.cpp featureitem.cpp )
+
+kde4_add_ui_files( ptedit_SOURCES mainwindow.ui )
 
 qt4_add_resources(ptedit_SOURCES ptedit.qrc)
 

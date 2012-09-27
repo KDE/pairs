@@ -28,7 +28,8 @@ public slots:
 	void doOpen();
 	void doSave();
     void selectionChanged(const QItemSelection& selected, const QItemSelection&);
-
+    void addElement();
+    void deleteElement();
 private:
     Ui::MainWindow *ui;
     PairsTheme *pt;

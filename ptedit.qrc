@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="newPrefix">
+    <file>arrow-down.png</file>
     <file>list-add.png</file>
     <file>list-remove.png</file>
   </qresource>
