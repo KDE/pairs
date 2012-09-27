@@ -12,9 +12,12 @@ add_definitions( ${KDE4_DEFINITIONS} )
 
 kde4_add_ui_files( ptedit_SOURCES mainwindow.ui )
 
-kde4_add_executable( ptedit ${ptedit_SOURCES}
-    mainwindow.cpp main.cpp pairstheme.cpp            
+set(ptedit_SOURCES  mainwindow.cpp main.cpp pairstheme.cpp            
     thememodel.cpp elementitem.cpp featureitem.cpp )
+
+qt4_add_resources(ptedit_SOURCES ptedit.qrc)
+
+kde4_add_executable( ptedit ${ptedit_SOURCES} )
 
 target_link_libraries( ptedit ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${QT_QTXMLPATTERNS_LIBRARY})
 install(TARGETS ptedit ${INSTALL_TARGETS_DEFAULT_ARGS})
