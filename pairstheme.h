@@ -80,7 +80,6 @@ class PairsTheme : public QObject, public QStandardItem
         CardType mainType() const { return m_main_type; }
         QStringList images() const;
         bool hasFile(const QString& path) const;
-        
         static CardType cardNameToType(const QString& name);
     private:
         void parseElement(QXmlStreamReader &reader);

@@ -61,7 +61,6 @@ PairsTheme::PairsTheme(const QString& path)
         m_error = "Not valid XML file";
         return;
     }
-    qDebug() << path << m_dir.path();
     QXmlStreamReader reader(&m_archive);
     
     while (m_error.isEmpty() && !reader.atEnd()) {
@@ -114,9 +113,7 @@ PairsTheme::PairsTheme(const QString& path)
             m_error = i18n("%1:%2 Unknown token in theme file", reader.lineNumber(), reader.columnNumber());
         }
     }
-  qDebug() << m_title << m_description << m_author << m_date << m_version << m_missed_snd << m_found_snd
-              << m_turn_snd << m_back_img << m_background_img << m_backtrasp_img << m_main << m_languages;
-    if (reader.hasError()) {
+  if (reader.hasError()) {
         m_error += reader.errorString();
     }
 
@@ -129,7 +126,6 @@ PairsTheme::PairsTheme(const QString& path)
 }
 
 bool PairsTheme::isPertinent(const QString &type,const QString &lang) {
-//     qDebug() << type << lang << m_cardtypes[lang].count(type);
     return (m_cardtypes[lang].contains(type) || m_cardtypes["any"].contains(type));
 }
 
@@ -138,7 +134,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
     QString common[CARD_MAX_TYPE];
     QString common_found("");
     CardType current_type = CARD_IMAGE;
-    common[CARD_LOGIC] = "";
+  //  common[CARD_LOGIC] = "";
     QXmlStreamReader::TokenType type = reader.readNext();
     ThemeElement item;
     while(!reader.atEnd()) {
@@ -151,11 +147,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                     }
                 }
                 common[i].clear();
-//                 qDebug() << "ITEM" << item.name[i]  << "/ITEM";
             }
-            
-//             qDebug() << "CTYPES" << m_cardtypes << "/CTYPES";
-//             qDebug() << item.foundSound("en");
             m_items += item;
             item.reset();
         }
@@ -199,7 +191,6 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                         break;
                     case CARD_FOUND:
                         item.found[lang] = src;
-                        qDebug() << lang << src << item.found[lang] << item.foundSound("en");
                         break;
                     case CARD_WORD:
                         QString src = reader.readElementText().trimmed();
@@ -211,7 +202,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
                 
                 if(current_type == m_main_type) {
                     common[current_type] = src;
-                    common[CARD_LOGIC] = src;
+                  //  common[CARD_LOGIC] = src;
                 }
              }
         }

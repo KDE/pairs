@@ -1,6 +1,7 @@
 #include "cardtype.h"
 #include "elementitem.h"
 #include "featureitem.h"
+#include <QtCore/QDebug>
 
 ElementItem::ElementItem(const ThemeElement &el): QStandardItem()
 {
@@ -19,7 +20,7 @@ ElementItem::ElementItem(const ThemeElement &el): QStandardItem()
 	for(int i = CARD_IMAGE; i < CARD_MAX_TYPE; i++)
 	{
 		QStringList l = el.langlist((CardType)i);
-		if(l.isEmpty())
+		if(l.isEmpty() || i == CARD_SOUNDLOGIC || i == CARD_IMAGE2)
 			continue;
 		Q_FOREACH(QString s, l)
 		{

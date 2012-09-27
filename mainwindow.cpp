@@ -45,7 +45,6 @@ void MainWindow::doSave()
 	QXmlStreamWriter stream(&f);
 	stream.setAutoFormatting(true);
 	stream.writeStartDocument();
-	stream.writeAttribute("version", "1.0");
 	stream.writeStartElement("pairs");
 	stream.writeAttribute("xmlns", "http://edu.kde.org/game");
 	stream.writeTextElement("title", ui->titleEdit->text());
@@ -156,7 +155,6 @@ void MainWindow::elementSelected(const QModelIndex & idx)
 	ui->fileKurl->setText(idx.data(ThemeModel::PathRole).toString());
 	ui->wordEdit->setText(idx.data(ThemeModel::PathRole).toString());
 	int index = ui->comboBox_2->findText(idx.data(ThemeModel::LanguageRole).toString());
-	qDebug() << idx.data(ThemeModel::LanguageRole).toString() << index;
 	if ( index != -1 )
 	{
 		ui->comboBox_2->setCurrentIndex(index);
@@ -242,6 +240,4 @@ void MainWindow::fileSelected()
 	image.load(pt->path()+"/"+ui->fileKurl->text());
 	ui->itemLabel->setPixmap(image.scaledToWidth(100));
 	m_selectedItem->setData(ui->fileKurl->text(),ThemeModel::PathRole);
-	qDebug() << ".............." << ui->fileKurl->text() << m_selectedItem->text() << m_selectedItem->data(ThemeModel::PathRole);
-
 }
