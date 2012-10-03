@@ -39,17 +39,17 @@ void MainWindow::addElement()
 {
 	const ThemeElement el;
 	ElementItem *newItem = new ElementItem (el);
-
-	m_model->appendRow(newItem);
+    QString name = i18n("Element %1", m_model->rowCount()+1);
+    newItem->setText(name);
+    m_model->insertItem(newItem);
+/*	m_model->appendRow(newItem);
 	ui->treeView->update();
 	ui->treeView->update();
-
+*/
 }
 void MainWindow::deleteElement()
 {
-	QModelIndex mi = m_model->indexFromItem(m_selectedItem);
-	m_model->takeItem(mi.row(), mi.column());
-	ui->treeView->update();
+	m_model->removeItem(m_selectedItem);
 }
 
 
@@ -151,7 +151,7 @@ void MainWindow::open(const QString& filename)
 	ui->splitter->setStretchFactor(1, 3);
 	
 	connect(ui->delButton, SIGNAL(clicked()), this, SLOT(deleteElement()));
-	connect(ui->moreButton, SIGNAL(clicked()), this, SLOT(addElement()));
+	connect(ui->addButton, SIGNAL(clicked()), this, SLOT(addElement()));
 	connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(selectionChanged(QItemSelection,QItemSelection)));
 }
 

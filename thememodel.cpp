@@ -18,3 +18,22 @@ ThemeModel::ThemeModel(PairsTheme &t, QObject* parent): QStandardItemModel(paren
 		appendRow(item);
     }
 }
+
+void ThemeModel::removeItem(QStandardItem *selectedItem)
+{
+
+    QModelIndex mi = indexFromItem(selectedItem);
+
+    beginRemoveRows(QModelIndex(), mi.row(), mi.row());
+    removeRow(mi.row());
+
+    endRemoveRows();
+
+}
+
+void ThemeModel::insertItem(QStandardItem *newItem)
+{
+    beginInsertRows(QModelIndex(), rowCount(), rowCount());
+    insertRow(rowCount(), newItem);
+    endInsertRows();
+}
