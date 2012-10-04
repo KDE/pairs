@@ -15,6 +15,7 @@ class ThemeModel : public QStandardItemModel
         explicit ThemeModel(PairsTheme &t, QObject* parent = 0);
         void removeItem(QStandardItem *selectedItem);
         void insertItem(QStandardItem *newItem);
+        void insertFeature(QStandardItem *newItem, QStandardItem *parent);
 };
 
 #endif // THEMEMODEL_H

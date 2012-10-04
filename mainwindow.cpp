@@ -2,6 +2,7 @@
 #include "pairstheme.h"
 #include "thememodel.h"
 #include "elementitem.h"
+#include "featureitem.h"
 #include "ui_mainwindow.h"
 #include <QtGui/QFileDialog>
 #include <QtCore/QDebug>
@@ -35,6 +36,34 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::addFeature(int index)
+{
+    QStandardItem *paren = m_selectedItem;
+    if(m_selectedItem->data(ThemeModel::CardTypeRole).toInt())
+        paren = m_selectedItem->parent();
+    qDebug() << "addFeature called" << index;
+    CardType newType;
+    switch(index)
+    {
+        case 0:
+        default:
+            newType = CARD_IMAGE;
+            break;
+        case 1:
+            newType = CARD_IMAGE2;
+            break;
+        case 2:
+            newType = CARD_SOUND;
+            break;
+        case 3:
+            newType = CARD_WORD;
+            break;
+    }
+    FeatureItem *fi = new FeatureItem(newType, "any", "");
+    m_model->insertFeature(fi, paren);
+
+
+}
 void MainWindow::addElement()
 {
     if(m_selectedItem->data(ThemeModel::CardTypeRole).toInt())
@@ -155,6 +184,7 @@ void MainWindow::open(const QString& filename)
 	connect(ui->delButton, SIGNAL(clicked()), this, SLOT(deleteElement()));
 	connect(ui->addButton, SIGNAL(clicked()), this, SLOT(addElement()));
 	connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(selectionChanged(QItemSelection,QItemSelection)));
+    connect(ui->moreButton, SIGNAL(currentIndexChanged(int)), this, SLOT(addFeature(int)));
 }
 
 void MainWindow::doOpen()
@@ -187,6 +217,8 @@ void MainWindow::elementSelected(const QModelIndex & idx)
 	{
 		ui->comboBox_2->addItem(idx.data(ThemeModel::LanguageRole).toString());
 	}
+    ui->moreButton->show();
+    qDebug() << "card Type" << type;
 	if(!type)
 	{
 		ui->imageLabel->hide();
@@ -196,12 +228,9 @@ void MainWindow::elementSelected(const QModelIndex & idx)
 		ui->wordLabel->hide();
 		ui->langLabel->hide();
 		ui->comboBox_2->hide();
-		ui->moreButton->show();
 
 		return;
 	}
-	ui->moreButton->hide();
-
 	ui->langLabel->show();
 	ui->comboBox_2->show();
 	QPixmap image;

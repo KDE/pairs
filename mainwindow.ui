@@ -243,6 +243,48 @@
               <height>24</height>
              </size>
             </property>
+            <property name="currentIndex">
+             <number>-1</number>
+            </property>
+            <property name="sizeAdjustPolicy">
+             <enum>QComboBox::AdjustToMinimumContentsLengthWithIcon</enum>
+            </property>
+            <item>
+             <property name="text">
+              <string>new Image</string>
+             </property>
+             <property name="icon">
+              <iconset resource="ptedit.qrc">
+               <normaloff>:/newPrefix/view-preview.png</normaloff>:/newPrefix/view-preview.png</iconset>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>new Logic</string>
+             </property>
+             <property name="icon">
+              <iconset resource="ptedit.qrc">
+               <normaloff>:/newPrefix/preferences-plugin.png</normaloff>:/newPrefix/preferences-plugin.png</iconset>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>new Sound</string>
+             </property>
+             <property name="icon">
+              <iconset resource="ptedit.qrc">
+               <normaloff>:/newPrefix/preferences-desktop-text-to-speech.png</normaloff>:/newPrefix/preferences-desktop-text-to-speech.png</iconset>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>new Word</string>
+             </property>
+             <property name="icon">
+              <iconset resource="ptedit.qrc">
+               <normaloff>:/newPrefix/preferences-desktop-font.png</normaloff>:/newPrefix/preferences-desktop-font.png</iconset>
+             </property>
+            </item>
            </widget>
           </item>
           <item>
@@ -391,7 +433,7 @@
      <x>0</x>
      <y>0</y>
      <width>814</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_open">

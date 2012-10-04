@@ -46,3 +46,10 @@ void ThemeModel::insertItem(QStandardItem *newItem)
     insertRow(rowCount(), newItem);
     endInsertRows();
 }
+
+void ThemeModel::insertFeature(QStandardItem *newItem, QStandardItem *parent)
+{
+    beginInsertRows(indexFromItem(parent), parent->row(), parent->row());
+    parent->appendRow(newItem);
+    endInsertRows();
+}

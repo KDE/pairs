@@ -20,6 +20,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 	void open(const QString& path);
+
     
 public slots:
 	void elementSelected(const QModelIndex & item);
@@ -30,6 +31,7 @@ public slots:
     void selectionChanged(const QItemSelection& selected, const QItemSelection&);
     void addElement();
     void deleteElement();
+    void addFeature(int index);
 private:
     Ui::MainWindow *ui;
     PairsTheme *pt;
