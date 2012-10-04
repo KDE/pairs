@@ -22,10 +22,19 @@ ThemeModel::ThemeModel(PairsTheme &t, QObject* parent): QStandardItemModel(paren
 void ThemeModel::removeItem(QStandardItem *selectedItem)
 {
 
+    QStandardItem *par = selectedItem->parent();
+
     QModelIndex mi = indexFromItem(selectedItem);
 
-    beginRemoveRows(QModelIndex(), mi.row(), mi.row());
-    removeRow(mi.row());
+    if (par) {
+        beginRemoveRows(mi, mi.row(), mi.row());
+        par->removeRow(mi.row());
+    }
+    else
+    {
+        beginRemoveRows(QModelIndex(), mi.row(), mi.row());
+        removeRow(mi.row());
+    }
 
     endRemoveRows();
 

@@ -37,6 +37,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::addElement()
 {
+    if(m_selectedItem->data(ThemeModel::CardTypeRole).toInt())
+        return;
 	const ThemeElement el;
 	ElementItem *newItem = new ElementItem (el);
     QString name = i18n("Element %1", m_model->rowCount()+1);
