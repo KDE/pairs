@@ -208,7 +208,7 @@
             </property>
             <property name="icon">
              <iconset resource="ptedit.qrc">
-              <normaloff>:/newPrefix/list-add.png</normaloff>:/newPrefix/list-add.png</iconset>
+              <normaloff>:/images/list-add.png</normaloff>:/images/list-add.png</iconset>
             </property>
            </widget>
           </item>
@@ -231,7 +231,7 @@
             </property>
             <property name="icon">
              <iconset resource="ptedit.qrc">
-              <normaloff>:/newPrefix/list-remove.png</normaloff>:/newPrefix/list-remove.png</iconset>
+              <normaloff>:/images/list-remove.png</normaloff>:/images/list-remove.png</iconset>
             </property>
            </widget>
           </item>
@@ -254,7 +254,7 @@
               <string>new Image</string>
              </property>
              <property name="icon">
-              <iconset resource="ptedit.qrc">
+              <iconset>
                <normaloff>:/newPrefix/view-preview.png</normaloff>:/newPrefix/view-preview.png</iconset>
              </property>
             </item>
@@ -263,7 +263,7 @@
               <string>new Logic</string>
              </property>
              <property name="icon">
-              <iconset resource="ptedit.qrc">
+              <iconset>
                <normaloff>:/newPrefix/preferences-plugin.png</normaloff>:/newPrefix/preferences-plugin.png</iconset>
              </property>
             </item>
@@ -272,7 +272,7 @@
               <string>new Sound</string>
              </property>
              <property name="icon">
-              <iconset resource="ptedit.qrc">
+              <iconset>
                <normaloff>:/newPrefix/preferences-desktop-text-to-speech.png</normaloff>:/newPrefix/preferences-desktop-text-to-speech.png</iconset>
              </property>
             </item>
@@ -281,7 +281,7 @@
               <string>new Word</string>
              </property>
              <property name="icon">
-              <iconset resource="ptedit.qrc">
+              <iconset>
                <normaloff>:/newPrefix/preferences-desktop-font.png</normaloff>:/newPrefix/preferences-desktop-font.png</iconset>
              </property>
             </item>

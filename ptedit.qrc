@@ -1,5 +1,5 @@
 <RCC>
-  <qresource prefix="newPrefix">
+  <qresource prefix="images">
     <file>audio-headphones.png</file>
     <file>preferences-desktop-font.png</file>
     <file>preferences-desktop-text-to-speech.png</file>
