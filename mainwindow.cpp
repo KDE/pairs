@@ -16,8 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 	pt = 0;
 	ui->setupUi(this);
-	connect(ui->action_open, SIGNAL(triggered()), this, SLOT(doOpen()));
-	connect(ui->action_save, SIGNAL(triggered()), this, SLOT(doSave()));
+	connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(doOpen()));
+	connect(ui->actionSave, SIGNAL(triggered()), this, SLOT(doSave()));
 	ui->imageLabel->hide();
 	ui->fileKurl->hide();
 	ui->itemLabel->show();
