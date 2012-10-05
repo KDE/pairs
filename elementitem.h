@@ -26,10 +26,13 @@
 #include <QtGui/QStandardItem>
 #include "pairstheme.h"
 
+class QXmlStreamWriter;
+
 class ElementItem: public QStandardItem
 {
     public:
         explicit ElementItem(const ThemeElement &el);
+        void writeElement(QXmlStreamWriter *stream);
 };
 
 #endif // ELEMENTITEM_H

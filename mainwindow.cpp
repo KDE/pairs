@@ -108,48 +108,16 @@ void MainWindow::doSave()
 	stream.writeAttribute("src", ui->backKurl->text());
 	stream.writeEndElement(); // image
 	stream.writeStartElement("main");
-	stream.writeAttribute("type", ui->maintypeBox->currentText());
+	QString maintype = ui->maintypeBox->currentText();
+	if(maintype == "relation")
+	    maintype = "image";
+	stream.writeAttribute("type", maintype);
 	stream.writeEndElement(); // main
 	for (int i=0; i < m_model->rowCount(); i++)
 	{
-		QStandardItem *myitem = m_model->item(i,0);
-		if(!myitem->data(ThemeModel::CardTypeRole).toInt())
-		{
-			if(i != 0)
-				stream.writeEndElement();
-			stream.writeStartElement("element");
-			for (int i=0; i < myitem->rowCount(); i++)
-			{
-				QStandardItem *mysubitem = myitem->child(i,0);
-				switch(mysubitem->data(ThemeModel::CardTypeRole).toInt())
-				{
-				case CARD_IMAGE:
-				case CARD_LOGIC:
-					stream.writeStartElement("image");
-					stream.writeAttribute("src", mysubitem->data(ThemeModel::PathRole).toString());
-					break;
-				case CARD_SOUND:
-				case CARD_SOUNDLOGIC:
-					stream.writeStartElement("sound");
-					stream.writeAttribute("src", mysubitem->data(ThemeModel::PathRole).toString());
-					break;
-				case CARD_FOUND:
-					stream.writeStartElement("pfound");
-					stream.writeAttribute("src", mysubitem->data(ThemeModel::PathRole).toString());
-					break;
-				case CARD_WORD:
-					stream.writeStartElement("word");
-					break;
-
-				}
-				stream.writeAttribute("lang", mysubitem->data(ThemeModel::LanguageRole).toString());
-				if(mysubitem->data(ThemeModel::CardTypeRole).toInt() == CARD_WORD)
-					stream.writeCharacters(mysubitem->data(ThemeModel::PathRole).toString());
-				stream.writeEndElement();
-			}
-		}
+		ElementItem *myitem = static_cast<ElementItem*> (m_model->item(i,0));
+		myitem->writeElement(&stream);
 	}
-	stream.writeEndElement();//last element
 	stream.writeEndElement(); // pairs
 	stream.writeEndDocument();
 }

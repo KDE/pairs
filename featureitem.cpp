@@ -32,3 +32,31 @@ FeatureItem::FeatureItem(CardType type, QString lang, QString src): QStandardIte
 	setText(typeName + "-" + lang + "-" + src);
 }
 
+void FeatureItem::writeElement(QXmlStreamWriter *stream)
+{
+    switch(data(ThemeModel::CardTypeRole).toInt())
+    {
+    case CARD_IMAGE:
+    case CARD_LOGIC:
+        stream->writeStartElement("image");
+        stream->writeAttribute("src", data(ThemeModel::PathRole).toString());
+        break;
+    case CARD_SOUND:
+    case CARD_SOUNDLOGIC:
+        stream->writeStartElement("sound");
+        stream->writeAttribute("src", data(ThemeModel::PathRole).toString());
+        break;
+    case CARD_FOUND:
+        stream->writeStartElement("pfound");
+        stream->writeAttribute("src", data(ThemeModel::PathRole).toString());
+        break;
+    case CARD_WORD:
+        stream->writeStartElement("word");
+        break;
+
+    }
+    stream->writeAttribute("lang", data(ThemeModel::LanguageRole).toString());
+    if(data(ThemeModel::CardTypeRole).toInt() == CARD_WORD)
+        stream->writeCharacters(data(ThemeModel::PathRole).toString());
+    stream->writeEndElement();
+}

@@ -1,6 +1,7 @@
 #include "cardtype.h"
 #include "elementitem.h"
 #include "featureitem.h"
+#include <QtXml/QXmlStreamWriter>
 #include <QtCore/QDebug>
 
 ElementItem::ElementItem(const ThemeElement &el): QStandardItem()
@@ -31,4 +32,16 @@ ElementItem::ElementItem(const ThemeElement &el): QStandardItem()
 			}
 		}
 	}
+}
+
+
+void ElementItem::writeElement(QXmlStreamWriter *stream)
+{
+    stream->writeStartElement("element");
+    for (int i=0; i < rowCount(); i++)
+    {
+        FeatureItem *item = static_cast<FeatureItem*> (child(i,0));
+        item->writeElement(stream);
+    }
+    stream->writeEndElement();
 }
