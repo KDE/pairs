@@ -65,7 +65,7 @@ void MainWindow::addFeature(int index)
             newType = CARD_IMAGE;
             break;
         case 1:
-            newType = CARD_IMAGE2;
+            newType = CARD_LOGIC;
             break;
         case 2:
             newType = CARD_SOUND;
