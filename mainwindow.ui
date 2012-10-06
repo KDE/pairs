@@ -244,7 +244,7 @@
              </size>
             </property>
             <property name="currentIndex">
-             <number>-1</number>
+             <number>0</number>
             </property>
             <property name="sizeAdjustPolicy">
              <enum>QComboBox::AdjustToMinimumContentsLengthWithIcon</enum>
@@ -254,8 +254,8 @@
               <string>new Image</string>
              </property>
              <property name="icon">
-              <iconset>
-               <normaloff>:/newPrefix/view-preview.png</normaloff>:/newPrefix/view-preview.png</iconset>
+              <iconset resource="ptedit.qrc">
+               <normaloff>:/images/view-preview.png</normaloff>:/images/view-preview.png</iconset>
              </property>
             </item>
             <item>
@@ -263,8 +263,8 @@
               <string>new Logic</string>
              </property>
              <property name="icon">
-              <iconset>
-               <normaloff>:/newPrefix/preferences-plugin.png</normaloff>:/newPrefix/preferences-plugin.png</iconset>
+              <iconset resource="ptedit.qrc">
+               <normaloff>:/images/preferences-plugin.png</normaloff>:/images/preferences-plugin.png</iconset>
              </property>
             </item>
             <item>
@@ -272,8 +272,8 @@
               <string>new Sound</string>
              </property>
              <property name="icon">
-              <iconset>
-               <normaloff>:/newPrefix/preferences-desktop-text-to-speech.png</normaloff>:/newPrefix/preferences-desktop-text-to-speech.png</iconset>
+              <iconset resource="ptedit.qrc">
+               <normaloff>:/images/preferences-desktop-text-to-speech.png</normaloff>:/images/preferences-desktop-text-to-speech.png</iconset>
              </property>
             </item>
             <item>
@@ -281,8 +281,8 @@
               <string>new Word</string>
              </property>
              <property name="icon">
-              <iconset>
-               <normaloff>:/newPrefix/preferences-desktop-font.png</normaloff>:/newPrefix/preferences-desktop-font.png</iconset>
+              <iconset resource="ptedit.qrc">
+               <normaloff>:/images/preferences-desktop-font.png</normaloff>:/images/preferences-desktop-font.png</iconset>
              </property>
             </item>
            </widget>
@@ -440,11 +440,7 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
-    <addaction name="actionOpen"/>
-    <addaction name="actionSave"/>
     <addaction name="separator"/>
-    <addaction name="actionTry"/>
-    <addaction name="actionUpload"/>
    </widget>
    <addaction name="menu_file"/>
   </widget>
@@ -458,11 +454,8 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="separator"/>
-   <addaction name="actionOpen"/>
-   <addaction name="actionSave"/>
   </widget>
-  <action name="actionOpen">
+  <action name="action_2">
    <property name="text">
     <string>&amp;Open </string>
    </property>

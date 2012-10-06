@@ -6,7 +6,9 @@
 #include "ui_mainwindow.h"
 #include <QtGui/QFileDialog>
 #include <QtCore/QDebug>
-
+#include <kstandardaction.h>
+#include <kaction.h>
+#include <kdeversion.h>
 
 MainWindow::MainWindow(QWidget *parent) :
 
@@ -16,9 +18,22 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 	pt = 0;
 	ui->setupUi(this);
-	connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(doOpen()));
-	connect(ui->actionSave, SIGNAL(triggered()), this, SLOT(doSave()));
-	ui->imageLabel->hide();
+	KAction *myact = KStandardAction::create(KStandardAction::Open, this, SLOT(doOpen()), ui->menu_file);
+	ui->menu_file->addAction(myact);
+    ui->toolBar->addAction(myact);
+    myact = KStandardAction::create(KStandardAction::Save, this, SLOT(doSave()), ui->menu_file);
+    ui->menu_file->addAction(myact);
+    ui->toolBar->addAction(myact);
+    myact = new KAction(KIcon("go-up"), "Upload", ui->menu_file);
+    connect(myact, SIGNAL(triggered(bool)), this, SLOT(doUpload()));
+    ui->menu_file->addAction(myact);
+    ui->toolBar->addAction(myact);
+    myact = new KAction(KIcon("pairs"), "Try", ui->menu_file);
+    connect(myact, SIGNAL(triggered(bool)), this, SLOT(doTry()));
+    ui->menu_file->addAction(myact);
+    ui->toolBar->addAction(myact);
+
+    ui->imageLabel->hide();
 	ui->fileKurl->hide();
 	ui->itemLabel->show();
 	ui->wordEdit->hide();
@@ -81,6 +96,15 @@ void MainWindow::addElement()
 void MainWindow::deleteElement()
 {
 	m_model->removeItem(m_selectedItem);
+}
+
+void MainWindow::doUpload()
+{
+
+}
+void MainWindow::doTry()
+{
+
 }
 
 
