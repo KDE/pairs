@@ -7,9 +7,10 @@
 #include <QtGui/QFileDialog>
 #include <QtGui/QMessageBox>
 #include <QtCore/QDebug>
-#include <kstandardaction.h>
-#include <kaction.h>
+#include <KAction>
+#include <KStandardAction>
 #include <kdeversion.h>
+#include <KTar>
 
 MainWindow::MainWindow(QWidget *parent) :
 
@@ -19,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 	pt = 0;
 	m_model = 0;
+	m_tmpDir = 0;
 	ui->setupUi(this);
     KAction *myact = KStandardAction::create(KStandardAction::New, this, SLOT(doNew()), ui->menu_file);
     ui->menu_file->addAction(myact);
@@ -94,7 +96,7 @@ bool MainWindow::check()
     for (int i=0; i < m_model->rowCount(); i++)
     {
         ElementItem *myitem = static_cast<ElementItem*> (m_model->item(i,0));
-        if(!myitem->check(i))
+        if(!myitem->check(i+1))
         {
             m_checkMessage =  myitem->checkMessage();
             return false;
@@ -167,6 +169,7 @@ void MainWindow::doNew()
 {
     m_file.clear();
     delete m_model;
+    newTmpDir(QDir::tempPath() + "/newfile");
     m_model = new ThemeModel(this);
     ui->treeView->setModel(m_model);
     ui->titleEdit->setText("");
@@ -203,12 +206,13 @@ void MainWindow::doSave()
 
     if(m_file.isEmpty())
     {
-        m_file = QFileDialog::getSaveFileName(this, tr("Save Pairs theme"), QDir::currentPath(), tr("Pairs Themes (*.game)"));
+        m_file = QFileDialog::getSaveFileName(this, tr("Save Pairs theme"), QDir::currentPath(), tr("Pairs Themes (*.pairs.tar.bz2)"));
         if(m_file.isEmpty())
             return;
     }
+    qDebug() << m_file << m_gameFile;
 
-    QFile f(m_file);
+    QFile f(m_gameFile);
 	if (!f.open(QFile::WriteOnly | QFile::Text))
 	{
 			qWarning() << "Error: Cannot write file " << m_file;
@@ -242,12 +246,15 @@ void MainWindow::doSave()
 	}
 	stream.writeEndElement(); // pairs
 	stream.writeEndDocument();
+	f.close();
+
+	compress(m_file);
 }
 
 
 void MainWindow::open(const QString& filename)
 {
-	m_file = filename;
+//	m_file = filename;
 	delete pt;
 	pt = new PairsTheme(filename);
 	m_model = new ThemeModel(*pt, this);
@@ -277,12 +284,15 @@ void MainWindow::open(const QString& filename)
 
 void MainWindow::doOpen()
 {
-	m_file = QFileDialog::getOpenFileName(this, tr("Open Pairs theme"), QDir::currentPath(), tr("Pairs Themes (*.game)"));
+	m_file = QFileDialog::getOpenFileName(this, tr("Open Pairs theme"), QDir::currentPath(), tr("Pairs Themes (*.pairs.tar.bz2)"));
 	if(!m_file.isEmpty())
 	{
 	    QFileInfo pathInfo(m_file);
-	    QDir::setCurrent(pathInfo.path());
-		open(m_file);
+        extract(m_file);
+        QStringList flist = m_tmpDir->entryList(QStringList("*.game"), QDir::Files | QDir::NoSymLinks);
+        Q_ASSERT(!flist.isEmpty());
+        m_gameFile = m_tmpDir->absolutePath() + "/" + flist.front();
+        open(m_gameFile);
 	}
 }
 
@@ -387,4 +397,38 @@ void MainWindow::fileSelected()
 	image.load(pt->path()+"/"+ui->fileKurl->text());
 	ui->itemLabel->setPixmap(image.scaledToWidth(100));
 	m_selectedItem->setData(ui->fileKurl->text(),ThemeModel::PathRole);
+}
+
+void MainWindow::extract(QString path)
+{
+    KTar archive(path);
+    newTmpDir(QDir::tempPath() + "/" + QFileInfo(path).fileName());
+    Q_ASSERT(archive.open(QIODevice::ReadOnly));
+    QStringList files(archive.directory()->entries());
+    Q_FOREACH(QString filename, files)
+    {
+        Q_ASSERT(archive.directory()->entry(filename)->isFile());
+        const KArchiveFile* file = static_cast<const KArchiveFile*>(archive.directory()->entry(filename));
+        file->copyTo(m_tmpDir->path());
+    }
+    archive.close();
+}
+
+void MainWindow::compress(QString path)
+{
+    KTar archive(path);
+    Q_ASSERT(archive.open(QIODevice::WriteOnly));
+    archive.addLocalDirectory(m_tmpDir->path(), "");
+    archive.close();
+    m_tmpDir->rmpath(m_tmpDir->path());
+}
+
+void MainWindow::newTmpDir(const QString &path)
+{
+    delete m_tmpDir;
+    m_tmpDir = new QDir(path);
+    while(m_tmpDir->exists())
+        m_tmpDir->setPath(m_tmpDir->path()+"a");
+    m_tmpDir->mkpath(m_tmpDir->path());
+
 }

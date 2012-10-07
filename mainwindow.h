@@ -6,6 +6,7 @@
 
 class QItemSelection;
 class PairsTheme;
+class QDir;
 class QStandardItem;
 class ThemeModel;
 namespace Ui {
@@ -42,9 +43,14 @@ private:
     QStandardItem *m_selectedItem;
     ThemeModel *m_model;
     QString m_file;
+    QString m_gameFile;
     QString m_checkMessage;
+    QDir *m_tmpDir;
 
     bool check();
+    void newTmpDir(const QString &path);
+    void extract(QString path);
+    void compress(QString path);
 };
 
 #endif // MAINWINDOW_H
