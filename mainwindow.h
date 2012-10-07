@@ -28,6 +28,7 @@ public slots:
 	void fileSelected();
 	void doOpen();
 	void doSave();
+    void doSaveAs();
     void doUpload();
     void doTry();
     void selectionChanged(const QItemSelection& selected, const QItemSelection&);

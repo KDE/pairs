@@ -24,6 +24,9 @@ MainWindow::MainWindow(QWidget *parent) :
     myact = KStandardAction::create(KStandardAction::Save, this, SLOT(doSave()), ui->menu_file);
     ui->menu_file->addAction(myact);
     ui->toolBar->addAction(myact);
+    myact = KStandardAction::create(KStandardAction::SaveAs, this, SLOT(doSaveAs()), ui->menu_file);
+    ui->menu_file->addAction(myact);
+    ui->toolBar->addAction(myact);
     myact = new KAction(KIcon("go-up"), "Upload", ui->menu_file);
     connect(myact, SIGNAL(triggered(bool)), this, SLOT(doUpload()));
     ui->menu_file->addAction(myact);
@@ -107,10 +110,24 @@ void MainWindow::doTry()
 
 }
 
+void MainWindow::doSaveAs()
+{
+    m_file = QFileDialog::getSaveFileName(this, tr("Save Pairs theme"), QDir::currentPath(), tr("Pairs Themes (*.game)"));
+    if(!m_file.isEmpty())
+    {
+        qDebug() << "Saving to " << m_file;
+        doSave();
+    }
+}
+
+void MainWindow::doNew()
+{
+
+}
 
 void MainWindow::doSave()
 {
-	QFile f(m_file+".new");
+	QFile f(m_file);
 	if (!f.open(QFile::WriteOnly | QFile::Text))
 	{
 			qWarning() << "Error: Cannot write file " << m_file;
