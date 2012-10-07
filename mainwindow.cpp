@@ -5,6 +5,7 @@
 #include "featureitem.h"
 #include "ui_mainwindow.h"
 #include <QtGui/QFileDialog>
+#include <QtGui/QMessageBox>
 #include <QtCore/QDebug>
 #include <kstandardaction.h>
 #include <kaction.h>
@@ -139,11 +140,8 @@ void MainWindow::addElement()
     QString name = i18n("Element %1", m_model->rowCount()+1);
     newItem->setText(name);
     m_model->insertItem(newItem);
-/*	m_model->appendRow(newItem);
-	ui->treeView->update();
-	ui->treeView->update();
-*/
 }
+
 void MainWindow::deleteElement()
 {
 	m_model->removeItem(m_selectedItem);
@@ -153,6 +151,7 @@ void MainWindow::doUpload()
 {
 
 }
+
 void MainWindow::doTry()
 {
 
@@ -160,12 +159,8 @@ void MainWindow::doTry()
 
 void MainWindow::doSaveAs()
 {
-    m_file = QFileDialog::getSaveFileName(this, tr("Save Pairs theme"), QDir::currentPath(), tr("Pairs Themes (*.game)"));
-    if(!m_file.isEmpty())
-    {
-        qDebug() << "Saving to " << m_file;
-        doSave();
-    }
+    m_file = "";
+    doSave();
 }
 
 void MainWindow::doNew()
@@ -198,7 +193,22 @@ void MainWindow::doNew()
 
 void MainWindow::doSave()
 {
-	QFile f(m_file);
+    if(!check())
+    {
+        qDebug() << "Check not passed:";
+        qDebug() << m_checkMessage;
+        QMessageBox(QMessageBox::Critical, "File not saved", m_checkMessage, QMessageBox::Ok, this).exec();
+        return ;
+    }
+
+    if(m_file.isEmpty())
+    {
+        m_file = QFileDialog::getSaveFileName(this, tr("Save Pairs theme"), QDir::currentPath(), tr("Pairs Themes (*.game)"));
+        if(m_file.isEmpty())
+            return;
+    }
+
+    QFile f(m_file);
 	if (!f.open(QFile::WriteOnly | QFile::Text))
 	{
 			qWarning() << "Error: Cannot write file " << m_file;
