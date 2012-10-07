@@ -1,6 +1,7 @@
 #include "cardtype.h"
 #include "elementitem.h"
 #include "featureitem.h"
+#include "klocalizedstring.h"
 #include <QtXml/QXmlStreamWriter>
 #include <QtCore/QDebug>
 
@@ -44,4 +45,25 @@ void ElementItem::writeElement(QXmlStreamWriter *stream)
         item->writeElement(stream);
     }
     stream->writeEndElement();
+}
+
+bool ElementItem::check(int index)
+{
+    m_checkMessage = "";
+    if(rowCount() == 0)
+    {
+        m_checkMessage = i18n("No features present on Element %1", index);
+        return false;
+    }
+    for (int i=0; i < rowCount(); i++)
+    {
+        FeatureItem *item = static_cast<FeatureItem*> (child(i,0));
+        if(!item->check(index))
+        {
+            m_checkMessage = item->checkMessage();
+            return false;
+        }
+
+    }
+    return true;
 }

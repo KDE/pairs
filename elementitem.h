@@ -33,6 +33,11 @@ class ElementItem: public QStandardItem
     public:
         explicit ElementItem(const ThemeElement &el);
         void writeElement(QXmlStreamWriter *stream);
+        QString checkMessage() const {return m_checkMessage;};
+        bool check(int index);
+    private:
+        QString m_checkMessage;
+
 };
 
 #endif // ELEMENTITEM_H

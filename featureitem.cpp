@@ -1,6 +1,7 @@
 #include "featureitem.h"
 #include "pairstheme.h"
 #include "thememodel.h"
+#include "klocalizedstring.h"
 
 FeatureItem::FeatureItem(CardType type, QString lang, QString src): QStandardItem()
 {
@@ -63,4 +64,26 @@ void FeatureItem::writeElement(QXmlStreamWriter *stream)
     if(data(ThemeModel::CardTypeRole).toInt() == CARD_WORD)
         stream->writeCharacters(data(ThemeModel::PathRole).toString());
     stream->writeEndElement();
+}
+
+bool FeatureItem::check(int index)
+{
+    m_checkMessage = "";
+    if(data(ThemeModel::CardTypeRole).toInt() == 0)
+    {
+        m_checkMessage = i18n("No Features type on child from Element %1", index);
+        return false;
+    }
+    if(data(ThemeModel::LanguageRole).toInt() == 0)
+    {
+        m_checkMessage = i18n("No language set on child from Element %1", index);
+        return false;
+    }
+    if(data(ThemeModel::PathRole).toInt() == 0)
+    {
+        m_checkMessage = i18n("No file or word set on child from Element %1", index);
+        return false;
+    }
+    return true;
+
 }

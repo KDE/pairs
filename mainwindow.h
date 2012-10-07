@@ -42,6 +42,9 @@ private:
     QStandardItem *m_selectedItem;
     ThemeModel *m_model;
     QString m_file;
+    QString m_checkMessage;
+
+    bool check();
 };
 
 #endif // MAINWINDOW_H

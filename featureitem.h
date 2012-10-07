@@ -12,6 +12,10 @@ class FeatureItem : public QStandardItem
     public:
         explicit FeatureItem(CardType type, QString lang, QString src);
         void writeElement(QXmlStreamWriter *stream);
+        bool check(int index);
+        QString checkMessage() const {return m_checkMessage;};
+    private:
+        QString m_checkMessage;
 
 };
 

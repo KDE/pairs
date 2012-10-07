@@ -62,6 +62,46 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+bool MainWindow::check()
+{
+    m_checkMessage = "";
+    if(ui->titleEdit->text().isEmpty())
+    {
+        m_checkMessage = "The Title is missing";
+        return false;
+    }
+    if(ui->authorEdit->text().isEmpty())
+    {
+        m_checkMessage = "The Author is missing";
+        return false;
+    }
+    if(ui->versionEdit->text().isEmpty())
+    {
+        m_checkMessage = "The Version is missing";
+        return false;
+    }
+    if(ui->descriptionEdit->text().isEmpty())
+    {
+        m_checkMessage = "The Description is missing";
+        return false;
+    }
+    if(ui->backKurl->text().isEmpty())
+    {
+        m_checkMessage = "The Back Image is missing";
+        return false;
+    }
+    for (int i=0; i < m_model->rowCount(); i++)
+    {
+        ElementItem *myitem = static_cast<ElementItem*> (m_model->item(i,0));
+        if(!myitem->check(i))
+        {
+            m_checkMessage =  myitem->checkMessage();
+            return false;
+        }
+    }
+    return true;
+}
+
 void MainWindow::addFeature(int index)
 {
     QStandardItem *paren = m_selectedItem;
@@ -142,8 +182,8 @@ void MainWindow::doNew()
     ui->descriptionEdit->setText("");
     ui->backKurl->setText("");
     ui->pixLabel->setPixmap(QPixmap());
-    ui->fileKurl->setStartDir(KUrl(""));
-    ui->backKurl->setStartDir(KUrl(""));
+    ui->fileKurl->setStartDir(KUrl(QDir::currentPath()));
+    ui->backKurl->setStartDir(KUrl(QDir::currentPath()));
     ui->imageLabel->hide();
     ui->itemLabel->hide();
     ui->fileKurl->hide();
