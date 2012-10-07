@@ -198,11 +198,13 @@ void MainWindow::open(const QString& filename)
 
 void MainWindow::doOpen()
 {
-	QFileDialog fdialog(this);
-	m_file = QFileDialog::getOpenFileName(this);
-	
+	m_file = QFileDialog::getOpenFileName(this, tr("Open Pairs theme"), QDir::currentPath(), tr("Pairs Themes (*.game)"));
 	if(!m_file.isEmpty())
+	{
+	    QFileInfo pathInfo(m_file);
+	    QDir::setCurrent(pathInfo.path());
 		open(m_file);
+	}
 }
 
 void MainWindow::selectionChanged(const QItemSelection& selected, const QItemSelection&  )
