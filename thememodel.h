@@ -13,6 +13,7 @@ class ThemeModel : public QStandardItemModel
          PathRole
      };
         explicit ThemeModel(PairsTheme &t, QObject* parent = 0);
+        explicit ThemeModel(QObject* parent = 0);
         void removeItem(QStandardItem *selectedItem);
         void insertItem(QStandardItem *newItem);
         void insertFeature(QStandardItem *newItem, QStandardItem *parent);

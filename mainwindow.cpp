@@ -17,8 +17,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
 {
 	pt = 0;
+	m_model = 0;
 	ui->setupUi(this);
-	KAction *myact = KStandardAction::create(KStandardAction::Open, this, SLOT(doOpen()), ui->menu_file);
+    KAction *myact = KStandardAction::create(KStandardAction::New, this, SLOT(doNew()), ui->menu_file);
+    ui->menu_file->addAction(myact);
+    ui->toolBar->addAction(myact);
+	myact = KStandardAction::create(KStandardAction::Open, this, SLOT(doOpen()), ui->menu_file);
 	ui->menu_file->addAction(myact);
     ui->toolBar->addAction(myact);
     myact = KStandardAction::create(KStandardAction::Save, this, SLOT(doSave()), ui->menu_file);
@@ -47,6 +51,10 @@ MainWindow::MainWindow(QWidget *parent) :
 	
 	connect(ui->fileKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(fileSelected()));
 	connect(ui->backKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(backSelected()));
+    connect(ui->delButton, SIGNAL(clicked()), this, SLOT(deleteElement()));
+    connect(ui->addButton, SIGNAL(clicked()), this, SLOT(addElement()));
+    connect(ui->moreButton, SIGNAL(currentIndexChanged(int)), this, SLOT(addFeature(int)));
+
 }
 
 MainWindow::~MainWindow()
@@ -122,6 +130,29 @@ void MainWindow::doSaveAs()
 
 void MainWindow::doNew()
 {
+    m_file = "";
+    delete m_model;
+    m_model = new ThemeModel(this);
+    ui->treeView->setModel(m_model);
+    ui->titleEdit->setText("");
+    ui->authorEdit->setText("");
+    ui->versionEdit->setText("");
+    ui->dateEdit->setDate(QDate::currentDate());
+    ui->maintypeBox->setCurrentIndex(0);
+    ui->descriptionEdit->setText("");
+    ui->backKurl->setText("");
+    ui->pixLabel->setPixmap(QPixmap());
+    ui->fileKurl->setStartDir(KUrl(""));
+    ui->backKurl->setStartDir(KUrl(""));
+    ui->imageLabel->hide();
+    ui->itemLabel->hide();
+    ui->fileKurl->hide();
+    ui->wordEdit->hide();
+    ui->wordLabel->hide();
+    ui->langLabel->hide();
+    ui->comboBox_2->hide();
+    ui->splitter->setStretchFactor(1, 3);
+    connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(selectionChanged(QItemSelection,QItemSelection)));
 
 }
 
@@ -163,12 +194,13 @@ void MainWindow::doSave()
 	stream.writeEndDocument();
 }
 
+
 void MainWindow::open(const QString& filename)
 {
 	m_file = filename;
 	delete pt;
 	pt = new PairsTheme(filename);
-	m_model = new ThemeModel(*pt);
+	m_model = new ThemeModel(*pt, this);
 	ui->treeView->setModel(m_model);
 	ui->titleEdit->setText(pt->title());
 	ui->authorEdit->setText(pt->author());
@@ -189,11 +221,8 @@ void MainWindow::open(const QString& filename)
 	ui->langLabel->hide();
 	ui->comboBox_2->hide();
 	ui->splitter->setStretchFactor(1, 3);
+    connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(selectionChanged(QItemSelection,QItemSelection)));
 	
-	connect(ui->delButton, SIGNAL(clicked()), this, SLOT(deleteElement()));
-	connect(ui->addButton, SIGNAL(clicked()), this, SLOT(addElement()));
-	connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(selectionChanged(QItemSelection,QItemSelection)));
-    connect(ui->moreButton, SIGNAL(currentIndexChanged(int)), this, SLOT(addFeature(int)));
 }
 
 void MainWindow::doOpen()

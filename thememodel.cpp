@@ -19,6 +19,19 @@ ThemeModel::ThemeModel(PairsTheme &t, QObject* parent): QStandardItemModel(paren
     }
 }
 
+ThemeModel::ThemeModel(QObject* parent): QStandardItemModel(parent)
+{
+    QHash<int, QByteArray> names = QStandardItemModel::roleNames();
+    names.insert(CardTypeRole, "type");
+    names.insert(LanguageRole, "language");
+    names.insert(PathRole, "path");
+    setRoleNames(names);
+    ElementItem *item = new ElementItem(ThemeElement());
+    QString name = i18n("Element %1", rowCount()+1);
+    item->setText(name);
+    appendRow(item);
+}
+
 void ThemeModel::removeItem(QStandardItem *selectedItem)
 {
 

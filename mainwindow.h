@@ -26,6 +26,7 @@ public slots:
 	void elementSelected(const QModelIndex & item);
 	void backSelected();
 	void fileSelected();
+    void doNew();
 	void doOpen();
 	void doSave();
     void doSaveAs();
