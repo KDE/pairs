@@ -32,11 +32,11 @@ MainWindow::MainWindow(QWidget *parent) :
     myact = KStandardAction::create(KStandardAction::SaveAs, this, SLOT(doSaveAs()), ui->menu_file);
     ui->menu_file->addAction(myact);
     ui->toolBar->addAction(myact);
-    myact = new KAction(KIcon("go-up"), "Upload", ui->menu_file);
+    myact = new KAction(KIcon("go-up"), i18n("Upload"), ui->menu_file);
     connect(myact, SIGNAL(triggered(bool)), this, SLOT(doUpload()));
     ui->menu_file->addAction(myact);
     ui->toolBar->addAction(myact);
-    myact = new KAction(KIcon("pairs"), "Try", ui->menu_file);
+    myact = new KAction(KIcon("pairs"), i18n("Try"), ui->menu_file);
     connect(myact, SIGNAL(triggered(bool)), this, SLOT(doTry()));
     ui->menu_file->addAction(myact);
     ui->toolBar->addAction(myact);
@@ -65,30 +65,30 @@ MainWindow::~MainWindow()
 
 bool MainWindow::check()
 {
-    m_checkMessage = "";
+    m_checkMessage.clear();
     if(ui->titleEdit->text().isEmpty())
     {
-        m_checkMessage = "The Title is missing";
+        m_checkMessage = i18n("The Title is missing");
         return false;
     }
     if(ui->authorEdit->text().isEmpty())
     {
-        m_checkMessage = "The Author is missing";
+        m_checkMessage = i18n("The Author is missing");
         return false;
     }
     if(ui->versionEdit->text().isEmpty())
     {
-        m_checkMessage = "The Version is missing";
+        m_checkMessage = i18n("The Version is missing");
         return false;
     }
     if(ui->descriptionEdit->text().isEmpty())
     {
-        m_checkMessage = "The Description is missing";
+        m_checkMessage = i18n("The Description is missing");
         return false;
     }
     if(ui->backKurl->text().isEmpty())
     {
-        m_checkMessage = "The Back Image is missing";
+        m_checkMessage = i18n("The Back Image is missing");
         return false;
     }
     for (int i=0; i < m_model->rowCount(); i++)
@@ -159,13 +159,13 @@ void MainWindow::doTry()
 
 void MainWindow::doSaveAs()
 {
-    m_file = "";
+    m_file.clear();
     doSave();
 }
 
 void MainWindow::doNew()
 {
-    m_file = "";
+    m_file.clear();
     delete m_model;
     m_model = new ThemeModel(this);
     ui->treeView->setModel(m_model);
