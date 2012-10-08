@@ -10,6 +10,7 @@
 #include <KAction>
 #include <KStandardAction>
 #include <kdeversion.h>
+#include <KUrlRequester>
 #include <KTar>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -386,17 +387,28 @@ void MainWindow::elementSelected(const QModelIndex & idx)
 void MainWindow::backSelected()
 {
 	QPixmap image;
-	ui->backKurl->setText(ui->backKurl->url().fileName());
-	image.load(pt->path()+"/"+ui->backKurl->text());
+    QString newFile = copyFile(ui->backKurl);
+    ui->backKurl->setText(ui->backKurl->url().fileName());
+    image.load(newFile);
 	ui->pixLabel->setPixmap(image.scaledToWidth(100));
 }
 void MainWindow::fileSelected()
 {
 	QPixmap image;
-	ui->fileKurl->setText(ui->fileKurl->url().fileName());
-	image.load(pt->path()+"/"+ui->fileKurl->text());
+	QString newFile = copyFile(ui->fileKurl);
+    ui->fileKurl->setText(ui->fileKurl->url().fileName());
+	image.load(newFile);
 	ui->itemLabel->setPixmap(image.scaledToWidth(100));
 	m_selectedItem->setData(ui->fileKurl->text(),ThemeModel::PathRole);
+}
+
+QString MainWindow::copyFile(KUrlRequester *k)
+{
+    QString newFile = m_tmpDir->path() + "/" + k->url().fileName();
+    qDebug() << "file "<< newFile << k->text();
+    if(newFile != k->text())
+        QFile::copy(k->url().path(), newFile);
+    return newFile;
 }
 
 void MainWindow::extract(QString path)

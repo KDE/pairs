@@ -9,6 +9,8 @@ class PairsTheme;
 class QDir;
 class QStandardItem;
 class ThemeModel;
+class KUrlRequester;
+
 namespace Ui {
 class MainWindow;
 }
@@ -47,6 +49,7 @@ private:
     QString m_checkMessage;
     QDir *m_tmpDir;
 
+    QString copyFile(KUrlRequester *k);
     bool check();
     void newTmpDir(const QString &path);
     void extract(QString path);
