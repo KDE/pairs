@@ -36,6 +36,7 @@ public slots:
     void doUpload();
     void doTry();
     void selectionChanged(const QItemSelection& selected, const QItemSelection&);
+    void wordChanged(const QString &word);
     void addElement();
     void deleteElement();
     void addFeature(int index);

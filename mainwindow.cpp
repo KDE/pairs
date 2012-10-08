@@ -55,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	
 	connect(ui->fileKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(fileSelected()));
 	connect(ui->backKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(backSelected()));
+	connect(ui->wordEdit, SIGNAL(textChanged(QString)), this, SLOT(wordChanged(QString)));
     connect(ui->delButton, SIGNAL(clicked()), this, SLOT(deleteElement()));
     connect(ui->addButton, SIGNAL(clicked()), this, SLOT(addElement()));
     connect(ui->moreButton, SIGNAL(currentIndexChanged(int)), this, SLOT(addFeature(int)));
@@ -400,6 +401,14 @@ void MainWindow::fileSelected()
 	image.load(newFile);
 	ui->itemLabel->setPixmap(image.scaledToWidth(100));
 	m_selectedItem->setData(ui->fileKurl->text(),ThemeModel::PathRole);
+    m_selectedItem->setText(ui->fileKurl->text());
+
+}
+
+void MainWindow::wordChanged(const QString &word)
+{
+    m_selectedItem->setData(word, ThemeModel::PathRole);
+    m_selectedItem->setText(word);
 }
 
 QString MainWindow::copyFile(KUrlRequester *k)
