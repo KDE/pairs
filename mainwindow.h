@@ -23,16 +23,16 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-	void open(const QString& path);
+    void open(const QString& path);
 
     
 public slots:
-	void elementSelected(const QModelIndex & item);
-	void backSelected();
-	void fileSelected();
+    void elementSelected(const QModelIndex & item);
+    void backSelected();
+    void fileSelected();
     void doNew();
-	void doOpen();
-	void doSave();
+    void doOpen();
+    void doSave();
     void doSaveAs();
     void doUpload();
     void doTry();

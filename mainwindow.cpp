@@ -22,16 +22,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 
 {
-	pt = 0;
-	m_model = 0;
-	m_tmpDir = 0;
-	m_process = 0;
-	ui->setupUi(this);
+    pt = 0;
+    m_model = 0;
+    m_tmpDir = 0;
+    m_process = 0;
+    ui->setupUi(this);
     KAction *myact = KStandardAction::create(KStandardAction::New, this, SLOT(doNew()), ui->menu_file);
     ui->menu_file->addAction(myact);
     ui->toolBar->addAction(myact);
-	myact = KStandardAction::create(KStandardAction::Open, this, SLOT(doOpen()), ui->menu_file);
-	ui->menu_file->addAction(myact);
+    myact = KStandardAction::create(KStandardAction::Open, this, SLOT(doOpen()), ui->menu_file);
+    ui->menu_file->addAction(myact);
     ui->toolBar->addAction(myact);
     myact = KStandardAction::create(KStandardAction::Save, this, SLOT(doSave()), ui->menu_file);
     ui->menu_file->addAction(myact);
@@ -49,17 +49,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->toolBar->addAction(myact);
 
     ui->imageLabel->hide();
-	ui->fileKurl->hide();
-	ui->itemLabel->show();
-	ui->wordEdit->hide();
-	ui->wordLabel->hide();
-	ui->langLabel->hide();
-	ui->comboBox_2->hide();
-	ui->moreButton->hide();
-	
-	connect(ui->fileKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(fileSelected()));
-	connect(ui->backKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(backSelected()));
-	connect(ui->wordEdit, SIGNAL(textChanged(QString)), this, SLOT(wordChanged(QString)));
+    ui->fileKurl->hide();
+    ui->itemLabel->show();
+    ui->wordEdit->hide();
+    ui->wordLabel->hide();
+    ui->langLabel->hide();
+    ui->comboBox_2->hide();
+    ui->moreButton->hide();
+    
+    connect(ui->fileKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(fileSelected()));
+    connect(ui->backKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(backSelected()));
+    connect(ui->wordEdit, SIGNAL(textChanged(QString)), this, SLOT(wordChanged(QString)));
     connect(ui->delButton, SIGNAL(clicked()), this, SLOT(deleteElement()));
     connect(ui->addButton, SIGNAL(clicked()), this, SLOT(addElement()));
     connect(ui->moreButton, SIGNAL(currentIndexChanged(int)), this, SLOT(addFeature(int)));
@@ -142,8 +142,8 @@ void MainWindow::addElement()
 {
     if(m_selectedItem->data(ThemeModel::CardTypeRole).toInt())
         return;
-	const ThemeElement el;
-	ElementItem *newItem = new ElementItem (el);
+    const ThemeElement el;
+    ElementItem *newItem = new ElementItem (el);
     QString name = i18n("Element %1", m_model->rowCount()+1);
     newItem->setText(name);
     m_model->insertItem(newItem);
@@ -151,7 +151,7 @@ void MainWindow::addElement()
 
 void MainWindow::deleteElement()
 {
-	m_model->removeItem(m_selectedItem);
+    m_model->removeItem(m_selectedItem);
 }
 
 void MainWindow::doUpload()
@@ -234,192 +234,192 @@ void MainWindow::doSave()
     qDebug() << m_file << m_gameFile;
 
     QFile f(m_gameFile);
-	if (!f.open(QFile::WriteOnly | QFile::Text))
-	{
-			qWarning() << "Error: Cannot write file " << m_file;
-			return;
-	}
+    if (!f.open(QFile::WriteOnly | QFile::Text))
+    {
+            qWarning() << "Error: Cannot write file " << m_file;
+            return;
+    }
 
-	QXmlStreamWriter stream(&f);
-	stream.setAutoFormatting(true);
-	stream.writeStartDocument();
-	stream.writeStartElement("pairs");
-	stream.writeAttribute("xmlns", "http://edu.kde.org/game");
-	stream.writeTextElement("title", ui->titleEdit->text());
-	stream.writeTextElement("description", ui->descriptionEdit->text());
-	stream.writeTextElement("author", ui->authorEdit->text());
-	stream.writeTextElement("date", ui->dateEdit->text());
-	stream.writeTextElement("version", ui->versionEdit->text());
-	stream.writeStartElement("image");
-	stream.writeAttribute("type", "back");
-	stream.writeAttribute("src", ui->backKurl->text());
-	stream.writeEndElement(); // image
-	stream.writeStartElement("main");
-	QString maintype = ui->maintypeBox->currentText();
-	if(maintype == "relation")
-	    maintype = "image";
-	stream.writeAttribute("type", maintype);
-	stream.writeEndElement(); // main
-	for (int i=0; i < m_model->rowCount(); i++)
-	{
-		ElementItem *myitem = static_cast<ElementItem*> (m_model->item(i,0));
-		myitem->writeElement(&stream);
-	}
-	stream.writeEndElement(); // pairs
-	stream.writeEndDocument();
-	f.close();
+    QXmlStreamWriter stream(&f);
+    stream.setAutoFormatting(true);
+    stream.writeStartDocument();
+    stream.writeStartElement("pairs");
+    stream.writeAttribute("xmlns", "http://edu.kde.org/game");
+    stream.writeTextElement("title", ui->titleEdit->text());
+    stream.writeTextElement("description", ui->descriptionEdit->text());
+    stream.writeTextElement("author", ui->authorEdit->text());
+    stream.writeTextElement("date", ui->dateEdit->text());
+    stream.writeTextElement("version", ui->versionEdit->text());
+    stream.writeStartElement("image");
+    stream.writeAttribute("type", "back");
+    stream.writeAttribute("src", ui->backKurl->text());
+    stream.writeEndElement(); // image
+    stream.writeStartElement("main");
+    QString maintype = ui->maintypeBox->currentText();
+    if(maintype == "relation")
+        maintype = "image";
+    stream.writeAttribute("type", maintype);
+    stream.writeEndElement(); // main
+    for (int i=0; i < m_model->rowCount(); i++)
+    {
+        ElementItem *myitem = static_cast<ElementItem*> (m_model->item(i,0));
+        myitem->writeElement(&stream);
+    }
+    stream.writeEndElement(); // pairs
+    stream.writeEndDocument();
+    f.close();
 
-	compress(m_file);
+    compress(m_file);
 }
 
 
 void MainWindow::open(const QString& filename)
 {
-//	m_file = filename;
-	delete pt;
-	pt = new PairsTheme(filename);
-	m_model = new ThemeModel(*pt, this);
-	ui->treeView->setModel(m_model);
-	ui->titleEdit->setText(pt->title());
-	ui->authorEdit->setText(pt->author());
-	ui->versionEdit->setText(pt->version());
-	ui->dateEdit->setDate(QDate::fromString(pt->date(),"d/M/yyyy"));
-	ui->maintypeBox->setCurrentIndex(pt->mainType()-1);
-	ui->descriptionEdit->setText(pt->description());
-	ui->backKurl->setText(pt->backImage());
-	QPixmap image(pt->path()+"/"+pt->backImage());
-	ui->pixLabel->setPixmap(image.scaledToWidth(100));
-	ui->fileKurl->setStartDir(KUrl(pt->path()));
-	ui->backKurl->setStartDir(KUrl(pt->path()));
-	ui->imageLabel->hide();
-	ui->itemLabel->hide();
-	ui->fileKurl->hide();
-	ui->wordEdit->hide();
-	ui->wordLabel->hide();
-	ui->langLabel->hide();
-	ui->comboBox_2->hide();
-	ui->splitter->setStretchFactor(1, 3);
+//    m_file = filename;
+    delete pt;
+    pt = new PairsTheme(filename);
+    m_model = new ThemeModel(*pt, this);
+    ui->treeView->setModel(m_model);
+    ui->titleEdit->setText(pt->title());
+    ui->authorEdit->setText(pt->author());
+    ui->versionEdit->setText(pt->version());
+    ui->dateEdit->setDate(QDate::fromString(pt->date(),"d/M/yyyy"));
+    ui->maintypeBox->setCurrentIndex(pt->mainType()-1);
+    ui->descriptionEdit->setText(pt->description());
+    ui->backKurl->setText(pt->backImage());
+    QPixmap image(pt->path()+"/"+pt->backImage());
+    ui->pixLabel->setPixmap(image.scaledToWidth(100));
+    ui->fileKurl->setStartDir(KUrl(pt->path()));
+    ui->backKurl->setStartDir(KUrl(pt->path()));
+    ui->imageLabel->hide();
+    ui->itemLabel->hide();
+    ui->fileKurl->hide();
+    ui->wordEdit->hide();
+    ui->wordLabel->hide();
+    ui->langLabel->hide();
+    ui->comboBox_2->hide();
+    ui->splitter->setStretchFactor(1, 3);
     connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(selectionChanged(QItemSelection,QItemSelection)));
-	
+    
 }
 
 void MainWindow::doOpen()
 {
-	m_file = QFileDialog::getOpenFileName(this, tr("Open Pairs theme"), QDir::currentPath(), tr("Pairs Themes (*.pairs.tar.bz2)"));
-	if(!m_file.isEmpty())
-	{
-	    QFileInfo pathInfo(m_file);
+    m_file = QFileDialog::getOpenFileName(this, tr("Open Pairs theme"), QDir::currentPath(), tr("Pairs Themes (*.pairs.tar.bz2)"));
+    if(!m_file.isEmpty())
+    {
+        QFileInfo pathInfo(m_file);
         extract(m_file);
         QStringList flist = m_tmpDir->entryList(QStringList("*.game"), QDir::Files | QDir::NoSymLinks);
         Q_ASSERT(!flist.isEmpty());
         m_gameFile = m_tmpDir->absolutePath() + "/" + flist.front();
         open(m_gameFile);
-	}
+    }
 }
 
 void MainWindow::selectionChanged(const QItemSelection& selected, const QItemSelection&  )
 {
-	if(!selected.isEmpty())
-		elementSelected(selected.indexes().first());
+    if(!selected.isEmpty())
+        elementSelected(selected.indexes().first());
 }
 
 void MainWindow::elementSelected(const QModelIndex & idx)
 {
-	m_selectedItem = m_model->itemFromIndex(idx);
-	int type = idx.data(ThemeModel::CardTypeRole).toInt();
-	ui->fileKurl->setText(idx.data(ThemeModel::PathRole).toString());
-	ui->wordEdit->setText(idx.data(ThemeModel::PathRole).toString());
-	int index = ui->comboBox_2->findText(idx.data(ThemeModel::LanguageRole).toString());
-	if ( index != -1 )
-	{
-		ui->comboBox_2->setCurrentIndex(index);
-	}
-	else
-	{
-		ui->comboBox_2->addItem(idx.data(ThemeModel::LanguageRole).toString());
-	}
+    m_selectedItem = m_model->itemFromIndex(idx);
+    int type = idx.data(ThemeModel::CardTypeRole).toInt();
+    ui->fileKurl->setText(idx.data(ThemeModel::PathRole).toString());
+    ui->wordEdit->setText(idx.data(ThemeModel::PathRole).toString());
+    int index = ui->comboBox_2->findText(idx.data(ThemeModel::LanguageRole).toString());
+    if ( index != -1 )
+    {
+        ui->comboBox_2->setCurrentIndex(index);
+    }
+    else
+    {
+        ui->comboBox_2->addItem(idx.data(ThemeModel::LanguageRole).toString());
+    }
     ui->moreButton->show();
     qDebug() << "card Type" << type;
-	if(!type)
-	{
-		ui->imageLabel->hide();
-		ui->itemLabel->hide();
-		ui->fileKurl->hide();
-		ui->wordEdit->hide();
-		ui->wordLabel->hide();
-		ui->langLabel->hide();
-		ui->comboBox_2->hide();
+    if(!type)
+    {
+        ui->imageLabel->hide();
+        ui->itemLabel->hide();
+        ui->fileKurl->hide();
+        ui->wordEdit->hide();
+        ui->wordLabel->hide();
+        ui->langLabel->hide();
+        ui->comboBox_2->hide();
 
-		return;
-	}
-	ui->langLabel->show();
-	ui->comboBox_2->show();
-	QPixmap image;
-	switch(type)
-	{
-	case CARD_IMAGE:
-		ui->imageLabel->setText("Image file");
-		ui->imageLabel->show();
-		ui->itemLabel->show();
-		ui->fileKurl->show();
-		ui->wordEdit->hide();
-		ui->wordLabel->hide();
-		image.load(pt->path()+"/"+ui->fileKurl->text());
-		ui->itemLabel->setPixmap(image.scaledToWidth(100));
-		break;
-	case CARD_SOUND:
-	case CARD_SOUNDLOGIC:
-		ui->imageLabel->setText("Sound file");
-		ui->itemLabel->hide();
-		ui->imageLabel->show();
-		ui->fileKurl->show();
-		ui->wordEdit->hide();
-		ui->wordLabel->hide();
-		break;
-	case CARD_LOGIC:
-		ui->imageLabel->setText("Logic image file");
-		ui->itemLabel->show();
-		ui->imageLabel->show();
-		ui->fileKurl->show();
-		ui->wordEdit->hide();
-		ui->wordLabel->hide();
-		image.load(pt->path()+"/"+ui->fileKurl->text());
-		ui->itemLabel->setPixmap(image.scaledToWidth(100));
-		break;
-	case CARD_WORD:
-		ui->imageLabel->hide();
-		ui->itemLabel->hide();
-		ui->fileKurl->hide();
-		ui->wordEdit->show();
-		ui->wordLabel->show();
-		break;
-	case CARD_FOUND:
-		ui->imageLabel->setText("Found sound file");
-		ui->itemLabel->hide();
-		ui->imageLabel->show();
-		ui->fileKurl->show();
-		ui->wordEdit->hide();
-		ui->wordLabel->hide();
-		break;
+        return;
+    }
+    ui->langLabel->show();
+    ui->comboBox_2->show();
+    QPixmap image;
+    switch(type)
+    {
+    case CARD_IMAGE:
+        ui->imageLabel->setText("Image file");
+        ui->imageLabel->show();
+        ui->itemLabel->show();
+        ui->fileKurl->show();
+        ui->wordEdit->hide();
+        ui->wordLabel->hide();
+        image.load(pt->path()+"/"+ui->fileKurl->text());
+        ui->itemLabel->setPixmap(image.scaledToWidth(100));
+        break;
+    case CARD_SOUND:
+    case CARD_SOUNDLOGIC:
+        ui->imageLabel->setText("Sound file");
+        ui->itemLabel->hide();
+        ui->imageLabel->show();
+        ui->fileKurl->show();
+        ui->wordEdit->hide();
+        ui->wordLabel->hide();
+        break;
+    case CARD_LOGIC:
+        ui->imageLabel->setText("Logic image file");
+        ui->itemLabel->show();
+        ui->imageLabel->show();
+        ui->fileKurl->show();
+        ui->wordEdit->hide();
+        ui->wordLabel->hide();
+        image.load(pt->path()+"/"+ui->fileKurl->text());
+        ui->itemLabel->setPixmap(image.scaledToWidth(100));
+        break;
+    case CARD_WORD:
+        ui->imageLabel->hide();
+        ui->itemLabel->hide();
+        ui->fileKurl->hide();
+        ui->wordEdit->show();
+        ui->wordLabel->show();
+        break;
+    case CARD_FOUND:
+        ui->imageLabel->setText("Found sound file");
+        ui->itemLabel->hide();
+        ui->imageLabel->show();
+        ui->fileKurl->show();
+        ui->wordEdit->hide();
+        ui->wordLabel->hide();
+        break;
 
-	}
+    }
 }
 void MainWindow::backSelected()
 {
-	QPixmap image;
+    QPixmap image;
     QString newFile = copyFile(ui->backKurl);
     ui->backKurl->setText(ui->backKurl->url().fileName());
     image.load(newFile);
-	ui->pixLabel->setPixmap(image.scaledToWidth(100));
+    ui->pixLabel->setPixmap(image.scaledToWidth(100));
 }
 void MainWindow::fileSelected()
 {
-	QPixmap image;
-	QString newFile = copyFile(ui->fileKurl);
+    QPixmap image;
+    QString newFile = copyFile(ui->fileKurl);
     ui->fileKurl->setText(ui->fileKurl->url().fileName());
-	image.load(newFile);
-	ui->itemLabel->setPixmap(image.scaledToWidth(100));
-	m_selectedItem->setData(ui->fileKurl->text(),ThemeModel::PathRole);
+    image.load(newFile);
+    ui->itemLabel->setPixmap(image.scaledToWidth(100));
+    m_selectedItem->setData(ui->fileKurl->text(),ThemeModel::PathRole);
     m_selectedItem->setText(ui->fileKurl->text());
 
 }

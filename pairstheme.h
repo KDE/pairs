@@ -107,8 +107,8 @@ class PairsTheme : public QObject, public QStandardItem
         QSet<QString> m_languages;
         QMap<QString, QSet<QString> > m_cardtypes;
 
-		QFile m_archive;
-		QDir m_dir;
+        QFile m_archive;
+        QDir m_dir;
 
 };
 

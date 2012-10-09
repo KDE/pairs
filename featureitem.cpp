@@ -5,36 +5,36 @@
 
 FeatureItem::FeatureItem(CardType type, QString lang, QString src): QStandardItem()
 {
-	setData(type, ThemeModel::CardTypeRole);
-	setData(lang, ThemeModel::LanguageRole);
-	setData(src, ThemeModel::PathRole);
-	QString typeName;
-	switch(type)
-	{
-	case CARD_IMAGE:
-	case CARD_IMAGE2:
-		typeName = "image";
-	    setIcon(QIcon(":/images/view-preview.png"));
-		break;
-	case CARD_SOUND:
-	case CARD_SOUNDLOGIC:
-		typeName = "sound";
-	    setIcon(QIcon(":/images/preferences-desktop-text-to-speech.png"));
-		break;
-	case CARD_LOGIC:
-		typeName = "logic";
-	    setIcon(QIcon(":/images/preferences-plugin.png"));
-		break;
-	case CARD_WORD:
-		typeName = "word";
-	    setIcon(QIcon(":/images/preferences-desktop-font.png"));
-		break;
-	case CARD_FOUND:
-		typeName = "pfound";
-		break;
+    setData(type, ThemeModel::CardTypeRole);
+    setData(lang, ThemeModel::LanguageRole);
+    setData(src, ThemeModel::PathRole);
+    QString typeName;
+    switch(type)
+    {
+    case CARD_IMAGE:
+    case CARD_IMAGE2:
+        typeName = "image";
+        setIcon(QIcon(":/images/view-preview.png"));
+        break;
+    case CARD_SOUND:
+    case CARD_SOUNDLOGIC:
+        typeName = "sound";
+        setIcon(QIcon(":/images/preferences-desktop-text-to-speech.png"));
+        break;
+    case CARD_LOGIC:
+        typeName = "logic";
+        setIcon(QIcon(":/images/preferences-plugin.png"));
+        break;
+    case CARD_WORD:
+        typeName = "word";
+        setIcon(QIcon(":/images/preferences-desktop-font.png"));
+        break;
+    case CARD_FOUND:
+        typeName = "pfound";
+        break;
 
-	}
-	setText(src);
+    }
+    setText(src);
 }
 
 void FeatureItem::writeElement(QXmlStreamWriter *stream)

@@ -46,15 +46,15 @@ PairsTheme::PairsTheme(const QString& path)
     : QStandardItem()
     , m_back_img("")
     , m_archive(path)
-	, m_dir()
+    , m_dir()
 {
-	QFileInfo fi(path);
-	m_dir = fi.dir();
-	if (!m_archive.open(QFile::ReadOnly | QFile::Text))
-	{
-			qWarning() << "Error: Cannot read file " << path;
-			return;
-	}
+    QFileInfo fi(path);
+    m_dir = fi.dir();
+    if (!m_archive.open(QFile::ReadOnly | QFile::Text))
+    {
+            qWarning() << "Error: Cannot read file " << path;
+            return;
+    }
     if(!isValid(&m_archive))
     {
         qWarning() << "Skipping game theme not valid: " << path;
@@ -212,7 +212,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
 
 bool PairsTheme::isValid(const QFile* file) {
 
-	return true;
+    return true;
     QUrl schemaUrl = QUrl::fromLocalFile(KGlobal::dirs()->findResource("appdata", QLatin1String( "themes/game.xsd" )));
     QXmlSchema schema;
     schema.load(schemaUrl);
@@ -227,7 +227,7 @@ bool PairsTheme::isValid(const QFile* file) {
 
 QStringList PairsTheme::images() const
 {
-	QStringList a("*.svg");
+    QStringList a("*.svg");
     return m_dir.entryList(a, QDir::Files);
 }
 
