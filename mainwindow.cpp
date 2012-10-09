@@ -47,16 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(myact, SIGNAL(triggered(bool)), this, SLOT(doTry()));
     ui->menu_file->addAction(myact);
     ui->toolBar->addAction(myact);
-
-    ui->imageLabel->hide();
-    ui->fileKurl->hide();
-    ui->itemLabel->show();
-    ui->wordEdit->hide();
-    ui->wordLabel->hide();
-    ui->langLabel->hide();
-    ui->comboBox_2->hide();
-    ui->moreButton->hide();
-    
+    widgetsHide();
     connect(ui->fileKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(fileSelected()));
     connect(ui->backKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(backSelected()));
     connect(ui->wordEdit, SIGNAL(textChanged(QString)), this, SLOT(wordChanged(QString)));
@@ -68,6 +59,18 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::widgetsHide()
+{
+    ui->imageLabel->hide();
+    ui->fileKurl->hide();
+    ui->wordEdit->hide();
+    ui->wordLabel->hide();
+    ui->langLabel->hide();
+    ui->comboBox_2->hide();
+    ui->moreButton->hide();
+    ui->itemLabel->hide();
 }
 
 bool MainWindow::check()
@@ -138,6 +141,7 @@ void MainWindow::addFeature(int index)
 
 
 }
+
 void MainWindow::addElement()
 {
     if(m_selectedItem->data(ThemeModel::CardTypeRole).toInt())
@@ -203,13 +207,7 @@ void MainWindow::doNew()
     ui->pixLabel->setPixmap(QPixmap());
     ui->fileKurl->setStartDir(KUrl(QDir::currentPath()));
     ui->backKurl->setStartDir(KUrl(QDir::currentPath()));
-    ui->imageLabel->hide();
-    ui->itemLabel->hide();
-    ui->fileKurl->hide();
-    ui->wordEdit->hide();
-    ui->wordLabel->hide();
-    ui->langLabel->hide();
-    ui->comboBox_2->hide();
+    widgetsHide();
     ui->splitter->setStretchFactor(1, 3);
     connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(selectionChanged(QItemSelection,QItemSelection)));
 
@@ -291,13 +289,7 @@ void MainWindow::open(const QString& filename)
     ui->pixLabel->setPixmap(image.scaledToWidth(100));
     ui->fileKurl->setStartDir(KUrl(pt->path()));
     ui->backKurl->setStartDir(KUrl(pt->path()));
-    ui->imageLabel->hide();
-    ui->itemLabel->hide();
-    ui->fileKurl->hide();
-    ui->wordEdit->hide();
-    ui->wordLabel->hide();
-    ui->langLabel->hide();
-    ui->comboBox_2->hide();
+    widgetsHide();
     ui->splitter->setStretchFactor(1, 3);
     connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(selectionChanged(QItemSelection,QItemSelection)));
     
@@ -342,14 +334,7 @@ void MainWindow::elementSelected(const QModelIndex & idx)
     qDebug() << "card Type" << type;
     if(!type)
     {
-        ui->imageLabel->hide();
-        ui->itemLabel->hide();
-        ui->fileKurl->hide();
-        ui->wordEdit->hide();
-        ui->wordLabel->hide();
-        ui->langLabel->hide();
-        ui->comboBox_2->hide();
-
+        widgetsHide();
         return;
     }
     ui->langLabel->show();
@@ -358,48 +343,40 @@ void MainWindow::elementSelected(const QModelIndex & idx)
     switch(type)
     {
     case CARD_IMAGE:
+        widgetsHide();
         ui->imageLabel->setText("Image file");
         ui->imageLabel->show();
         ui->itemLabel->show();
         ui->fileKurl->show();
-        ui->wordEdit->hide();
-        ui->wordLabel->hide();
         image.load(pt->path()+"/"+ui->fileKurl->text());
         ui->itemLabel->setPixmap(image.scaledToWidth(100));
         break;
     case CARD_SOUND:
     case CARD_SOUNDLOGIC:
+        widgetsHide();
         ui->imageLabel->setText("Sound file");
-        ui->itemLabel->hide();
         ui->imageLabel->show();
         ui->fileKurl->show();
-        ui->wordEdit->hide();
-        ui->wordLabel->hide();
         break;
     case CARD_LOGIC:
+        widgetsHide();
         ui->imageLabel->setText("Logic image file");
         ui->itemLabel->show();
         ui->imageLabel->show();
         ui->fileKurl->show();
-        ui->wordEdit->hide();
-        ui->wordLabel->hide();
         image.load(pt->path()+"/"+ui->fileKurl->text());
         ui->itemLabel->setPixmap(image.scaledToWidth(100));
         break;
     case CARD_WORD:
-        ui->imageLabel->hide();
-        ui->itemLabel->hide();
-        ui->fileKurl->hide();
+        widgetsHide();
         ui->wordEdit->show();
         ui->wordLabel->show();
         break;
     case CARD_FOUND:
+        widgetsHide();
         ui->imageLabel->setText("Found sound file");
-        ui->itemLabel->hide();
         ui->imageLabel->show();
         ui->fileKurl->show();
-        ui->wordEdit->hide();
-        ui->wordLabel->hide();
         break;
 
     }

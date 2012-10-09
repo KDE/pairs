@@ -59,6 +59,7 @@ private:
     void newTmpDir(const QString &path);
     void extract(QString path);
     void compress(QString path);
+    void widgetsHide();
 };
 
 #endif // MAINWINDOW_H
