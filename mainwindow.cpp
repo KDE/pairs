@@ -37,8 +37,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->toolBar->addAction(myact);
     myact = new KAction(KIcon("go-up"), i18n("Upload"), ui->menu_file);
     connect(myact, SIGNAL(triggered(bool)), this, SLOT(doUpload()));
-    ui->menu_file->addAction(myact);
-    ui->toolBar->addAction(myact);
+//    ui->menu_file->addAction(myact);
+//    ui->toolBar->addAction(myact);
     myact = new KAction(KIcon("pairs"), i18n("Try"), ui->menu_file);
     connect(myact, SIGNAL(triggered(bool)), this, SLOT(doTry()));
     ui->menu_file->addAction(myact);
