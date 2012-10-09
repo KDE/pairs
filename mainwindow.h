@@ -43,8 +43,8 @@ public slots:
     void addFeature(int index);
     void pairsFinished();
 private:
-    Ui::MainWindow *ui;
-    PairsTheme *pt;
+    Ui::MainWindow *m_ui;
+    PairsTheme *m_pt;
     QStandardItem *m_selectedItem;
     ThemeModel *m_model;
     QString m_file;
