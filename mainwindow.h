@@ -10,6 +10,7 @@ class QDir;
 class QStandardItem;
 class ThemeModel;
 class KUrlRequester;
+class QProcess;
 
 namespace Ui {
 class MainWindow;
@@ -40,6 +41,7 @@ public slots:
     void addElement();
     void deleteElement();
     void addFeature(int index);
+    void pairsFinished();
 private:
     Ui::MainWindow *ui;
     PairsTheme *pt;
@@ -47,8 +49,10 @@ private:
     ThemeModel *m_model;
     QString m_file;
     QString m_gameFile;
+    QString m_pairsFile;
     QString m_checkMessage;
     QDir *m_tmpDir;
+    QProcess *m_process;
 
     QString copyFile(KUrlRequester *k);
     bool check();

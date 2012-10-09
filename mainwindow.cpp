@@ -7,7 +7,10 @@
 #include <QtGui/QFileDialog>
 #include <QtGui/QMessageBox>
 #include <QtCore/QDebug>
+#include <QtCore/QProcess>
 #include <KAction>
+#include <KGlobal>
+#include <KStandardDirs>
 #include <KStandardAction>
 #include <kdeversion.h>
 #include <KUrlRequester>
@@ -22,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	pt = 0;
 	m_model = 0;
 	m_tmpDir = 0;
+	m_process = 0;
 	ui->setupUi(this);
     KAction *myact = KStandardAction::create(KStandardAction::New, this, SLOT(doNew()), ui->menu_file);
     ui->menu_file->addAction(myact);
@@ -59,7 +63,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->delButton, SIGNAL(clicked()), this, SLOT(deleteElement()));
     connect(ui->addButton, SIGNAL(clicked()), this, SLOT(addElement()));
     connect(ui->moreButton, SIGNAL(currentIndexChanged(int)), this, SLOT(addFeature(int)));
-
 }
 
 MainWindow::~MainWindow()
@@ -158,7 +161,23 @@ void MainWindow::doUpload()
 
 void MainWindow::doTry()
 {
+    doSave();
+    KStandardDirs tmp;
+    QString dir = tmp.findDirs("data", "pairs").first() + "themes/";
+    QFileInfo pathInfo(m_file);
+    m_pairsFile = dir + pathInfo.fileName();
+    qDebug() << "try" << m_pairsFile << m_file ;
+    QFile::copy(m_file, m_pairsFile);
+    QProcess *m_process = new QProcess(this);
+    m_process->start("pairs");
+    connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(pairsFinished()));
+}
 
+void MainWindow::pairsFinished()
+{
+    qDebug() << "Pairs Finished";
+    QFile::remove(m_pairsFile);
+    delete m_process;
 }
 
 void MainWindow::doSaveAs()
