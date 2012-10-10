@@ -3,7 +3,6 @@
 
 #include <KXmlGuiWindow>
 #include <QtCore/QModelIndex>
-#include "mainwindowview.h"
 
 class QItemSelection;
 class PairsTheme;
@@ -12,6 +11,7 @@ class QStandardItem;
 class ThemeModel;
 class KUrlRequester;
 class QProcess;
+class MainWindowView;
 
 class MainWindow : public KXmlGuiWindow
 {
@@ -23,21 +23,15 @@ public:
     void open(const QString& path);
     
 public slots:
-    void elementSelected(const QModelIndex & item);
-    void backSelected();
-    void fileSelected();
     void doNew();
     void doOpen();
     void doSave();
     void doSaveAs();
-    void doUpload();
+//    void doUpload();
     void doTry();
-    void selectionChanged(const QItemSelection& selected, const QItemSelection&);
-    void wordChanged(const QString &word);
-    void addElement();
-    void deleteElement();
-    void addFeature(int index);
     void pairsFinished();
+    QString copyFile(KUrlRequester *k);
+
 private:
     MainWindowView *m_mainWidget;
     PairsTheme *m_pt;
@@ -46,12 +40,9 @@ private:
     QString m_file;
     QString m_gameFile;
     QString m_pairsFile;
-    QString m_checkMessage;
     QDir *m_tmpDir;
     QProcess *m_process;
 
-    QString copyFile(KUrlRequester *k);
-    bool check();
     void newTmpDir(const QString &path);
     void extract(QString path);
     void compress(QString path);

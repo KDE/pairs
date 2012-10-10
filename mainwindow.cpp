@@ -1,9 +1,8 @@
 #include "mainwindow.h"
-#include "pairstheme.h"
+#include "mainwindowview.h"
 #include "thememodel.h"
-#include "elementitem.h"
-#include "featureitem.h"
 #include "ui_mainwindowview.h"
+#include "elementitem.h"
 #include <QtGui/QFileDialog>
 #include <QtGui/QMessageBox>
 #include <QtCore/QDebug>
@@ -50,107 +49,14 @@ MainWindow::MainWindow(QWidget *parent) : KXmlGuiWindow(parent)
     actionCollection()->addAction("try", myact);
     m_mainWidget->widgetsHide();
     createGUI();
-    connect(m_mainWidget->ui()->fileKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(fileSelected()));
-    connect(m_mainWidget->ui()->backKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(backSelected()));
-    connect(m_mainWidget->ui()->wordEdit, SIGNAL(textChanged(QString)), this, SLOT(wordChanged(QString)));
-    connect(m_mainWidget->ui()->delButton, SIGNAL(clicked()), this, SLOT(deleteElement()));
-    connect(m_mainWidget->ui()->addButton, SIGNAL(clicked()), this, SLOT(addElement()));
-    connect(m_mainWidget->ui()->moreButton, SIGNAL(currentIndexChanged(int)), this, SLOT(addFeature(int)));
 }
 
 MainWindow::~MainWindow()
 {
 }
 
-bool MainWindow::check()
-{
-    m_checkMessage.clear();
-    if(m_mainWidget->ui()->titleEdit->text().isEmpty())
-    {
-        m_checkMessage = i18n("The Title is missing");
-        return false;
-    }
-    if(m_mainWidget->ui()->authorEdit->text().isEmpty())
-    {
-        m_checkMessage = i18n("The Author is missing");
-        return false;
-    }
-    if(m_mainWidget->ui()->versionEdit->text().isEmpty())
-    {
-        m_checkMessage = i18n("The Version is missing");
-        return false;
-    }
-    if(m_mainWidget->ui()->descriptionEdit->text().isEmpty())
-    {
-        m_checkMessage = i18n("The Description is missing");
-        return false;
-    }
-    if(m_mainWidget->ui()->backKurl->text().isEmpty())
-    {
-        m_checkMessage = i18n("The Back Image is missing");
-        return false;
-    }
-    for (int i=0; i < m_model->rowCount(); i++)
-    {
-        ElementItem *myitem = static_cast<ElementItem*> (m_model->item(i,0));
-        if(!myitem->check(i+1))
-        {
-            m_checkMessage =  myitem->checkMessage();
-            return false;
-        }
-    }
-    return true;
-}
 
-void MainWindow::addFeature(int index)
-{
-    QStandardItem *paren = m_selectedItem;
-    if(m_selectedItem->data(ThemeModel::CardTypeRole).toInt())
-        paren = m_selectedItem->parent();
-    qDebug() << "addFeature called" << index;
-    CardType newType;
-    switch(index)
-    {
-        case 0:
-        default:
-            newType = CARD_IMAGE;
-            break;
-        case 1:
-            newType = CARD_LOGIC;
-            break;
-        case 2:
-            newType = CARD_SOUND;
-            break;
-        case 3:
-            newType = CARD_WORD;
-            break;
-    }
-    FeatureItem *fi = new FeatureItem(newType, "any", "");
-    m_model->insertFeature(fi, paren);
-
-
-}
-
-void MainWindow::addElement()
-{
-    if(m_selectedItem->data(ThemeModel::CardTypeRole).toInt())
-        return;
-    const ThemeElement el;
-    ElementItem *newItem = new ElementItem (el);
-    QString name = i18n("Element %1", m_model->rowCount()+1);
-    newItem->setText(name);
-    m_model->insertItem(newItem);
-}
-
-void MainWindow::deleteElement()
-{
-    m_model->removeItem(m_selectedItem);
-}
-
-void MainWindow::doUpload()
-{
-
-}
+//void MainWindow::doUpload(){};
 
 void MainWindow::doTry()
 {
@@ -185,36 +91,26 @@ void MainWindow::doNew()
     delete m_model;
     newTmpDir(QDir::tempPath() + "/newfile");
     m_model = new ThemeModel(this);
-    m_mainWidget->ui()->treeView->setModel(m_model);
-    m_mainWidget->ui()->titleEdit->setText("");
-    m_mainWidget->ui()->authorEdit->setText("");
-    m_mainWidget->ui()->versionEdit->setText("");
-    m_mainWidget->ui()->dateEdit->setDate(QDate::currentDate());
-    m_mainWidget->ui()->maintypeBox->setCurrentIndex(0);
-    m_mainWidget->ui()->descriptionEdit->setText("");
-    m_mainWidget->ui()->backKurl->setText("");
-    m_mainWidget->ui()->pixLabel->setPixmap(QPixmap());
-    m_mainWidget->ui()->fileKurl->setStartDir(KUrl(QDir::currentPath()));
-    m_mainWidget->ui()->backKurl->setStartDir(KUrl(QDir::currentPath()));
+    m_mainWidget->setModel(m_model);
+    m_mainWidget->clearUi(m_tmpDir->path());
     m_mainWidget->widgetsHide();
-    m_mainWidget->ui()->splitter->setStretchFactor(1, 3);
-    connect(m_mainWidget->ui()->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(selectionChanged(QItemSelection,QItemSelection)));
-
 }
 
 void MainWindow::doSave()
 {
-    if(!check())
+    if(!m_mainWidget->check())
     {
         qDebug() << "Check not passed:";
-        qDebug() << m_checkMessage;
-        QMessageBox(QMessageBox::Critical, "File not saved", m_checkMessage, QMessageBox::Ok, this).exec();
+        qDebug() << m_mainWidget->checkString();
+        QMessageBox(QMessageBox::Critical, "File not saved", m_mainWidget->checkString(), QMessageBox::Ok, this).exec();
         return ;
     }
 
     if(m_file.isEmpty())
     {
         m_file = QFileDialog::getSaveFileName(this, tr("Save Pairs theme"), QDir::currentPath(), tr("Pairs Themes (*.pairs.tar.bz2)"));
+        QFileInfo fi(m_file);
+        m_gameFile = m_tmpDir->absolutePath() + "/" + fi.baseName() + ".game";
         if(m_file.isEmpty())
             return;
     }
@@ -232,21 +128,7 @@ void MainWindow::doSave()
     stream.writeStartDocument();
     stream.writeStartElement("pairs");
     stream.writeAttribute("xmlns", "http://edu.kde.org/game");
-    stream.writeTextElement("title", m_mainWidget->ui()->titleEdit->text());
-    stream.writeTextElement("description", m_mainWidget->ui()->descriptionEdit->text());
-    stream.writeTextElement("author", m_mainWidget->ui()->authorEdit->text());
-    stream.writeTextElement("date", m_mainWidget->ui()->dateEdit->text());
-    stream.writeTextElement("version", m_mainWidget->ui()->versionEdit->text());
-    stream.writeStartElement("image");
-    stream.writeAttribute("type", "back");
-    stream.writeAttribute("src", m_mainWidget->ui()->backKurl->text());
-    stream.writeEndElement(); // image
-    stream.writeStartElement("main");
-    QString maintype = m_mainWidget->ui()->maintypeBox->currentText();
-    if(maintype == "relation")
-        maintype = "image";
-    stream.writeAttribute("type", maintype);
-    stream.writeEndElement(); // main
+    m_mainWidget->writeXmlCommon(&stream);
     for (int i=0; i < m_model->rowCount(); i++)
     {
         ElementItem *myitem = static_cast<ElementItem*> (m_model->item(i,0));
@@ -266,22 +148,9 @@ void MainWindow::open(const QString& filename)
     delete m_pt;
     m_pt = new PairsTheme(filename);
     m_model = new ThemeModel(*m_pt, this);
-    m_mainWidget->ui()->treeView->setModel(m_model);
-    m_mainWidget->ui()->titleEdit->setText(m_pt->title());
-    m_mainWidget->ui()->authorEdit->setText(m_pt->author());
-    m_mainWidget->ui()->versionEdit->setText(m_pt->version());
-    m_mainWidget->ui()->dateEdit->setDate(QDate::fromString(m_pt->date(),"d/M/yyyy"));
-    m_mainWidget->ui()->maintypeBox->setCurrentIndex(m_pt->mainType()-1);
-    m_mainWidget->ui()->descriptionEdit->setText(m_pt->description());
-    m_mainWidget->ui()->backKurl->setText(m_pt->backImage());
-    QPixmap image(m_pt->path()+"/"+m_pt->backImage());
-    m_mainWidget->ui()->pixLabel->setPixmap(image.scaledToWidth(100));
-    m_mainWidget->ui()->fileKurl->setStartDir(KUrl(m_pt->path()));
-    m_mainWidget->ui()->backKurl->setStartDir(KUrl(m_pt->path()));
+    m_mainWidget->setModel(m_model);
+    m_mainWidget->setUi(m_pt);
     m_mainWidget->widgetsHide();
-    m_mainWidget->ui()->splitter->setStretchFactor(1, 3);
-    connect(m_mainWidget->ui()->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(selectionChanged(QItemSelection,QItemSelection)));
-    
 }
 
 void MainWindow::doOpen()
@@ -296,100 +165,6 @@ void MainWindow::doOpen()
         m_gameFile = m_tmpDir->absolutePath() + "/" + flist.front();
         open(m_gameFile);
     }
-}
-
-void MainWindow::selectionChanged(const QItemSelection& selected, const QItemSelection&  )
-{
-    if(!selected.isEmpty())
-        elementSelected(selected.indexes().first());
-}
-
-void MainWindow::elementSelected(const QModelIndex & idx)
-{
-    m_selectedItem = m_model->itemFromIndex(idx);
-    int type = idx.data(ThemeModel::CardTypeRole).toInt();
-    m_mainWidget->ui()->fileKurl->setText(idx.data(ThemeModel::PathRole).toString());
-    m_mainWidget->ui()->wordEdit->setText(idx.data(ThemeModel::PathRole).toString());
-    int index = m_mainWidget->ui()->comboBox_2->findText(idx.data(ThemeModel::LanguageRole).toString());
-    if ( index != -1 )
-    {
-        m_mainWidget->ui()->comboBox_2->setCurrentIndex(index);
-    }
-    else
-    {
-        m_mainWidget->ui()->comboBox_2->addItem(idx.data(ThemeModel::LanguageRole).toString());
-    }
-    m_mainWidget->ui()->moreButton->show();
-    qDebug() << "card Type" << type;
-    if(!type)
-    {
-        m_mainWidget->widgetsHide();
-        return;
-    }
-    m_mainWidget->ui()->langLabel->show();
-    m_mainWidget->ui()->comboBox_2->show();
-    QPixmap image;
-    m_mainWidget->widgetsHide();
-    switch(type)
-    {
-    case CARD_IMAGE:
-        m_mainWidget->ui()->imageLabel->setText("Image file");
-        m_mainWidget->ui()->imageLabel->show();
-        m_mainWidget->ui()->itemLabel->show();
-        m_mainWidget->ui()->fileKurl->show();
-        image.load(m_pt->path()+"/"+m_mainWidget->ui()->fileKurl->text());
-        m_mainWidget->ui()->itemLabel->setPixmap(image.scaledToWidth(100));
-        break;
-    case CARD_SOUND:
-    case CARD_SOUNDLOGIC:
-        m_mainWidget->ui()->imageLabel->setText("Sound file");
-        m_mainWidget->ui()->imageLabel->show();
-        m_mainWidget->ui()->fileKurl->show();
-        break;
-    case CARD_LOGIC:
-        m_mainWidget->ui()->imageLabel->setText("Logic image file");
-        m_mainWidget->ui()->itemLabel->show();
-        m_mainWidget->ui()->imageLabel->show();
-        m_mainWidget->ui()->fileKurl->show();
-        image.load(m_pt->path()+"/"+m_mainWidget->ui()->fileKurl->text());
-        m_mainWidget->ui()->itemLabel->setPixmap(image.scaledToWidth(100));
-        break;
-    case CARD_WORD:
-        m_mainWidget->ui()->wordEdit->show();
-        m_mainWidget->ui()->wordLabel->show();
-        break;
-    case CARD_FOUND:
-        m_mainWidget->ui()->imageLabel->setText("Found sound file");
-        m_mainWidget->ui()->imageLabel->show();
-        m_mainWidget->ui()->fileKurl->show();
-        break;
-
-    }
-}
-void MainWindow::backSelected()
-{
-    QPixmap image;
-    QString newFile = copyFile(m_mainWidget->ui()->backKurl);
-    m_mainWidget->ui()->backKurl->setText(m_mainWidget->ui()->backKurl->url().fileName());
-    image.load(newFile);
-    m_mainWidget->ui()->pixLabel->setPixmap(image.scaledToWidth(100));
-}
-void MainWindow::fileSelected()
-{
-    QPixmap image;
-    QString newFile = copyFile(m_mainWidget->ui()->fileKurl);
-    m_mainWidget->ui()->fileKurl->setText(m_mainWidget->ui()->fileKurl->url().fileName());
-    image.load(newFile);
-    m_mainWidget->ui()->itemLabel->setPixmap(image.scaledToWidth(100));
-    m_selectedItem->setData(m_mainWidget->ui()->fileKurl->text(),ThemeModel::PathRole);
-    m_selectedItem->setText(m_mainWidget->ui()->fileKurl->text());
-
-}
-
-void MainWindow::wordChanged(const QString &word)
-{
-    m_selectedItem->setData(word, ThemeModel::PathRole);
-    m_selectedItem->setText(word);
 }
 
 QString MainWindow::copyFile(KUrlRequester *k)
