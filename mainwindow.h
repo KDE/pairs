@@ -1,8 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QtGui/QMainWindow>
+#include <KXmlGuiWindow>
 #include <QtCore/QModelIndex>
+#include "mainwindowview.h"
 
 class QItemSelection;
 class PairsTheme;
@@ -12,11 +13,7 @@ class ThemeModel;
 class KUrlRequester;
 class QProcess;
 
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QMainWindow
+class MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
     
@@ -24,7 +21,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void open(const QString& path);
-
     
 public slots:
     void elementSelected(const QModelIndex & item);
@@ -43,7 +39,7 @@ public slots:
     void addFeature(int index);
     void pairsFinished();
 private:
-    Ui::MainWindow *m_ui;
+    MainWindowView *m_mainWidget;
     PairsTheme *m_pt;
     QStandardItem *m_selectedItem;
     ThemeModel *m_model;
@@ -59,7 +55,6 @@ private:
     void newTmpDir(const QString &path);
     void extract(QString path);
     void compress(QString path);
-    void widgetsHide();
 };
 
 #endif // MAINWINDOW_H
