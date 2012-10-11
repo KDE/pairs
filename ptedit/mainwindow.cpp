@@ -39,7 +39,6 @@
 #include <KUrlRequester>
 #include <KTar>
 #include <KActionCollection>
-#include <KAboutData>
 
 MainWindow::MainWindow(QWidget *parent) : KXmlGuiWindow(parent)
 {
@@ -49,9 +48,6 @@ MainWindow::MainWindow(QWidget *parent) : KXmlGuiWindow(parent)
     m_model = 0;
     m_tmpDir = 0;
     m_process = 0;
-    KAboutData aboutData( "ptedit", "ptedit3", ki18n("PTEdit"), "1.0",
-                          ki18n("Editor for pairs thems"), KAboutData::License_GPL,
-                          ki18n("Copyright (c) 2012 Marco Calignano") );
     setMinimumSize (900, 400);
     m_mainWidget = new MainWindowView(this);
     setCentralWidget(m_mainWidget);

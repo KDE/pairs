@@ -21,13 +21,24 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QtGui/QApplication>
+#include <KApplication>
 #include "mainwindow.h"
+#include <KAboutData>
+#include <KCmdLineArgs>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    KAboutData aboutData( "ptedit", "ptedit3", ki18n("PTEdit"), "1.0",
+                          ki18n("Editor for Pairs thems"), KAboutData::License_GPL,
+                          ki18n("Copyright (c) 2012 the Pairs developers"));
+
+    aboutData.addAuthor( ki18n("Aleix Pol Gonzalez"), ki18n("Maintainer"), "aleixpol@kde.org" );
+    aboutData.addAuthor( ki18n("Marco Calignano"), ki18n("Feature development"), "marco.calignano@gmail.com");
+    aboutData.addAuthor(ki18n("Heena Mahour"), ki18n("Layout development"), "heena393@gmail.com");
+    KCmdLineArgs::init(argc, argv, &aboutData);
+    KApplication a;
     MainWindow w;
+
     if(argc>1)
         w.open(a.arguments()[1]);
     w.show();
