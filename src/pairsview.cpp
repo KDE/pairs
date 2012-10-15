@@ -23,6 +23,10 @@
 
 #include "pairsview.h"
 #include "carditem.h"
+#include "pairstheme.h"
+#include "themesmodel.h"
+#include "themeiconsprovider.h"
+#include "playersmodel.h"
 #include <QDebug>
 #include <QPropertyAnimation>
 #include <QGraphicsRotation>
@@ -38,11 +42,6 @@
 // #ifndef QT_NO_OPENGL
 //     #include <QGLWidget>
 // #endif
-#include <Phonon/MediaObject>
-#include "pairstheme.h"
-#include "themesmodel.h"
-#include "themeiconsprovider.h"
-#include "playersmodel.h"
 #include <Phonon/MediaObject>
 #include <Phonon/AudioOutput>
 
@@ -72,8 +71,7 @@ PairsView::PairsView(QWidget *parent)
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
     
-    connect(m_players, SIGNAL(rowsRemoved(QModelIndex, int, int)), m_timer, SLOT(stop()));
-    
+    connect(m_players, SIGNAL(rowsRemoved(QModelIndex,int,int)), m_timer, SLOT(stop()));
 //     qmlRegisterType<ThemesModel>("org.kde.edu.pairs", 1, 0, "ThemesModel");
     
     setResizeMode(SizeRootObjectToView);
@@ -179,7 +177,7 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     const CardType type = PairsTheme::cardNameToType(cardType);
     QByteArray file_buf;
 
-    if(theme->backImage() == ""){
+    if(theme->backImage().isEmpty()){
         QString dir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String( "gameicons/pairs.svg"));
         QFile f(dir+"gameicons/pairsIcon.svg");
         f.open(QIODevice::ReadOnly);

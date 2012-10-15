@@ -48,7 +48,7 @@ Item
     MouseArea {
         id: mouse
         width: parent.width
-        height: parent.heigth
+        height: parent.height
         hoverEnabled: true
         onClicked: button.clicked()
         onEntered: button.state="hovered"
