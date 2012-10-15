@@ -27,8 +27,8 @@
 #include "thememodel.h"
 #include "ui_mainwindowview.h"
 #include "elementitem.h"
-#include <QtGui/QFileDialog>
-#include <QtGui/QMessageBox>
+#include <KFileDialog>
+#include <KMessageBox>
 #include <QtCore/QDebug>
 #include <QtCore/QProcess>
 #include <KAction>
@@ -89,7 +89,7 @@ void MainWindow::doTry()
     QFile::copy(m_file, m_pairsFile);
     QProcess *m_process = new QProcess(this);
     m_process->start("pairs");
-    connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(pairsFinished()));
+    connect(m_process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(pairsFinished()));
 }
 
 void MainWindow::pairsFinished()
@@ -122,15 +122,15 @@ void MainWindow::doSave()
     {
         qDebug() << "Check not passed:";
         qDebug() << m_mainWidget->checkString();
-        QMessageBox(QMessageBox::Critical, "File not saved", m_mainWidget->checkString(), QMessageBox::Ok, this).exec();
+        KMessageBox::error(this, m_mainWidget->checkString(), "File not saved");
         return ;
     }
 
     if(m_file.isEmpty())
     {
-        m_file = QFileDialog::getSaveFileName(this, tr("Save Pairs theme"), QDir::currentPath(), tr("Pairs Themes (*.pairs.tar.bz2)"));
+        m_file = KFileDialog::getSaveFileName(KUrl(QDir::currentPath()), tr("Pairs Themes (*.pairs.tar.bz2)"), this, tr("Save Pairs theme"));
         QFileInfo fi(m_file);
-        m_gameFile = m_tmpDir->absolutePath() + "/" + fi.baseName() + ".game";
+        m_gameFile = m_tmpDir->absolutePath() + '/' + fi.baseName() + ".game";
         if(m_file.isEmpty())
             return;
     }
@@ -175,7 +175,7 @@ void MainWindow::open(const QString& filename)
 
 void MainWindow::doOpen()
 {
-    m_file = QFileDialog::getOpenFileName(this, tr("Open Pairs theme"), QDir::currentPath(), tr("Pairs Themes (*.pairs.tar.bz2)"));
+    m_file = KFileDialog::getSaveFileName(KUrl(QDir::currentPath()), tr("Pairs Themes (*.pairs.tar.bz2)"), this, tr("Save Pairs theme"));
     if(!m_file.isEmpty())
     {
         QFileInfo pathInfo(m_file);
@@ -189,7 +189,7 @@ void MainWindow::doOpen()
 
 QString MainWindow::copyFile(KUrlRequester *k)
 {
-    QString newFile = m_tmpDir->path() + "/" + k->url().fileName();
+    QString newFile = m_tmpDir->path() + '/' + k->url().fileName();
     qDebug() << "file "<< newFile << k->text();
     if(newFile != k->text())
         QFile::copy(k->url().path(), newFile);
@@ -199,10 +199,10 @@ QString MainWindow::copyFile(KUrlRequester *k)
 void MainWindow::extract(QString path)
 {
     KTar archive(path);
-    newTmpDir(QDir::tempPath() + "/" + QFileInfo(path).fileName());
+    newTmpDir(QDir::tempPath() + '/' + QFileInfo(path).fileName());
     Q_ASSERT(archive.open(QIODevice::ReadOnly));
     QStringList files(archive.directory()->entries());
-    Q_FOREACH(QString filename, files)
+    Q_FOREACH(const QString filename, files)
     {
         Q_ASSERT(archive.directory()->entry(filename)->isFile());
         const KArchiveFile* file = static_cast<const KArchiveFile*>(archive.directory()->entry(filename));
@@ -225,7 +225,7 @@ void MainWindow::newTmpDir(const QString &path)
     delete m_tmpDir;
     m_tmpDir = new QDir(path);
     while(m_tmpDir->exists())
-        m_tmpDir->setPath(m_tmpDir->path()+"a");
+        m_tmpDir->setPath(m_tmpDir->path()+'a');
     m_tmpDir->mkpath(m_tmpDir->path());
 
 }

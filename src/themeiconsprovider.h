@@ -20,8 +20,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef THEMEICONSPROVIDER_H_
-#define THEMEICONSPROVIDER_H_
+#ifndef THEMEICONSPROVIDER_H
+#define THEMEICONSPROVIDER_H
 
 #include <QDeclarativeImageProvider>
 #include "pairstheme.h"

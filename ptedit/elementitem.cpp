@@ -20,8 +20,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "cardtype.h"
 #include "elementitem.h"
+#include "cardtype.h"
 #include "featureitem.h"
 #include "klocalizedstring.h"
 #include <QtXml/QXmlStreamWriter>
@@ -32,7 +32,7 @@ ElementItem::ElementItem(const ThemeElement &el): QStandardItem()
     QStringList l = el.foundLanglist();
     if(!l.isEmpty())
     {
-        Q_FOREACH(QString s, l)
+        Q_FOREACH(const QString s, l)
         {
             if(!s.isEmpty())
             {
@@ -46,7 +46,7 @@ ElementItem::ElementItem(const ThemeElement &el): QStandardItem()
         QStringList l = el.langlist((CardType)i);
         if(l.isEmpty() || i == CARD_SOUNDLOGIC || i == CARD_IMAGE2)
             continue;
-        Q_FOREACH(QString s, l)
+        Q_FOREACH(const QString s, l)
         {
             if(!s.isEmpty())
             {

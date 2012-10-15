@@ -28,7 +28,7 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QLineEdit" name="titleEdit"/>
+          <widget class="KLineEdit" name="titleEdit"/>
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="descriptionLabel">
@@ -38,7 +38,7 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QLineEdit" name="descriptionEdit"/>
+          <widget class="KLineEdit" name="descriptionEdit"/>
          </item>
          <item row="3" column="0">
           <widget class="QLabel" name="authorLabel">
@@ -48,7 +48,7 @@
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="QLineEdit" name="authorEdit"/>
+          <widget class="KLineEdit" name="authorEdit"/>
          </item>
          <item row="4" column="0">
           <widget class="QLabel" name="versionLabel">
@@ -58,7 +58,7 @@
           </widget>
          </item>
          <item row="4" column="1">
-          <widget class="QLineEdit" name="versionEdit"/>
+          <widget class="KLineEdit" name="versionEdit"/>
          </item>
         </layout>
        </item>
@@ -89,7 +89,7 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QComboBox" name="maintypeBox">
+          <widget class="KComboBox" name="maintypeBox">
            <item>
             <property name="text">
              <string>image</string>
@@ -224,7 +224,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="moreButton">
+           <widget class="KComboBox" name="moreButton">
             <property name="maximumSize">
              <size>
               <width>24</width>
@@ -235,7 +235,7 @@
              <number>-1</number>
             </property>
             <property name="sizeAdjustPolicy">
-             <enum>QComboBox::AdjustToMinimumContentsLengthWithIcon</enum>
+             <enum>KComboBox::AdjustToMinimumContentsLengthWithIcon</enum>
             </property>
             <item>
              <property name="text">
@@ -346,7 +346,7 @@
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QLineEdit" name="wordEdit"/>
+         <widget class="KLineEdit" name="wordEdit"/>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="langLabel">
@@ -356,7 +356,7 @@
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QComboBox" name="comboBox_2">
+         <widget class="KComboBox" name="comboBox_2">
           <item>
            <property name="text">
             <string>any</string>

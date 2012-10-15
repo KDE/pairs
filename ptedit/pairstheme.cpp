@@ -141,7 +141,7 @@ void PairsTheme::parseElement(QXmlStreamReader &reader)
         if(type==QXmlStreamReader::EndElement && reader.name().toString() == "element") {
             for (int i = 0; i < CARD_MAX_TYPE; i++) {
                 if(!common[i].isEmpty()) {
-                    foreach (const QString &str, m_cardtypes.keys()) {
+                	Q_FOREACH (const QString &str, m_cardtypes.keys()) {
                         if(item.name[i][str].isEmpty())
                             item.name[i][str]=common[i];
                     }

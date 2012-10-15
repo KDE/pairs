@@ -27,7 +27,6 @@
 #include "pairstheme.h"
 #include "thememodel.h"
 #include "elementitem.h"
-#include "thememodel.h"
 #include "featureitem.h"
 #include <QtGui/QTreeView>
 #include <QXmlStreamWriter>
@@ -97,7 +96,7 @@ void MainWindowView::setUi(PairsTheme *theme)
 	m_ui->maintypeBox->setCurrentIndex(theme->mainType()-1);
 	m_ui->descriptionEdit->setText(theme->description());
 	m_ui->backKurl->setText(theme->backImage());
-	QPixmap image(m_path +"/"+theme->backImage());
+	QPixmap image(m_path +'/'+theme->backImage());
 	m_ui->pixLabel->setPixmap(image.scaledToWidth(100));
 	m_ui->fileKurl->setStartDir(KUrl(theme->path()));
 	m_ui->backKurl->setStartDir(KUrl(theme->path()));
@@ -248,7 +247,7 @@ void MainWindowView::elementSelected(const QModelIndex & idx)
         m_ui->imageLabel->show();
         m_ui->itemLabel->show();
         m_ui->fileKurl->show();
-        image.load(m_path+"/"+m_ui->fileKurl->text());
+        image.load(m_path+'/'+m_ui->fileKurl->text());
         m_ui->itemLabel->setPixmap(image.scaledToWidth(100));
         break;
     case CARD_SOUND:
@@ -262,7 +261,7 @@ void MainWindowView::elementSelected(const QModelIndex & idx)
         m_ui->itemLabel->show();
         m_ui->imageLabel->show();
         m_ui->fileKurl->show();
-        image.load(m_path+"/"+m_ui->fileKurl->text());
+        image.load(m_path+'/'+m_ui->fileKurl->text());
         m_ui->itemLabel->setPixmap(image.scaledToWidth(100));
         break;
     case CARD_WORD:

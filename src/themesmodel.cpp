@@ -60,7 +60,7 @@ void ThemesModel::reload()
         	int iNumber = 0;
         	while(nameExists(theme->title())) {
         		iNumber++;
-        		theme->setTitle(theme->title() + "(" + QString::number(iNumber) + ")" );
+        		theme->setTitle(theme->title() + '(' + QString::number(iNumber) + ')' );
 			}  // namespace )
         	qDebug()<< theme->title();
             appendRow(theme);
