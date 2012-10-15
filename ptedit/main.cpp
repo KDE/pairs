@@ -28,7 +28,7 @@
 
 int main(int argc, char *argv[])
 {
-    KAboutData aboutData( "ptedit", "ptedit3", ki18n("PTEdit"), "1.0",
+    KAboutData aboutData( "ptedit", "ptedit3", ki18n("ptEdit"), "1.0",
                           ki18n("Editor for Pairs thems"), KAboutData::License_GPL,
                           ki18n("Copyright (c) 2012 the Pairs developers"));
 
