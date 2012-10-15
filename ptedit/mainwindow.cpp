@@ -128,7 +128,7 @@ void MainWindow::doSave()
 
     if(m_file.isEmpty())
     {
-        m_file = KFileDialog::getSaveFileName(KUrl(QDir::currentPath()), tr("Pairs Themes (*.pairs.tar.bz2)"), this, tr("Save Pairs theme"));
+        m_file = KFileDialog::getSaveFileName(KUrl(QDir::currentPath()), "*.pairs.tar.bz2|" + i18n("Pairs Themes"), this, i18n("Save Pairs theme"));
         QFileInfo fi(m_file);
         m_gameFile = m_tmpDir->absolutePath() + '/' + fi.baseName() + ".game";
         if(m_file.isEmpty())
@@ -175,7 +175,7 @@ void MainWindow::open(const QString& filename)
 
 void MainWindow::doOpen()
 {
-    m_file = KFileDialog::getSaveFileName(KUrl(QDir::currentPath()), tr("Pairs Themes (*.pairs.tar.bz2)"), this, tr("Save Pairs theme"));
+    m_file = KFileDialog::getOpenFileName(KUrl(QDir::currentPath()), "*.pairs.tar.bz2|" + i18n("Pairs Themes"), this, i18n("Open Pairs theme"));
     if(!m_file.isEmpty())
     {
         QFileInfo pathInfo(m_file);
