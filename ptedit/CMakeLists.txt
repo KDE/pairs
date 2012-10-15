@@ -21,7 +21,7 @@ kde4_add_executable( ptedit ${ptedit_SOURCES} )
 
 target_link_libraries( ptedit ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${QT_QTXMLPATTERNS_LIBRARY})
 install(TARGETS ptedit ${INSTALL_TARGETS_DEFAULT_ARGS})
-install( FILES ptedit.rc  DESTINATION  ${DATA_INSTALL_DIR}/ptedit)
+install( FILES pteditui.rc  DESTINATION  ${DATA_INSTALL_DIR}/ptedit)
 
 
 
