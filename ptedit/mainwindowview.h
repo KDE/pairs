@@ -72,7 +72,7 @@ private:
     ThemeModel *m_model;
     PairsTheme *m_pt;
     QStandardItem *m_selectedItem;
-
+    QPixmap scaleImage(const QPixmap &i, int max) const;
 };
 
 #endif // MAINWINDOWVIEW_H

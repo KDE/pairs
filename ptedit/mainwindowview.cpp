@@ -97,7 +97,7 @@ void MainWindowView::setUi(PairsTheme *theme)
 	m_ui->descriptionEdit->setText(theme->description());
 	m_ui->backKurl->setText(theme->backImage());
 	QPixmap image(m_path +'/'+theme->backImage());
-	m_ui->pixLabel->setPixmap(image.scaledToWidth(100));
+	m_ui->pixLabel->setPixmap(scaleImage(image, 100));
 	m_ui->fileKurl->setStartDir(KUrl(theme->path()));
 	m_ui->backKurl->setStartDir(KUrl(theme->path()));
 }
@@ -248,7 +248,7 @@ void MainWindowView::elementSelected(const QModelIndex & idx)
         m_ui->itemLabel->show();
         m_ui->fileKurl->show();
         image.load(m_path+'/'+m_ui->fileKurl->text());
-        m_ui->itemLabel->setPixmap(image.scaledToWidth(100));
+      	m_ui->itemLabel->setPixmap(scaleImage(image, 100));
         break;
     case CARD_SOUND:
     case CARD_SOUNDLOGIC:
@@ -261,8 +261,7 @@ void MainWindowView::elementSelected(const QModelIndex & idx)
         m_ui->itemLabel->show();
         m_ui->imageLabel->show();
         m_ui->fileKurl->show();
-        image.load(m_path+'/'+m_ui->fileKurl->text());
-        m_ui->itemLabel->setPixmap(image.scaledToWidth(100));
+      	m_ui->itemLabel->setPixmap(scaleImage(image, 100));
         break;
     case CARD_WORD:
         m_ui->wordEdit->show();
@@ -282,7 +281,7 @@ void MainWindowView::backSelected()
     QString newFile = m_parent->copyFile(m_ui->backKurl);
     m_ui->backKurl->setText(m_ui->backKurl->url().fileName());
     image.load(newFile);
-    m_ui->pixLabel->setPixmap(image.scaledToWidth(100));
+  	m_ui->pixLabel->setPixmap(scaleImage(image, 100));
 }
 void MainWindowView::fileSelected()
 {
@@ -290,10 +289,17 @@ void MainWindowView::fileSelected()
     QString newFile = m_parent->copyFile(m_ui->fileKurl);
     m_ui->fileKurl->setText(m_ui->fileKurl->url().fileName());
     image.load(newFile);
-    m_ui->itemLabel->setPixmap(image.scaledToWidth(100));
+  	m_ui->itemLabel->setPixmap(scaleImage(image, 100));
     m_selectedItem->setData(m_ui->fileKurl->text(),ThemeModel::PathRole);
     m_selectedItem->setText(m_ui->fileKurl->text());
 
+}
+
+QPixmap MainWindowView::scaleImage(const QPixmap &i, int max) const
+{
+	if (i.width() > i.height())
+		return i.scaledToWidth(max);
+	return i.scaledToHeight(max);
 }
 
 void MainWindowView::wordChanged(const QString &word)
