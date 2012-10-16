@@ -24,6 +24,7 @@
 #include "pairstheme.h"
 #include "thememodel.h"
 #include "klocalizedstring.h"
+#include <KIcon>
 
 FeatureItem::FeatureItem(CardType type, QString lang, QString src): QStandardItem()
 {
@@ -36,20 +37,20 @@ FeatureItem::FeatureItem(CardType type, QString lang, QString src): QStandardIte
     case CARD_IMAGE:
     case CARD_IMAGE2:
         typeName = "image";
-        setIcon(QIcon(":/images/view-preview.png"));
+        setIcon(KIcon::fromTheme("view-preview"));
         break;
     case CARD_SOUND:
     case CARD_SOUNDLOGIC:
         typeName = "sound";
-        setIcon(QIcon(":/images/preferences-desktop-text-to-speech.png"));
+        setIcon(KIcon::fromTheme("preferences-desktop-text-to-speech"));
         break;
     case CARD_LOGIC:
         typeName = "logic";
-        setIcon(QIcon(":/images/preferences-plugin.png"));
+        setIcon(KIcon::fromTheme("preferences-plugin"));
         break;
     case CARD_WORD:
         typeName = "word";
-        setIcon(QIcon(":/images/preferences-desktop-font.png"));
+        setIcon(KIcon::fromTheme("preferences-desktop-font"));
         break;
     case CARD_FOUND:
         typeName = "pfound";
