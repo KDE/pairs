@@ -194,7 +194,8 @@ void MainWindowView::addFeature(int index)
 
 void MainWindowView::addElement()
 {
-    if(m_selectedItem->data(ThemeModel::CardTypeRole).toInt())
+
+    if(!m_model || m_model->rowCount() == 0 || m_selectedItem->data(ThemeModel::CardTypeRole).toInt())
         return;
     const ThemeElement el;
     ElementItem *newItem = new ElementItem (el);
@@ -205,6 +206,8 @@ void MainWindowView::addElement()
 
 void MainWindowView::deleteElement()
 {
+	if(!m_model || m_model->rowCount() == 0)
+		return;
     m_model->removeItem(m_selectedItem);
 }
 void MainWindowView::selectionChanged(const QItemSelection& selected, const QItemSelection&  )
