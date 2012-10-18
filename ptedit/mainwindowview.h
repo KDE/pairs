@@ -29,7 +29,7 @@
 #include <QtGui/QItemSelection>
 
 class QXmlStreamWriter;
-class PairsTheme;
+class PairsThemeEditor;
 class ThemeModel;
 class QStandardItem;
 class MainWindow;
@@ -49,7 +49,7 @@ public:
     void clearUi(const QString &path);
     void writeXmlCommon(QXmlStreamWriter *stream);
     Ui::MainWindowView *ui(){return m_ui;};
-    void setUi(PairsTheme *theme);
+    void setUi(PairsThemeEditor *theme);
     void setModel(ThemeModel *model);
     bool check();
     QString checkString() const {return m_checkMessage;};
@@ -70,7 +70,7 @@ private:
     QString m_checkMessage;
     QString m_path;
     ThemeModel *m_model;
-    PairsTheme *m_pt;
+    PairsThemeEditor *m_pt;
     QStandardItem *m_selectedItem;
     QPixmap scaleImage(const QPixmap &i, int max) const;
 };

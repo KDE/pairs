@@ -23,7 +23,7 @@
 #define ELEMENTITEM_H
 
 #include <QtGui/QStandardItem>
-#include "pairstheme.h"
+#include "pairsthemeeditor.h"
 
 class QXmlStreamWriter;
 

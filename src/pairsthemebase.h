@@ -20,24 +20,17 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PAIRSTHEME_H
-#define PAIRSTHEME_H
+#ifndef PAIRSTHEMEBASE_H
+#define PAIRSTHEMEBASE_H
 #include <QtCore/QString>
 #include <QtCore/QMap>
 #include <QtCore/QVariant>
 #include <QtCore/QList>
 #include <QtCore/QStringList>
 #include <QtCore/QSet>
-#include <QtCore/QFile>
-#include <QtCore/QDir>
-#ifdef Q_OS_WIN
-#include <KZip>
-#else
-#include <KTar>
-#endif
-#include <QtXml/QXmlStreamReader>
 #include <QtGui/QStandardItem>
 #include "cardtype.h"
+#include <QtXml/QXmlStreamReader>
 
 class ThemeElement {
 public:
@@ -56,35 +49,40 @@ public:
     QString foundSound(const QString& lang) const;
 };
 
-class PairsTheme : public QObject, public QStandardItem
+class PairsThemeBase : public QObject, public QStandardItem
 {
     Q_OBJECT
 
     public:
+        enum ThemeRoles {
+             CardTypeRole = Qt::UserRole + 1,
+             LanguagesRole,
+             PathRole
+         };
 
-        PairsTheme(const QString& path);
+        PairsThemeBase();
         bool isPertinent(const QString &type,const QString &lang);
+        static CardType cardNameToType(const QString& name);
         QString title() const { return m_title; }
         void setTitle(const QString &title) {m_title = title; setText(title);}
         QString description() const { return m_description; }
         QString backImage() const { return m_back_img; }
-        QString path() const;
+        QList<ThemeElement> items() const { return m_items; }
+        bool isCorrect() const { return m_error.isEmpty(); }
+        QString error() const { return m_error; }
+        CardType mainType() const { return m_main_type; }
         QString author() const { return m_author; }
         QString version() const { return m_version; }
         QString date() const { return m_date; }
 
-        QList<ThemeElement> items() const { return m_items; }
+        virtual QStringList images() const = 0;
+        virtual bool hasFile(const QString& path) const = 0;
+        virtual QString path() const = 0;
         
-        bool isCorrect() const { return m_error.isEmpty(); }
-        QString error() const { return m_error; }
-        CardType mainType() const { return m_main_type; }
-        QStringList images() const;
-        bool hasFile(const QString& path) const;
-        static CardType cardNameToType(const QString& name);
-    private:
+    protected:
+        void parse(QXmlStreamReader &reader);
         void parseElement(QXmlStreamReader &reader);
 
-        bool isValid(const QFile* file);
         QString m_title;
         QString m_description;
         QString m_author;
@@ -107,9 +105,6 @@ class PairsTheme : public QObject, public QStandardItem
         QSet<QString> m_languages;
         QMap<QString, QSet<QString> > m_cardtypes;
 
-        QFile m_archive;
-        QDir m_dir;
-
 };
 
-#endif // PAIRSTHEME_H
+#endif // PAIRSTHEMEBASE_H

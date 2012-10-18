@@ -166,7 +166,7 @@ void MainWindow::open(const QString& filename)
 {
 //    m_file = filename;
     delete m_pt;
-    m_pt = new PairsTheme(filename);
+    m_pt = new PairsThemeEditor(filename);
     m_model = new ThemeModel(*m_pt, this);
     m_mainWidget->setModel(m_model);
     m_mainWidget->setUi(m_pt);

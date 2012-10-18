@@ -25,7 +25,7 @@
 #include <klocale.h>
 
 
-ThemeModel::ThemeModel(PairsTheme &t, QObject* parent): QStandardItemModel(parent)
+ThemeModel::ThemeModel(PairsThemeEditor &t, QObject* parent): QStandardItemModel(parent)
 {
     QHash<int, QByteArray> names = QStandardItemModel::roleNames();
     names.insert(CardTypeRole, "type");

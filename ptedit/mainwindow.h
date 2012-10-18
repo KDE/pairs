@@ -29,7 +29,7 @@
 #include <QtCore/QModelIndex>
 
 class QItemSelection;
-class PairsTheme;
+class PairsThemeEditor;
 class QDir;
 class QStandardItem;
 class ThemeModel;
@@ -58,7 +58,7 @@ public slots:
 
 private:
     MainWindowView *m_mainWidget;
-    PairsTheme *m_pt;
+    PairsThemeEditor *m_pt;
     QStandardItem *m_selectedItem;
     ThemeModel *m_model;
     QString m_file;

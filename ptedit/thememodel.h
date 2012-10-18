@@ -23,7 +23,7 @@
 #define THEMEMODEL_H
 
 #include <QtGui/QStandardItemModel>
-#include "pairstheme.h"
+#include "pairsthemeeditor.h"
 class ThemeModel : public QStandardItemModel
 {
     Q_OBJECT
@@ -33,7 +33,7 @@ class ThemeModel : public QStandardItemModel
          LanguageRole,
          PathRole
      };
-        explicit ThemeModel(PairsTheme &t, QObject* parent = 0);
+        explicit ThemeModel(PairsThemeEditor &t, QObject* parent = 0);
         explicit ThemeModel(QObject* parent = 0);
         void removeItem(QStandardItem *selectedItem);
         void insertItem(QStandardItem *newItem);

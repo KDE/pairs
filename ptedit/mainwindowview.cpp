@@ -24,7 +24,7 @@
 #include "mainwindowview.h"
 #include "mainwindow.h"
 #include "ui_mainwindowview.h"
-#include "pairstheme.h"
+#include "pairsthemeeditor.h"
 #include "thememodel.h"
 #include "elementitem.h"
 #include "featureitem.h"
@@ -85,7 +85,7 @@ void MainWindowView::clearUi(const QString &path)
 	m_ui->backKurl->setStartDir(KUrl(QDir::currentPath()));
 }
 
-void MainWindowView::setUi(PairsTheme *theme)
+void MainWindowView::setUi(PairsThemeEditor *theme)
 {
 	m_pt = theme;
 	m_path = m_pt->path();

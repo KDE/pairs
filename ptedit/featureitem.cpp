@@ -21,7 +21,7 @@
  */
 
 #include "featureitem.h"
-#include "pairstheme.h"
+#include "pairsthemeeditor.h"
 #include "thememodel.h"
 #include "klocalizedstring.h"
 #include <KIcon>
