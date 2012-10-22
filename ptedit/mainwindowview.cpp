@@ -35,6 +35,7 @@
 MainWindowView::MainWindowView(QWidget *parent) : m_ui(new Ui::MainWindowView)
 {
 	m_parent = static_cast<MainWindow*> (parent);
+	m_selectedItem = 0;
     m_ui->setupUi(this);
 	m_ui->splitter->setStretchFactor(1, 3);
 	connect(m_ui->fileKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(fileSelected()));
@@ -171,6 +172,8 @@ bool MainWindowView::check()
 
 void MainWindowView::addFeature(int index)
 {
+    if(!m_model || m_model->rowCount() == 0 || !m_selectedItem)
+        return;
     QStandardItem *paren = m_selectedItem;
     m_ui->moreButton->setCurrentIndex(-1);
     if(m_selectedItem->data(ThemeModel::CardTypeRole).toInt())
@@ -202,7 +205,7 @@ void MainWindowView::addFeature(int index)
 void MainWindowView::addElement()
 {
 
-    if(!m_model || m_model->rowCount() == 0 || m_selectedItem->data(ThemeModel::CardTypeRole).toInt())
+    if(!m_model || m_model->rowCount() == 0 || !m_selectedItem || m_selectedItem->data(ThemeModel::CardTypeRole).toInt())
         return;
     const ThemeElement el;
     ElementItem *newItem = new ElementItem (el);
@@ -215,9 +218,10 @@ void MainWindowView::addElement()
 
 void MainWindowView::deleteElement()
 {
-	if(!m_model || m_model->rowCount() == 0)
+	if(!m_model || m_model->rowCount() == 0 || !m_selectedItem)
 		return;
     m_model->removeItem(m_selectedItem);
+    m_selectedItem = 0;
     emit changed();
 
 }
