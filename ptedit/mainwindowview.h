@@ -54,6 +54,9 @@ public:
     bool check();
     QString checkString() const {return m_checkMessage;};
 
+signals:
+	void changed();
+
 public slots:
     void elementSelected(const QModelIndex & item);
     void backSelected();

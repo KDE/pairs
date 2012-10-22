@@ -55,6 +55,10 @@ public slots:
     void doTry();
     void pairsFinished();
     QString copyFile(KUrlRequester *k);
+    void doChange() {m_fileSaved = false;}
+
+protected:
+    virtual bool queryClose();
 
 private:
     MainWindowView *m_mainWidget;
@@ -66,6 +70,7 @@ private:
     QString m_pairsFile;
     QDir *m_tmpDir;
     QProcess *m_process;
+    bool m_fileSaved;
 
     void newTmpDir(const QString &path);
     void extract(QString path);

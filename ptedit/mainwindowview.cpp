@@ -44,6 +44,13 @@ MainWindowView::MainWindowView(QWidget *parent) : m_ui(new Ui::MainWindowView)
 	connect(m_ui->addButton, SIGNAL(clicked()), this, SLOT(addElement()));
 	connect(m_ui->moreButton, SIGNAL(currentIndexChanged(int)), this, SLOT(addFeature(int)));
 
+	connect(m_ui->titleEdit, SIGNAL(textEdited(QString)), this, SIGNAL(changed()));
+	connect(m_ui->descriptionEdit, SIGNAL(textEdited(QString)), this, SIGNAL(changed()));
+	connect(m_ui->authorEdit, SIGNAL(textEdited(QString)), this, SIGNAL(changed()));
+	connect(m_ui->versionEdit, SIGNAL(textEdited(QString)), this, SIGNAL(changed()));
+	connect(m_ui->dateEdit, SIGNAL(dateChanged(QDate)), this, SIGNAL(changed()));
+	connect(m_ui->maintypeBox, SIGNAL(currentIndexChanged(int)), this, SIGNAL(changed()));
+
 }
 
 MainWindowView::~MainWindowView()
@@ -188,7 +195,7 @@ void MainWindowView::addFeature(int index)
     }
     FeatureItem *fi = new FeatureItem(newType, "any", "");
     m_model->insertFeature(fi, paren);
-
+    emit changed();
 
 }
 
@@ -202,6 +209,8 @@ void MainWindowView::addElement()
     QString name = i18n("Element %1", m_model->rowCount()+1);
     newItem->setText(name);
     m_model->insertItem(newItem);
+    emit changed();
+
 }
 
 void MainWindowView::deleteElement()
@@ -209,6 +218,8 @@ void MainWindowView::deleteElement()
 	if(!m_model || m_model->rowCount() == 0)
 		return;
     m_model->removeItem(m_selectedItem);
+    emit changed();
+
 }
 void MainWindowView::selectionChanged(const QItemSelection& selected, const QItemSelection&  )
 {
@@ -285,6 +296,7 @@ void MainWindowView::backSelected()
     m_ui->backKurl->setText(m_ui->backKurl->url().fileName());
     image.load(newFile);
   	m_ui->pixLabel->setPixmap(scaleImage(image, 100));
+    emit changed();
 }
 void MainWindowView::fileSelected()
 {
@@ -295,7 +307,7 @@ void MainWindowView::fileSelected()
   	m_ui->itemLabel->setPixmap(scaleImage(image, 100));
     m_selectedItem->setData(m_ui->fileKurl->text(),ThemeModel::PathRole);
     m_selectedItem->setText(m_ui->fileKurl->text());
-
+    emit changed();
 }
 
 QPixmap MainWindowView::scaleImage(const QPixmap &i, int max) const
@@ -309,5 +321,6 @@ void MainWindowView::wordChanged(const QString &word)
 {
     m_selectedItem->setData(word, ThemeModel::PathRole);
     m_selectedItem->setText(word);
+    emit changed();
 }
 

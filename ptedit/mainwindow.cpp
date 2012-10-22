@@ -48,8 +48,10 @@ MainWindow::MainWindow(QWidget *parent) : KXmlGuiWindow(parent)
     m_model = 0;
     m_tmpDir = 0;
     m_process = 0;
+    m_fileSaved = true;
     setMinimumSize (900, 400);
     m_mainWidget = new MainWindowView(this);
+    connect(m_mainWidget, SIGNAL(changed()), this, SLOT(doChange()));
     setCentralWidget(m_mainWidget);
     KAction *myact = KStandardAction::create(KStandardAction::New, this, SLOT(doNew()), this);
     actionCollection()->addAction("new", myact);
@@ -77,6 +79,24 @@ MainWindow::~MainWindow()
 
 
 //void MainWindow::doUpload(){};
+
+bool MainWindow::queryClose()
+{
+    if (!m_fileSaved)
+    {
+    	switch ( KMessageBox::warningYesNoCancel( this, i18n("Save changes to document")) ) {
+    		case KMessageBox::Yes :
+    			doSave();
+    			return true;
+    		case KMessageBox::No :
+    	         return true;
+    		default: // cancel
+    			return false;
+    	}
+    }
+    return true;
+}
+
 
 void MainWindow::doTry()
 {
@@ -114,6 +134,8 @@ void MainWindow::doNew()
     m_mainWidget->setModel(m_model);
     m_mainWidget->clearUi(m_tmpDir->path());
     m_mainWidget->widgetsHide();
+    m_fileSaved = true;
+
 }
 
 void MainWindow::doSave()
@@ -159,6 +181,8 @@ void MainWindow::doSave()
     f.close();
 
     compress(m_file);
+    m_fileSaved = true;
+
 }
 
 
@@ -171,6 +195,8 @@ void MainWindow::open(const QString& filename)
     m_mainWidget->setModel(m_model);
     m_mainWidget->setUi(m_pt);
     m_mainWidget->widgetsHide();
+    m_fileSaved = true;
+
 }
 
 void MainWindow::doOpen()
