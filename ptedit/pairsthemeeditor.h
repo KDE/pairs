@@ -20,39 +20,27 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PAIRSTHEME_H
-#define PAIRSTHEME_H
-#include "pairsthemebase.h"
-#ifdef Q_OS_WIN
-#include <KZip>
-#else
-#include <KTar>
-#endif
+#ifndef PAIRSTHEMEEDITOR_H
+#define PAIRSTHEMEEDITOR_H
+#include "../src/pairsthemebase.h"
+#include <QtCore/QDir>
 #include <QtXml/QXmlStreamReader>
 #include <QtGui/QStandardItem>
 #include "cardtype.h"
 
-class PairsTheme : public PairsThemeBase
+class PairsThemeEditor : public PairsThemeBase
 {
     Q_OBJECT
 
     public:
 
-        PairsTheme(const QString& path);
-
+    	PairsThemeEditor(const QString& path);
         virtual QString path() const;
         virtual QStringList images() const;
         virtual bool hasFile(const QString& path) const;
-
-        QByteArray themeData(const QString& path) const;
     private:
-        bool isValid(const KArchiveFile* file);
-        //TODO: use KZip everywhere
-        #ifdef Q_OS_WIN
-                KZip m_archive;
-        #else
-        		KTar m_archive;
-        #endif
+        QFile m_archive;
+        QDir m_dir;
 
 };
 

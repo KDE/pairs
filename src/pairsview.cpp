@@ -26,7 +26,7 @@
 #include "pairstheme.h"
 #include "themesmodel.h"
 #include "themeiconsprovider.h"
-#include "playersmodel.h"
+#include "pairsplayer.h"
 #include <QDebug>
 #include <QPropertyAnimation>
 #include <QGraphicsRotation>
@@ -42,6 +42,7 @@
 // #ifndef QT_NO_OPENGL
 //     #include <QGLWidget>
 // #endif
+#include "playersmodel.h"
 #include <Phonon/MediaObject>
 #include <Phonon/AudioOutput>
 
@@ -52,7 +53,6 @@
 #include <KRandom>
 #include <KStandardDirs>
 #include <kdeclarative.h>
-#include "pairsplayer.h"
 
 PairsView::PairsView(QWidget *parent)
     : QDeclarativeView(parent)
@@ -72,6 +72,7 @@ PairsView::PairsView(QWidget *parent)
     connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
     
     connect(m_players, SIGNAL(rowsRemoved(QModelIndex,int,int)), m_timer, SLOT(stop()));
+    
 //     qmlRegisterType<ThemesModel>("org.kde.edu.pairs", 1, 0, "ThemesModel");
     
     setResizeMode(SizeRootObjectToView);

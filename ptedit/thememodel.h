@@ -1,7 +1,7 @@
 /*  This file is part of Pairs
  *
- *  Copyright (C) <2011>       <Aleix Pol>           <aleixpol@kde.org>
- *  Copyright (C) <2011>       <Marco Calignano>     <marco.calignano@googlemail.com>
+ *  Copyright (C) <2012>       <Marco Calignano>     <marco.calignano@gmail.com>
+ *
  *
  *  This program is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License as
@@ -19,24 +19,25 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#ifndef THEMEMODEL_H
+#define THEMEMODEL_H
 
-#ifndef THEMEICONSPROVIDER_H
-#define THEMEICONSPROVIDER_H
-
-#include <QDeclarativeImageProvider>
-#include "pairstheme.h"
-
-class ThemesModel;
-class ThemeIconsProvider : public QDeclarativeImageProvider
+#include <QtGui/QStandardItemModel>
+#include "pairsthemeeditor.h"
+class ThemeModel : public QStandardItemModel
 {
+    Q_OBJECT
     public:
-        ThemeIconsProvider(QDeclarativeImageProvider::ImageType type, ThemesModel* themes);
-        ~ThemeIconsProvider();
-        QPixmap requestPixmap(const QString& id, QSize* size, const QSize& requestedSize);
-
-	private:
-        ThemesModel* m_themes;
+    enum ThemeModelRoles {
+         CardTypeRole = Qt::UserRole + 1,
+         LanguageRole,
+         PathRole
+     };
+        explicit ThemeModel(PairsThemeEditor &t, QObject* parent = 0);
+        explicit ThemeModel(QObject* parent = 0);
+        void removeItem(QStandardItem *selectedItem);
+        void insertItem(QStandardItem *newItem);
+        void insertFeature(QStandardItem *newItem, QStandardItem *parent);
 };
 
-
-#endif /* THEMEICONSPROVIDER_H_ */
+#endif // THEMEMODEL_H

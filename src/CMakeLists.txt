@@ -21,7 +21,10 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-set(pairs_SRCS pairstheme.cpp carditem.cpp
+set(pairs_SRCS 
+   pairstheme.cpp 
+   pairsthemebase.cpp
+   carditem.cpp
    pairs.cpp
    main.cpp
    pairsview.cpp

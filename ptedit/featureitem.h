@@ -1,7 +1,7 @@
 /*  This file is part of Pairs
  *
- *  Copyright (C) <2011>       <Aleix Pol>           <aleixpol@kde.org>
- *  Copyright (C) <2011>       <Marco Calignano>     <marco.calignano@googlemail.com>
+ *  Copyright (C) <2012>       <Marco Calignano>     <marco.calignano@gmail.com>
+ *
  *
  *  This program is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License as
@@ -20,23 +20,25 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef THEMEICONSPROVIDER_H
-#define THEMEICONSPROVIDER_H
+#ifndef FEATUREITEM_H
+#define FEATUREITEM_H
 
-#include <QDeclarativeImageProvider>
-#include "pairstheme.h"
+#include <QtGui/QStandardItem>
+#include <QtCore/QModelIndex>
+#include "pairsthemeeditor.h"
 
-class ThemesModel;
-class ThemeIconsProvider : public QDeclarativeImageProvider
+class QXmlStreamWriter;
+
+class FeatureItem : public QStandardItem
 {
     public:
-        ThemeIconsProvider(QDeclarativeImageProvider::ImageType type, ThemesModel* themes);
-        ~ThemeIconsProvider();
-        QPixmap requestPixmap(const QString& id, QSize* size, const QSize& requestedSize);
+        explicit FeatureItem(CardType type, QString lang, QString src);
+        void writeElement(QXmlStreamWriter *stream);
+        bool check(int index);
+        QString checkMessage() const {return m_checkMessage;};
+    private:
+        QString m_checkMessage;
 
-	private:
-        ThemesModel* m_themes;
 };
 
-
-#endif /* THEMEICONSPROVIDER_H_ */
+#endif //FEATUREITEM_H

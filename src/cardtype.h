@@ -20,8 +20,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CARDTYPE_H_
-#define CARDTYPE_H_
+#ifndef CARDTYPE_H
+#define CARDTYPE_H
 
 enum CardType {
     CARD_NONE = 0,
