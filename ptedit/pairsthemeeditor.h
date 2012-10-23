@@ -22,7 +22,7 @@
 
 #ifndef PAIRSTHEMEEDITOR_H
 #define PAIRSTHEMEEDITOR_H
-#include "../src/pairsthemebase.h"
+#include "../game/pairsthemebase.h"
 #include <QtCore/QDir>
 #include <QtXml/QXmlStreamReader>
 #include <QtGui/QStandardItem>

@@ -11,7 +11,7 @@ include_directories( ${KDE4_INCLUDE_DIRS} ${CMAKE_CURRENT_BINARY_DIR})
 add_definitions( ${KDE4_DEFINITIONS} )
 
 set(ptedit_SOURCES  mainwindow.cpp main.cpp pairsthemeeditor.cpp mainwindowview.cpp
-    thememodel.cpp elementitem.cpp featureitem.cpp ../src/pairsthemebase.cpp)
+    thememodel.cpp elementitem.cpp featureitem.cpp ../game/pairsthemebase.cpp)
 
 kde4_add_ui_files( ptedit_SOURCES mainwindowview.ui )
 
