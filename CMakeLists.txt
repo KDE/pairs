@@ -29,7 +29,7 @@ include (KDE4Defaults)
 include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
 
 add_subdirectory( game )
-add_subdirectory( ptedit )
+add_subdirectory( pairseditor )
 add_subdirectory( icons )
 add_subdirectory( players )
 add_subdirectory( gameicons )
