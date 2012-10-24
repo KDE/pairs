@@ -226,7 +226,8 @@ void MainWindow::extract(QString path)
 {
     KTar archive(path);
     newTmpDir(QDir::tempPath() + '/' + QFileInfo(path).fileName());
-    Q_ASSERT(archive.open(QIODevice::ReadOnly));
+    const bool opened = archive.open(QIODevice::ReadOnly);
+    Q_ASSERT(opened);
     QStringList files(archive.directory()->entries());
     Q_FOREACH(const QString filename, files)
     {
@@ -240,7 +241,8 @@ void MainWindow::extract(QString path)
 void MainWindow::compress(QString path)
 {
     KTar archive(path);
-    Q_ASSERT(archive.open(QIODevice::WriteOnly));
+    const bool opened = archive.open(QIODevice::WriteOnly);
+    Q_ASSERT(opened);
     archive.addLocalDirectory(m_tmpDir->path(), "");
     archive.close();
     m_tmpDir->rmpath(m_tmpDir->path());
