@@ -1,14 +1,4 @@
 project(pairs-editor)
-CMAKE_MINIMUM_REQUIRED( VERSION 2.8 )
-find_package( KDE4 REQUIRED )
-
-INCLUDE_DIRECTORIES( ${KDE4_INCLUDES}  )
-
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
-
-include_directories( ${KDE4_INCLUDE_DIRS} ${CMAKE_CURRENT_BINARY_DIR})
-
-add_definitions( ${KDE4_DEFINITIONS} )
 
 set(pairseditor_SOURCES  mainwindow.cpp main.cpp pairsthemeeditor.cpp mainwindowview.cpp
     thememodel.cpp elementitem.cpp featureitem.cpp ../game/pairsthemebase.cpp)
