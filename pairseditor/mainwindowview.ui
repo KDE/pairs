@@ -31,7 +31,7 @@
         <item row="0" column="0">
          <widget class="QLabel" name="titleLabel">
           <property name="text">
-           <string>Title</string>
+           <string>Title:</string>
           </property>
          </widget>
         </item>
@@ -41,7 +41,7 @@
         <item row="1" column="0">
          <widget class="QLabel" name="descriptionLabel">
           <property name="text">
-           <string>Description</string>
+           <string>Description:</string>
           </property>
          </widget>
         </item>
@@ -51,7 +51,7 @@
         <item row="3" column="0">
          <widget class="QLabel" name="authorLabel">
           <property name="text">
-           <string>Author</string>
+           <string>Author:</string>
           </property>
          </widget>
         </item>
@@ -61,7 +61,7 @@
         <item row="4" column="0">
          <widget class="QLabel" name="versionLabel">
           <property name="text">
-           <string>Version</string>
+           <string>Version:</string>
           </property>
          </widget>
         </item>
@@ -78,7 +78,7 @@
         <item row="0" column="0">
          <widget class="QLabel" name="dateLabel">
           <property name="text">
-           <string>Date</string>
+           <string>Date:</string>
           </property>
          </widget>
         </item>
@@ -92,7 +92,7 @@
         <item row="1" column="0">
          <widget class="QLabel" name="maintypeLabel">
           <property name="text">
-           <string>Main Type</string>
+           <string>Main Type:</string>
           </property>
          </widget>
         </item>
@@ -123,7 +123,7 @@
         <item row="2" column="0">
          <widget class="QLabel" name="backLabel">
           <property name="text">
-           <string>Back Image</string>
+           <string>Back Image:</string>
           </property>
          </widget>
         </item>
@@ -203,7 +203,9 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset theme="list-add"/>
+            <iconset theme="list-add">
+             <normaloff/>
+            </iconset>
            </property>
           </widget>
          </item>
@@ -225,7 +227,9 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset theme="list-remove"/>
+            <iconset theme="list-remove">
+             <normaloff/>
+            </iconset>
            </property>
           </widget>
          </item>
@@ -248,34 +252,42 @@
            </property>
            <item>
             <property name="text">
-             <string>new Image</string>
+             <string>New Image</string>
             </property>
             <property name="icon">
-             <iconset theme="view-preview"/>
+             <iconset theme="view-preview">
+              <normaloff/>
+             </iconset>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>new Logic</string>
+             <string>New Logic</string>
             </property>
             <property name="icon">
-             <iconset theme="preferences-plugin"/>
+             <iconset theme="preferences-plugin">
+              <normaloff/>
+             </iconset>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>new Sound</string>
+             <string>New Sound</string>
             </property>
             <property name="icon">
-             <iconset theme="preferences-desktop-text-to-speech"/>
+             <iconset theme="preferences-desktop-text-to-speech">
+              <normaloff/>
+             </iconset>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>new Word</string>
+             <string>New Word</string>
             </property>
             <property name="icon">
-             <iconset theme="preferences-desktop-font"/>
+             <iconset theme="preferences-desktop-font">
+              <normaloff/>
+             </iconset>
             </property>
            </item>
           </widget>
@@ -336,7 +348,7 @@
        <item row="0" column="0">
         <widget class="QLabel" name="imageLabel">
          <property name="text">
-          <string>Image</string>
+          <string>Image:</string>
          </property>
         </widget>
        </item>
@@ -346,7 +358,7 @@
        <item row="1" column="0">
         <widget class="QLabel" name="wordLabel">
          <property name="text">
-          <string>Word</string>
+          <string>Word:</string>
          </property>
         </widget>
        </item>
@@ -356,7 +368,7 @@
        <item row="2" column="0">
         <widget class="QLabel" name="langLabel">
          <property name="text">
-          <string>Language</string>
+          <string>Language:</string>
          </property>
         </widget>
        </item>

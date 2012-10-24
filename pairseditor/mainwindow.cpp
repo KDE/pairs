@@ -84,7 +84,7 @@ bool MainWindow::queryClose()
 {
     if (!m_fileSaved)
     {
-    	switch ( KMessageBox::warningYesNoCancel( this, i18n("Save changes to document")) ) {
+    	switch ( KMessageBox::warningYesNoCancel( this, i18n("Save changes to the document?")) ) {
     		case KMessageBox::Yes :
     			doSave();
     			return true;
@@ -144,7 +144,7 @@ void MainWindow::doSave()
     {
         qDebug() << "Check not passed:";
         qDebug() << m_mainWidget->checkString();
-        KMessageBox::error(this, m_mainWidget->checkString(), "File not saved");
+        KMessageBox::error(this, m_mainWidget->checkString(), i18n("File not saved"));
         return ;
     }
 

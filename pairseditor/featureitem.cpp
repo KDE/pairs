@@ -94,17 +94,17 @@ bool FeatureItem::check(int index)
     m_checkMessage = "";
     if(data(ThemeModel::CardTypeRole).toInt() == 0)
     {
-        m_checkMessage = i18n("No Features type on child from Element %1", index);
+        m_checkMessage = i18n("No features type on child from element %1", index);
         return false;
     }
     if(data(ThemeModel::LanguageRole).toString().isEmpty())
     {
-        m_checkMessage = i18n("No language set on child from Element %1", index);
+        m_checkMessage = i18n("No language set on child from element %1", index);
         return false;
     }
     if(data(ThemeModel::PathRole).toString().isEmpty())
     {
-        m_checkMessage = i18n("No file or word set on child from Element %1", index);
+        m_checkMessage = i18n("No file or word set on child from element %1", index);
         return false;
     }
     return true;

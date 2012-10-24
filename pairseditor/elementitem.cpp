@@ -74,7 +74,7 @@ bool ElementItem::check(int index)
     m_checkMessage = "";
     if(rowCount() == 0)
     {
-        m_checkMessage = i18n("No features present on Element %1", index);
+        m_checkMessage = i18n("No features present on element %1", index);
         return false;
     }
     for (int i=0; i < rowCount(); i++)
