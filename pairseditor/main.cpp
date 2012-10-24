@@ -29,7 +29,7 @@
 
 int main(int argc, char *argv[])
 {
-    KAboutData aboutData( "ptedit", "ptedit3", ki18n("ptEdit"), "1.0",
+    KAboutData aboutData( "pairseditor", QByteArray(), ki18n("Pairs Editor"), "1.0",
                           ki18n("Pairs Themes Editor"), KAboutData::License_GPL,
                           ki18n("Copyright (c) 2012 the Pairs developers"));
 

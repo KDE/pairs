@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Pairs Theme Editor
-Exec=ptedit %i -caption "%c"
+Exec=pairseditor %i -caption "%c"
 Icon=pairs
 Type=Application
 GenericName=A Pairs theme editor
