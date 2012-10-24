@@ -21,4 +21,6 @@
 
 #!/bin/bash
 
-$XGETTEXT `find . -name \*.cpp -o -name \*.qml` -o $podir/pairseditor.pot
+$EXTRACTRC *.ui *.rc >> rc.cpp
+$XGETTEXT `find . -name \*.cpp` -o $podir/pairseditor.pot
+rm -f rc.cpp
