@@ -1,4 +1,4 @@
-project(pairs-editor)
+project(pairseditor)
 
 set(pairseditor_SOURCES  mainwindow.cpp main.cpp pairsthemeeditor.cpp mainwindowview.cpp
     thememodel.cpp elementitem.cpp featureitem.cpp ../game/pairsthemebase.cpp)
