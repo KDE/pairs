@@ -41,7 +41,7 @@ public:
     /**
      * Default Constructor
      */
-    Pairs();
+    Pairs(const QString &file = "");
 
     /**
      * Default Destructor

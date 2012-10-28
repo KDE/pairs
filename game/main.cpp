@@ -28,6 +28,7 @@
 #include <KDE/KCmdLineArgs>
 #include <KDE/KLocale>
 #include <KDE/KIcon>
+#include <KDE/KUrl>
 #include <KStandardDirs>
 #include <QDebug>
 #include "pairstheme.h"
@@ -48,7 +49,10 @@ int main(int argc, char **argv)
 
     KCmdLineOptions options;
     options.add("fullscreen", ki18n( "start in fullscreen mode"));
-    KCmdLineArgs::addCmdLineOptions(options);
+//    KCmdLineArgs::addCmdLineOptions(options);
+    options.add("+[file]", ki18n("Pairs theme to open")); //new
+    KCmdLineArgs::addCmdLineOptions(options); //new
+
     KApplication app;
     
     // see if we are starting with session management
@@ -61,8 +65,16 @@ int main(int argc, char **argv)
         // no session.. just start up normally
         KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
         bool fsMode = KCmdLineArgs::parsedArgs()->isSet("fullscreen");
-        args->clear();
-        Pairs *widget = new Pairs;
+        Pairs *widget = 0;
+        if(args->count())
+        {
+             widget = new Pairs(args->arg(0));
+        }
+        else
+        {
+            widget = new Pairs;
+        }
+    	args->clear();
         widget->view()->setLanguage(KGlobal::locale()->language().left(2));
         if (fsMode) 
         {

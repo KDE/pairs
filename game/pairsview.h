@@ -43,7 +43,7 @@ public:
     /**
      * Default constructor
      */
-    PairsView(QWidget *parent);
+    PairsView(QWidget *parent, const QString &file = "");
 
     /**
      * Destructor

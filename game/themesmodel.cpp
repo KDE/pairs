@@ -29,19 +29,38 @@
 #include <QDebug>
 
 
-ThemesModel::ThemesModel(QObject* parent): QStandardItemModel(parent)
+ThemesModel::ThemesModel(QObject* parent, const QString &filePath): QStandardItemModel(parent)
 {
     QHash<int, QByteArray> names=QStandardItemModel::roleNames();
     names.insert(PairsTheme::CardTypeRole, "type");
     names.insert(PairsTheme::LanguagesRole, "languages");
     setRoleNames(names);
-    
-    QStringList themesdirs=KGlobal::dirs()->findDirs("appdata", "themes");
-    m_fs=new QFileSystemWatcher(this);
-    m_fs->addPaths(themesdirs);
-    connect(m_fs, SIGNAL(directoryChanged(QString)), SLOT(reload()));
-    
-    QMetaObject::invokeMethod(this, "reload", Qt::QueuedConnection);
+    qDebug() << "file path:"<< filePath;
+	if(filePath.isEmpty())
+	{
+		QStringList themesdirs=KGlobal::dirs()->findDirs("appdata", "themes");
+		m_fs=new QFileSystemWatcher(this);
+		m_fs->addPaths(themesdirs);
+		connect(m_fs, SIGNAL(directoryChanged(QString)), SLOT(reload()));
+
+		QMetaObject::invokeMethod(this, "reload", Qt::QueuedConnection);
+	}
+	else
+	{
+		PairsTheme* theme = new PairsTheme(filePath);
+        if(!theme->isCorrect()) {
+            qWarning() << "Incorrect theme:" << filePath << theme->error();
+            delete theme;
+        } else {
+        	int iNumber = 0;
+        	while(nameExists(theme->title())) {
+        		iNumber++;
+        		theme->setTitle(theme->title() + '(' + QString::number(iNumber) + ')' );
+			}  // namespace )
+        	qDebug()<< theme->title();
+            appendRow(theme);
+        }
+	}
 }
 
 void ThemesModel::reload()

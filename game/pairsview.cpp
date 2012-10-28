@@ -54,7 +54,7 @@
 #include <KStandardDirs>
 #include <kdeclarative.h>
 
-PairsView::PairsView(QWidget *parent)
+PairsView::PairsView(QWidget *parent, const QString &file)
     : QDeclarativeView(parent)
     , m_last(0)
     , m_knsDialog(0)
@@ -64,7 +64,7 @@ PairsView::PairsView(QWidget *parent)
 //     setViewport(new QGLWidget);
 // #endif
     
-    m_model = new ThemesModel(this);
+    m_model = new ThemesModel(this, file);
     m_players = new PlayersModel(this);
     m_themeImagesProvider = new ThemeIconsProvider(QDeclarativeImageProvider::Pixmap, m_model);
     

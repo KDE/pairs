@@ -31,7 +31,7 @@ class ThemesModel : public QStandardItemModel
 {
     Q_OBJECT
     public:
-        explicit ThemesModel(QObject* parent = 0);
+        explicit ThemesModel(QObject* parent = 0, const QString &filepath = "");
 
         PairsTheme* themeForName(const QString& title) const;
         bool exists(const QString& icon);

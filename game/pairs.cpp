@@ -42,9 +42,9 @@
 #include "playersmodel.h"
 #include <kstatusbar.h>
 
-Pairs::Pairs()
+Pairs::Pairs(const QString &file)
     : KMainWindow()
-    , m_view(new PairsView(this))
+    , m_view(new PairsView(this, file))
 {
     setWindowIcon(KIcon("pairs"));
     setWindowTitle(qAppName());
