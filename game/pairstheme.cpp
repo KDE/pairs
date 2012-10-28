@@ -34,9 +34,11 @@ PairsTheme::PairsTheme(const QString& path)
 	bool b = m_archive.open(QIODevice::ReadOnly);
     Q_ASSERT(b);
 	QStringList files(m_archive.directory()->entries());
-    files = files.filter(QRegExp("*.game", Qt::CaseSensitive, QRegExp::Wildcard));
-    
-    Q_ASSERT(files.count()==1 && "no games in the theme!");
+    qDebug() << files;
+	files = files.filter(QRegExp("*.game", Qt::CaseSensitive, QRegExp::Wildcard));
+    qDebug() << files;
+
+    Q_ASSERT(files.count()>=1 && "no games in the theme!");
     
     QString themename(files.first()); //TODO: Support many games inside a theme
     Q_ASSERT(m_archive.directory()->entry(themename)->isFile());
