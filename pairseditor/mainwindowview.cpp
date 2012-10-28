@@ -35,6 +35,8 @@
 MainWindowView::MainWindowView(QWidget *parent) : m_ui(new Ui::MainWindowView)
 {
 	m_parent = static_cast<MainWindow*> (parent);
+	m_model = 0;
+	m_pt = 0;
 	m_selectedItem = 0;
     m_ui->setupUi(this);
 	m_ui->splitter->setStretchFactor(1, 3);
