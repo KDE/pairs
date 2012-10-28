@@ -68,7 +68,7 @@ int main(int argc, char **argv)
         Pairs *widget = 0;
         if(args->count())
         {
-             widget = new Pairs(args->arg(0));
+             widget = new Pairs(args->url(0).toLocalFile());
         }
         else
         {

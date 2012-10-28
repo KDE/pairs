@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
         MainWindow *w = new MainWindow;
 
         if(args->count()==2)
-            w->open(args->url(0).toLocalFile());
+            w->openfile(args->url(0).toLocalFile());
         args->clear();
         w->show();
     }

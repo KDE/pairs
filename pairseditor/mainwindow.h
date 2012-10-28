@@ -44,14 +44,13 @@ class MainWindow : public KXmlGuiWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void open(const QString& path);
+    void openfile(const QString& path);
     
 public slots:
     void doNew();
     void doOpen();
     void doSave();
     void doSaveAs();
-//    void doUpload();
     void doTry();
     void pairsFinished();
     QString copyFile(KUrlRequester *k);

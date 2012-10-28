@@ -183,9 +183,8 @@ void MainWindow::doSave()
 }
 
 
-void MainWindow::open(const QString& filename)
+void MainWindow::openfile(const QString& filename)
 {
-//    m_file = filename;
     delete m_pt;
     m_pt = new PairsThemeEditor(filename);
     m_model = new ThemeModel(*m_pt, this);
@@ -205,8 +204,8 @@ void MainWindow::doOpen()
         extract(m_file);
         QStringList flist = m_tmpDir->entryList(QStringList("*.game"), QDir::Files | QDir::NoSymLinks);
         Q_ASSERT(!flist.isEmpty());
-        m_gameFile = m_tmpDir->absolutePath() + "/" + flist.front();
-        open(m_gameFile);
+        m_gameFile = m_tmpDir->absolutePath() + '/' + flist.front();
+        openfile(m_gameFile);
     }
 }
 
