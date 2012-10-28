@@ -61,11 +61,6 @@ MainWindow::MainWindow(QWidget *parent) : KXmlGuiWindow(parent)
     actionCollection()->addAction("save", myact);
     myact = KStandardAction::create(KStandardAction::SaveAs, this, SLOT(doSaveAs()), this);
     actionCollection()->addAction("saveas", myact);
-//    myact = new KAction(KIcon("go-up"), i18n("Upload"), this);
-//    actionCollection()->addAction("new", myact);
-//    connect(myact, SIGNAL(triggered(bool)), this, SLOT(doUpload()));
-//    ui->menu_file->addAction(myact);
-//    ui->toolBar->addAction(myact);
     myact = new KAction(KIcon("pairs"), i18n("Try"), this);
     connect(myact, SIGNAL(triggered(bool)), this, SLOT(doTry()));
     actionCollection()->addAction("try", myact);
@@ -100,22 +95,24 @@ bool MainWindow::queryClose()
 
 void MainWindow::doTry()
 {
-    doSave();
-    KStandardDirs tmp;
-    QString dir = tmp.findDirs("data", "pairs").first() + "themes/";
-    QFileInfo pathInfo(m_file);
-    m_pairsFile = dir + pathInfo.fileName();
-    qDebug() << "try" << m_pairsFile << m_file ;
-    QFile::copy(m_file, m_pairsFile);
-    QProcess *m_process = new QProcess(this);
-    m_process->start("pairs");
+    if (!m_fileSaved)
+    {
+    	doSave();
+    }
+    if(m_file.isEmpty())
+    {
+    	return;
+    }
+    qDebug() << "try" << m_file ;
+    m_process = new QProcess(this);
+    m_process->start("pairs " + m_file);
     connect(m_process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(pairsFinished()));
 }
 
 void MainWindow::pairsFinished()
 {
     qDebug() << "Pairs Finished";
-    QFile::remove(m_pairsFile);
+//    QFile::remove(m_pairsFile);
     delete m_process;
 }
 
