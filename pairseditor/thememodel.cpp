@@ -35,7 +35,7 @@ ThemeModel::ThemeModel(PairsThemeEditor &t, QObject* parent): QStandardItemModel
     Q_FOREACH(const ThemeElement& el, t.items())
     {
         ElementItem *item = new ElementItem(el);
-        QString name = i18n("Element %1", rowCount()+1);
+        QString name = i18n("Element %1", el.value(CARD_IMAGE, "any").split('.').first());
         item->setText(name);
         appendRow(item);
     }
