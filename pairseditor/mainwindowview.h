@@ -34,6 +34,9 @@ class ThemeModel;
 class QStandardItem;
 class MainWindow;
 
+namespace Phonon {
+class MediaObject;
+}
 namespace Ui {
 class MainWindowView;
 }
@@ -66,6 +69,7 @@ public slots:
     void addElement();
     void deleteElement();
     void addFeature(int index);
+    void playSound();
 
 private:
     MainWindow *m_parent;
@@ -76,6 +80,7 @@ private:
     PairsThemeEditor *m_pt;
     QStandardItem *m_selectedItem;
     QPixmap scaleImage(const QPixmap &i, int max) const;
+    Phonon::MediaObject *m_media;
 };
 
 #endif // MAINWINDOWVIEW_H

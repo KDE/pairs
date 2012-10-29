@@ -29,8 +29,10 @@
 #include "elementitem.h"
 #include "featureitem.h"
 #include <QtGui/QTreeView>
-#include <QXmlStreamWriter>
+#include <QtXml/QXmlStreamWriter>
 #include <QtCore/QDebug>
+#include <phonon/Phonon/MediaObject>
+#include <phonon/Phonon/AudioOutput>
 
 MainWindowView::MainWindowView(QWidget *parent) : m_ui(new Ui::MainWindowView)
 {
@@ -43,6 +45,7 @@ MainWindowView::MainWindowView(QWidget *parent) : m_ui(new Ui::MainWindowView)
 	connect(m_ui->fileKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(fileSelected()));
 	connect(m_ui->backKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(backSelected()));
 	connect(m_ui->wordEdit, SIGNAL(textChanged(QString)), this, SLOT(wordChanged(QString)));
+	connect(m_ui->playButton, SIGNAL(clicked()), this, SLOT(playSound()));
 	connect(m_ui->delButton, SIGNAL(clicked()), this, SLOT(deleteElement()));
 	connect(m_ui->addButton, SIGNAL(clicked()), this, SLOT(addElement()));
 	connect(m_ui->moreButton, SIGNAL(currentIndexChanged(int)), this, SLOT(addFeature(int)));
@@ -54,11 +57,33 @@ MainWindowView::MainWindowView(QWidget *parent) : m_ui(new Ui::MainWindowView)
 	connect(m_ui->dateEdit, SIGNAL(dateChanged(QDate)), this, SIGNAL(changed()));
 	connect(m_ui->maintypeBox, SIGNAL(currentIndexChanged(int)), this, SIGNAL(changed()));
 
+
+    m_media = new Phonon::MediaObject(this);
+    Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput(Phonon::GameCategory, this);
+    createPath(m_media, audioOutput);
+
 }
 
 MainWindowView::~MainWindowView()
 {
     delete m_ui;
+}
+
+void MainWindowView::playSound()
+{
+
+    if(!m_selectedItem)
+         return;
+    int type = m_selectedItem->data(ThemeModel::CardTypeRole).toInt();
+    if(type != CARD_SOUND && type != CARD_SOUNDLOGIC && type != CARD_FOUND)
+         return;
+    Phonon::MediaSource media(m_ui->fileKurl->startDir().path() + '/' + m_ui->fileKurl->text());
+    if(m_media->state()==Phonon::PlayingState) {
+        m_media->setQueue(QList<Phonon::MediaSource>() << media);
+    } else {
+        m_media->setCurrentSource(media);
+        m_media->play();
+    }
 }
 
 void MainWindowView::setModel(ThemeModel *model)
@@ -78,6 +103,7 @@ void MainWindowView::widgetsHide()
     m_ui->comboBox_2->hide();
     m_ui->moreButton->hide();
     m_ui->itemLabel->hide();
+    m_ui->playButton->hide();
 }
 
 void MainWindowView::clearUi(const QString &path)
