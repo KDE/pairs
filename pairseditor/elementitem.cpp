@@ -41,9 +41,11 @@ ElementItem::ElementItem(const ThemeElement &el): QStandardItem()
             }
         }
     }
+    qDebug() << "found Lang List" << l;
     for(int i = CARD_IMAGE; i < CARD_MAX_TYPE; i++)
     {
         QStringList l = el.langlist((CardType)i);
+        qDebug() << " Lang List from card type " << i << ":"  << l;
         if(l.isEmpty() || i == CARD_SOUNDLOGIC || i == CARD_IMAGE2)
             continue;
         Q_FOREACH(const QString s, l)

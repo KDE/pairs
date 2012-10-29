@@ -160,7 +160,10 @@ void PairsThemeBase::parseElement(QXmlStreamReader &reader)
                             current_type = CARD_IMAGE2;
                             m_cardtypes[lang].insert("image2");
                             m_cardtypes[lang].insert("logic");
+                            item.name[CARD_IMAGE2][lang] = src;
+                            item.name[CARD_LOGIC][lang] = src;
                         }
+                        break;
                     case CARD_IMAGE2:
                         item.name[CARD_IMAGE2][lang] = src;
                         item.name[CARD_LOGIC][lang] = src;
@@ -190,7 +193,7 @@ void PairsThemeBase::parseElement(QXmlStreamReader &reader)
                 
                 if(current_type == m_main_type) {
                     common[current_type] = src;
-                    common[CARD_LOGIC] = src;
+                    //common[CARD_LOGIC] = src;
                 }
              }
         }
