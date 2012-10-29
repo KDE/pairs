@@ -263,7 +263,11 @@ void MainWindowView::elementSelected(const QModelIndex & idx)
     switch(type)
     {
     case CARD_IMAGE:
-        m_ui->imageLabel->setText(i18n("Image file"));
+    case CARD_LOGIC:
+        if(type == CARD_LOGIC)
+            m_ui->imageLabel->setText(i18n("Logic image file"));
+        else
+            m_ui->imageLabel->setText(i18n("Image file"));
         m_ui->imageLabel->show();
         m_ui->itemLabel->show();
         m_ui->fileKurl->show();
@@ -272,27 +276,19 @@ void MainWindowView::elementSelected(const QModelIndex & idx)
         break;
     case CARD_SOUND:
     case CARD_SOUNDLOGIC:
-        m_ui->imageLabel->setText(i18n("Sound file"));
+    case CARD_FOUND:
+        if(type == CARD_FOUND)
+            m_ui->imageLabel->setText(i18n("Found sound file"));
+        else
+            m_ui->imageLabel->setText(i18n("Sound file"));
         m_ui->imageLabel->show();
+        m_ui->playButton->show();
         m_ui->fileKurl->show();
-        break;
-    case CARD_LOGIC:
-        m_ui->imageLabel->setText(i18n("Logic image file"));
-        m_ui->itemLabel->show();
-        m_ui->imageLabel->show();
-        m_ui->fileKurl->show();
-      	m_ui->itemLabel->setPixmap(scaleImage(image, 100));
         break;
     case CARD_WORD:
         m_ui->wordEdit->show();
         m_ui->wordLabel->show();
         break;
-    case CARD_FOUND:
-        m_ui->imageLabel->setText(i18n("Found sound file"));
-        m_ui->imageLabel->show();
-        m_ui->fileKurl->show();
-        break;
-
     }
 }
 void MainWindowView::backSelected()
