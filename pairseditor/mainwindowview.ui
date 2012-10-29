@@ -102,20 +102,32 @@
            <property name="text">
             <string>image</string>
            </property>
+           <property name="icon">
+            <iconset theme="view-preview"/>
+           </property>
           </item>
           <item>
            <property name="text">
             <string>relation</string>
+           </property>
+           <property name="icon">
+            <iconset theme="preferences-plugin"/>
            </property>
           </item>
           <item>
            <property name="text">
             <string>sound</string>
            </property>
+           <property name="icon">
+            <iconset theme="preferences-desktop-text-to-speech"/>
+           </property>
           </item>
           <item>
            <property name="text">
             <string>word</string>
+           </property>
+           <property name="icon">
+            <iconset theme="preferences-desktop-font"/>
            </property>
           </item>
          </widget>
