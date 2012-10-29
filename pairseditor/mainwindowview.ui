@@ -251,7 +251,7 @@
             </size>
            </property>
            <property name="currentIndex">
-            <number>-1</number>
+            <number>0</number>
            </property>
            <property name="sizeAdjustPolicy">
             <enum>QComboBox::AdjustToContents</enum>
@@ -297,6 +297,14 @@
              <iconset theme="preferences-desktop-font">
               <normaloff/>
              </iconset>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>New Found Sound</string>
+            </property>
+            <property name="icon">
+             <iconset theme="dialog-ok-apply"/>
             </property>
            </item>
           </widget>

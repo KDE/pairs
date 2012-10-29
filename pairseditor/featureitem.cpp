@@ -54,6 +54,7 @@ FeatureItem::FeatureItem(CardType type, QString lang, QString src): QStandardIte
         break;
     case CARD_FOUND:
         typeName = "pfound";
+        setIcon(KIcon::fromTheme("dialog-ok-apply"));
         break;
 
     }
