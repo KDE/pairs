@@ -200,7 +200,7 @@ bool MainWindowView::check()
 
 void MainWindowView::addFeature(int index)
 {
-    if(!m_model || m_model->rowCount() == 0 || !m_selectedItem)
+    if(!m_model || m_model->rowCount() == 0 || !m_selectedItem || index == -1)
         return;
     QStandardItem *paren = m_selectedItem;
     m_ui->moreButton->setCurrentIndex(-1);
@@ -222,6 +222,9 @@ void MainWindowView::addFeature(int index)
             break;
         case 3:
             newType = CARD_WORD;
+            break;
+        case 4:
+            newType = CARD_FOUND;
             break;
     }
     FeatureItem *fi = new FeatureItem(newType, "any", "");

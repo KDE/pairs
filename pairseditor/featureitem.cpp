@@ -25,6 +25,8 @@
 #include "thememodel.h"
 #include "klocalizedstring.h"
 #include <KIcon>
+#include <QtCore/QDebug>
+
 
 FeatureItem::FeatureItem(CardType type, QString lang, QString src): QStandardItem()
 {
@@ -32,6 +34,7 @@ FeatureItem::FeatureItem(CardType type, QString lang, QString src): QStandardIte
     setData(lang, ThemeModel::LanguageRole);
     setData(src, ThemeModel::PathRole);
     QString typeName;
+    qDebug() << "creating new feature type:" << type;
     switch(type)
     {
     case CARD_IMAGE:
