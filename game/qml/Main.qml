@@ -241,7 +241,7 @@ FancyBackground
                     focus: true
                     
                     Component.onCompleted: selectAll()
-                    onAccepted: addPlayer()
+                    onAccepted: playersControl.addPlayer()
                 }
             }
         }
@@ -256,15 +256,15 @@ FancyBackground
             width: 100
             text: i18n("Add"); 
             source: playersModel.iconsDir("gameicons/addUser.svg")
-            onClicked: addPlayer()
+            onClicked: playersControl.addPlayer()
         }
+	    function addPlayer() {
+	        playersModel.addPlayer(playerName.text, newUserPicture.source)
+	        newUserPicture.source=playersModel.randomIcon()
+	        playerName.selectAll()
+	    }
     }
     
-    function addPlayer() {
-        playersModel.addPlayer(playerName.text, newUserPicture.source)
-        newUserPicture.source=playersModel.randomIcon()
-        playerName.selectAll()
-    }
     
     states: [
          State { name: "newgame" },
