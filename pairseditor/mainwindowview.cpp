@@ -31,8 +31,8 @@
 #include <QtGui/QTreeView>
 #include <QtXml/QXmlStreamWriter>
 #include <QtCore/QDebug>
-#include <phonon/Phonon/MediaObject>
-#include <phonon/Phonon/AudioOutput>
+#include <Phonon/MediaObject>
+#include <Phonon/AudioOutput>
 
 MainWindowView::MainWindowView(QWidget *parent) : m_ui(new Ui::MainWindowView)
 {
