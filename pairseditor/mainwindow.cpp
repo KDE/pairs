@@ -66,6 +66,9 @@ MainWindow::MainWindow(QWidget *parent) : KXmlGuiWindow(parent)
     actionCollection()->addAction("try", myact);
     m_mainWidget->widgetsHide();
     createGUI();
+    actionCollection()->action("help_contents")->setVisible(false);
+    actionCollection()->action("help_whats_this")->setVisible(false);
+
 }
 
 MainWindow::~MainWindow()
