@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Pairs Theme Editor
 Name[et]=Paaride teemaredaktor
+Name[hu]=Pairs témaszerkesztő
 Name[nl]=Themabewerker van Paren
 Name[pt]=Editor de Temas do Pairs
 Name[pt_BR]=Editor de temas do Pairs
@@ -13,6 +14,7 @@ Icon=pairs
 Type=Application
 GenericName=A Pairs theme editor
 GenericName[et]=Paaride teemaredaktor
+GenericName[hu]=Egy Pairs témaszerkesztő
 GenericName[nl]=Een themabewerker van Paren
 GenericName[pt]=Um editor de temas do Pairs
 GenericName[pt_BR]=Um editor de temas para o Pairs
