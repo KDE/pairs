@@ -113,7 +113,7 @@ Flickable {
                                 if(playersModel.count>0)
                                     playersModel.toggleSelection(0)
                                 else
-                                    addPlayer()
+                                    playersControl.addPlayer()
                             }
                             
                             gameStarted()
