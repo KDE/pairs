@@ -103,7 +103,9 @@
             <string>image</string>
            </property>
            <property name="icon">
-            <iconset theme="view-preview"/>
+            <iconset theme="view-preview">
+             <normaloff/>
+            </iconset>
            </property>
           </item>
           <item>
@@ -111,7 +113,9 @@
             <string>relation</string>
            </property>
            <property name="icon">
-            <iconset theme="preferences-plugin"/>
+            <iconset theme="preferences-plugin">
+             <normaloff/>
+            </iconset>
            </property>
           </item>
           <item>
@@ -119,7 +123,9 @@
             <string>sound</string>
            </property>
            <property name="icon">
-            <iconset theme="preferences-desktop-text-to-speech"/>
+            <iconset theme="preferences-desktop-text-to-speech">
+             <normaloff/>
+            </iconset>
            </property>
           </item>
           <item>
@@ -127,7 +133,9 @@
             <string>word</string>
            </property>
            <property name="icon">
-            <iconset theme="preferences-desktop-font"/>
+            <iconset theme="preferences-desktop-font">
+             <normaloff/>
+            </iconset>
            </property>
           </item>
          </widget>
@@ -358,6 +366,9 @@
          <property name="editTriggers">
           <set>QAbstractItemView::NoEditTriggers</set>
          </property>
+         <attribute name="headerVisible">
+          <bool>false</bool>
+         </attribute>
         </widget>
        </item>
       </layout>
