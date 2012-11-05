@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gui name="pairseditor"
-     version="2"
+     version="3"
      xmlns="http://www.kde.org/standards/kxmlgui/1.0"
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:schemaLocation="http://www.kde.org/standards/kxmlgui/1.0
                          http://www.kde.org/standards/kxmlgui/1.0/kxmlgui.xsd">
 <MenuBar>
-  <Menu name="File"><text>&amp;File</text>
-    <Action name="new"/>
-    <Action name="open"/>
-    <Action name="save"/>
-    <Action name="saveas"/>
+  <Menu name="file">
     <Action name="try"/>
   </Menu>
 </MenuBar>
 <ToolBar name="mainToolBar" noMerge="1"><text>Main Toolbar</text>
-  <Action name="new"/>
-  <Action name="open"/>
-  <Action name="save"/>
-  <Action name="saveas"/>
+  <Action name="file_new"/>
+  <Action name="file_open"/>
+  <Action name="file_save"/>
+  <Action name="file_save_as"/>
   <Action name="try"/>
 </ToolBar>
 </gui>
