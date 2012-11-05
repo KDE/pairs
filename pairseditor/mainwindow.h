@@ -74,6 +74,8 @@ private:
     void newTmpDir(const QString &path);
     void extract(QString path);
     void compress(QString path);
+    bool askToSave();
+
 };
 
 #endif // MAINWINDOW_H

@@ -71,10 +71,7 @@ MainWindow::~MainWindow()
 {
 }
 
-
-//void MainWindow::doUpload(){};
-
-bool MainWindow::queryClose()
+bool MainWindow::askToSave()
 {
     if (!m_fileSaved)
     {
@@ -89,6 +86,11 @@ bool MainWindow::queryClose()
     	}
     }
     return true;
+}
+
+bool MainWindow::queryClose()
+{
+    return askToSave();
 }
 
 
@@ -123,6 +125,8 @@ void MainWindow::doSaveAs()
 
 void MainWindow::doNew()
 {
+	if(!askToSave())
+		return;
     m_file.clear();
     delete m_model;
     newTmpDir(QDir::tempPath() + "/newfile");
@@ -196,6 +200,8 @@ void MainWindow::openfile(const QString& filename)
 
 void MainWindow::doOpen()
 {
+	if(!askToSave())
+		return;
     m_file = KFileDialog::getOpenFileName(KUrl(QDir::currentPath()), "*.pairs.tar.bz2|" + i18n("Pairs Themes"), this, i18n("Open Pairs theme"));
     if(!m_file.isEmpty())
     {
