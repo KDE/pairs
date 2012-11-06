@@ -72,7 +72,7 @@ void ThemeModel::removeItem(QStandardItem *selectedItem)
     }
 
     endRemoveRows();
-
+    reset();
 }
 
 void ThemeModel::insertItem(QStandardItem *newItem)
