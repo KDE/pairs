@@ -251,9 +251,14 @@ void MainWindowView::deleteElement()
 {
 	if(!m_model || m_model->rowCount() == 0 || !m_selectedItem)
 		return;
+	int new_row = m_selectedItem->row();
     m_model->removeItem(m_selectedItem);
     m_selectedItem = 0;
     emit changed();
+    if(new_row >= m_model->rowCount())
+    	new_row = m_model->rowCount() - 1;
+    QModelIndex index = m_model->index(new_row,0);
+    m_ui->treeView->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows);
 
 }
 void MainWindowView::selectionChanged(const QItemSelection& selected, const QItemSelection&  )
