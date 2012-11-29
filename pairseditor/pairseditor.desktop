@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Pairs Theme Editor
+Name[ca]=Editor de temes del Pairs
 Name[da]=Temaeditor til Pairs
 Name[et]=Paaride teemaredaktor
 Name[fi]=Pairs-teemamuokkain
@@ -17,6 +18,7 @@ Exec=pairseditor %i -caption "%c"
 Icon=pairs
 Type=Application
 GenericName=A Pairs theme editor
+GenericName[ca]=Un editor de temes pel Pairs
 GenericName[da]=En temaeditor til Pairs
 GenericName[et]=Paaride teemaredaktor
 GenericName[fi]=Pairs-teemamuokkain
