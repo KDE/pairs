@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
     aboutData.addAuthor( ki18n("Aleix Pol Gonzalez"), ki18n("Maintainer"), "aleixpol@kde.org" );
     aboutData.addAuthor( ki18n("Marco Calignano"), ki18n("Feature development"), "marco.calignano@gmail.com");
     aboutData.addAuthor(ki18n("Heena Mahour"), ki18n("Layout development"), "heena393@gmail.com");
+    aboutData.addAuthor(ki18n("Ian Sanders"), ki18n("Application icon development"), "iansan565@gmail.com");
     KCmdLineArgs::init(argc, argv, &aboutData);
     KCmdLineOptions options;
     options.add("+[URL]", ki18n("Theme to open"));
