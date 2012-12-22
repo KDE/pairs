@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Pairs
+Name[bs]=Parovi
 Name[ca]=Pairs
 Name[da]=Pairs
 Name[de]=Paare
@@ -30,6 +31,7 @@ Exec=pairs %i -caption "%c"
 Icon=pairs
 Type=Application
 GenericName=A game to enhance your memory
+GenericName[bs]=Igra za poboljšanje memorije
 GenericName[ca]=Un joc per millorar la teva memòria
 GenericName[cs]=Hra pro zlepšení Vaší paměti
 GenericName[da]=Et spil der forbedrer din hukommelse
