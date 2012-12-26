@@ -2,6 +2,7 @@
 Name=Pairs Theme Editor
 Name[ca]=Editor de temes del Pairs
 Name[da]=Temaeditor til Pairs
+Name[el]=Επεξεργαστής θεμάτων του Pairs
 Name[et]=Paaride teemaredaktor
 Name[fi]=Pairs-teemamuokkain
 Name[hu]=Pairs témaszerkesztő
@@ -22,6 +23,7 @@ Type=Application
 GenericName=A Pairs theme editor
 GenericName[ca]=Un editor de temes pel Pairs
 GenericName[da]=En temaeditor til Pairs
+GenericName[el]=Επεξεργαστής θεμάτων του Pairs
 GenericName[et]=Paaride teemaredaktor
 GenericName[fi]=Pairs-teemamuokkain
 GenericName[hu]=Egy Pairs témaszerkesztő
