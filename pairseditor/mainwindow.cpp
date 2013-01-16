@@ -63,7 +63,6 @@ MainWindow::MainWindow(QWidget *parent) : KXmlGuiWindow(parent)
     KStandardAction::quit(this, SLOT(close()), actionCollection());
     m_mainWidget->widgetsHide();
     createGUI();
-    actionCollection()->action("help_contents")->setVisible(false);
     actionCollection()->action("help_whats_this")->setVisible(false);
 }
 

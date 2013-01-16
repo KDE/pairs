@@ -26,6 +26,7 @@ Name[zh_CN]=Pairs 主题编辑器
 Name[zh_TW]=Pairs 主題編輯器
 Exec=pairseditor %i -caption "%c"
 Icon=pairseditor
+X-DocPath=pairseditor/index.html
 Type=Application
 GenericName=A Pairs theme editor
 GenericName[ca]=Un editor de temes pel Pairs

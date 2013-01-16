@@ -1,0 +1,198 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % English "INCLUDE">
+]>
+<book lang="&language;">
+<bookinfo>
+<title>The Pairs Editor Handbook</title>
+<authorgroup>
+<author>
+<personname>
+      <firstname>This documentation was converted from the KDE UserBase <ulink url=" http://userbase.kde.org/Pairs/Editor">Pairs/Editor</ulink> page.</firstname>
+<surname></surname>
+</personname>
+      </author>
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
+      </authorgroup>
+<legalnotice>&FDLNotice;</legalnotice>
+<date>2012-12-30</date>
+      <releaseinfo>1.0.0 (&kde; SC 4.10)</releaseinfo>
+<abstract>
+<para><application>Pairs</application> editor is a part of <application>Pairs</application> Project. It can be used to make and edit themes for <application>Pairs</application>.</para>
+      </abstract>
+      <keywordset>
+<keyword>KDE</keyword>
+<keyword>Pairs</keyword>
+<keyword>Education</keyword>
+<keyword>Sound</keyword>
+<keyword>Image</keyword>
+<keyword>theme</keyword>
+<keyword>editor</keyword>
+</keywordset>
+</bookinfo>
+<!--userbase <timestamp>2012-12-30T14:09:02Z</timestamp>-->
+
+<!--userbase-content-->
+<chapter id="pairs-editor"><title>Pairs Editor</title>
+<para><application>Pairs</application> editor is a part of <application>Pairs</application> Project. It can be used to make and edit themes for <application>Pairs</application>.
+</para>
+<para>
+<screenshot>
+<screeninfo></screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="pairseditor.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase></phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+<sect1 id="main-toolbar"><title>Main Toolbar</title>
+<para>It consists of 5 buttons which can be resized or whose text can be altered.
+</para>
+<sect2 id="new"><title>New</title>
+<para>The button can be used to create a new theme.
+</para>
+</sect2>
+<sect2 id="open"><title>Open</title>
+<para>This button can be used to open an existing theme.
+</para>
+</sect2>
+<sect2 id="save-save-as"><title>Save/Save as</title>
+<para>These two button are used to save the created theme.
+</para>
+</sect2>
+<sect2 id="try"><title>Try</title>
+<para><guilabel>Try</guilabel> button is used for trying the theme that is created. It will launch <application>Pairs</application> with the new theme.
+</para>
+</sect2>
+</sect1>
+<sect1 id="creating-a-new-theme"><title>Creating a new theme</title>
+<para>Creating a new theme is quite easy and can be done using the following steps:
+</para>
+<itemizedlist>
+<listitem><para>Assign a Title, Description, Author, Date and version to the theme</para></listitem>
+<listitem><para>The <guilabel>Main Type</guilabel> describes the type of a theme. For example, <guilabel>Image</guilabel> type is used if the theme is for pairing the images.</para></listitem>
+<listitem><para>Include a back image. This image will be used in <application>Pairs</application> as the image that would be displayed on the back of the cards.</para></listitem>
+</itemizedlist>
+<para>
+<screenshot>
+<screeninfo></screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="pairseditor1.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase></phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+<itemizedlist>
+<listitem><para>Add elements to the theme by pressing <inlinemediaobject> <imageobject> <imagedata fileref="Icon-list-add.png" format="PNG"/> </imageobject> </inlinemediaobject> and add images, words or sound to the elements . Elements are used for defining relation between two images, words or sounds. For example: Adding two images in one element will make those a pair. In case of sounds,  Two sounds are added in an element to make them a pair. And two words can also be added to make them a pair. Adding a sound and an image together in an element will make them a pair too.</para></listitem>
+</itemizedlist>
+<para>
+<screenshot>
+<screeninfo></screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="pairseditor2.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase></phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+<itemizedlist>
+<listitem><para>Include <guilabel>Found Sound</guilabel>. Found sound is a sound that is played when the element is correctly matched in <application>Pairs</application>. There should be only one found sound for one element.</para></listitem>
+</itemizedlist>
+<para>
+<screenshot>
+<screeninfo></screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="pairseditor3.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase></phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+<itemizedlist>
+<listitem><para>Add more Elements. Adding elements increases the number of pairs in the game which can be useful when more number of outcomes are needed.</para></listitem>
+</itemizedlist>
+<para>
+<screenshot>
+<screeninfo></screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="pairseditor4.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase></phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+<itemizedlist>
+  <listitem><para>After doing the mentioned steps, save your theme and hit the <guilabel>Try</guilabel> button. It will launch <application>Pairs</application> with your theme.</para></listitem>
+</itemizedlist>
+<para>
+<informaltable>
+  <tgroup cols="2">
+  <tbody>
+  <row>
+<entry>
+<para>
+<screenshot>
+<screeninfo></screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="pairseditor5.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase></phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+</entry>
+<entry>
+<para>
+<screenshot>
+<screeninfo></screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="pairseditor6.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase></phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+</entry>
+  </row>
+  </tbody>
+  </tgroup>
+</informaltable>
+</para>
+</sect1>
+</chapter>
+
+<!--userbase-content-->
+<chapter id="credits">
+<title>Credits and License</title>
+      <para>
+Documentation Copyright see the UserBase 
+      <ulink url="http://userbase.kde.org/index.php?title=Pairs/Editor&amp;action=history">Pairs/Editor page history</ulink></para>
+      <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+&underFDL;
+</chapter>
+&documentation.index;
+</book>
