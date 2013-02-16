@@ -299,9 +299,17 @@ void MainWindowView::elementSelected(const QModelIndex & idx)
     case CARD_IMAGE:
     case CARD_LOGIC:
         if(type == CARD_LOGIC)
+        {
             m_ui->imageLabel->setText(i18n("Logic image file"));
+            m_ui->comboBox_2->setToolTip(i18n("Language of the logic image"));
+            m_ui->fileKurl->setToolTip(i18n("Logic image file"));
+        }
         else
+        {
             m_ui->imageLabel->setText(i18n("Image file"));
+            m_ui->comboBox_2->setToolTip(i18n("Language of the image"));
+            m_ui->fileKurl->setToolTip(i18n("Image file"));
+        }
         m_ui->imageLabel->show();
         m_ui->itemLabel->show();
         m_ui->fileKurl->show();
@@ -312,14 +320,24 @@ void MainWindowView::elementSelected(const QModelIndex & idx)
     case CARD_SOUNDLOGIC:
     case CARD_FOUND:
         if(type == CARD_FOUND)
+        {
             m_ui->imageLabel->setText(i18n("Found sound file"));
+            m_ui->comboBox_2->setToolTip(i18n("Language of the found sound file"));
+            m_ui->fileKurl->setToolTip(i18n("Found sound file"));
+        }
         else
+        {
             m_ui->imageLabel->setText(i18n("Sound file"));
+            m_ui->comboBox_2->setToolTip(i18n("Language of the sound image"));
+            m_ui->fileKurl->setToolTip(i18n("Sound file"));
+        }
         m_ui->imageLabel->show();
         m_ui->playButton->show();
         m_ui->fileKurl->show();
         break;
     case CARD_WORD:
+        m_ui->comboBox_2->setToolTip(i18n("Language of the word"));
+        m_ui->wordEdit->setToolTip(i18n("Word"));
         m_ui->wordEdit->show();
         m_ui->wordLabel->show();
         break;

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>511</width>
-    <height>352</height>
+    <height>409</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -30,43 +30,71 @@
         </property>
         <item row="0" column="0">
          <widget class="QLabel" name="titleLabel">
+          <property name="toolTip">
+           <string/>
+          </property>
           <property name="text">
            <string>Title:</string>
           </property>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="KLineEdit" name="titleEdit"/>
+         <widget class="KLineEdit" name="titleEdit">
+          <property name="toolTip">
+           <string>The title of the theme</string>
+          </property>
+         </widget>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="descriptionLabel">
+          <property name="toolTip">
+           <string/>
+          </property>
           <property name="text">
            <string>Description:</string>
           </property>
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="KLineEdit" name="descriptionEdit"/>
+         <widget class="KLineEdit" name="descriptionEdit">
+          <property name="toolTip">
+           <string>Description to the theme</string>
+          </property>
+         </widget>
         </item>
         <item row="3" column="0">
          <widget class="QLabel" name="authorLabel">
+          <property name="toolTip">
+           <string/>
+          </property>
           <property name="text">
            <string>Author:</string>
           </property>
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="KLineEdit" name="authorEdit"/>
+         <widget class="KLineEdit" name="authorEdit">
+          <property name="toolTip">
+           <string>Your (author) name</string>
+          </property>
+         </widget>
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="versionLabel">
+          <property name="toolTip">
+           <string/>
+          </property>
           <property name="text">
            <string>Version:</string>
           </property>
          </widget>
         </item>
         <item row="4" column="1">
-         <widget class="KLineEdit" name="versionEdit"/>
+         <widget class="KLineEdit" name="versionEdit">
+          <property name="toolTip">
+           <string>Theme version</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -77,6 +105,9 @@
         </property>
         <item row="0" column="0">
          <widget class="QLabel" name="dateLabel">
+          <property name="toolTip">
+           <string/>
+          </property>
           <property name="text">
            <string>Date:</string>
           </property>
@@ -84,6 +115,9 @@
         </item>
         <item row="0" column="1">
          <widget class="QDateEdit" name="dateEdit">
+          <property name="toolTip">
+           <string>Today's date</string>
+          </property>
           <property name="displayFormat">
            <string>d/M/yyyy</string>
           </property>
@@ -91,6 +125,9 @@
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="maintypeLabel">
+          <property name="toolTip">
+           <string/>
+          </property>
           <property name="text">
            <string>Main Type:</string>
           </property>
@@ -98,6 +135,9 @@
         </item>
         <item row="1" column="1">
          <widget class="KComboBox" name="maintypeBox">
+          <property name="toolTip">
+           <string>The main game of theme</string>
+          </property>
           <item>
            <property name="text">
             <string>image</string>
@@ -142,13 +182,20 @@
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="backLabel">
+          <property name="toolTip">
+           <string/>
+          </property>
           <property name="text">
            <string>Back Image:</string>
           </property>
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="KUrlRequester" name="backKurl"/>
+         <widget class="KUrlRequester" name="backKurl">
+          <property name="toolTip">
+           <string>The back image component</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -228,6 +275,9 @@
              <height>24</height>
             </size>
            </property>
+           <property name="toolTip">
+            <string>Add a new element</string>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -252,6 +302,9 @@
              <height>24</height>
             </size>
            </property>
+           <property name="toolTip">
+            <string>Remove an element</string>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -269,6 +322,9 @@
              <width>16777215</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="toolTip">
+            <string>Add a sub-element</string>
            </property>
            <property name="currentIndex">
             <number>-1</number>
@@ -389,13 +445,20 @@
        </property>
        <item row="0" column="0">
         <widget class="QLabel" name="imageLabel">
+         <property name="toolTip">
+          <string/>
+         </property>
          <property name="text">
           <string>Image:</string>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="KUrlRequester" name="fileKurl"/>
+        <widget class="KUrlRequester" name="fileKurl">
+         <property name="toolTip">
+          <string/>
+         </property>
+        </widget>
        </item>
        <item row="9" column="1">
         <widget class="QLabel" name="itemLabel">
@@ -409,6 +472,9 @@
        </item>
        <item row="2" column="1">
         <widget class="QPushButton" name="playButton">
+         <property name="toolTip">
+          <string>Play the sound file</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -421,6 +487,9 @@
        </item>
        <item row="4" column="1">
         <widget class="KComboBox" name="comboBox_2">
+         <property name="toolTip">
+          <string/>
+         </property>
          <item>
           <property name="text">
            <string>any</string>
@@ -465,6 +534,9 @@
        </item>
        <item row="4" column="0">
         <widget class="QLabel" name="langLabel">
+         <property name="toolTip">
+          <string/>
+         </property>
          <property name="text">
           <string>Language:</string>
          </property>
@@ -472,13 +544,20 @@
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="wordLabel">
+         <property name="toolTip">
+          <string/>
+         </property>
          <property name="text">
           <string>Word:</string>
          </property>
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="KLineEdit" name="wordEdit"/>
+        <widget class="KLineEdit" name="wordEdit">
+         <property name="toolTip">
+          <string/>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
