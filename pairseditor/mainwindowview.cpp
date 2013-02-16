@@ -303,12 +303,16 @@ void MainWindowView::elementSelected(const QModelIndex & idx)
             m_ui->imageLabel->setText(i18n("Logic image file"));
             m_ui->comboBox_2->setToolTip(i18n("Language of the logic image"));
             m_ui->fileKurl->setToolTip(i18n("Logic image file"));
+            m_ui->comboBox_2->setWhatsThis(i18n("Language of the logic image"));
+            m_ui->fileKurl->setWhatsThis(i18n("Logic image file"));
         }
         else
         {
             m_ui->imageLabel->setText(i18n("Image file"));
             m_ui->comboBox_2->setToolTip(i18n("Language of the image"));
             m_ui->fileKurl->setToolTip(i18n("Image file"));
+            m_ui->comboBox_2->setWhatsThis(i18n("Language of the image"));
+            m_ui->fileKurl->setWhatsThis(i18n("Image file"));
         }
         m_ui->imageLabel->show();
         m_ui->itemLabel->show();
@@ -324,12 +328,16 @@ void MainWindowView::elementSelected(const QModelIndex & idx)
             m_ui->imageLabel->setText(i18n("Found sound file"));
             m_ui->comboBox_2->setToolTip(i18n("Language of the found sound file"));
             m_ui->fileKurl->setToolTip(i18n("Found sound file"));
+            m_ui->comboBox_2->setWhatsThis(i18n("Language of the found sound file"));
+            m_ui->fileKurl->setWhatsThis(i18n("Found sound file"));
         }
         else
         {
             m_ui->imageLabel->setText(i18n("Sound file"));
             m_ui->comboBox_2->setToolTip(i18n("Language of the sound image"));
             m_ui->fileKurl->setToolTip(i18n("Sound file"));
+            m_ui->comboBox_2->setWhatsThis(i18n("Language of the sound file"));
+            m_ui->fileKurl->setWhatsThis(i18n("Sound file"));
         }
         m_ui->imageLabel->show();
         m_ui->playButton->show();
@@ -338,6 +346,8 @@ void MainWindowView::elementSelected(const QModelIndex & idx)
     case CARD_WORD:
         m_ui->comboBox_2->setToolTip(i18n("Language of the word"));
         m_ui->wordEdit->setToolTip(i18n("Word"));
+        m_ui->comboBox_2->setWhatsThis(i18n("Language of the word"));
+        m_ui->wordEdit->setWhatsThis(i18n("Word"));
         m_ui->wordEdit->show();
         m_ui->wordLabel->show();
         break;

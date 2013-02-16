@@ -43,6 +43,9 @@
           <property name="toolTip">
            <string>The title of the theme</string>
           </property>
+          <property name="whatsThis">
+           <string>The title of the theme</string>
+          </property>
          </widget>
         </item>
         <item row="1" column="0">
@@ -59,6 +62,9 @@
          <widget class="KLineEdit" name="descriptionEdit">
           <property name="toolTip">
            <string>Description to the theme</string>
+          </property>
+          <property name="whatsThis">
+           <string>Description of the theme</string>
           </property>
          </widget>
         </item>
@@ -77,6 +83,9 @@
           <property name="toolTip">
            <string>Your (author) name</string>
           </property>
+          <property name="whatsThis">
+           <string>Author (your) name</string>
+          </property>
          </widget>
         </item>
         <item row="4" column="0">
@@ -92,6 +101,9 @@
         <item row="4" column="1">
          <widget class="KLineEdit" name="versionEdit">
           <property name="toolTip">
+           <string>Theme version</string>
+          </property>
+          <property name="whatsThis">
            <string>Theme version</string>
           </property>
          </widget>
@@ -118,6 +130,9 @@
           <property name="toolTip">
            <string>Today's date</string>
           </property>
+          <property name="whatsThis">
+           <string>Today's date</string>
+          </property>
           <property name="displayFormat">
            <string>d/M/yyyy</string>
           </property>
@@ -137,6 +152,9 @@
          <widget class="KComboBox" name="maintypeBox">
           <property name="toolTip">
            <string>The main game of theme</string>
+          </property>
+          <property name="whatsThis">
+           <string>The type of theme</string>
           </property>
           <item>
            <property name="text">
@@ -193,6 +211,9 @@
         <item row="2" column="1">
          <widget class="KUrlRequester" name="backKurl">
           <property name="toolTip">
+           <string>The back image component</string>
+          </property>
+          <property name="whatsThis">
            <string>The back image component</string>
           </property>
          </widget>
@@ -278,6 +299,9 @@
            <property name="toolTip">
             <string>Add a new element</string>
            </property>
+           <property name="whatsThis">
+            <string>Add a new element</string>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -305,6 +329,9 @@
            <property name="toolTip">
             <string>Remove an element</string>
            </property>
+           <property name="whatsThis">
+            <string>Remove an element</string>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -324,6 +351,9 @@
             </size>
            </property>
            <property name="toolTip">
+            <string>Add a sub-element</string>
+           </property>
+           <property name="whatsThis">
             <string>Add a sub-element</string>
            </property>
            <property name="currentIndex">
@@ -473,6 +503,9 @@
        <item row="2" column="1">
         <widget class="QPushButton" name="playButton">
          <property name="toolTip">
+          <string>Play the sound file</string>
+         </property>
+         <property name="whatsThis">
           <string>Play the sound file</string>
          </property>
          <property name="text">
