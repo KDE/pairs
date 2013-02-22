@@ -81,7 +81,7 @@
         <item row="3" column="1">
          <widget class="KLineEdit" name="authorEdit">
           <property name="toolTip">
-           <string>Your (author) name</string>
+           <string>Author (your) name</string>
           </property>
           <property name="whatsThis">
            <string>Author (your) name</string>
@@ -151,10 +151,10 @@
         <item row="1" column="1">
          <widget class="KComboBox" name="maintypeBox">
           <property name="toolTip">
-           <string>The main game of theme</string>
+           <string>The main game of the theme</string>
           </property>
           <property name="whatsThis">
-           <string>The type of theme</string>
+           <string>The main game of the theme</string>
           </property>
           <item>
            <property name="text">
