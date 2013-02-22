@@ -334,7 +334,7 @@ void MainWindowView::elementSelected(const QModelIndex & idx)
         else
         {
             m_ui->imageLabel->setText(i18n("Sound file"));
-            m_ui->comboBox_2->setToolTip(i18n("Language of the sound image"));
+            m_ui->comboBox_2->setToolTip(i18n("Language of the sound file"));
             m_ui->fileKurl->setToolTip(i18n("Sound file"));
             m_ui->comboBox_2->setWhatsThis(i18n("Language of the sound file"));
             m_ui->fileKurl->setWhatsThis(i18n("Sound file"));
