@@ -2,6 +2,7 @@
 Name=Pairs Theme Editor
 Name[bs]=Uređivač tema za igru parova
 Name[ca]=Editor de temes del Pairs
+Name[cs]=Editor motivu Pexesa
 Name[da]=Temaeditor til Pairs
 Name[de]=Pairs-Designeditor
 Name[el]=Επεξεργαστής θεμάτων του Pairs
@@ -33,6 +34,7 @@ Type=Application
 GenericName=A Pairs theme editor
 GenericName[bs]=Uređivač tema za igru parova
 GenericName[ca]=Un editor de temes pel Pairs
+GenericName[cs]=Editor motivu Pexesa
 GenericName[da]=En temaeditor til Pairs
 GenericName[de]=Ein Designeditor für Pairs
 GenericName[el]=Επεξεργαστής θεμάτων του Pairs
