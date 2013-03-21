@@ -233,10 +233,9 @@ FancyBackground
                     text: i18n("Player Name:") 
                 }
                 
-                TextInput { 
+                PlasmaComponents.TextField {
                     id: playerName
                     width: 100 
-                    color: "white"
                     text: i18n("Player")
                     focus: true
                     
