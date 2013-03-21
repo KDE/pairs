@@ -98,7 +98,7 @@ Flickable {
                     model: themesModel
                     
                     delegate: Button {
-	                	width: Math.max((parent.width - 120) / 6, 100)
+	                	width: Math.max((themesView.width - 120) / 6, 100)
                         visible: themesModel.isPertinent(index, gameType, fgame.language())
                         source: "image://theme/"+display+"/"+decoration
                         text: display

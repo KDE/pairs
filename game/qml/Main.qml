@@ -20,6 +20,7 @@
  */
 
 import QtQuick 1.0
+import org.kde.plasma.components 0.1 as PlasmaComponents
 
 FancyBackground
 {
@@ -82,7 +83,7 @@ FancyBackground
         Row {
             anchors.fill: parent
             id: tools
-            property real buttonWidth: Math.min(tools.width/3, 100)
+            property real buttonWidth: 90
             
             Button {
                 width: tools.buttonWidth
@@ -123,67 +124,58 @@ FancyBackground
     
     Page {
         id: playersView
-        clip: true
         anchors {
             left: parent.left
             right: main.left
             top: toolbar.bottom
             bottom: playersControl.top
-            leftMargin: 20
-            rightMargin: 20
+            margins: 20
+            bottomMargin: playersControl.visible ? 20 : 0
         }
-        Flickable {
-            anchors.fill: parent
-            contentHeight: playersLabel.height+playersFlow.height
-            Text {
-                id: playersLabel
-                anchors {
-                    right: parent.right
-                    rightMargin: 5
-                }
+        
+        GridView {
+            anchors {
+                fill: parent
+                leftMargin: 20
+                rightMargin: 20
+            }
+            cellHeight: 130
+            cellWidth: 110
+            header: Text {
+                width: parent.width
+                horizontalAlignment: Text.AlignRight
                 font.pointSize: 14
                 color : "white"
                 text: i18n("Players")
             }
             
-            Flow {
-                id: playersFlow
-                anchors {
-                    top: playersLabel.bottom
-                    left: parent.left
-                    right: parent.right
-                    margins: 5
-                }
-                spacing: 10
+            model: playersModel
+            delegate: TogglableButton {
+                text: game.state!="playing" ? display : i18nc("name. found/tries, time seconds", "%1<br/>%2/%3, %4s", display, found, missed+found, time)
+                source: decoration
+                overlaySource: playersModel.iconsDir("gameicons/removeUser.svg")
+                visible: game.state=="newgame" || selected
+                overlayVisible: game.state=="newgame"
+                opacity: game.state!="playing" || fgame.currentPlayer==index ? 1 : 0.3
+                width: 100
                 
-                Repeater {
-                    model: playersModel
-                    delegate: TogglableButton {
-                        text: game.state!="playing" ? display : i18nc("name. found/tries, time seconds", "%1<br/>%2/%3, %4s", display, found, missed+found, time)
-                        source: decoration
-                        overlaySource: playersModel.iconsDir("gameicons/removeUser.svg")
-                        visible: game.state=="newgame" || selected
-                        overlayVisible: game.state=="newgame"
-                        opacity: game.state!="playing" || fgame.currentPlayer==index ? 1 : 0.3
-                        width: Math.min(100, parent.width)
-                        
-                        enabled: selected
-                        onClicked: if(game.state=="newgame") playersModel.toggleSelection(index)
-                        onOverlayClicked: playersModel.removePlayer(index)
-                    }
-                }
+                enabled: selected
+                onClicked: if(game.state=="newgame") playersModel.toggleSelection(index)
+                onOverlayClicked: playersModel.removePlayer(index)
             }
         }
     }
     
     Page {
         id: playersControl
-        visible: game.state=='newgame'
-        height: visible ? addPlayer.height + label.height : 0
+        height: game.state=='newgame' || game.state == "" ? 130 : 0
+        visible: height>0
+
         anchors {
             left: parent.left
             right: main.left
             bottom: parent.bottom
+            topMargin: 30
             margins: 20
         }
         
@@ -201,6 +193,7 @@ FancyBackground
         
         Item {
             id: controls
+            visible: height>0
             anchors {
                 fill: parent
                 topMargin: label.height
@@ -212,9 +205,10 @@ FancyBackground
                     left: parent.left
                     top: parent.top
                     bottom: parent.bottom
-                    right: playerNameControls.left
                     margins: 3
+                    bottomMargin: label.height
                 }
+                width: height
                 fillMode: Image.PreserveAspectFit
                 source: playersModel.randomIcon()
                 MouseArea {
@@ -252,16 +246,19 @@ FancyBackground
                 bottom: parent.bottom
                 bottomMargin: -10
             }
-            width: 100
-            text: i18n("Add"); 
+            height: parent.height
+            text: i18n("Add")
             source: playersModel.iconsDir("gameicons/addUser.svg")
             onClicked: playersControl.addPlayer()
         }
-	    function addPlayer() {
-	        playersModel.addPlayer(playerName.text, newUserPicture.source)
-	        newUserPicture.source=playersModel.randomIcon()
-	        playerName.selectAll()
-	    }
+
+        function addPlayer() {
+            playersModel.addPlayer(playerName.text, newUserPicture.source)
+            newUserPicture.source=playersModel.randomIcon()
+            playerName.selectAll()
+        }
+
+        Behavior on height { NumberAnimation { duration: 200; easing.type: Easing.InQuad } }
     }
     
     

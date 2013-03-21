@@ -25,5 +25,4 @@ Image
 {
     source: playersModel.iconsDir("gameicons/background.svg")
     fillMode: Image.PreserveAspectCrop
-    sourceSize.width: (width * 768 / 1366 < height) ? height * 1366 / 768 : width
 }

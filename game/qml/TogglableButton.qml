@@ -23,6 +23,7 @@ import QtQuick 1.0
 Item
 {
     id: container
+    width: 70
     height: button.height
     property bool enabled: true
     property alias text: button.text
@@ -37,6 +38,7 @@ Item
         radius: 20
         smooth: true
         anchors.fill: parent
+        anchors.margins: 3
         opacity: container.enabled ? 0.7 : 0
         Behavior on opacity { NumberAnimation { duration: 200 } }
         gradient: Gradient {
@@ -45,38 +47,27 @@ Item
         }
     }
     
-    MouseArea {
-        id: mouse
+    Button {
+        id: button
         width: parent.width
-        height: parent.height
-        hoverEnabled: true
-        onClicked: button.clicked()
-        onEntered: button.state="hovered"
-        onExited: button.state="default"
+        anchors.verticalCenterOffset: -10
         
-        Button {
-            id: button
-            width: parent.width
-            anchors.verticalCenterOffset: -10
-            
-            onClicked: container.clicked()
-            onOverlayClicked: container.overlayClicked()
-        }
+        onClicked: container.clicked()
+    }
+    
+    Image { 
+        id: overlay
         
-        Image { 
-            id: overlay
-            
-            opacity: !container.enabled && overlayVisible ? 1 : 0
-            width: parent.width/3
-            height: parent.height/3
-            anchors.top: parent.top
-            anchors.right: parent.right
-            Behavior on opacity { NumberAnimation { duration: 200; easing.type: Easing.InQuad } }
-            
-            MouseArea {
-                anchors.fill: parent
-                onClicked: button.overlayClicked()
-            }
+        opacity: !container.enabled && overlayVisible ? 1 : 0
+        width: parent.width/3
+        height: parent.height/3
+        anchors.top: parent.top
+        anchors.right: parent.right
+        Behavior on opacity { NumberAnimation { duration: 200; easing.type: Easing.InQuad } }
+        
+        MouseArea {
+            anchors.fill: parent
+            onClicked: button.overlayClicked()
         }
     }
 }
