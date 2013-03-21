@@ -36,7 +36,7 @@
 static const char description[] =
     I18N_NOOP("A game to enhance your memory for KDE!");
 
-static const char version[] = "1.1.0";
+static const char version[] = "1.2.0";
 
 int main(int argc, char **argv)
 {
