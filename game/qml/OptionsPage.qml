@@ -30,55 +30,53 @@ Flickable {
     Column {
         id: games
         width: parent.width
-        anchors.margins: 10
-        spacing: 30
+        spacing: 20
         Page {
             height: gameTypes.height
             width: parent.width
             Flow {
                 id: gameTypes
-                height: childrenRect.height
                 spacing: 20
                 anchors.margins: 10
                 width: parent.width
-                property real buttonWidth: Math.max((width - 120) / 6, 100)
+                property real buttonWidth: 107
                 TogglableButton {
-                	width: parent.buttonWidth
-                	source: playersModel.iconsDir("gameicons/pairs.svg")
+                    width: parent.buttonWidth
+                    source: playersModel.iconsDir("gameicons/pairs.svg")
                     text: i18n("Pairs")
                     onClicked: gameType = 'image'
                     enabled: gameType == 'image'
                 }
                 TogglableButton {
-                	width: parent.buttonWidth
+                    width: parent.buttonWidth
                     source: playersModel.iconsDir("gameicons/relations.svg")
                     text: i18n("Relations")
                     onClicked: gameType = 'image2'
                     enabled: gameType == 'image2'
                 }
                 TogglableButton {
-                	width: parent.buttonWidth
+                    width: parent.buttonWidth
                     source: playersModel.iconsDir("gameicons/logic.svg")
                     text: i18n("Logic")
                     onClicked: gameType = 'logic'
                     enabled: gameType == 'logic'
                 }
                 TogglableButton {
-                	width: parent.buttonWidth
+                    width: parent.buttonWidth
                     source: playersModel.iconsDir("gameicons/sound.svg")
                     text: i18n("Sound")
                     onClicked: gameType = 'sound'
                     enabled: gameType == 'sound'
                 }
                 TogglableButton {
-                	width: parent.buttonWidth
+                    width: parent.buttonWidth
                     source: playersModel.iconsDir("gameicons/soundLogic.svg")
                     text: i18n("SoundLogic")
                     onClicked: gameType = 'soundlogic'
                     enabled: gameType == 'soundlogic'
                 }
                 TogglableButton {
-                	width: parent.buttonWidth
+                    width: parent.buttonWidth
                     source: playersModel.iconsDir("gameicons/words.svg")
                     text: i18n("Words")
                     onClicked: gameType = 'word'
