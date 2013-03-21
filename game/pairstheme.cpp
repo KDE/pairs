@@ -35,9 +35,7 @@ PairsTheme::PairsTheme(const QString& path)
 	bool b = m_archive.open(QIODevice::ReadOnly);
     Q_ASSERT(b);
 	QStringList files(m_archive.directory()->entries());
-    qDebug() << files;
 	files = files.filter(QRegExp("*.game", Qt::CaseSensitive, QRegExp::Wildcard));
-    qDebug() << files;
 
     Q_ASSERT(files.count()>=1 && "no games in the theme!");
     

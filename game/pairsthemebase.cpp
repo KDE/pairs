@@ -181,7 +181,7 @@ void PairsThemeBase::parseElement(QXmlStreamReader &reader)
                         break;
                     case CARD_FOUND:
                         item.found[lang] = src;
-                        qDebug() << lang << src << item.found[lang] << item.foundSound("en");
+//                         qDebug() << lang << src << item.found[lang] << item.foundSound("en");
                         break;
                     case CARD_WORD:
                         QString src = reader.readElementText().trimmed();

@@ -28,14 +28,13 @@
 #include <krandom.h>
 #include <QDebug>
 
-
 ThemesModel::ThemesModel(QObject* parent, const QString &filePath): QStandardItemModel(parent)
 {
     QHash<int, QByteArray> names=QStandardItemModel::roleNames();
     names.insert(PairsTheme::CardTypeRole, "type");
     names.insert(PairsTheme::LanguagesRole, "languages");
     setRoleNames(names);
-    qDebug() << "file path:"<< filePath;
+//     qDebug() << "file path:"<< filePath;
 	if(filePath.isEmpty())
 	{
 		QStringList themesdirs=KGlobal::dirs()->findDirs("appdata", "themes");
@@ -57,7 +56,7 @@ ThemesModel::ThemesModel(QObject* parent, const QString &filePath): QStandardIte
         		iNumber++;
         		theme->setTitle(theme->title() + '(' + QString::number(iNumber) + ')' );
 			}  // namespace )
-        	qDebug()<< theme->title();
+//         	qDebug()<< theme->title();
             appendRow(theme);
         }
 	}
@@ -81,7 +80,7 @@ void ThemesModel::reload()
         		iNumber++;
         		theme->setTitle(theme->title() + '(' + QString::number(iNumber) + ')' );
 			}  // namespace )
-        	qDebug()<< theme->title();
+//         	qDebug()<< theme->title();
             appendRow(theme);
         }
     }
