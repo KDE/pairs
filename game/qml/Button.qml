@@ -27,7 +27,6 @@ Item {
     height: icon.height + caption.height  + icon.anchors.margins * 2 + caption.anchors.bottomMargin
     
     signal clicked;
-    signal overlayClicked;
     
     property alias text: caption.text
     property alias source: icon.source
