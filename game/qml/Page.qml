@@ -19,19 +19,20 @@
  */
 
 import QtQuick 1.1
+import org.kde.plasma.core 0.1 as PlasmaCore
+
 Item {
-    property alias backgroundOpacity: bg.opacity
-    Rectangle
-    {
-        id: bg
-        anchors.fill: parent
-        opacity: 0.1
-        radius: 10
-        smooth: true
-        
-        gradient: Gradient {
-            GradientStop { position: 0; color: "#FFFFFFFF" }
-            GradientStop { position: 1; color: "#00FFFFFF" }
+    PlasmaCore.FrameSvgItem {
+        id: pageDecoration
+        imagePath: "widgets/translucentbackground"
+        prefix: "translucent"
+        clip: true
+        anchors {
+            fill: parent
+            leftMargin: -margins.left
+            rightMargin: -margins.right
+            topMargin: -margins.top
+            bottomMargin: -margins.bottom
         }
     }
 }
