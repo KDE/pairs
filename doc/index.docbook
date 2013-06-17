@@ -3,13 +3,13 @@
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE">
 ]>
-<book lang="&language;">
+<book id="pairseditor" lang="&language;">
 <bookinfo>
 <title>The Pairs Editor Handbook</title>
 <authorgroup>
 <author>
 <personname>
-      <firstname>This documentation was converted from the KDE UserBase <ulink url=" http://userbase.kde.org/Pairs/Editor">Pairs/Editor</ulink> page.</firstname>
+      <firstname>This documentation was converted from the KDE UserBase <ulink url="http://userbase.kde.org/Pairs/Editor">Pairs/Editor</ulink> page.</firstname>
 <surname></surname>
 </personname>
       </author>
