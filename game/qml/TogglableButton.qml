@@ -67,7 +67,7 @@ Item
         
         MouseArea {
             anchors.fill: parent
-            onClicked: button.overlayClicked()
+            onClicked: container.overlayClicked()
         }
     }
 }
