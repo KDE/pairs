@@ -139,6 +139,7 @@ FancyBackground
                 leftMargin: 20
                 rightMargin: 20
             }
+            clip: true
             cellHeight: 130
             cellWidth: 110
             header: Text {
