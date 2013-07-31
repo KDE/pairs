@@ -82,12 +82,5 @@ Page {
                 description: i18n("Graphic design and icons")
             }
         ]
-        footer: Button {
-            width: parent.width
-            text: i18n("Go back")
-            font.pixelSize: 30
-            font.bold: true
-            height: 40
-        }
     }
 }

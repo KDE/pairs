@@ -119,6 +119,15 @@ FancyBackground
                     fgame.stopGame()
                 }
             }
+            Button {
+                width: tools.buttonWidth
+                source: "image://icon/go-previous"
+                text: i18n("Go Back")
+                visible: game.state=="info"
+                onClicked: {
+                    game.state="newgame"
+                }
+            }
         }
     }
     
@@ -132,7 +141,7 @@ FancyBackground
             margins: 20
             bottomMargin: playersControl.visible ? 20 : 0
         }
-        
+        visible: game.state!="info"
         GridView {
             anchors {
                 fill: parent
