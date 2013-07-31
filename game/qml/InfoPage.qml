@@ -68,7 +68,7 @@ Page {
             },
             Author {
                 name: "Marco Calignano"
-                email: "marco.calignano@googlemail.com"
+                email: "marco.calignano@gmail.com"
                 description: i18n("Theme support enhancement and general feature development")
             },
             Author {
