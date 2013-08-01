@@ -194,7 +194,6 @@ void MainWindow::openfile(const QString& filename)
     m_mainWidget->setUi(m_pt);
     m_mainWidget->widgetsHide();
     m_fileSaved = true;
-
 }
 
 void MainWindow::doOpen()
@@ -222,7 +221,7 @@ QString MainWindow::copyFile(KUrlRequester *k)
     return newFile;
 }
 
-void MainWindow::extract(QString path)
+void MainWindow::extract(const QString& path)
 {
     KTar archive(path);
     newTmpDir(QDir::tempPath() + '/' + QFileInfo(path).fileName());
@@ -238,7 +237,7 @@ void MainWindow::extract(QString path)
     archive.close();
 }
 
-void MainWindow::compress(QString path)
+void MainWindow::compress(const QString& path)
 {
     KTar archive(path);
     const bool opened = archive.open(QIODevice::WriteOnly);

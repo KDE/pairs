@@ -72,8 +72,8 @@ private:
     bool m_fileSaved;
 
     void newTmpDir(const QString &path);
-    void extract(QString path);
-    void compress(QString path);
+    void extract(const QString& path);
+    void compress(const QString& path);
     bool askToSave();
 
 };
