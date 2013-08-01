@@ -40,15 +40,15 @@
 #include <KTar>
 #include <KActionCollection>
 
-MainWindow::MainWindow(QWidget *parent) : KXmlGuiWindow(parent)
+MainWindow::MainWindow(QWidget *parent)
+    : KXmlGuiWindow(parent)
+    , m_pt(0)
+    , m_selectedItem(0)
+    , m_model(0)
+    , m_tmpDir(0)
+    , m_process(0)
+    , m_fileSaved(true)
 {
-
-    m_selectedItem = 0;
-    m_pt = 0;
-    m_model = 0;
-    m_tmpDir = 0;
-    m_process = 0;
-    m_fileSaved = true;
     setMinimumSize (900, 400);
     m_mainWidget = new MainWindowView(this);
     connect(m_mainWidget, SIGNAL(changed()), this, SLOT(doChange()));
