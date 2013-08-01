@@ -64,6 +64,8 @@ MainWindow::MainWindow(QWidget *parent)
     m_mainWidget->widgetsHide();
     createGUI();
     actionCollection()->action("help_whats_this");
+
+    doNew();
 }
 
 MainWindow::~MainWindow()
@@ -124,7 +126,7 @@ void MainWindow::doSaveAs()
 
 void MainWindow::doNew()
 {
-	if(!askToSave())
+	if(m_model && !askToSave())
 		return;
     m_file.clear();
     delete m_model;
