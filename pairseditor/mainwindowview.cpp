@@ -109,14 +109,14 @@ void MainWindowView::widgetsHide()
 void MainWindowView::clearUi(const QString &path)
 {
 	m_path = path;
-	m_ui->titleEdit->setText("");
-	m_ui->authorEdit->setText("");
-	m_ui->versionEdit->setText("");
+	m_ui->titleEdit->clear();
+	m_ui->authorEdit->clear();
+	m_ui->versionEdit->clear();
 	m_ui->dateEdit->setDate(QDate::currentDate());
 	m_ui->maintypeBox->setCurrentIndex(0);
-	m_ui->descriptionEdit->setText("");
-	m_ui->backKurl->setText("");
-	m_ui->pixLabel->setPixmap(QPixmap());
+	m_ui->descriptionEdit->clear();
+	m_ui->backKurl->clear();
+	m_ui->pixLabel->clear();
 	m_ui->fileKurl->setStartDir(KUrl(QDir::currentPath()));
 	m_ui->backKurl->setStartDir(KUrl(QDir::currentPath()));
 }
