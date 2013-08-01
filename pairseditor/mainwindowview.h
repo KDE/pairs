@@ -60,7 +60,7 @@ public:
 signals:
 	void changed();
 
-public slots:
+private slots:
     void elementSelected(const QModelIndex & item);
     void backSelected();
     void fileSelected();
@@ -68,7 +68,7 @@ public slots:
     void wordChanged(const QString &word);
     void addElement();
     void deleteElement();
-    void addFeature(int index);
+    void addFeature(QAction* triggeredFeature);
     void playSound();
 
 private:

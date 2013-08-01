@@ -343,81 +343,6 @@
           </widget>
          </item>
          <item>
-          <widget class="KComboBox" name="moreButton">
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Add a sub-element</string>
-           </property>
-           <property name="whatsThis">
-            <string>Add a sub-element</string>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-           <property name="sizeAdjustPolicy">
-            <enum>QComboBox::AdjustToContents</enum>
-           </property>
-           <property name="minimumContentsLength">
-            <number>0</number>
-           </property>
-           <item>
-            <property name="text">
-             <string>New Image</string>
-            </property>
-            <property name="icon">
-             <iconset theme="view-preview">
-              <normaloff/>
-             </iconset>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>New Logic</string>
-            </property>
-            <property name="icon">
-             <iconset theme="preferences-plugin">
-              <normaloff/>
-             </iconset>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>New Sound</string>
-            </property>
-            <property name="icon">
-             <iconset theme="preferences-desktop-text-to-speech">
-              <normaloff/>
-             </iconset>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>New Word</string>
-            </property>
-            <property name="icon">
-             <iconset theme="preferences-desktop-font">
-              <normaloff/>
-             </iconset>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>New Found Sound</string>
-            </property>
-            <property name="icon">
-             <iconset theme="dialog-ok-apply">
-              <normaloff/>
-             </iconset>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item>
           <spacer name="horizontalSpacer">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -432,6 +357,13 @@
             </size>
            </property>
           </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="moreButton">
+           <property name="text">
+            <string>Add Feature</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>

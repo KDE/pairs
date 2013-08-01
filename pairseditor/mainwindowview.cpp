@@ -28,6 +28,7 @@
 #include "thememodel.h"
 #include "elementitem.h"
 #include "featureitem.h"
+#include <QMenu>
 #include <QtGui/QTreeView>
 #include <QtXml/QXmlStreamWriter>
 #include <QtCore/QDebug>
@@ -42,13 +43,22 @@ MainWindowView::MainWindowView(QWidget *parent) : m_ui(new Ui::MainWindowView)
 	m_selectedItem = 0;
     m_ui->setupUi(this);
 	m_ui->splitter->setStretchFactor(1, 3);
+    
+    QMenu* moreButtonMenu = new QMenu(m_ui->moreButton);
+    moreButtonMenu->addAction(QIcon::fromTheme("view-preview"), i18n("New Image"))->setProperty("type", int(CARD_IMAGE));
+    moreButtonMenu->addAction(QIcon::fromTheme("preferences-plugin"), i18n("New Logic Relation"))->setProperty("type", int(CARD_LOGIC));
+    moreButtonMenu->addAction(QIcon::fromTheme("preferences-desktop-text-to-speech"), i18n("New Sound"))->setProperty("type", int(CARD_SOUND));
+    moreButtonMenu->addAction(QIcon::fromTheme("preferences-desktop-font"), i18n("New Word"))->setProperty("type", int(CARD_WORD));
+    moreButtonMenu->addAction(QIcon::fromTheme("dialog-ok-apply"), i18n("New Found Sound"))->setProperty("type", int(CARD_FOUND));
+	connect(moreButtonMenu, SIGNAL(triggered(QAction*)), this, SLOT(addFeature(QAction*)));
+    m_ui->moreButton->setMenu(moreButtonMenu);
+
 	connect(m_ui->fileKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(fileSelected()));
 	connect(m_ui->backKurl, SIGNAL(urlSelected(KUrl)), this, SLOT(backSelected()));
 	connect(m_ui->wordEdit, SIGNAL(textChanged(QString)), this, SLOT(wordChanged(QString)));
 	connect(m_ui->playButton, SIGNAL(clicked()), this, SLOT(playSound()));
 	connect(m_ui->delButton, SIGNAL(clicked()), this, SLOT(deleteElement()));
 	connect(m_ui->addButton, SIGNAL(clicked()), this, SLOT(addElement()));
-	connect(m_ui->moreButton, SIGNAL(currentIndexChanged(int)), this, SLOT(addFeature(int)));
 
 	connect(m_ui->titleEdit, SIGNAL(textEdited(QString)), this, SIGNAL(changed()));
 	connect(m_ui->descriptionEdit, SIGNAL(textEdited(QString)), this, SIGNAL(changed()));
@@ -198,35 +208,14 @@ bool MainWindowView::check()
     return true;
 }
 
-void MainWindowView::addFeature(int index)
+void MainWindowView::addFeature(QAction* triggeredFeature)
 {
-    if(!m_model || m_model->rowCount() == 0 || !m_selectedItem || index == -1)
+    if(!m_model || m_model->rowCount() == 0 || !m_selectedItem || !triggeredFeature)
         return;
     QStandardItem *paren = m_selectedItem;
-    m_ui->moreButton->setCurrentIndex(-1);
     if(m_selectedItem->data(ThemeModel::CardTypeRole).toInt())
         paren = m_selectedItem->parent();
-    qDebug() << "addFeature called" << index;
-    CardType newType;
-    switch(index)
-    {
-        case 0:
-        default:
-            newType = CARD_IMAGE;
-            break;
-        case 1:
-            newType = CARD_LOGIC;
-            break;
-        case 2:
-            newType = CARD_SOUND;
-            break;
-        case 3:
-            newType = CARD_WORD;
-            break;
-        case 4:
-            newType = CARD_FOUND;
-            break;
-    }
+    CardType newType = CardType(triggeredFeature->property("type").toInt());
     FeatureItem *fi = new FeatureItem(newType, "any", "");
     m_model->insertFeature(fi, paren);
     emit changed();
