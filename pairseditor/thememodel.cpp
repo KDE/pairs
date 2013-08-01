@@ -54,27 +54,6 @@ ThemeModel::ThemeModel(QObject* parent): QStandardItemModel(parent)
     appendRow(item);
 }
 
-void ThemeModel::removeItem(QStandardItem *selectedItem)
-{
-
-    QStandardItem *par = selectedItem->parent();
-
-    QModelIndex mi = indexFromItem(selectedItem);
-
-    if (par) {
-        par->removeRow(mi.row());
-    }
-    else
-    {
-        removeRow(mi.row());
-    }
-}
-
-void ThemeModel::insertItem(QStandardItem *newItem)
-{
-    insertRow(rowCount(), newItem);
-}
-
 void ThemeModel::insertFeature(QStandardItem *newItem, QStandardItem *parent)
 {
     parent->appendRow(newItem);

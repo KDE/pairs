@@ -242,7 +242,7 @@ void MainWindowView::addElement()
     ElementItem *newItem = new ElementItem (el);
     QString name = i18n("Element %1", m_model->rowCount()+1);
     newItem->setText(name);
-    m_model->insertItem(newItem);
+    m_model->appendRow(newItem);
     emit changed();
 
 }
@@ -251,15 +251,14 @@ void MainWindowView::deleteElement()
 {
 	if(!m_model || m_model->rowCount() == 0 || !m_selectedItem)
 		return;
-	int new_row = m_selectedItem->row();
-    m_model->removeItem(m_selectedItem);
+	QModelIndex oldIdx = m_selectedItem->index();
+    m_model->removeRow(oldIdx.row(), oldIdx.parent());
     m_selectedItem = 0;
     emit changed();
-    if(new_row >= m_model->rowCount())
-    	new_row = m_model->rowCount() - 1;
-    QModelIndex index = m_model->index(new_row,0);
-    m_ui->treeView->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows);
 
+    int new_row = qMin(oldIdx.row(), m_model->rowCount() - 1);
+    QModelIndex index = m_model->index(new_row, 0);
+    m_ui->treeView->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows);
 }
 void MainWindowView::selectionChanged(const QItemSelection& selected, const QItemSelection&  )
 {
