@@ -62,29 +62,20 @@ void ThemeModel::removeItem(QStandardItem *selectedItem)
     QModelIndex mi = indexFromItem(selectedItem);
 
     if (par) {
-        beginRemoveRows(mi, mi.row(), mi.row());
         par->removeRow(mi.row());
     }
     else
     {
-        beginRemoveRows(QModelIndex(), mi.row(), mi.row());
         removeRow(mi.row());
     }
-
-    endRemoveRows();
-    reset();
 }
 
 void ThemeModel::insertItem(QStandardItem *newItem)
 {
-    beginInsertRows(QModelIndex(), rowCount(), rowCount());
     insertRow(rowCount(), newItem);
-    endInsertRows();
 }
 
 void ThemeModel::insertFeature(QStandardItem *newItem, QStandardItem *parent)
 {
-    beginInsertRows(indexFromItem(parent), parent->row(), parent->row());
     parent->appendRow(newItem);
-    endInsertRows();
 }
