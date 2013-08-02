@@ -236,8 +236,7 @@ void MainWindowView::addFeature(int index)
 
 void MainWindowView::addElement()
 {
-
-    if(!m_model || m_model->rowCount() == 0 || !m_selectedItem || m_selectedItem->data(ThemeModel::CardTypeRole).toInt())
+    if(!m_model || (m_selectedItem && m_selectedItem->data(ThemeModel::CardTypeRole).toInt()))
         return;
 
     m_model->appendRow(new ElementItem(i18n("Element %1", m_model->rowCount()+1), ThemeElement()));
@@ -246,9 +245,9 @@ void MainWindowView::addElement()
 
 void MainWindowView::deleteElement()
 {
-	if(!m_model || m_model->rowCount() == 0 || !m_selectedItem)
-		return;
-	QModelIndex oldIdx = m_selectedItem->index();
+    if(!m_ui->treeView->selectionModel()->hasSelection())
+        return;
+    QModelIndex oldIdx = m_ui->treeView->selectionModel()->selectedIndexes().first();
     m_model->removeRow(oldIdx.row(), oldIdx.parent());
     m_selectedItem = 0;
     emit changed();
