@@ -350,19 +350,17 @@ void MainWindowView::elementSelected(const QModelIndex & idx)
 }
 void MainWindowView::backSelected()
 {
-    QPixmap image;
     QString newFile = m_parent->copyFile(m_ui->backKurl);
     m_ui->backKurl->setText(m_ui->backKurl->url().fileName());
-    image.load(newFile);
+    QPixmap image(newFile);
   	m_ui->pixLabel->setPixmap(scaleImage(image, 100));
     emit changed();
 }
 void MainWindowView::fileSelected()
 {
-    QPixmap image;
     QString newFile = m_parent->copyFile(m_ui->fileKurl);
     m_ui->fileKurl->setText(m_ui->fileKurl->url().fileName());
-    image.load(newFile);
+    QPixmap image(newFile);
   	m_ui->itemLabel->setPixmap(scaleImage(image, 100));
     m_selectedItem->setData(m_ui->fileKurl->text(),ThemeModel::PathRole);
     m_selectedItem->setText(m_ui->fileKurl->text());
