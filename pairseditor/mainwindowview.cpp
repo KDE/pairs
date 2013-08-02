@@ -238,13 +238,9 @@ void MainWindowView::addElement()
 
     if(!m_model || m_model->rowCount() == 0 || !m_selectedItem || m_selectedItem->data(ThemeModel::CardTypeRole).toInt())
         return;
-    const ThemeElement el;
-    ElementItem *newItem = new ElementItem (el);
-    QString name = i18n("Element %1", m_model->rowCount()+1);
-    newItem->setText(name);
-    m_model->appendRow(newItem);
-    emit changed();
 
+    m_model->appendRow(new ElementItem(i18n("Element %1", m_model->rowCount()+1), ThemeElement()));
+    emit changed();
 }
 
 void MainWindowView::deleteElement()

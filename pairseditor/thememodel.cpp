@@ -34,9 +34,8 @@ ThemeModel::ThemeModel(PairsThemeEditor &t, QObject* parent): QStandardItemModel
     setRoleNames(names);
     Q_FOREACH(const ThemeElement& el, t.items())
     {
-        ElementItem *item = new ElementItem(el);
         QString name = i18n("Element %1", el.value(CARD_IMAGE, "any").split('.').first());
-        item->setText(name);
+        ElementItem *item = new ElementItem(name, el);
         appendRow(item);
     }
 }
@@ -48,10 +47,8 @@ ThemeModel::ThemeModel(QObject* parent): QStandardItemModel(parent)
     names.insert(LanguageRole, "language");
     names.insert(PathRole, "path");
     setRoleNames(names);
-    ElementItem *item = new ElementItem(ThemeElement());
-    QString name = i18n("Element %1", rowCount()+1);
-    item->setText(name);
-    appendRow(item);
+
+    appendRow(new ElementItem(i18n("Element %1", rowCount()+1), ThemeElement()));
 }
 
 void ThemeModel::insertFeature(QStandardItem *newItem, QStandardItem *parent)
