@@ -51,7 +51,6 @@ public:
     void widgetsHide();
     void clearUi(const QString &path);
     void writeXmlCommon(QXmlStreamWriter *stream);
-    Ui::MainWindowView *ui(){return m_ui;};
     void setUi(PairsThemeEditor *theme);
     void setModel(ThemeModel *model);
     bool check();
