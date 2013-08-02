@@ -95,7 +95,7 @@ void MainWindowView::setModel(ThemeModel *model)
     if(m_model) {
         connect(m_model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), SIGNAL(changed()));
         connect(m_model, SIGNAL(rowsRemoved(QModelIndex,int,int)), SIGNAL(changed()));
-        connect(m_model, SIGNAL(rowsAdded(QModelIndex,int,int)), SIGNAL(changed()));
+        connect(m_model, SIGNAL(rowsInserted(QModelIndex,int,int)), SIGNAL(changed()));
         m_ui->treeView->setModel(model);
         connect(m_ui->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(selectionChanged(QItemSelection,QItemSelection)));
     }
