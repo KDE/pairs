@@ -55,6 +55,7 @@ public:
     void setModel(ThemeModel *model);
     bool check();
     QString checkString() const {return m_checkMessage;};
+    QString title() const;
 
 signals:
 	void changed();

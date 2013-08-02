@@ -386,3 +386,7 @@ void MainWindowView::wordChanged(const QString &word)
     emit changed();
 }
 
+QString MainWindowView::title() const
+{
+    return m_ui->titleEdit->text();
+}

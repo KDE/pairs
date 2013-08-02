@@ -136,7 +136,6 @@ void MainWindow::doNew()
     m_mainWidget->clearUi(m_tmpDir->path());
     m_mainWidget->widgetsHide();
     m_fileSaved = true;
-
 }
 
 void MainWindow::doSave()
@@ -183,7 +182,7 @@ void MainWindow::doSave()
 
     compress(m_file);
     m_fileSaved = true;
-
+    setCaption(m_mainWidget->title(), !m_fileSaved);
 }
 
 
@@ -196,6 +195,7 @@ void MainWindow::openfile(const QString& filename)
     m_mainWidget->setUi(m_pt);
     m_mainWidget->widgetsHide();
     m_fileSaved = true;
+    setCaption(m_mainWidget->title(), !m_fileSaved);
 
 }
 
@@ -258,4 +258,10 @@ void MainWindow::newTmpDir(const QString &path)
         m_tmpDir->setPath(m_tmpDir->path()+'a');
     m_tmpDir->mkpath(m_tmpDir->path());
 
+}
+
+void MainWindow::doChange()
+{
+    m_fileSaved = false;
+    setCaption(m_mainWidget->title(), !m_fileSaved);
 }
