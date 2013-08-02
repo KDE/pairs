@@ -78,7 +78,6 @@ private:
     QString m_path;
     ThemeModel *m_model;
     PairsThemeEditor *m_pt;
-    QStandardItem *m_selectedItem;
     QPixmap scaleImage(const QPixmap &i, int max) const;
     Phonon::MediaObject *m_media;
 };

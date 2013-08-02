@@ -39,7 +39,6 @@ MainWindowView::MainWindowView(MainWindow *parent)
     , m_parent(parent)
     , m_model(0)
     , m_pt(0)
-    , m_selectedItem(0)
 {
     m_ui->setupUi(this);
 	m_ui->splitter->setStretchFactor(1, 3);
@@ -72,10 +71,10 @@ MainWindowView::~MainWindowView()
 
 void MainWindowView::playSound()
 {
-
-    if(!m_selectedItem)
+    if(!m_ui->treeView->selectionModel()->hasSelection())
          return;
-    int type = m_selectedItem->data(ThemeModel::CardTypeRole).toInt();
+    QModelIndex selectedIdx = m_ui->treeView->selectionModel()->selectedIndexes().first();
+    int type = selectedIdx.data(ThemeModel::CardTypeRole).toInt();
     if(type != CARD_SOUND && type != CARD_SOUNDLOGIC && type != CARD_FOUND)
          return;
     Phonon::MediaSource media(m_ui->fileKurl->startDir().path() + '/' + m_ui->fileKurl->text());
@@ -208,12 +207,12 @@ bool MainWindowView::check()
 
 void MainWindowView::addFeature(int index)
 {
-    if(!m_model || m_model->rowCount() == 0 || !m_selectedItem || index == -1)
+    if(!m_model || m_model->rowCount() == 0 || !m_ui->treeView->selectionModel()->hasSelection() || index == -1)
         return;
-    QStandardItem *paren = m_selectedItem;
+    QModelIndex paren = m_ui->treeView->selectionModel()->selectedIndexes().first();
     m_ui->moreButton->setCurrentIndex(-1);
-    if(m_selectedItem->data(ThemeModel::CardTypeRole).toInt())
-        paren = m_selectedItem->parent();
+    if(paren.parent().isValid())
+        paren = paren.parent();
     qDebug() << "addFeature called" << index;
     CardType newType;
     switch(index)
@@ -236,13 +235,13 @@ void MainWindowView::addFeature(int index)
             break;
     }
     FeatureItem *fi = new FeatureItem(newType, "any", "");
-    m_model->insertFeature(fi, paren);
+    m_model->insertFeature(fi, m_model->itemFromIndex(paren));
 
 }
 
 void MainWindowView::addElement()
 {
-    if(!m_model || (m_selectedItem && m_selectedItem->data(ThemeModel::CardTypeRole).toInt()))
+    if(!m_model)
         return;
 
     m_model->appendRow(new ElementItem(i18n("Element %1", m_model->rowCount()+1), ThemeElement()));
@@ -254,8 +253,6 @@ void MainWindowView::deleteElement()
         return;
     QModelIndex oldIdx = m_ui->treeView->selectionModel()->selectedIndexes().first();
     m_model->removeRow(oldIdx.row(), oldIdx.parent());
-    m_selectedItem = 0;
-    emit changed();
 
     int new_row = qMin(oldIdx.row(), m_model->rowCount() - 1);
     QModelIndex index = m_model->index(new_row, 0);
@@ -269,7 +266,6 @@ void MainWindowView::selectionChanged(const QItemSelection& selected, const QIte
 
 void MainWindowView::elementSelected(const QModelIndex & idx)
 {
-    m_selectedItem = m_model->itemFromIndex(idx);
     int type = idx.data(ThemeModel::CardTypeRole).toInt();
     if(!type)
     {
@@ -367,9 +363,12 @@ void MainWindowView::fileSelected()
     m_ui->fileKurl->setText(m_ui->fileKurl->url().fileName());
     QPixmap image(newFile);
   	m_ui->itemLabel->setPixmap(scaleImage(image, 100));
-    m_selectedItem->setData(m_ui->fileKurl->text(),ThemeModel::PathRole);
-    m_selectedItem->setText(m_ui->fileKurl->text());
-    emit changed();
+    
+    Q_ASSERT(m_ui->treeView->selectionModel()->hasSelection());
+    QModelIndex idx = m_ui->treeView->selectionModel()->selectedIndexes().first();
+    QStandardItem* selectedItem = m_model->itemFromIndex(idx);
+    selectedItem->setData(m_ui->fileKurl->text(),ThemeModel::PathRole);
+    selectedItem->setText(m_ui->fileKurl->text());
 }
 
 QPixmap MainWindowView::scaleImage(const QPixmap &i, int max) const
@@ -381,9 +380,11 @@ QPixmap MainWindowView::scaleImage(const QPixmap &i, int max) const
 
 void MainWindowView::wordChanged(const QString &word)
 {
-    m_selectedItem->setData(word, ThemeModel::PathRole);
-    m_selectedItem->setText(word);
-    emit changed();
+    Q_ASSERT(m_ui->treeView->selectionModel()->hasSelection());
+    QModelIndex idx = m_ui->treeView->selectionModel()->selectedIndexes().first();
+    QStandardItem* selectedItem = m_model->itemFromIndex(idx);
+    selectedItem->setData(word, ThemeModel::PathRole);
+    selectedItem->setText(word);
 }
 
 QString MainWindowView::title() const
