@@ -35,12 +35,13 @@
 #include <Phonon/MediaObject>
 #include <Phonon/AudioOutput>
 
-MainWindowView::MainWindowView(QWidget *parent) : m_ui(new Ui::MainWindowView)
+MainWindowView::MainWindowView(MainWindow *parent)
+    : m_ui(new Ui::MainWindowView)
+    , m_parent(parent)
+    , m_model(0)
+    , m_pt(0)
+    , m_selectedItem(0)
 {
-	m_parent = static_cast<MainWindow*> (parent);
-	m_model = 0;
-	m_pt = 0;
-	m_selectedItem = 0;
     m_ui->setupUi(this);
 	m_ui->splitter->setStretchFactor(1, 3);
     
@@ -98,9 +99,16 @@ void MainWindowView::playSound()
 
 void MainWindowView::setModel(ThemeModel *model)
 {
+    if(m_model)
+        disconnect(m_model, 0, this, 0);
 	m_model = model;
-	m_ui->treeView->setModel(model);
-    connect(m_ui->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(selectionChanged(QItemSelection,QItemSelection)));
+    if(m_model) {
+        connect(m_model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), SIGNAL(changed()));
+        connect(m_model, SIGNAL(rowsRemoved(QModelIndex,int,int)), SIGNAL(changed()));
+        connect(m_model, SIGNAL(rowsInserted(QModelIndex,int,int)), SIGNAL(changed()));
+        m_ui->treeView->setModel(model);
+        connect(m_ui->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(selectionChanged(QItemSelection,QItemSelection)));
+    }
 }
 
 void MainWindowView::widgetsHide()
@@ -218,37 +226,29 @@ void MainWindowView::addFeature(QAction* triggeredFeature)
     CardType newType = CardType(triggeredFeature->property("type").toInt());
     FeatureItem *fi = new FeatureItem(newType, "any", "");
     m_model->insertFeature(fi, paren);
-    emit changed();
 
 }
 
 void MainWindowView::addElement()
 {
-
-    if(!m_model || m_model->rowCount() == 0 || !m_selectedItem || m_selectedItem->data(ThemeModel::CardTypeRole).toInt())
+    if(!m_model || (m_selectedItem && m_selectedItem->data(ThemeModel::CardTypeRole).toInt()))
         return;
-    const ThemeElement el;
-    ElementItem *newItem = new ElementItem (el);
-    QString name = i18n("Element %1", m_model->rowCount()+1);
-    newItem->setText(name);
-    m_model->insertItem(newItem);
-    emit changed();
 
+    m_model->appendRow(new ElementItem(i18n("Element %1", m_model->rowCount()+1), ThemeElement()));
 }
 
 void MainWindowView::deleteElement()
 {
-	if(!m_model || m_model->rowCount() == 0 || !m_selectedItem)
-		return;
-	int new_row = m_selectedItem->row();
-    m_model->removeItem(m_selectedItem);
+    if(!m_ui->treeView->selectionModel()->hasSelection())
+        return;
+    QModelIndex oldIdx = m_ui->treeView->selectionModel()->selectedIndexes().first();
+    m_model->removeRow(oldIdx.row(), oldIdx.parent());
     m_selectedItem = 0;
     emit changed();
-    if(new_row >= m_model->rowCount())
-    	new_row = m_model->rowCount() - 1;
-    QModelIndex index = m_model->index(new_row,0);
-    m_ui->treeView->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows);
 
+    int new_row = qMin(oldIdx.row(), m_model->rowCount() - 1);
+    QModelIndex index = m_model->index(new_row, 0);
+    m_ui->treeView->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows);
 }
 void MainWindowView::selectionChanged(const QItemSelection& selected, const QItemSelection&  )
 {
@@ -344,19 +344,17 @@ void MainWindowView::elementSelected(const QModelIndex & idx)
 }
 void MainWindowView::backSelected()
 {
-    QPixmap image;
     QString newFile = m_parent->copyFile(m_ui->backKurl);
     m_ui->backKurl->setText(m_ui->backKurl->url().fileName());
-    image.load(newFile);
+    QPixmap image(newFile);
   	m_ui->pixLabel->setPixmap(scaleImage(image, 100));
     emit changed();
 }
 void MainWindowView::fileSelected()
 {
-    QPixmap image;
     QString newFile = m_parent->copyFile(m_ui->fileKurl);
     m_ui->fileKurl->setText(m_ui->fileKurl->url().fileName());
-    image.load(newFile);
+    QPixmap image(newFile);
   	m_ui->itemLabel->setPixmap(scaleImage(image, 100));
     m_selectedItem->setData(m_ui->fileKurl->text(),ThemeModel::PathRole);
     m_selectedItem->setText(m_ui->fileKurl->text());
@@ -377,3 +375,7 @@ void MainWindowView::wordChanged(const QString &word)
     emit changed();
 }
 
+QString MainWindowView::title() const
+{
+    return m_ui->titleEdit->text();
+}

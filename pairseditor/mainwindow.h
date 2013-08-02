@@ -54,7 +54,7 @@ public slots:
     void doTry();
     void pairsFinished();
     QString copyFile(KUrlRequester *k);
-    void doChange() {m_fileSaved = false;}
+    void doChange();
 
 protected:
     virtual bool queryClose();

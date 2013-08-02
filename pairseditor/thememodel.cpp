@@ -34,9 +34,8 @@ ThemeModel::ThemeModel(PairsThemeEditor &t, QObject* parent): QStandardItemModel
     setRoleNames(names);
     Q_FOREACH(const ThemeElement& el, t.items())
     {
-        ElementItem *item = new ElementItem(el);
         QString name = i18n("Element %1", el.value(CARD_IMAGE, "any").split('.').first());
-        item->setText(name);
+        ElementItem *item = new ElementItem(name, el);
         appendRow(item);
     }
 }
@@ -48,43 +47,11 @@ ThemeModel::ThemeModel(QObject* parent): QStandardItemModel(parent)
     names.insert(LanguageRole, "language");
     names.insert(PathRole, "path");
     setRoleNames(names);
-    ElementItem *item = new ElementItem(ThemeElement());
-    QString name = i18n("Element %1", rowCount()+1);
-    item->setText(name);
-    appendRow(item);
-}
 
-void ThemeModel::removeItem(QStandardItem *selectedItem)
-{
-
-    QStandardItem *par = selectedItem->parent();
-
-    QModelIndex mi = indexFromItem(selectedItem);
-
-    if (par) {
-        beginRemoveRows(mi, mi.row(), mi.row());
-        par->removeRow(mi.row());
-    }
-    else
-    {
-        beginRemoveRows(QModelIndex(), mi.row(), mi.row());
-        removeRow(mi.row());
-    }
-
-    endRemoveRows();
-    reset();
-}
-
-void ThemeModel::insertItem(QStandardItem *newItem)
-{
-    beginInsertRows(QModelIndex(), rowCount(), rowCount());
-    insertRow(rowCount(), newItem);
-    endInsertRows();
+    appendRow(new ElementItem(i18n("Element %1", rowCount()+1), ThemeElement()));
 }
 
 void ThemeModel::insertFeature(QStandardItem *newItem, QStandardItem *parent)
 {
-    beginInsertRows(indexFromItem(parent), parent->row(), parent->row());
     parent->appendRow(newItem);
-    endInsertRows();
 }

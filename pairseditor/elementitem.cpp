@@ -27,7 +27,8 @@
 #include <QtXml/QXmlStreamWriter>
 #include <QtCore/QDebug>
 
-ElementItem::ElementItem(const ThemeElement &el): QStandardItem()
+ElementItem::ElementItem(const QString& text, const ThemeElement& el)
+    : QStandardItem(text)
 {
     QStringList l = el.foundLanglist();
     if(!l.isEmpty())
