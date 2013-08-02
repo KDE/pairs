@@ -89,9 +89,16 @@ void MainWindowView::playSound()
 
 void MainWindowView::setModel(ThemeModel *model)
 {
+    if(m_model)
+        disconnect(m_model, 0, this, 0);
 	m_model = model;
-	m_ui->treeView->setModel(model);
-    connect(m_ui->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(selectionChanged(QItemSelection,QItemSelection)));
+    if(m_model) {
+        connect(m_model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), SIGNAL(changed()));
+        connect(m_model, SIGNAL(rowsRemoved(QModelIndex,int,int)), SIGNAL(changed()));
+        connect(m_model, SIGNAL(rowsAdded(QModelIndex,int,int)), SIGNAL(changed()));
+        m_ui->treeView->setModel(model);
+        connect(m_ui->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(selectionChanged(QItemSelection,QItemSelection)));
+    }
 }
 
 void MainWindowView::widgetsHide()
@@ -230,7 +237,6 @@ void MainWindowView::addFeature(int index)
     }
     FeatureItem *fi = new FeatureItem(newType, "any", "");
     m_model->insertFeature(fi, paren);
-    emit changed();
 
 }
 
@@ -240,7 +246,6 @@ void MainWindowView::addElement()
         return;
 
     m_model->appendRow(new ElementItem(i18n("Element %1", m_model->rowCount()+1), ThemeElement()));
-    emit changed();
 }
 
 void MainWindowView::deleteElement()
