@@ -46,7 +46,7 @@ class MainWindowView : public QWidget
     Q_OBJECT
     
 public:
-    explicit MainWindowView(QWidget *parent = 0);
+    explicit MainWindowView(MainWindow* parent);
     ~MainWindowView();
     void widgetsHide();
     void clearUi(const QString &path);
@@ -72,8 +72,8 @@ public slots:
     void playSound();
 
 private:
-    MainWindow *m_parent;
     Ui::MainWindowView *m_ui;
+    MainWindow *m_parent;
     QString m_checkMessage;
     QString m_path;
     ThemeModel *m_model;
