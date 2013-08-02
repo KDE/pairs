@@ -237,6 +237,8 @@ void MainWindowView::addFeature(int index)
     FeatureItem *fi = new FeatureItem(newType, "any", "");
     m_model->insertFeature(fi, m_model->itemFromIndex(paren));
 
+    m_ui->treeView->expand(fi->parent()->index());
+    m_ui->treeView->selectionModel()->select(fi->index(), QItemSelectionModel::ClearAndSelect);
 }
 
 void MainWindowView::addElement()
@@ -244,7 +246,9 @@ void MainWindowView::addElement()
     if(!m_model)
         return;
 
-    m_model->appendRow(new ElementItem(i18n("Element %1", m_model->rowCount()+1), ThemeElement()));
+    ElementItem* item = new ElementItem(i18n("Element %1", m_model->rowCount()+1), ThemeElement());
+    m_model->appendRow(item);
+    m_ui->treeView->selectionModel()->select(item->index(), QItemSelectionModel::ClearAndSelect);
 }
 
 void MainWindowView::deleteElement()
