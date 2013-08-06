@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Pairs Theme Editor
+Name[bg]=Редактор на изгледа на "Двойки"
 Name[bs]=Uređivač tema za igru parova
 Name[ca]=Editor de temes del Pairs
 Name[ca@valencia]=Editor de temes del Pairs
@@ -37,6 +38,7 @@ Icon=pairseditor
 X-DocPath=pairseditor/index.html
 Type=Application
 GenericName=A Pairs theme editor
+GenericName[bg]=Редактор на изгледа на играта "Двойки"
 GenericName[bs]=Uređivač tema za igru parova
 GenericName[ca]=Un editor de temes pel Pairs
 GenericName[ca@valencia]=Un editor de temes pel Pairs
