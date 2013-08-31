@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<cooperative xmlns="http://edu.kde.org/game">
+<pairs difficulty="very easy">
+  <title>KDE Programs</title>
+  <maxmoves>0</maxmoves>
+  <description>Helps you learn KDE programs</description>
+  <author>Aleix Pol</author>
+  <date>23/9/2011</date>
+  <version>0.1</version>
+  <image type='back' src='kde.svg'/>
+  <main type='image' />
+  <element><image src='konqueror.svg'  lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>Konqueror </word></element>
+  <element><image src='dolphin.svg'    lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>Dolphin   </word></element>
+</pairs>
+<pairs difficulty="easy">
+  <title>KDE Programs</title>
+  <description>Helps you learn KDE programs</description>
+  <author>Aleix Pol</author>
+  <date>23/9/2011</date>
+  <maxmoves>0</maxmoves>
+  <version>0.1</version>
+  <image type='back' src='kde.svg'/>
+  <main type='image' />
+  <element><image src='kopete.svg'     lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>Kopete    </word></element>
+  <element><image src='konqueror.svg'  lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>Konqueror </word></element>
+  <element><image src='dolphin.svg'    lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>Dolphin   </word></element>
+</pairs>
+<pairs difficulty="medium">
+  <title>KDE Programs</title>
+  <description>Helps you learn KDE programs</description>
+  <author>Aleix Pol</author>
+  <maxmoves>0</maxmoves>
+  <date>23/9/2011</date>
+  <version>0.1</version>
+  <image type='back' src='kde.svg'/>
+  <main type='image' />
+  <element><image src='kdevelop.svg'   lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>KDevelop  </word></element>
+  <element><image src='kopete.svg'     lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>Kopete    </word></element>
+  <element><image src='konqueror.svg'  lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>Konqueror </word></element>
+  <element><image src='dolphin.svg'    lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>Dolphin   </word></element>
+</pairs>
+<pairs difficulty="hard">
+  <title>KDE Programs</title>
+  <description>Helps you learn KDE programs</description>
+  <author>Aleix Pol</author>
+  <date>23/9/2011</date>
+  <maxmoves>0</maxmoves>
+  <version>0.1</version>
+  <image type='back' src='kde.svg'/>
+  <main type='image' />
+  <element><image src='ktuberling.svg' lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>KTuberling</word></element>
+  <element><image src='kalgebra.svg'   lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>KAlgebra  </word></element>
+  <element><image src='okular.svg'     lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>Okular    </word></element>
+  <element><image src='kdevelop.svg'   lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>KDevelop  </word></element>
+  <element><image src='kopete.svg'     lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>Kopete    </word></element>
+  <element><image src='konqueror.svg'  lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>Konqueror </word></element>
+  <element><image src='dolphin.svg'    lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>Dolphin   </word></element>
+</pairs>
+<pairs difficulty="very hard">
+  <title>KDE Programs</title>
+  <description>Helps you learn KDE programs</description>
+  <author>Aleix Pol</author>
+  <date>23/9/2011</date>
+  <maxmoves>5</maxmoves>
+  <version>0.1</version>
+  <image type='back' src='kde.svg'/>
+  <main type='image' />
+  <element><image src='ktuberling.svg' lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>KTuberling</word></element>
+  <element><image src='kalgebra.svg'   lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>KAlgebra  </word></element>
+  <element><image src='okular.svg'     lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>Okular    </word></element>
+  <element><image src='kdevelop.svg'   lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>KDevelop  </word></element>
+  <element><image src='kopete.svg'     lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>Kopete    </word></element>
+  <element><image src='konqueror.svg'  lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>Konqueror </word></element>
+  <element><image src='dolphin.svg'    lang='any' /><pfound src='test.ogg' lang='any' /><word lang='any'>Dolphin   </word></element>
+</pairs>
+</cooperative>
