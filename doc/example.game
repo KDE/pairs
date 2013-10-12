@@ -1,8 +1,4 @@
-
-
-
 <?xml version="1.0"?>
-
 <pairs>
 <title>Zoo</title>
 <description lang='en'>Little zoo</description> 
@@ -29,6 +25,7 @@
 <video src='lionit.ogv' lang='it'/>
 <word lang='en'>lion</word>
 <word lang='it'>leone</word>
+</element>
 </pairs>
 
 
