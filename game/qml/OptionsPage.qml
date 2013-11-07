@@ -84,10 +84,10 @@ Flickable {
                 }
                 TogglableButton {
                     width: parent.buttonWidth
-                    //source: playersModel.iconsDir(" ") TODO get a SVG to set as icon.
+                    source: playersModel.iconsDir("gameicons/cooperative.svgz") TODO get a SVG to set as icon.
                     text: i18n("Cooperative")
-		    //onClicked: gameType =  TODO  
-                    //enabled: gameType == 
+		    onClicked: gameType = 'cooperative'
+                    enabled: gameType == 'cooperative'
 		}    
             }
         }
