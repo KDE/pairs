@@ -1,7 +1,9 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
 <!-- Created using Karbon, part of Calligra: http://www.calligra.org/karbon -->
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="204.8pt" height="204.8pt">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="298.301px" height="298.301px" viewBox="0 0 298.301 298.301" style="enable-background:new 0 0 298.301 298.301;"
+	 xml:space="preserve">
 <defs>
   <filter id="filter0" filterUnits="objectBoundingBox" primitiveUnits="objectBoundingBox" x="-0.10000000000" y="-0.10000000000" width="1.20000000000" height="1.20000000000">
    <feGaussianBlur result="" in="" x="0.00000000000" y="0.00000000000" width="1.00000000000" height="1.00000000000" stdDeviation="0.01273148148"/>
