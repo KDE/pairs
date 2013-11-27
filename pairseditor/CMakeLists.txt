@@ -5,7 +5,7 @@ set(pairseditor_SOURCES  mainwindow.cpp main.cpp pairsthemeeditor.cpp mainwindow
 
 kde4_add_ui_files( pairseditor_SOURCES mainwindowview.ui )
 
-kde4_add_app_icon(pairs_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../icons/hi*-apps-pairseditor*")
+kde4_add_app_icon(pairseditor_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/../icons/hi*-apps-pairseditor.png")
 
 kde4_add_executable( pairseditor ${pairseditor_SOURCES} )
 
