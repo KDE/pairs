@@ -34,7 +34,8 @@ enum CardType {
     CARD_SOUNDLOGIC,
     
     CARD_MAX_TYPE,
-    CARD_FOUND
+    CARD_FOUND,
+    COOPERATIVE_MODE,
 
 };
 
