@@ -22,6 +22,8 @@
 import QtQuick 1.0
 import org.kde.plasma.components 0.1 as PlasmaComponents
 
+property int playersNumber: 0; 
+
 FancyBackground
 {
     id: game
@@ -263,9 +265,17 @@ FancyBackground
         }
 
         function addPlayer() {
+	  
+	    if(gameType != 'cooperative'){
             playersModel.addPlayer(playerName.text, newUserPicture.source)
             newUserPicture.source=playersModel.randomIcon()
+            playerName.selectAll()}
+            else{
+	    playersModel.addPlayer(playerName.text, newUserPicture.source)
+            newUserPicture.source=playersModel.randomIcon()
             playerName.selectAll()
+	    playersNumber++
+	    }
         }
 
         Behavior on height { NumberAnimation { duration: 200; easing.type: Easing.InQuad } }

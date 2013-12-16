@@ -79,12 +79,13 @@ Flickable {
                     width: parent.buttonWidth
                     source: playersModel.iconsDir("gameicons/words.svg")
                     text: i18n("Words")
-                    onClicked: gameType = 'word'
+                    onClicked: {
+		      gameType = 'word'
                     enabled: gameType == 'word'
                 }
                 TogglableButton {
                     width: parent.buttonWidth
-                    source: iconsDir("gameicons/cooperative.svg")
+                    source: playersModel.iconsDir("gameicons/cooperative.svg")
                     text: i18n("Cooperative")
 		    onClicked: gameType = 'cooperative'
                     enabled: gameType == 'cooperative'
@@ -112,7 +113,7 @@ Flickable {
                         font.pointSize: 12
                         
                         onClicked: {
-                            if(!playersModel.isAnySelected()) {
+                            if(!playersModel.isAnySelected() && gameType!= 'cooperative') {
                                 //if there are no selected players, select the first one
                                 //if there's none, just create one
                                 if(playersModel.count>0)
@@ -120,6 +121,9 @@ Flickable {
                                 else
                                     playersControl.addPlayer()
                             }
+                            else if(gameType=='cooperative')
+				if(playersNumber<=3)
+				    playersControl.addPlayer()
                             
                             gameStarted()
                             fgame.newGame(index, gameType)
