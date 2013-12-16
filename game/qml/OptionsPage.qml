@@ -84,7 +84,7 @@ Flickable {
                 }
                 TogglableButton {
                     width: parent.buttonWidth
-                    source: playersModel.iconsDir("gameicons/cooperative.svg")
+                    source: iconsDir("gameicons/cooperative.svg")
                     text: i18n("Cooperative")
 		    onClicked: gameType = 'cooperative'
                     enabled: gameType == 'cooperative'
