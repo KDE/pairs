@@ -38,6 +38,7 @@ CardType PairsThemeBase::cardNameToType(const QString& name)
     else if (name == "logic") return CARD_LOGIC;
     else if (name == "soundlogic") return CARD_SOUNDLOGIC;
     else if (name == "pfound") return CARD_FOUND;
+    else if (name == "cooperative") return COOPERATIVE_MODE;
     Q_ASSERT(false);
     return CARD_NONE;
 }
