@@ -22,10 +22,12 @@
 import QtQuick 1.0
 import org.kde.plasma.components 0.1 as PlasmaComponents
 
-property int playersNumber: 0
+
 
 FancyBackground
 {
+  
+property int playersNumber: 0  
     id: game
     Item {
         id: main
