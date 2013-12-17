@@ -25,7 +25,7 @@ Flickable {
     id: gameSettings
     property string gameType: 'image'
     
-    signal gameStarted;
+    signal gameStarted
     contentHeight: games.height
     Column {
         id: games
@@ -79,8 +79,7 @@ Flickable {
                     width: parent.buttonWidth
                     source: playersModel.iconsDir("gameicons/words.svg")
                     text: i18n("Words")
-                    onClicked: {
-		      gameType = 'word'
+                    onClicked: gameType = 'word'
                     enabled: gameType == 'word'
                 }
                 TogglableButton {
@@ -121,10 +120,13 @@ Flickable {
                                 else
                                     playersControl.addPlayer()
                             }
-                            else if(gameType=='cooperative')
-				if(playersNumber<=3)
-				    playersControl.addPlayer()
-                            
+                            else{
+			      if(gameType=='cooperative'){
+				//If players number less than 3 then don't start the game	
+				//if(playersNumber==3)
+				    //TODO Then only go ahead with game 
+							}
+			    }
                             gameStarted()
                             fgame.newGame(index, gameType)
                         }
@@ -134,3 +136,4 @@ Flickable {
         }
     }
 }
+

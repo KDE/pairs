@@ -27,7 +27,8 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 FancyBackground
 {
   
-property int playersNumber: 0  
+property int playersNumber: 0 
+property int iscooperative: 0
     id: game
     Item {
         id: main
@@ -54,7 +55,10 @@ property int playersNumber: 0
             anchors.fill: parent
             visible: game.state=="newgame"
             
-            onGameStarted: game.state="playing"
+            onGameStarted: 
+            {game.state="playing"
+	     if(gameType=="cooperative")  
+	     iscooperative=1}
         }
         
         ResultsPage {
@@ -263,21 +267,28 @@ property int playersNumber: 0
             height: parent.height
             text: i18n("Add")
             source: playersModel.iconsDir("gameicons/addUser.svg")
-            onClicked: playersControl.addPlayer()
-        }
+            onClicked:{
+	      playersControl.addPlayer()
+	      playersNumber++
+	    }
+	    }
 
         function addPlayer() {
-	  
-	    if(gameType != 'cooperative'){
-            playersModel.addPlayer(playerName.text, newUserPicture.source)
-            newUserPicture.source=playersModel.randomIcon()
-            playerName.selectAll()}
-            else{
+	    if (iscooperative==1 && playersNumber<3){
 	    playersModel.addPlayer(playerName.text, newUserPicture.source)
             newUserPicture.source=playersModel.randomIcon()
             playerName.selectAll()
 	    playersNumber++
+	    //if(playersNumber<3) --TODO Show prompt to add more (3-playersNumber) players
+	     
 	    }
+	    else{
+	    playersModel.addPlayer(playerName.text, newUserPicture.source)
+            newUserPicture.source=playersModel.randomIcon()
+            playerName.selectAll()
+	      
+	    }
+	      
         }
 
         Behavior on height { NumberAnimation { duration: 200; easing.type: Easing.InQuad } }
