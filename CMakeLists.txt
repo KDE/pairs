@@ -36,3 +36,6 @@ add_subdirectory( players )
 add_subdirectory( gameicons )
 add_subdirectory( themes )
 add_subdirectory( doc )
+
+install(FILES pairs.appdata.xml DESTINATION ${SHARE_INSTALL_PREFIX}/appdata/)
+

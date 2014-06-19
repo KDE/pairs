@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<component type="desktop">
+  <id>pairs.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <name>Pairs</name>
+  <summary>Memory Enhancement Game</summary>
+  <description>
+    <p>Pairs is a collection of games aimed to help the development of preschool children. With these games the child can improve memory, logic, hearing, and even reading skills. Each game can have different themes so the child is stimulated with different and new challenges. It provides an editor to create own game sets.</p>
+    <p>Games:</p>
+    <ul>
+      <li>Pairs: A game for the development of memory skills. On a board there are different cards, all facing down, so the player does not see the pictures. Each card matches only one other card that has the same exact picture. The player has to click a card to turn it and try to remember where the match is. When a match is found both cards stay uncovered and the player gets a point. </li>
+      <li>Relations: A game for the development of memory and logic skills. On a board there are different cards, all facing down, so the player does not see the pictures. Each card matches only one other card with a picture that is somehow related to the first. The player has to click a card to turn it and try to remember where the match is. When a match is found both cards stay uncovered and the player gets a point. </li>
+      <li>Logic: A game for the development of logic skills. On a board there are different cards, all facing up, and the player can see all the pictures. Each card matches with only one card with a picture that is somehow related to the first. The player has to find the different matches. When a match is found both cards stay uncovered and the player get a point.</li>
+      <li>Sound: A game for the development of memory and hearing skills. On a board there are different cards, all facing down, so the player does not see the content. There are two types of cards, one type has a picture and the other type will play a sound when selected. The player has to find the right sound that matches each picture. When a match is found both card stay uncovered and the player gets a point. </li>
+      <li>SoundLogic: A game for the development of hearing skills. On a board there are different cards, all facing up. There are two type of card, one type has a picture and the other type will play a sound when selected. The player has to find the right sound that matches the right picture. When a match is found both cards stay uncovered and the player gets a point. </li>
+      <li>Words: A game to develop the memory and reading skills of the child. On a board there are different cards all facing down so the player does not see the content. There are two types of cards, one card has a picture and another card has a word. The player has to find the right word that matches the right picture. When a match is found both cards stay uncovered and the player get a point.</li>
+    </ul>
+  </description>
+  <url type="homepage">http://edu.kde.org/pairs/</url>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=pairs</url>
+  <url type="help">http://docs.kde.org/development/en/kdeedu/pairseditor/index.html</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>http://edu.kde.org/images/screenshots/resized/pairs.png</image>
+    </screenshot>
+  </screenshots>
+  <project_group>KDE</project_group>
+  <provides>
+    <binary>pairs</binary>
+  </provides>
+</component>
