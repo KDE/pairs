@@ -3,6 +3,7 @@
 #  Copyright (C) <2010>       <Albert Astals Cid>   <aacid@kde.org>
 #  Copyright (C) <2010>       <Aleix Pol>           <aleixpol@kde.org>
 #  Copyright (C) <2012>       <Marco Calignano>     <marco.calignano@gmail.com>
+#  Copyright (C) <2014>       <Marco Calignano>     <marco.calignano@gmail.com>
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License as
@@ -19,15 +20,21 @@
 #  
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+cmake_minimum_required(VERSION 2.8.12)
 
 project(pairs)
 
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
 
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
-add_definitions( ${KDE4_DEFINITIONS} )
+find_package(ECM 0.0.11 REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings)
+include(FeatureSummary)
+
+find_package(Qt5 REQUIRED COMPONENTS Widgets)
+find_package(KF5 REQUIRED COMPONENTS CoreAddons Solid)
 
 add_subdirectory( game )
 add_subdirectory( pairseditor )
@@ -36,6 +43,8 @@ add_subdirectory( players )
 add_subdirectory( gameicons )
 add_subdirectory( themes )
 add_subdirectory( doc )
+
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 install(FILES pairs.appdata.xml DESTINATION ${SHARE_INSTALL_PREFIX}/appdata/)
 
