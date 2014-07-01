@@ -25,9 +25,9 @@ Item {
     id: button
     width: 100
     height: icon.height + caption.height  + icon.anchors.margins * 2 + caption.anchors.bottomMargin
-    
+
     signal clicked;
-    
+
     property alias text: caption.text
     property alias source: icon.source
     property alias font: caption.font
@@ -48,7 +48,7 @@ Item {
             width: height
         }
     }
-    
+
     Text {
        id: caption
        anchors {
@@ -60,10 +60,10 @@ Item {
        horizontalAlignment: Text.AlignHCenter
        wrapMode: Text.WordWrap
        font.pointSize: 12
-       color: mouse.containsMouse ? "red" : "white"      
+       color: mouse.containsMouse ? "red" : "white"
        Behavior on color { ColorAnimation { duration: 200 } }
     }
-    
+
     MouseArea {
         id: mouse
         anchors.fill: parent

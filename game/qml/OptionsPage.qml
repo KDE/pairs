@@ -24,7 +24,7 @@ import QtQuick 1.0
 Flickable {
     id: gameSettings
     property string gameType: 'image'
-    
+
     signal gameStarted;
     contentHeight: games.height
     Column {
@@ -84,7 +84,7 @@ Flickable {
                 }
             }
         }
-        
+
         Page {
             width: parent.width
             height: themesView.height
@@ -93,17 +93,17 @@ Flickable {
                 width: parent.width
                 spacing: 20
                 anchors.margins: 10
-                
+
                 Repeater {
                     model: themesModel
-                    
+
                     delegate: Button {
 	                	width: Math.max((themesView.width - 120) / 6, 100)
                         visible: themesModel.isPertinent(index, gameType, fgame.language())
                         source: "image://theme/"+display+"/"+decoration
                         text: display
                         font.pointSize: 12
-                        
+
                         onClicked: {
                             if(!playersModel.isAnySelected()) {
                                 //if there are no selected players, select the first one
@@ -113,7 +113,7 @@ Flickable {
                                 else
                                     playersControl.addPlayer()
                             }
-                            
+
                             gameStarted()
                             fgame.newGame(index, gameType)
                         }

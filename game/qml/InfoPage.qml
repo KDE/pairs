@@ -28,7 +28,7 @@ Page {
             margins: 5
         }
         spacing: 10
-        
+
         header: Text {
             font.pixelSize: 26
             anchors.horizontalCenter: parent.horizontalCenter
@@ -59,7 +59,7 @@ Page {
             }
         }
         model: authors
-        
+
         property list<Author> authors: [
             Author {
                 name: "Aleix Pol Gonzalez"

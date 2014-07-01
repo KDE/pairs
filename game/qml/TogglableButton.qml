@@ -30,10 +30,10 @@ Item
     property alias source: button.source
     property alias overlaySource: overlay.source
     property bool overlayVisible: true
-    
+
     signal overlayClicked
     signal clicked
-    
+
     Rectangle {
         radius: 20
         smooth: true
@@ -46,25 +46,25 @@ Item
             GradientStop { position: 1; color: "transparent" }
         }
     }
-    
+
     Button {
         id: button
         width: parent.width
         anchors.verticalCenterOffset: -10
-        
+
         onClicked: container.clicked()
     }
-    
+
     Image { 
         id: overlay
-        
+
         opacity: !container.enabled && overlayVisible ? 1 : 0
         width: parent.width/3
         height: parent.height/3
         anchors.top: parent.top
         anchors.right: parent.right
         Behavior on opacity { NumberAnimation { duration: 200; easing.type: Easing.InQuad } }
-        
+
         MouseArea {
             anchors.fill: parent
             onClicked: container.overlayClicked()

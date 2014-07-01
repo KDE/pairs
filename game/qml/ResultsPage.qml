@@ -24,7 +24,7 @@ import QtQuick 1.0
 Page {
     ListView {
         anchors.fill: parent
-        
+
         header: Text {
             font.pixelSize: 70
             anchors.horizontalCenter: parent.horizontalCenter
@@ -32,7 +32,7 @@ Page {
             text: i18n("Congratulations!")
         }
         model: playersModel
-        
+
         delegate: Row {
             spacing: 20
             Image { height: 150; width: 150; source: decoration }

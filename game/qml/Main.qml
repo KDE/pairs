@@ -27,32 +27,32 @@ FancyBackground
     id: game
     Item {
         id: main
-        
+
         anchors {
             fill: parent
             leftMargin: Math.min(game.width/3, 320)
             margins: 20
         }
-        
+
         Board {
             id: board
             anchors.fill: parent
             visible: game.state=="playing"
-            
+
             onIsGameOverChanged: {
                 if(isGameOver)
                     game.state="congratulations"
             }
         }
-        
+
         OptionsPage {
             id: options
             anchors.fill: parent
             visible: game.state=="newgame"
-            
+
             onGameStarted: game.state="playing"
         }
-        
+
         ResultsPage {
             anchors.fill: parent
             visible: game.state=="congratulations"
@@ -64,12 +64,12 @@ FancyBackground
                 anchors.fill: parent
                 onClicked: game.state="newgame"
             }
-            
+
         }
     }
-    
+
     Component.onCompleted: game.state="newgame"
-    
+
     Page {
         id: toolbar
         anchors {
@@ -79,19 +79,19 @@ FancyBackground
             margins: 20
         }
         height: 130
-        
+
         Row {
             anchors.fill: parent
             id: tools
             property real buttonWidth: 90
-            
+
             Button {
                 width: tools.buttonWidth
                 source: playersModel.iconsDir("gameicons/exit.svg")
                 text: i18n("Quit")
                 onClicked: Qt.quit()
             }
-            
+
             Button {
                 width: tools.buttonWidth
                 source: playersModel.iconsDir("gameicons/getThemes.svg")
@@ -99,7 +99,7 @@ FancyBackground
                 onClicked: fgame.download()
                 visible: game.state=="newgame"
             }
-            
+
             Button {
                 width: tools.buttonWidth
                 source: playersModel.iconsDir("gameicons/info.svg")
@@ -130,7 +130,7 @@ FancyBackground
             }
         }
     }
-    
+
     Page {
         id: playersView
         anchors {
@@ -158,7 +158,7 @@ FancyBackground
                 color : "white"
                 text: i18n("Players")
             }
-            
+
             model: playersModel
             delegate: TogglableButton {
                 text: game.state!="playing" ? display : i18nc("name. found/tries, time seconds", "%1<br/>%2/%3, %4s", display, found, missed+found, time)
@@ -168,14 +168,14 @@ FancyBackground
                 overlayVisible: game.state=="newgame"
                 opacity: game.state!="playing" || fgame.currentPlayer==index ? 1 : 0.3
                 width: 100
-                
+
                 enabled: selected
                 onClicked: if(game.state=="newgame") playersModel.toggleSelection(index)
                 onOverlayClicked: playersModel.removePlayer(index)
             }
         }
     }
-    
+
     Page {
         id: playersControl
         height: game.state=='newgame' || game.state == "" ? 130 : 0
@@ -188,7 +188,7 @@ FancyBackground
             topMargin: 30
             margins: 20
         }
-        
+
         Text {
             id: label
             anchors {
@@ -200,7 +200,7 @@ FancyBackground
             color: "white"
             text: i18n("Join!")
         }
-        
+
         Item {
             id: controls
             visible: height>0
@@ -226,7 +226,7 @@ FancyBackground
                     onClicked: newUserPicture.source=playersModel.randomIcon()
                 }
             }
-            
+
             Column {
                 id: playerNameControls
                 anchors.verticalCenterOffset: -10
@@ -236,19 +236,18 @@ FancyBackground
                     color: "white" 
                     text: i18n("Player Name:") 
                 }
-                
+
                 PlasmaComponents.TextField {
                     id: playerName
                     width: 100 
                     text: i18n("Player")
                     focus: true
-                    
                     Component.onCompleted: selectAll()
                     onAccepted: playersControl.addPlayer()
                 }
             }
         }
-        
+
         Button {
         	id: addPlayer
             anchors {
@@ -270,8 +269,6 @@ FancyBackground
 
         Behavior on height { NumberAnimation { duration: 200; easing.type: Easing.InQuad } }
     }
-    
-    
     states: [
          State { name: "newgame" },
          State { name: "playing" },
