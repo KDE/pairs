@@ -38,7 +38,7 @@ PairsTheme::PairsTheme(const QString& path)
 	files = files.filter(QRegExp("*.game", Qt::CaseSensitive, QRegExp::Wildcard));
 
     Q_ASSERT(files.count()>=1 && "no games in the theme!");
-    
+
     QString themename(files.first()); //TODO: Support many games inside a theme
     Q_ASSERT(m_archive.directory()->entry(themename)->isFile());
     const KArchiveFile* file = static_cast<const KArchiveFile*>(m_archive.directory()->entry(themename));
@@ -81,7 +81,7 @@ QByteArray PairsTheme::themeData(const QString& path) const
     const KArchiveEntry* entry = m_archive.directory()->entry(path);
     if(!entry || !entry->isFile())
         return QByteArray();
-    
+
     return static_cast<const KArchiveFile*>(entry)->data();
 }
 

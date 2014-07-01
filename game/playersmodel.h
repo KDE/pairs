@@ -38,15 +38,15 @@ class PlayersModel : public QStandardItemModel
             Time,
             Selected
         };
-        
+
         explicit PlayersModel(QObject* parent);
         virtual ~PlayersModel();
-        
+
         PairsPlayer* player(int row);
         Q_SCRIPTABLE void addPlayer(const QString& player, const QString& decoration);
         Q_SCRIPTABLE void removePlayer(int index);
         void resetPlayers();
-        
+
     public slots:
         QVariant info(int row, const QByteArray& role);
         void toggleSelection(int row);
@@ -56,7 +56,7 @@ class PlayersModel : public QStandardItemModel
 
     private slots:
         void refresh();
-        
+
     private:
         QStringList m_playerIcons;
 };

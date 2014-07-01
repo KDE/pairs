@@ -147,11 +147,10 @@ bool ThemesModel::exists(const QString& id)
 QByteArray ThemesModel::themeData(const QString& id) const
 {
     int firstSlash = id.indexOf('/');
-    
+
     const PairsTheme *theme = 0;
     if(firstSlash>=0)
         theme = themeForName(id.left(firstSlash));
-    
     if(!theme)
         return QByteArray();
 

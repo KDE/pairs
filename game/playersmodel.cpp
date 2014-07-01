@@ -52,13 +52,13 @@ PlayersModel::PlayersModel(QObject* parent)
 PlayersModel::~PlayersModel()
 {
     QStringList players, icons;
-    
+
     for (int i = 0; i < rowCount(); ++i) {
         PairsPlayer* p=player(i);
         players += p->text();
         icons += p->data(Qt::DecorationRole).toString();
     }
-    
+
     KConfig config;
     KConfigGroup group(&config, "NewGame");
     group.writeEntry("Players", players);
@@ -87,7 +87,7 @@ void PlayersModel::refresh()
         QString icon = icons[i];
         if(!m_playerIcons.contains(icon))
             icon = randomIcon();
-        
+
         addPlayer(name, icon);
         i++;
     }

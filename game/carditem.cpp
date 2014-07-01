@@ -46,20 +46,20 @@ CardItem::CardItem(const QSharedPointer<QSvgRenderer>& back, QGraphicsItem* pare
 
     m_rotation = new QGraphicsRotation(this);
     m_rotation->setAxis(Qt::YAxis);
-    
+
     m_animation = new QPropertyAnimation(m_rotation, "angle", m_rotation);
     m_animation->setStartValue(0);
     m_animation->setEndValue(90);
     m_animation->setDuration(200);
     m_animation->setEasingCurve(QEasingCurve::InOutQuad);
     connect(m_animation, SIGNAL(finished()), SLOT(changeValue()));
-    
+
     m_animationBack = new QPropertyAnimation(m_rotation, "angle", m_rotation);
     m_animationBack->setStartValue(90);
     m_animationBack->setEndValue(0);
     m_animationBack->setDuration(200);
     m_animationBack->setEasingCurve(QEasingCurve::InOutQuad);
-    
+
     setTransformations(QList<QGraphicsTransform*>() << m_rotation);
     m_opacityAnimation=new QPropertyAnimation(this, "opacity", this);
     m_opacityAnimation->setStartValue(1.0);
@@ -88,13 +88,13 @@ void CardItem::setSize(const QSizeF& newSize)
 {
     if(newSize==m_back.size())
         return;
-    
+
     m_back=QPixmap(newSize.toSize());
     m_back.fill(Qt::transparent);
     QPainter p(&m_back);
     m_backRenderer->render(&p);
     m_rotation->setOrigin(QVector3D(m_back.rect().center()));
-    
+
     m_color=QPixmap(newSize.toSize());
     m_color.fill(Qt::transparent);
     if(m_type==CARD_WORD) {
@@ -106,7 +106,7 @@ void CardItem::setSize(const QSizeF& newSize)
         QPainter pixPainter(&m_color);
         m_frontRenderer->render(&pixPainter);
     }
-    
+
     if(m_type == CARD_LOGIC || m_type == CARD_SOUNDLOGIC)
     {
         setPixmap(m_color);
@@ -163,7 +163,7 @@ void CardItem::turn()
 {
     disconnect(m_media, SIGNAL(finished()), this, SLOT(turn()));
     m_activated=!m_activated;
-    
+
     m_animation->start();
 }
 
@@ -196,7 +196,7 @@ void CardItem::changeValue()
         createPath(object, audioOutput);
         object->setCurrentSource(m_source);
         object->play();
-        
+
         //We delay the emit selected until it has played, that way sounds don't overlap
         connect(object, SIGNAL(finished()), this, SLOT(emitSelected()));
         connect(object, SIGNAL(finished()), object, SLOT(deleteLater()));

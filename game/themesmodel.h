@@ -41,10 +41,10 @@ class ThemesModel : public QStandardItemModel
     public slots:
         QVariant info(int row, const QByteArray& role);
         bool isPertinent(int row, const QString &type,const QString &lang);
-        
+
         /** @returns a random image from any theme */
         QString randomThemesImage() const;
-        
+
     private slots:
         void reload();
     private:

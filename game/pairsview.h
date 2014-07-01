@@ -49,7 +49,7 @@ public:
      * Destructor
      */
     virtual ~PairsView();
-    
+
     bool isGameOver() const;
     void setRowSize(int itemsPerRow);
     int cardsNum();
@@ -57,7 +57,7 @@ public:
     PlayersModel* playersModel() const { return m_players; }
     void setLanguage(const QString &l) { m_language = l; }
     int currentPlayer() const { return m_currentPlayer; }
-    
+
     Q_SCRIPTABLE void newGame(int row, const QString& cardType);
     Q_SCRIPTABLE QString language(){return m_language;};
 	
@@ -65,20 +65,20 @@ public:
 signals:
     void gameOver();
     void currentPlayerChanged();
-    
+
 public slots:
     void checkGameOver();
     void download();
     void cardSelected(CardItem* cardData);
     void stopGame();
-    
+
 private slots:
     void update();
     void reorganizeCards(bool starting=false);
-    
+
 private:
     void playSound(const QByteArray& sound) const;
-    
+
     ThemesModel* m_model;
     CardItem* m_last;
     QList<CardItem*> m_cards;

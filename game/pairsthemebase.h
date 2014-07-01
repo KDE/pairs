@@ -37,12 +37,12 @@ public:
     QMap<QString, QString>  name[CARD_MAX_TYPE];
     QMap<QString, QString> found;
     ThemeElement(){ reset(); };
-    
+
     void reset() {
         for(int i = 0; i < CARD_MAX_TYPE; i++) name[i].clear();
         found.clear();
     };
-    
+
     QString value(CardType type, const QString& language) const;
     QStringList langlist(CardType type) const;
     QStringList foundLanglist() const;
@@ -78,7 +78,7 @@ class PairsThemeBase : public QObject, public QStandardItem
         virtual QStringList images() const = 0;
         virtual bool hasFile(const QString& path) const = 0;
         virtual QString path() const = 0;
-        
+
     protected:
         void parse(QXmlStreamReader &reader);
         void parseElement(QXmlStreamReader &reader);
@@ -100,7 +100,7 @@ class PairsThemeBase : public QObject, public QStandardItem
         CardType m_main_type;
 
         QList<ThemeElement> m_items;
-        
+
         QString m_error;
         QSet<QString> m_languages;
         QMap<QString, QSet<QString> > m_cardtypes;

@@ -132,7 +132,7 @@ void PairsThemeBase::parseElement(QXmlStreamReader &reader)
                 common[i].clear();
 //                 qDebug() << "ITEM" << item.name[i]  << "/ITEM";
             }
-            
+
 //             qDebug() << "CTYPES" << m_cardtypes << "/CTYPES";
 //             qDebug() << item.foundSound("en");
             m_items += item;
@@ -143,10 +143,10 @@ void PairsThemeBase::parseElement(QXmlStreamReader &reader)
             QString lang = reader.attributes().hasAttribute("lang") ? reader.attributes().value("lang").toString() : "any";
             QString src = "";
             m_languages.insert(lang);
-            
+
             if(name != "element") {
                 m_cardtypes[lang].insert(name);
-            
+
                 current_type = cardNameToType(name);
                 if(current_type != CARD_WORD)
                     src = reader.attributes().value("src").toString();
@@ -190,7 +190,7 @@ void PairsThemeBase::parseElement(QXmlStreamReader &reader)
                         item.name[current_type][lang] = src;
                         break;
                 }
-                
+
                 if(current_type == m_main_type) {
                     common[current_type] = src;
                     //common[CARD_LOGIC] = src;

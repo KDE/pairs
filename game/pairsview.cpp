@@ -63,20 +63,20 @@ PairsView::PairsView(QWidget *parent, const QString &file)
 // #ifndef QT_NO_OPENGL
 //     setViewport(new QGLWidget);
 // #endif
-    
+
     m_model = new ThemesModel(this, file);
     m_players = new PlayersModel(this);
     m_themeImagesProvider = new ThemeIconsProvider(QDeclarativeImageProvider::Pixmap, m_model);
-    
+
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
-    
+
     connect(m_players, SIGNAL(rowsRemoved(QModelIndex,int,int)), m_timer, SLOT(stop()));
-    
+
 //     qmlRegisterType<ThemesModel>("org.kde.edu.pairs", 1, 0, "ThemesModel");
-    
+
     setResizeMode(SizeRootObjectToView);
-    
+
     rootContext()->setContextProperty("fgame", this);
     rootContext()->setContextProperty("themesModel", m_model);
     rootContext()->setContextProperty("playersModel", m_players);
@@ -92,12 +92,12 @@ PairsView::PairsView(QWidget *parent, const QString &file)
 
     setSource(QUrl("qrc:/qml/Main.qml"));
     Q_ASSERT(errors().isEmpty());
-    
+
     m_resizeTimer = new QTimer(this);
     m_resizeTimer->setSingleShot(true);
     connect(m_resizeTimer, SIGNAL(timeout()), SLOT(reorganizeCards()));
     connect(engine(), SIGNAL(quit()), QCoreApplication::instance(), SLOT(quit()));
-    
+
     m_media = new Phonon::MediaObject(this);
     Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput(Phonon::GameCategory, this);
     createPath(m_media, audioOutput);
@@ -128,7 +128,7 @@ void PairsView::update()
 void PairsView::cardSelected(CardItem* card)
 {
     Q_ASSERT(card);
-    
+
     if(m_last) {
         if(m_last->data(0)==card->data(0)) {
             m_last->markDone();
@@ -141,7 +141,7 @@ void PairsView::cardSelected(CardItem* card)
             connect(m_media, SIGNAL(finished()), m_last, SLOT(turn()));
             playSound(card->missedSound());
             m_players->player(m_currentPlayer)->incMissed();
-            
+
             //next player
             do {
                 ++m_currentPlayer %= m_players->rowCount();
@@ -167,11 +167,11 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     m_last = 0;
     m_cards.clear();
     QList<CardItem*> cards;
-    
+
     QDeclarativeItem* cardsParent=rootObject()->findChild<QDeclarativeItem*>("board");
     playersModel()->resetPlayers();
     Q_ASSERT(cardsParent);
-    
+
     QList<ThemeElement> items = theme->items();
     //int num=qMin(((rows*columns)/2)*2, items.size()); //we make it %2
     int num = items.size();
@@ -218,16 +218,15 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
         cards += item1;
 
     }
-    
+
     while(!cards.isEmpty())
         m_cards += cards.takeAt(KRandom::random()%cards.size());
-    
+
     if(num % 2 == 0)
     	setRowSize(qMax(4, num/2));
     else
     	setRowSize((2*num)/3);
-    
-    
+
     QObject* cardsContext=rootObject()->findChild<QObject*>("board");
     Q_ASSERT(cardsContext);
     cardsContext->setProperty("isGameOver", QVariant(false));

@@ -44,7 +44,6 @@ class CardItem
     public:
         CardItem(const QSharedPointer<QSvgRenderer>& back, QGraphicsItem* parent, QGraphicsScene* scene = 0, Phonon::MediaObject *media = 0);
         virtual ~CardItem();
-        
         virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
         virtual void mousePressEvent(QGraphicsSceneMouseEvent*) {}
         void setCardPixmap(const QSharedPointer<QSvgRenderer>& renderer);
@@ -56,21 +55,17 @@ class CardItem
         void setFoundSound(const QByteArray & found);
         QByteArray foundSound() const;
         QByteArray missedSound() const;
-        
+
     public slots:
         void changeValue();
         void turn();
         void emitSelected();
 
-
-        
     signals:
         void selected(CardItem* data);
-        
     private:
         QPropertyAnimation* m_animation;
         QPropertyAnimation* m_animationBack;
-        
         CardType m_type;
         bool m_activated;
         QPixmap m_color;

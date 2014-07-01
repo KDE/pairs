@@ -25,14 +25,12 @@
 
 enum CardType {
     CARD_NONE = 0,
-    
     CARD_IMAGE,
     CARD_IMAGE2,
     CARD_SOUND,
     CARD_WORD,
     CARD_LOGIC,
     CARD_SOUNDLOGIC,
-    
     CARD_MAX_TYPE,
     CARD_FOUND
 

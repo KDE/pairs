@@ -48,9 +48,9 @@ public:
      */
     virtual ~Pairs();
     PairsView* view() const { return m_view; }
-    
+
     virtual QSize sizeHint() const { return QSize(800,500); }
-    
+
 private:
     PairsView *m_view;
     QString m_right;

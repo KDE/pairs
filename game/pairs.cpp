@@ -49,7 +49,7 @@ Pairs::Pairs(const QString &file)
     setWindowIcon(KIcon("pairs"));
     setWindowTitle(qAppName());
     setCentralWidget(m_view);
-    
+
     setAutoSaveSettings();
 }
 
