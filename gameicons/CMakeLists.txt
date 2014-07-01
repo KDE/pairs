@@ -19,7 +19,7 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-install(FILES newGame.svg removeUser.svg info.svg
+install(FILES newGame.svg removeUser.svg info.svg cooperative.svg
               addUser.svg logic.svg sound.svg words.svg exit.svg soundLogic.svg 
               relations.svg getThemes.svg pairs.svg  background.svg pairsIcon.svg
               DESTINATION  ${DATA_INSTALL_DIR}/pairs/gameicons )

@@ -202,7 +202,7 @@ void MainWindow::doOpen()
 {
 	if(!askToSave())
 		return;
-    m_file = KFileDialog::getOpenFileName(KUrl(QDir::currentPath()), "*.pairs.tar.bz2|" + i18n("Pairs Themes"), this, i18n("Open Pairs theme"));
+    m_file = KFileDialog::getOpenFileName(KUrl(QDir::currentPath()), "*.pairs.tar.bz2|" + i18n("Pairs Themes") + "\n*.coopairs.tar.bz2|" + i18n("Cooperative Pairs Themes"), this, i18n("Open Pairs theme"));
     if(!m_file.isEmpty())
     {
         QFileInfo pathInfo(m_file);
@@ -210,7 +210,8 @@ void MainWindow::doOpen()
         QStringList flist = m_tmpDir->entryList(QStringList("*.game"), QDir::Files | QDir::NoSymLinks);
         Q_ASSERT(!flist.isEmpty());
         m_gameFile = m_tmpDir->absolutePath() + '/' + flist.front();
-        openfile(m_gameFile);
+      	openfile(m_gameFile);
+
     }
 }
 

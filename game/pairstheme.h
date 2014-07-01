@@ -45,7 +45,7 @@ class PairsTheme : public PairsThemeBase
         virtual bool hasFile(const QString& path) const;
 
         QByteArray themeData(const QString& path) const;
-    private:
+    protected:
         bool isValid(const KArchiveFile* file);
         //TODO: use KZip everywhere
         #ifdef Q_OS_WIN

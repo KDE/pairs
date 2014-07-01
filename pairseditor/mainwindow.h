@@ -62,6 +62,7 @@ protected:
 private:
     MainWindowView *m_mainWidget;
     PairsThemeEditor *m_pt;
+    CoopThemeEditor *m_cpt;
     QStandardItem *m_selectedItem;
     ThemeModel *m_model;
     QString m_file;
