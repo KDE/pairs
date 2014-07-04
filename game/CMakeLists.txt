@@ -34,15 +34,15 @@ set(pairs_SRCS
    themeiconsprovider.cpp
  )
 
-qt4_add_resources(pairs_SRCS resources.qrc)
+qt5_add_resources(pairs_SRCS resources.qrc)
 
-kde4_add_app_icon(pairs_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../icons/hi*-apps-pairs*")
+#add_app_icon(pairs_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../icons/hi*-apps-pairs*")
 
-kde4_add_executable(pairs ${pairs_SRCS})
+add_executable(pairs ${pairs_SRCS})
 
-target_link_libraries(pairs ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_PHONON_LIBS}
-    ${QT_QTXMLPATTERNS_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY} ${KDE4_KNEWSTUFF3_LIBS}
-    ${QT_QTOPENGL_LIBRARY} kdeclarative
+
+target_link_libraries(pairs Qt5::Core Qt5::Gui QT5::Xml KF5::KIOCore KF5::KI18n
+{KCoreAddons_LIBRARIES} KDE5::Phonon
 )
 
 install(TARGETS pairs ${INSTALL_TARGETS_DEFAULT_ARGS} )

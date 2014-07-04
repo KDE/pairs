@@ -30,7 +30,7 @@
 #include <QtCore/QSet>
 #include <QtGui/QStandardItem>
 #include "cardtype.h"
-#include <QtXml/QXmlStreamReader>
+#include <QtCore/QXmlStreamReader>
 
 class ThemeElement {
 public:
