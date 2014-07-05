@@ -5,6 +5,7 @@
   <project_license>GPL-2.0+</project_license>
   <name>Pairs</name>
   <name xml:lang="cs">Pexeso</name>
+  <name xml:lang="es">Pairs</name>
   <name xml:lang="nds">Poren</name>
   <name xml:lang="nl">Paren</name>
   <name xml:lang="pl">Pary</name>
@@ -16,6 +17,7 @@
   <name xml:lang="x-test">xxPairsxx</name>
   <summary>Memory Enhancement Game</summary>
   <summary xml:lang="cs">Hra k procvičování paměti</summary>
+  <summary xml:lang="es">Juego para la mejora de la memoria</summary>
   <summary xml:lang="nds">Speel för't Verbetern vun't Behollen</summary>
   <summary xml:lang="nl">Geheugenoefenspel</summary>
   <summary xml:lang="pl">Gra na ćwiczenie pamięci</summary>
@@ -38,6 +40,7 @@
     <p xml:lang="x-test">xxPairs is a collection of games aimed to help the development of preschool children. With these games the child can improve memory, logic, hearing, and even reading skills. Each game can have different themes so the child is stimulated with different and new challenges. It provides an editor to create own game sets.xx</p>
     <p>Games:</p>
     <p xml:lang="cs">Hry:</p>
+    <p xml:lang="es">Juegos:</p>
     <p xml:lang="nds">Spelen:</p>
     <p xml:lang="nl">Spellen:</p>
     <p xml:lang="pl">Gry:</p>
