@@ -34,7 +34,8 @@ include(KDECompilerSettings)
 include(FeatureSummary)
 
 find_package(Qt5 REQUIRED COMPONENTS Widgets)
-find_package(KF5 REQUIRED COMPONENTS CoreAddons Solid)
+find_package(KF5 REQUIRED COMPONENTS Archive CoreAddons Solid)
+
 
 add_subdirectory( game )
 add_subdirectory( pairseditor )

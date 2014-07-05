@@ -37,7 +37,7 @@
 #include <KStandardAction>
 #include <kdeversion.h>
 #include <KUrlRequester>
-#include <KTar>
+#include <KArchive/KTar>
 #include <KActionCollection>
 
 MainWindow::MainWindow(QWidget *parent)

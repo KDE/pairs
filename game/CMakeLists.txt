@@ -42,7 +42,7 @@ add_executable(pairs ${pairs_SRCS})
 
 
 target_link_libraries(pairs Qt5::Core Qt5::Gui QT5::Xml KF5::KIOCore KF5::KI18n
-{KCoreAddons_LIBRARIES} KDE5::Phonon
+{KCoreAddons_LIBRARIES} KDE5::Phonon KDE5::Archive
 )
 
 install(TARGETS pairs ${INSTALL_TARGETS_DEFAULT_ARGS} )

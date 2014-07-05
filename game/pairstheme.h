@@ -26,7 +26,7 @@
 #ifdef Q_OS_WIN
 #include <KZip>
 #else
-#include <KTar>
+#include <KArchive/KTar>
 #endif
 #include <QtXml/QXmlStreamReader>
 #include <QtGui/QStandardItem>
