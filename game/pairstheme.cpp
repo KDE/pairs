@@ -22,6 +22,7 @@
 
 #include "pairstheme.h"
 #include <QtCore/QDebug>
+#include <KGlobal>
 #include <KLocalizedString>
 #include <KUrl>
 #include <KStandardDirs>

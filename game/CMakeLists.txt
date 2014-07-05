@@ -22,7 +22,7 @@
 
 
 set(pairs_SRCS 
-   pairstheme.cpp 
+   pairstheme.cpp
    pairsthemebase.cpp
    carditem.cpp
    pairs.cpp
@@ -41,8 +41,8 @@ qt5_add_resources(pairs_SRCS resources.qrc)
 add_executable(pairs ${pairs_SRCS})
 
 
-target_link_libraries(pairs Qt5::Core Qt5::Gui QT5::Xml KF5::KIOCore KF5::KI18n
-{KCoreAddons_LIBRARIES} KDE5::Phonon KDE5::Archive
+target_link_libraries(pairs Qt5::Core Qt5::Widgets Qt5::Svg Qt5::Xml KF5::KIOCore KF5::KI18n
+KF5::Archive KF5::KDELibs4Support Phonon::phonon4qt5
 )
 
 install(TARGETS pairs ${INSTALL_TARGETS_DEFAULT_ARGS} )

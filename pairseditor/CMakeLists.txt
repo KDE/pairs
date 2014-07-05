@@ -9,8 +9,7 @@ qt5_wrap_ui( pairseditor_SOURCES mainwindowview.ui )
 
 add_executable( pairseditor ${pairseditor_SOURCES} )
 
-target_link_libraries( pairseditor ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_PHONON_LIBS}
-					${QT_QTXMLPATTERNS_LIBRARY})
+target_link_libraries( pairseditor KF5::XmlGui Phonon::phonon4qt5)
 install(TARGETS pairseditor ${INSTALL_TARGETS_DEFAULT_ARGS})
 install( FILES pairseditor.desktop DESTINATION  ${XDG_APPS_INSTALL_DIR})
 install( FILES pairseditorui.rc DESTINATION ${DATA_INSTALL_DIR}/pairseditor)
