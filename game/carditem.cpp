@@ -129,7 +129,7 @@ void CardItem::setType(CardType type, const QString& file, const PairsTheme* the
         case CARD_SOUNDLOGIC:
         case CARD_SOUND:
         {
-            QString dir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String( "gameicons/pairs.svg"));
+            QString dir = QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String( "gameicons/pairs.svg"));
             setCardPixmap(QSharedPointer<QSvgRenderer>(new QSvgRenderer(dir+"gameicons/sound.svg")));
 //            m_color.fill(Qt::blue);
             QBuffer *mediafile = new QBuffer(this);
@@ -239,7 +239,7 @@ QByteArray CardItem::foundSound() const
     if(m_found.isEmpty()) {
         static QByteArray defaultCorrectSound;
         if(defaultCorrectSound.isEmpty()) {
-            defaultCorrectSound = readFile(KGlobal::dirs()->findResource("appdata", "themes/right.ogg"));
+            defaultCorrectSound = readFile(QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String("themes/right.ogg")));
         }
         return defaultCorrectSound;
     } else
@@ -248,6 +248,6 @@ QByteArray CardItem::foundSound() const
 
 QByteArray CardItem::missedSound() const
 {
-    static QByteArray defaultMissedSound = readFile(KGlobal::dirs()->findResource("appdata", "themes/wrong.ogg"));
+    static QByteArray defaultMissedSound = readFile(QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String("themes/wrong.ogg")));
     return defaultMissedSound;
 }
