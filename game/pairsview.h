@@ -25,7 +25,7 @@
 #ifndef PAIRSVIEW_H
 #define PAIRSVIEW_H
 
-#include <QDeclarativeView>
+#include <QQuickView>
 
 namespace KNS3 { class DownloadDialog; }
 namespace Phonon { class MediaObject;}
@@ -35,7 +35,7 @@ class ThemesModel;
 class PairsTheme;
 class CardItem;
 class ThemeIconsProvider;
-class PairsView : public QDeclarativeView
+class PairsView : public QQuickView
 {
     Q_OBJECT
     Q_PROPERTY(int currentPlayer READ currentPlayer NOTIFY currentPlayerChanged)
