@@ -28,7 +28,7 @@
 #else
 #include <KArchive/KTar>
 #endif
-#include <QtXml/QXmlStreamReader>
+#include <QXmlStreamReader>
 #include <QtGui/QStandardItem>
 #include "cardtype.h"
 

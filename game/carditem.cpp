@@ -37,7 +37,7 @@
 #include <kfontutils.h>
 
 CardItem::CardItem(const QSharedPointer<QSvgRenderer>& back, QGraphicsItem* parent, QGraphicsScene* scene, Phonon::MediaObject *media)
-    : QGraphicsPixmapItem(parent, scene)
+    : QGraphicsPixmapItem(parent)
     , m_type(CARD_NONE)
     , m_activated(false)
     , m_backRenderer(back)

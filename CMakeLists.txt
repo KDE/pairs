@@ -24,7 +24,7 @@ cmake_minimum_required(VERSION 2.8.12)
 
 project(pairs)
 
-
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wdeprecated-declarations")
 find_package(ECM 0.0.11 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
@@ -33,7 +33,7 @@ include(KDECMakeSettings)
 include(KDECompilerSettings)
 include(FeatureSummary)
 
-find_package(Qt5 REQUIRED COMPONENTS Widgets Svg)
+find_package(Qt5 REQUIRED COMPONENTS Widgets Svg Quick)
 find_package(KF5 REQUIRED COMPONENTS Archive CoreAddons Solid XmlGui KDELibs4Support)
 find_package(Phonon4Qt5 CONFIG REQUIRED)
 
