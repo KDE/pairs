@@ -23,30 +23,28 @@
 
 #include "pairs.h"
 #include "pairsview.h"
-#include <KDE/KApplication>
-#include <KDE/KAboutData>
-#include <KDE/KCmdLineArgs>
-#include <KDE/KLocale>
-#include <KDE/KIcon>
-#include <KDE/KUrl>
-#include <KStandardDirs>
+#include <KApplication>
+#include <KAboutData>
+#include <KCmdLineArgs>
+#include <KLocalizedString>
+#include <KSharedConfig>
 #include <QDebug>
 #include "pairstheme.h"
 
 static const char description[] =
     I18N_NOOP("A game to enhance your memory for KDE!");
 
-static const char version[] = "1.2.0";
+static const char version[] = "2.0.0";
 
 int main(int argc, char **argv)
 {
-    KAboutData about("pairs", 0, ki18n("pairs"), version, ki18n(description),
-                     KAboutData::License_GPL, ki18n("(C) 2011 Aleix Pol Gonzalez"), KLocalizedString(), 0);
-    about.addAuthor( ki18n("Aleix Pol Gonzalez"), ki18n("Initial implementation and maintainer"), "aleixpol@kde.org" );
-    about.addAuthor( ki18n("Marco Calignano"), ki18n("Theme support enhancement and general feature development"), "marco.calignano@gmail.com");
-    about.addAuthor( ki18n("Albert Astals Cid"), ki18n("Initial project setup and ideas"), "aacid@kde.org" );
-    KCmdLineArgs::init(argc, argv, &about);
-
+    KAboutData about("pairs", i18n("pairs"), version, i18n(description),
+                     KAboutLicense::LGPL, i18n("(C) 2011 Aleix Pol Gonzalez"));
+    about.addAuthor( i18n("Aleix Pol Gonzalez"), i18n("Initial implementation and maintainer"), QStringLiteral("aleixpol@kde.org"), 0);
+    about.addAuthor( i18n("Marco Calignano"), i18n("Theme support enhancement and general feature development"), QStringLiteral("marco.calignano@gmail.com"), 0);
+    about.addAuthor( i18n("Albert Astals Cid"), i18n("Initial project setup and ideas"), QStringLiteral("aacid@kde.org"), 0);
+    KCmdLineArgs::init(argc, argv, QByteArray("pairs"), QByteArray("pairs"), KLocalizedString(), QByteArray(version));
+  
     KCmdLineOptions options;
     options.add("fullscreen", ki18n( "start in fullscreen mode"));
 //    KCmdLineArgs::addCmdLineOptions(options);
@@ -58,7 +56,7 @@ int main(int argc, char **argv)
     // see if we are starting with session management
     if (app.isSessionRestored())
     {
-        RESTORE(Pairs);
+//TODO        RESTORE(Pairs);
     }
     else
     {
@@ -75,7 +73,8 @@ int main(int argc, char **argv)
             widget = new Pairs;
         }
     	args->clear();
-        widget->view()->setLanguage(KGlobal::locale()->language().left(2));
+//TODO
+//        widget->view()->setLanguage(KSharedConfig::locale()->language().left(2));
         if (fsMode) 
         {
             widget->showFullScreen();
