@@ -23,15 +23,14 @@
 #include "themeiconsprovider.h"
 #include <QPainter>
 #include <QSvgRenderer>
+#include <QStandardPaths>
 #include "themesmodel.h"
 #include <QDebug>
 #include <QFile>
-#include <KStandardDirs>
+//#include <KStandardDirs>
 
-
-
-ThemeIconsProvider::ThemeIconsProvider(QDeclarativeImageProvider::ImageType type, ThemesModel* themes) :
-    QDeclarativeImageProvider(type), m_themes(themes)
+ThemeIconsProvider::ThemeIconsProvider(QQuickImageProvider::ImageType type, ThemesModel* themes) :
+    QQuickImageProvider(type), m_themes(themes)
 {}
 
 ThemeIconsProvider::~ThemeIconsProvider()
@@ -41,7 +40,7 @@ QPixmap ThemeIconsProvider::requestPixmap(const QString& id, QSize* size, const 
 {
     QByteArray data = m_themes->themeData(id);
     if(data.isNull()) {
-        QString dir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String( "gameicons/pairs.svg"));
+        QString dir = QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String( "gameicons/pairs.svg"));
         QFile f(dir+"gameicons/pairsIcon.svg");
         f.open(QIODevice::ReadOnly);
         data = f.readAll();

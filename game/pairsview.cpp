@@ -46,6 +46,7 @@
 #include <Phonon/MediaObject>
 #include <Phonon/AudioOutput>
 
+#include <QStandardPaths>
 #include <knewstuff3/downloaddialog.h>
 #include <knewstuff3/entry.h>
 #include <QResizeEvent>
@@ -179,7 +180,7 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     QByteArray file_buf;
 
     if(theme->backImage().isEmpty()){
-        QString dir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String( "gameicons/pairs.svg"));
+        QString dir = QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String( "gameicons/pairs.svg"), QStandardPaths::LocateDirectory);
         QFile f(dir+"gameicons/pairsIcon.svg");
         f.open(QIODevice::ReadOnly);
         file_buf = f.readAll();

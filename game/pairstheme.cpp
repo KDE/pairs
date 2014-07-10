@@ -22,10 +22,9 @@
 
 #include "pairstheme.h"
 #include <QtCore/QDebug>
-#include <KGlobal>
 #include <KLocalizedString>
-#include <KUrl>
-#include <KStandardDirs>
+#include <QUrl>
+#include <QStandardPaths>
 #include <QtXmlPatterns/QXmlSchemaValidator>
 #include <QtXmlPatterns/QXmlSchema>
 
@@ -59,7 +58,7 @@ PairsTheme::PairsTheme(const QString& path)
 
 bool PairsTheme::isValid(const KArchiveFile* file) {
 
-    KUrl schemaUrl = KUrl::fromLocalFile(KGlobal::dirs()->findResource("appdata", QLatin1String( "themes/game.xsd" )));
+    QUrl schemaUrl = QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String( "themes/game.xsd" )));
     QXmlSchema schema;
     schema.load(schemaUrl);
 
