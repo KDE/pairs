@@ -23,68 +23,47 @@
 #ifndef CARDITEM_H
 #define CARDITEM_H
 
-#include <QGraphicsRectItem>
-#include <QSvgRenderer>
+#include <QStandardItem>
 #include <QBuffer>
-
+#include <QImage>
+#include <QString>
 #include "cardtype.h"
-#include <phonon/mediasource.h>
 
 class PairsTheme;
-namespace Phonon { class MediaObject; class MediaSource;}
 
-class QPropertyAnimation;
-class QGraphicsRotation;
 class CardItem
-    : public QObject, public QGraphicsPixmapItem
+    : public QObject
+    , public QStandardItem
 {
-    Q_OBJECT
-    Q_PROPERTY(QPointF position READ pos WRITE setPos);
-    Q_PROPERTY(qreal opacity READ opacity WRITE setOpacity);
+    Q_OBJECT;
+    Q_PROPERTY(QImage frontImage READ readFront);
+    Q_PROPERTY(QImage backImage READ readBack);
+    Q_PROPERTY(QString postMessage READ readPostMsg);
+    Q_PROPERTY(QString text READ readText);
+    Q_PROPERTY(QByteArray foundSound READ readFoundSound WRITE setFoundSound);
+    Q_PROPERTY(QByteArray missedSound READ readMissedSound WRITE setMissedSound);
     public:
-        CardItem(const QSharedPointer<QSvgRenderer>& back, QGraphicsItem* parent, QGraphicsScene* scene = 0, Phonon::MediaObject *media = 0);
+        CardItem(QObject* parent, QImage front, QImage back, QString text, QString postMessage, QByteArray foundSound, QByteArray missedSound, CardType type, int index);
         virtual ~CardItem();
-        
-        virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
-        virtual void mousePressEvent(QGraphicsSceneMouseEvent*) {}
-        void setCardPixmap(const QSharedPointer<QSvgRenderer>& renderer);
-        void markDone();
-        void setType(CardType type, const QString& file, const PairsTheme* theme);
-        bool isDone() const;
-        void setDuration(int dur);
-        void setSize(const QSizeF& newSize);
-        void setFoundSound(const QByteArray & found);
-        QByteArray foundSound() const;
-        QByteArray missedSound() const;
-        
-    public slots:
-        void changeValue();
-        void turn();
-        void emitSelected();
+      //  void setType(CardType type, const QString& file, const PairsTheme* theme);
+        QByteArray readFoundSound() const;
+        void setFoundSound(const QByteArray &found){m_found = found;};
+        QByteArray readMissedSound() const;
+        void setMissedSound(const QByteArray &missed){m_missed = missed;};
+        QImage readBack(){return m_back;};
+        QImage readFront(){return m_front;};
+        QString readText(){return m_text;};
+        QString readPostMsg(){return m_postMessage;};
 
-
-        
-    signals:
-        void selected(CardItem* data);
-        
     private:
-        QPropertyAnimation* m_animation;
-        QPropertyAnimation* m_animationBack;
-        
+        QObject *m_parent;
         CardType m_type;
-        bool m_activated;
-        QPixmap m_color;
-        QPixmap m_back;
-        QPropertyAnimation* m_opacityAnimation;
-        QPropertyAnimation* m_colorAnimation;
-        QPropertyAnimation* m_backColorAnimation;
-        Phonon::MediaSource m_source;
-        QSharedPointer<QSvgRenderer> m_frontRenderer;
-        QSharedPointer<QSvgRenderer> m_backRenderer;
+        QImage m_front;
+        QImage m_back;
         QString m_text;
+        QString m_postMessage;
         QByteArray m_found;
-        QGraphicsRotation* m_rotation;
-        Phonon::MediaObject *m_media;
+        QByteArray m_missed;
 };
 
 #endif // CARDITEM_H

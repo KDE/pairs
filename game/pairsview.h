@@ -27,69 +27,58 @@
 
 #include <QQuickView>
 
+
 namespace KNS3 { class DownloadDialog; }
 namespace Phonon { class MediaObject;}
 
 class PlayersModel;
 class ThemesModel;
 class PairsTheme;
-class CardItem;
+class CardModel;
 class QQmlEngine;
 class ThemeIconsProvider;
 class PairsView : public QQuickView
 {
     Q_OBJECT
-    Q_PROPERTY(int currentPlayer READ currentPlayer NOTIFY currentPlayerChanged)
 public:
     /**
      * Default constructor
      */
-    PairsView(QWindow *parent, QQmlEngine *pengine, const QString &file = "");
+    PairsView(QWidget *parent, const QString &file = "");
 
     /**
      * Destructor
      */
     virtual ~PairsView();
     
-    bool isGameOver() const;
-    void setRowSize(int itemsPerRow);
-    int cardsNum();
-    void newGame(const PairsTheme* theme, const QString& language, const QString& cardType);
     PlayersModel* playersModel() const { return m_players; }
     void setLanguage(const QString &l) { m_language = l; }
     int currentPlayer() const { return m_currentPlayer; }
     
     Q_SCRIPTABLE void newGame(int row, const QString& cardType);
     Q_SCRIPTABLE QString language(){return m_language;};
+<<<<<<< Updated upstream
 	
-//    virtual void resizeEvent(QResizeEvent* ev);
+    virtual void resizeEvent(QResizeEvent* ev);
 signals:
     void gameOver();
     void currentPlayerChanged();
     
+=======
+
+>>>>>>> Stashed changes
 public slots:
-    void checkGameOver();
     void download();
-    void cardSelected(CardItem* cardData);
-    void stopGame();
-    
-private slots:
-    void update();
-    void reorganizeCards(bool starting=false);
-    
+
 private:
-    void playSound(const QByteArray& sound) const;
-    
+    void newGame(const PairsTheme* theme, const QString& language, const QString& cardType);
+//    void playSound(const QByteArray& sound) const;
     ThemesModel* m_model;
-    CardItem* m_last;
-    QList<CardItem*> m_cards;
+    CardModel* m_cards;
     ThemeIconsProvider *m_themeImagesProvider;
     KNS3::DownloadDialog *m_knsDialog;
     PlayersModel* m_players;
     int m_currentPlayer;
-    QTimer *m_timer;
-    int m_itemsPerRow;
-    QTimer* m_resizeTimer;
     QString m_language;
     Phonon::MediaObject *m_media;
 };
