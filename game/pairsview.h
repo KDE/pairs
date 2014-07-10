@@ -34,6 +34,7 @@ class PlayersModel;
 class ThemesModel;
 class PairsTheme;
 class CardItem;
+class QQmlEngine;
 class ThemeIconsProvider;
 class PairsView : public QQuickView
 {
@@ -43,7 +44,7 @@ public:
     /**
      * Default constructor
      */
-    PairsView(QWidget *parent, const QString &file = "");
+    PairsView(QWindow *parent, QQmlEngine *pengine, const QString &file = "");
 
     /**
      * Destructor
@@ -61,7 +62,7 @@ public:
     Q_SCRIPTABLE void newGame(int row, const QString& cardType);
     Q_SCRIPTABLE QString language(){return m_language;};
 	
-    virtual void resizeEvent(QResizeEvent* ev);
+//    virtual void resizeEvent(QResizeEvent* ev);
 signals:
     void gameOver();
     void currentPlayerChanged();

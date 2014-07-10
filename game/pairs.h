@@ -32,9 +32,10 @@
 
 namespace Phonon { class MediaObject; }
 class PairsView;
-class KToggleAction;
+#include <QQuickWindow>
 
-class Pairs : public KMainWindow
+class QQmlEngine;
+class Pairs : public QQuickWindow
 {
     Q_OBJECT
 public:
@@ -52,6 +53,7 @@ public:
     virtual QSize sizeHint() const { return QSize(800,500); }
     
 private:
+    QQmlEngine *m_engine;
     PairsView *m_view;
     QString m_right;
     QString m_wrong;

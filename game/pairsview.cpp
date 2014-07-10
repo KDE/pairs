@@ -34,11 +34,11 @@
 #include <QTimer>
 #include <QFile>
 #include <QSvgRenderer>
-#include <QDeclarativeEngine>
-#include <QDeclarativeComponent>
-#include <QDeclarativeItem>
+#include <QQmlEngine>
+#include <QQmlComponent>
+#include <QQuickItem>
 #include <QCoreApplication>
-#include <QDeclarativeContext>
+#include <QQmlContext>
 // #ifndef QT_NO_OPENGL
 //     #include <QGLWidget>
 // #endif
@@ -55,19 +55,15 @@
 #include <KStandardDirs>
 #include <kdeclarative.h>
 
-PairsView::PairsView(QWidget *parent, const QString &file)
-    : QDeclarativeView(parent)
+PairsView::PairsView(QWindow *parent, QQmlEngine *pengine, const QString &file)
+    : QQuickView(pengine, parent)
     , m_last(0)
     , m_knsDialog(0)
     , m_itemsPerRow(1)
 {
-// #ifndef QT_NO_OPENGL
-//     setViewport(new QGLWidget);
-// #endif
-    
     m_model = new ThemesModel(this, file);
     m_players = new PlayersModel(this);
-    m_themeImagesProvider = new ThemeIconsProvider(QDeclarativeImageProvider::Pixmap, m_model);
+    m_themeImagesProvider = new ThemeIconsProvider(QQuickImageProvider::Pixmap, m_model);
     
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
@@ -83,14 +79,14 @@ PairsView::PairsView(QWidget *parent, const QString &file)
     rootContext()->setContextProperty("playersModel", m_players);
     engine()->addImageProvider("theme", m_themeImagesProvider);
 
-
+/* TODO
     KDeclarative m_kdeclarative;
     m_kdeclarative.setDeclarativeEngine(engine());
     m_kdeclarative.initialize();
     //binds things like kconfig and icons
     m_kdeclarative.setupBindings();
 
-
+*/
     setSource(QUrl("qrc:/qml/Main.qml"));
     Q_ASSERT(errors().isEmpty());
     
@@ -169,7 +165,7 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     m_cards.clear();
     QList<CardItem*> cards;
     
-    QDeclarativeItem* cardsParent=rootObject()->findChild<QDeclarativeItem*>("board");
+    QQuickItem* cardsParent=findChild<QQuickItem*>("board");
     playersModel()->resetPlayers();
     Q_ASSERT(cardsParent);
     
@@ -249,7 +245,7 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
 void PairsView::checkGameOver()
 {
     if(isGameOver()) {
-        QObject* cardsContext=rootObject()->findChild<QObject*>("board");
+        QObject* cardsContext=findChild<QObject*>("board");
         Q_ASSERT(cardsContext);
         cardsContext->setProperty("isGameOver", true);
         stopGame();
@@ -271,7 +267,7 @@ void PairsView::download()
 
 void PairsView::resizeEvent(QResizeEvent* ev)
 {
-    QDeclarativeView::resizeEvent(ev);
+    QQuickView::resizeEvent(ev);
     
     m_resizeTimer->start(100);
 }
@@ -285,7 +281,7 @@ void PairsView::setRowSize(int itemsPerRow)
 
 void PairsView::reorganizeCards(bool starting)
 {
-    QDeclarativeItem* cardsParent=rootObject()->findChild<QDeclarativeItem*>("board");
+    QQuickItem* cardsParent=findChild<QQuickItem*>("board");
     QSizeF s(cardsParent->width(), cardsParent->height());
     
     Q_ASSERT(m_itemsPerRow>0);

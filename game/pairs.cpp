@@ -38,19 +38,20 @@
 #include <kstandarddirs.h>
 #include <KDE/KLocale>
 #include <KApplication>
-
+#include <QQmlEngine>
 #include "playersmodel.h"
 #include <kstatusbar.h>
 
 Pairs::Pairs(const QString &file)
-    : KMainWindow()
-    , m_view(new PairsView(this, file))
+    : QQuickWindow()
+    , m_engine(new QQmlEngine(this))
+    , m_view(new PairsView(this, m_engine, file))
 {
-    setWindowIcon(KIcon("pairs"));
-    setWindowTitle(qAppName());
-    setCentralWidget(m_view);
+    setIcon(QIcon("pairs"));
+    setTitle(qAppName());
+//    setCentralWidget(m_view);
     
-    setAutoSaveSettings();
+    //setAutoSaveSettings();
 }
 
 Pairs::~Pairs()

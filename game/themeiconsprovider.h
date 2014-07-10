@@ -23,14 +23,14 @@
 #ifndef THEMEICONSPROVIDER_H
 #define THEMEICONSPROVIDER_H
 
-#include <QDeclarativeImageProvider>
+#include <QQuickImageProvider>
 #include "pairstheme.h"
 
 class ThemesModel;
-class ThemeIconsProvider : public QDeclarativeImageProvider
+class ThemeIconsProvider : public QQuickImageProvider
 {
     public:
-        ThemeIconsProvider(QDeclarativeImageProvider::ImageType type, ThemesModel* themes);
+        ThemeIconsProvider(QQuickImageProvider::ImageType type, ThemesModel* themes);
         ~ThemeIconsProvider();
         QPixmap requestPixmap(const QString& id, QSize* size, const QSize& requestedSize);
 
