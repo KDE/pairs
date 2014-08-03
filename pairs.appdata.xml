@@ -9,6 +9,7 @@
   <name xml:lang="en-GB">Pairs</name>
   <name xml:lang="es">Pairs</name>
   <name xml:lang="et">Paarid</name>
+  <name xml:lang="fi">Pairs</name>
   <name xml:lang="nds">Poren</name>
   <name xml:lang="nl">Paren</name>
   <name xml:lang="pl">Pary</name>
@@ -25,6 +26,7 @@
   <summary xml:lang="en-GB">Memory Enhancement Game</summary>
   <summary xml:lang="es">Juego para la mejora de la memoria</summary>
   <summary xml:lang="et">Mälu parandamise mäng</summary>
+  <summary xml:lang="fi">Muistipeli</summary>
   <summary xml:lang="nds">Speel för't Verbetern vun't Behollen</summary>
   <summary xml:lang="nl">Geheugenoefenspel</summary>
   <summary xml:lang="pl">Gra na ćwiczenie pamięci</summary>
@@ -55,6 +57,7 @@
     <p xml:lang="en-GB">Games:</p>
     <p xml:lang="es">Juegos:</p>
     <p xml:lang="et">Mängud:</p>
+    <p xml:lang="fi">Pelit:</p>
     <p xml:lang="nds">Spelen:</p>
     <p xml:lang="nl">Spellen:</p>
     <p xml:lang="pl">Gry:</p>
