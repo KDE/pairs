@@ -44,7 +44,7 @@ public:
     /**
      * Default constructor
      */
-    PairsView(QWidget *parent, const QString &file = "");
+    PairsView(QQmlEngine *pengine, const QString &file = "", QWindow *parent = 0);
 
     /**
      * Destructor
@@ -57,16 +57,6 @@ public:
     
     Q_SCRIPTABLE void newGame(int row, const QString& cardType);
     Q_SCRIPTABLE QString language(){return m_language;};
-<<<<<<< Updated upstream
-	
-    virtual void resizeEvent(QResizeEvent* ev);
-signals:
-    void gameOver();
-    void currentPlayerChanged();
-    
-=======
-
->>>>>>> Stashed changes
 public slots:
     void download();
 

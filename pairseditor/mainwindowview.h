@@ -24,9 +24,9 @@
 #ifndef MAINWINDOWVIEW_H
 #define MAINWINDOWVIEW_H
 
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 #include <QtCore/QModelIndex>
-#include <QtGui/QItemSelection>
+#include <QtCore/QItemSelection>
 
 class QXmlStreamWriter;
 class PairsThemeEditor;

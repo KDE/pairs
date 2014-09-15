@@ -53,7 +53,7 @@
 //#include <KStandardDirs>
 //#include <kdeclarative.h>
 
-PairsView::PairsView(QWindow *parent, QQmlEngine *pengine, const QString &file)
+PairsView::PairsView(QQmlEngine *pengine, const QString &file, QWindow *parent)
     : QQuickView(pengine, parent)
     , m_knsDialog(0)
 {
@@ -99,17 +99,8 @@ void PairsView::newGame(int row, const QString& cardType)
 
 void PairsView::newGame(const PairsTheme* theme, const QString& language, const QString& cardType)
 {
-<<<<<<< Updated upstream
-    qDeleteAll(m_cards);
-    m_last = 0;
-    m_cards.clear();
-    QList<CardItem*> cards;
-    
-    QQuickItem* cardsParent=findChild<QQuickItem*>("board");
-=======
     m_cards->clear();
     QQuickItem* cardsParent=findChild<QQuickItem*>("board");
->>>>>>> Stashed changes
     playersModel()->resetPlayers();
     Q_ASSERT(cardsParent);
     
@@ -132,15 +123,6 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     backImage.loadFromData(file_buf);
     for(int i=0; i<num; i++) {
         ThemeElement titem = items.at(i);
-<<<<<<< Updated upstream
-
-        CardItem* item = new CardItem(backRenderer, cardsParent, m_media);
-        item->setData(0, i);
-        if(type == CARD_LOGIC || type == CARD_SOUNDLOGIC) {
-            item->setType(CARD_LOGIC, titem.value(theme->mainType(), language), theme);
-        } else {
-            item->setType(theme->mainType(), titem.value(theme->mainType(), language), theme);
-=======
         QString file = titem.value(theme->mainType(), language);
         QImage  frontImage;
         QString text;
@@ -166,7 +148,6 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
                 break;
             default:
                 break;
->>>>>>> Stashed changes
         }
         if(type == CARD_LOGIC || type == CARD_SOUNDLOGIC) {}
         m_cards->addCard(new CardItem(cardsParent, frontImage, backImage, text, "", fsound, msound, mtype, i));
@@ -174,23 +155,6 @@ void PairsView::newGame(const PairsTheme* theme, const QString& language, const 
     }
 }
 
-<<<<<<< Updated upstream
-void PairsView::checkGameOver()
-{
-    if(isGameOver()) {
-        QObject* cardsContext=findChild<QObject*>("board");
-        Q_ASSERT(cardsContext);
-        cardsContext->setProperty("isGameOver", true);
-        stopGame();
-    }
-}
-
-void PairsView::stopGame()
-{
-    m_timer->stop();
-}
-=======
->>>>>>> Stashed changes
 
 void PairsView::download()
 {
@@ -200,52 +164,6 @@ void PairsView::download()
     m_knsDialog->show();
 }
 
-<<<<<<< Updated upstream
-void PairsView::resizeEvent(QResizeEvent* ev)
-{
-    QQuickView::resizeEvent(ev);
-    
-    m_resizeTimer->start(100);
-}
-
-void PairsView::setRowSize(int itemsPerRow)
-{
-    m_itemsPerRow = itemsPerRow;
-    
-    reorganizeCards(true);
-}
-
-void PairsView::reorganizeCards(bool starting)
-{
-    QQuickItem* cardsParent=findChild<QQuickItem*>("board");
-    QSizeF s(cardsParent->width(), cardsParent->height());
-    
-    Q_ASSERT(m_itemsPerRow>0);
-    
-    int i=0;
-    qreal rowCount = std::ceil(double(m_cards.size())/m_itemsPerRow);
-    int minspacing = 5;
-    qreal side = qMin((s.width()-m_itemsPerRow*minspacing)/m_itemsPerRow, (s.height()-rowCount*minspacing)/rowCount);
-    
-    qreal hspacing=(s.width()-m_itemsPerRow*side)/m_itemsPerRow;
-    qreal vspacing=(s.height()-rowCount*side)/rowCount;
-    
-    foreach(CardItem* card, m_cards) {
-        card->setSize(QSizeF(side, side));
-        QPointF p(hspacing/2+(i%m_itemsPerRow)*(side+hspacing), vspacing/2+(i/m_itemsPerRow)*(side+vspacing));
-        
-        QPropertyAnimation* anim = new QPropertyAnimation(card, "position", card);
-        anim->setEndValue(p);
-        anim->setDuration(starting ? 300 : 0);
-        anim->setEasingCurve(QEasingCurve::InOutQuad);
-        
-        anim->start(QAbstractAnimation::DeleteWhenStopped);
-        i++;
-    }
-}
-=======
-
->>>>>>> Stashed changes
 
 /*
 void PairsView::playSound(const QByteArray& sound) const

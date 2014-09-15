@@ -24,7 +24,7 @@
 #define PAIRSTHEMEEDITOR_H
 #include "../game/pairsthemebase.h"
 #include <QtCore/QDir>
-#include <QtXml/QXmlStreamReader>
+#include <QtCore/QXmlStreamReader>
 #include <QtGui/QStandardItem>
 #include "cardtype.h"
 

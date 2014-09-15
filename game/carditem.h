@@ -64,6 +64,7 @@ class CardItem
         QString m_postMessage;
         QByteArray m_found;
         QByteArray m_missed;
+        int m_index;
 };
 
 #endif // CARDITEM_H

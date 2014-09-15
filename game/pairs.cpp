@@ -45,7 +45,7 @@
 Pairs::Pairs(const QString &file)
     : QQuickWindow()
     , m_engine(new QQmlEngine(this))
-    , m_view(new PairsView(this, m_engine, file))
+    , m_view(new PairsView(m_engine, file))
 {
     setIcon(QIcon("pairs"));
     setTitle(qAppName());
