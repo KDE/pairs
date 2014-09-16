@@ -24,7 +24,7 @@
 #include "cardtype.h"
 #include "featureitem.h"
 #include "klocalizedstring.h"
-#include <QtXml/QXmlStreamWriter>
+#include <QXmlStreamWriter>
 #include <QtCore/QDebug>
 
 ElementItem::ElementItem(const QString& text, const ThemeElement& el)

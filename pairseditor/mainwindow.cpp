@@ -57,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent)
     KStandardAction::open(this, SLOT(doOpen()), actionCollection());
     KStandardAction::save(this, SLOT(doSave()), actionCollection());
     KStandardAction::saveAs(this, SLOT(doSaveAs()), actionCollection());
-    KAction *myact = new KAction(KIcon("pairs"), i18n("Try"), this);
+    KAction *myact = new KAction(QIcon::fromTheme("pairs"), i18n("Try"), this);
     connect(myact, SIGNAL(triggered(bool)), this, SLOT(doTry()));
     actionCollection()->addAction("try", myact);
     KStandardAction::quit(this, SLOT(close()), actionCollection());
@@ -150,7 +150,7 @@ void MainWindow::doSave()
 
     if(m_file.isEmpty())
     {
-        m_file = KFileDialog::getSaveFileName(KUrl(QDir::currentPath()), "*.pairs.tar.bz2|" + i18n("Pairs Themes"), this, i18n("Save Pairs theme"));
+        m_file = KFileDialog::getSaveFileName(QUrl::fromLocalFile(QDir::currentPath()), "*.pairs.tar.bz2|" + i18n("Pairs Themes"), this, i18n("Save Pairs theme"));
         QFileInfo fi(m_file);
         m_gameFile = m_tmpDir->absolutePath() + '/' + fi.baseName() + ".game";
         if(m_file.isEmpty())
@@ -202,7 +202,7 @@ void MainWindow::doOpen()
 {
 	if(!askToSave())
 		return;
-    m_file = KFileDialog::getOpenFileName(KUrl(QDir::currentPath()), "*.pairs.tar.bz2|" + i18n("Pairs Themes"), this, i18n("Open Pairs theme"));
+    m_file = KFileDialog::getOpenFileName(QUrl::fromLocalFile(QDir::currentPath()), "*.pairs.tar.bz2|" + i18n("Pairs Themes"), this, i18n("Open Pairs theme"));
     if(!m_file.isEmpty())
     {
         QFileInfo pathInfo(m_file);

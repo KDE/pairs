@@ -23,14 +23,14 @@
 
 #include <KApplication>
 #include "mainwindow.h"
-#include <KAboutData>
+#include <k4aboutdata.h>
 #include <KCmdLineArgs>
 #include <kurl.h>
 
 int main(int argc, char *argv[])
 {
-    KAboutData aboutData( "pairseditor", QByteArray(), ki18n("Pairs Editor"), "1.0.0",
-                          ki18n("Pairs Themes Editor"), KAboutData::License_GPL,
+    K4AboutData aboutData( "pairseditor", QByteArray(), ki18n("Pairs Editor"), "1.0.0",
+                          ki18n("Pairs Themes Editor"), K4AboutData::License_GPL,
                           ki18n("Copyright (c) 2012 the Pairs developers"));
 
     aboutData.addAuthor( ki18n("Aleix Pol Gonzalez"), ki18n("Maintainer"), "aleixpol@kde.org" );

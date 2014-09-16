@@ -29,11 +29,12 @@
 #include "elementitem.h"
 #include "featureitem.h"
 #include <QMenu>
-#include <QtGui/QTreeView>
-#include <QtXml/QXmlStreamWriter>
+#include <QTreeView>
+#include <QXmlStreamWriter>
 #include <QtCore/QDebug>
 #include <Phonon/MediaObject>
 #include <Phonon/AudioOutput>
+#include <KLocalizedString>
 
 MainWindowView::MainWindowView(MainWindow *parent)
     : m_ui(new Ui::MainWindowView)
@@ -134,8 +135,8 @@ void MainWindowView::clearUi(const QString &path)
 	m_ui->descriptionEdit->clear();
 	m_ui->backKurl->clear();
 	m_ui->pixLabel->clear();
-	m_ui->fileKurl->setStartDir(KUrl(QDir::currentPath()));
-	m_ui->backKurl->setStartDir(KUrl(QDir::currentPath()));
+	m_ui->fileKurl->setStartDir(QUrl::fromLocalFile(QDir::currentPath()));
+    m_ui->backKurl->setStartDir(QUrl::fromLocalFile(QDir::currentPath()));
 }
 
 void MainWindowView::setUi(PairsThemeEditor *theme)
@@ -151,8 +152,8 @@ void MainWindowView::setUi(PairsThemeEditor *theme)
 	m_ui->backKurl->setText(theme->backImage());
 	QPixmap image(m_path +'/'+theme->backImage());
 	m_ui->pixLabel->setPixmap(scaleImage(image, 100));
-	m_ui->fileKurl->setStartDir(KUrl(theme->path()));
-	m_ui->backKurl->setStartDir(KUrl(theme->path()));
+	m_ui->fileKurl->setStartDir(QUrl::fromLocalFile(theme->path()));
+    m_ui->backKurl->setStartDir(QUrl::fromLocalFile(theme->path()));
 }
 
 void MainWindowView::writeXmlCommon(QXmlStreamWriter *stream)
