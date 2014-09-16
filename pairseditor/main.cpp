@@ -21,40 +21,48 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <KApplication>
+
 #include "mainwindow.h"
-#include <k4aboutdata.h>
-#include <KCmdLineArgs>
+#include <KAboutData>
+
 #include <kurl.h>
+#include <QApplication>
+#include <KLocalizedString>
+#include <QCommandLineParser>
+#include <QCommandLineOption>
 
 int main(int argc, char *argv[])
 {
-    K4AboutData aboutData( "pairseditor", QByteArray(), ki18n("Pairs Editor"), "1.0.0",
-                          ki18n("Pairs Themes Editor"), K4AboutData::License_GPL,
-                          ki18n("Copyright (c) 2012 the Pairs developers"));
+    KAboutData aboutData( "pairseditor", i18n("Pairs Editor"), "1.0.0",
+                          i18n("Pairs Themes Editor"), KAboutLicense::GPL,
+                          i18n("Copyright (c) 2012 the Pairs developers"));
 
-    aboutData.addAuthor( ki18n("Aleix Pol Gonzalez"), ki18n("Maintainer"), "aleixpol@kde.org" );
-    aboutData.addAuthor( ki18n("Marco Calignano"), ki18n("Feature development"), "marco.calignano@gmail.com");
-    aboutData.addAuthor(ki18n("Heena Mahour"), ki18n("Layout development"), "heena393@gmail.com");
-    aboutData.addAuthor(ki18n("Ian Sanders"), ki18n("Application icon development"), "iansan565@gmail.com");
-    KCmdLineArgs::init(argc, argv, &aboutData);
-    KCmdLineOptions options;
-    options.add("+[URL]", ki18n("Theme to open"));
-    KCmdLineArgs::addCmdLineOptions( options );
+    aboutData.addAuthor( i18n("Aleix Pol Gonzalez"), i18n("Maintainer"), "aleixpol@kde.org", 0);
+    aboutData.addAuthor( i18n("Marco Calignano"), i18n("Feature development"), "marco.calignano@gmail.com", 0);
+    aboutData.addAuthor( i18n("Heena Mahour"), i18n("Layout development"), "heena393@gmail.com", 0);
+    aboutData.addAuthor( i18n("Ian Sanders"), i18n("Application icon development"), "iansan565@gmail.com", 0);
+    QApplication app(argc, argv);
+    QCommandLineParser parser;
+    KAboutData::setApplicationData(aboutData);
+    parser.addVersionOption();
+    parser.addHelpOption();
+    //PORTING SCRIPT: adapt aboutdata variable if necessary
+    aboutData.setupCommandLine(&parser);
+    parser.process(app);
+    aboutData.processCommandLine(&parser);
+    parser.addOption(QCommandLineOption(QStringList() <<  QLatin1String("+[URL]"), i18n("Theme to open")));
     
-    KApplication app;
     if (app.isSessionRestored())
     {
         RESTORE(MainWindow);
     } else {
-        KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
         
         // no session.. just start up normally
         MainWindow *w = new MainWindow;
 
-        if(args->count()==2)
-            w->openfile(args->url(0).toLocalFile());
-        args->clear();
+        if(parser.positionalArguments().count()==2)
+            w->openfile(QUrl::fromUserInput(argv[1]).toLocalFile());
+        
         w->show();
     }
     

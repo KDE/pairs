@@ -9,7 +9,7 @@ qt5_wrap_ui( pairseditor_SOURCES mainwindowview.ui )
 
 add_executable( pairseditor ${pairseditor_SOURCES} )
 
-target_link_libraries( pairseditor Qt5::Xml KF5::XmlGui Phonon::phonon4qt5 KF5::KDELibs4Support KF5::Archive)
+target_link_libraries( pairseditor KF5::XmlGui KF5::Completion KF5::KIOWidgets KF5::KDELibs4Support KF5::Archive Phonon::phonon4qt5)
 install(TARGETS pairseditor ${INSTALL_TARGETS_DEFAULT_ARGS})
 install( FILES pairseditor.desktop DESTINATION  ${XDG_APPS_INSTALL_DIR})
 install( FILES pairseditorui.rc DESTINATION ${DATA_INSTALL_DIR}/pairseditor)

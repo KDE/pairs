@@ -31,7 +31,7 @@
 #include <KMessageBox>
 #include <QtCore/QDebug>
 #include <QtCore/QProcess>
-#include <KAction>
+#include <QAction>
 #include <KGlobal>
 #include <KStandardDirs>
 #include <KStandardAction>
@@ -57,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent)
     KStandardAction::open(this, SLOT(doOpen()), actionCollection());
     KStandardAction::save(this, SLOT(doSave()), actionCollection());
     KStandardAction::saveAs(this, SLOT(doSaveAs()), actionCollection());
-    KAction *myact = new KAction(QIcon::fromTheme("pairs"), i18n("Try"), this);
+    QAction *myact = new QAction(QIcon::fromTheme("pairs"), i18n("Try"), this);
     connect(myact, SIGNAL(triggered(bool)), this, SLOT(doTry()));
     actionCollection()->addAction("try", myact);
     KStandardAction::quit(this, SLOT(close()), actionCollection());

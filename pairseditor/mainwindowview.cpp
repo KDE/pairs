@@ -136,7 +136,7 @@ void MainWindowView::clearUi(const QString &path)
 	m_ui->backKurl->clear();
 	m_ui->pixLabel->clear();
 	m_ui->fileKurl->setStartDir(QUrl::fromLocalFile(QDir::currentPath()));
-    m_ui->backKurl->setStartDir(QUrl::fromLocalFile(QDir::currentPath()));
+	m_ui->backKurl->setStartDir(QUrl::fromLocalFile(QDir::currentPath()));
 }
 
 void MainWindowView::setUi(PairsThemeEditor *theme)
@@ -153,7 +153,7 @@ void MainWindowView::setUi(PairsThemeEditor *theme)
 	QPixmap image(m_path +'/'+theme->backImage());
 	m_ui->pixLabel->setPixmap(scaleImage(image, 100));
 	m_ui->fileKurl->setStartDir(QUrl::fromLocalFile(theme->path()));
-    m_ui->backKurl->setStartDir(QUrl::fromLocalFile(theme->path()));
+	m_ui->backKurl->setStartDir(QUrl::fromLocalFile(theme->path()));
 }
 
 void MainWindowView::writeXmlCommon(QXmlStreamWriter *stream)
