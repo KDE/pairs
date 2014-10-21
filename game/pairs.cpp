@@ -35,9 +35,6 @@
 #include <KMessageBox>
 #include <kactioncollection.h>
 #include <kstandardaction.h>
-#include <kstandarddirs.h>
-#include <KDE/KLocale>
-#include <KApplication>
 #include <QQmlEngine>
 #include "playersmodel.h"
 #include <kstatusbar.h>

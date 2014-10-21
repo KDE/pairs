@@ -23,7 +23,7 @@
 
 #include "pairs.h"
 #include "pairsview.h"
-#include <KApplication>
+#include <QApplication>
 #include <KAboutData>
 #include <KCmdLineArgs>
 #include <KLocalizedString>
@@ -51,7 +51,7 @@ int main(int argc, char **argv)
     options.add("+[file]", ki18n("Pairs theme to open")); //new
     KCmdLineArgs::addCmdLineOptions(options); //new
 
-    KApplication app;
+    QApplication app(argc, argv);
     
     // see if we are starting with session management
     if (app.isSessionRestored())

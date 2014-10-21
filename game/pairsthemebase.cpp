@@ -24,7 +24,6 @@
 #include <QtCore/QFile>
 #include <QtCore/QDebug>
 #include <KLocalizedString>
-#include <KStandardDirs>
 #include <QtXmlPatterns/QXmlSchemaValidator>
 #include <QtXmlPatterns/QXmlSchema>
 #include "cardtype.h"

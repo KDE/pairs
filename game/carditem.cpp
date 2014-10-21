@@ -23,7 +23,7 @@
 #include "carditem.h"
 #include <QFile>
 #include <KDE/KLocale>
-#include <KStandardDirs>
+//#include <KStandardDirs>
 
 CardItem::CardItem(QObject* parent, QImage front, QImage back, QString text, QString postMessage, QByteArray foundSound, QByteArray missedSound, CardType type, int index)
     : QObject(parent)
