@@ -25,8 +25,8 @@
 #include "mainwindow.h"
 #include <KAboutData>
 
-#include <kurl.h>
 #include <QApplication>
+#include <QUrl>
 #include <KLocalizedString>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
