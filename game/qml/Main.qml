@@ -19,8 +19,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 1.0
-import org.kde.plasma.components 0.1 as PlasmaComponents
+import QtQuick 2.3
+import org.kde.plasma.components 2.0 as PlasmaComponents
 
 FancyBackground
 {
