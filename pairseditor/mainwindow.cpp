@@ -27,7 +27,7 @@
 #include "thememodel.h"
 #include "ui_mainwindowview.h"
 #include "elementitem.h"
-#include <KFileDialog>
+#include <QFileDialog>
 #include <KMessageBox>
 #include <QtCore/QDebug>
 #include <QtCore/QProcess>
@@ -150,7 +150,8 @@ void MainWindow::doSave()
 
     if(m_file.isEmpty())
     {
-        m_file = KFileDialog::getSaveFileName(QUrl::fromLocalFile(QDir::currentPath()), "*.pairs.tar.bz2|" + i18n("Pairs Themes"), this, i18n("Save Pairs theme"));
+        m_file = QFileDialog::getSaveFileName(this, i18n("Save Pairs theme"), QDir::currentPath(), "*.pairs.tar.bz2|" + i18n("Pairs Themes"));
+                           //(QUrl::fromLocalFile(QDir::currentPath()), "*.pairs.tar.bz2|" + i18n("Pairs Themes"), this, i18n("Save Pairs theme"));
         QFileInfo fi(m_file);
         m_gameFile = m_tmpDir->absolutePath() + '/' + fi.baseName() + ".game";
         if(m_file.isEmpty())
@@ -202,7 +203,8 @@ void MainWindow::doOpen()
 {
 	if(!askToSave())
 		return;
-    m_file = KFileDialog::getOpenFileName(QUrl::fromLocalFile(QDir::currentPath()), "*.pairs.tar.bz2|" + i18n("Pairs Themes"), this, i18n("Open Pairs theme"));
+    m_file = QFileDialog::getOpenFileName(this, i18n("Open Pairs theme"), QDir::currentPath(), "*.pairs.tar.bz2|" + i18n("Pairs Themes"));
+//(QUrl::fromLocalFile(QDir::currentPath()), "*.pairs.tar.bz2|" + i18n("Pairs Themes"), this, i18n("Open Pairs theme"));
     if(!m_file.isEmpty())
     {
         QFileInfo pathInfo(m_file);
