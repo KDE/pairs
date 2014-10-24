@@ -79,7 +79,7 @@ PairsView::PairsView(QQmlEngine *pengine, const QString &file, QWindow *parent)
 
 */
     setSource(QUrl("qrc:/qml/Main.qml"));
-    Q_ASSERT(errors().isEmpty());
+    //Q_ASSERT(errors().isEmpty());
     
     connect(engine(), SIGNAL(quit()), QCoreApplication::instance(), SLOT(quit()));
     

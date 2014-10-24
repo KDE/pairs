@@ -43,7 +43,7 @@ add_executable(pairs ${pairs_SRCS})
 
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wdeprecated-declarations")
 
-target_link_libraries(pairs Qt5::Core Qt5::Widgets Qt5::Quick Qt5::Svg Qt5::Xml Qt5::XmlPatterns KF5::KIOCore KF5::I18n
+target_link_libraries(pairs Qt5::Core Qt5::Widgets Qt5::Quick Qt5::Qml Qt5::Svg Qt5::Xml Qt5::XmlPatterns KF5::KIOCore KF5::I18n
 KF5::Archive KF5::KDELibs4Support Phonon::phonon4qt5 KF5::NewStuff
 )
 
