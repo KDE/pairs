@@ -50,6 +50,7 @@
 #include <QResizeEvent>
 #include <cmath>
 #include <KRandom>
+#include <KDeclarative/KDeclarative>
 //#include <KStandardDirs>
 //#include <kdeclarative.h>
 
@@ -70,14 +71,10 @@ PairsView::PairsView(QQmlEngine *pengine, const QString &file, QWindow *parent)
     rootContext()->setContextProperty("cardModel", m_cards);
     engine()->addImageProvider("theme", m_themeImagesProvider);
 
-/* TODO
-    KDeclarative m_kdeclarative;
-    m_kdeclarative.setDeclarativeEngine(engine());
-    m_kdeclarative.initialize();
-    //binds things like kconfig and icons
-    m_kdeclarative.setupBindings();
+    KDeclarative::KDeclarative kdeclarative;
+    kdeclarative.setDeclarativeEngine(engine());
+    kdeclarative.setupBindings();
 
-*/
     setSource(QUrl("qrc:/qml/Main.qml"));
     //Q_ASSERT(errors().isEmpty());
     
