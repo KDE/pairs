@@ -40,13 +40,11 @@
 #include <kstatusbar.h>
 
 Pairs::Pairs(const QString &file)
-    : QQuickWindow()
-    , m_engine(new QQmlEngine(this))
-    , m_view(new PairsView(m_engine, file))
+    : QObject()
+    , m_view(new PairsView(file))
 {
-    setIcon(QIcon("pairs"));
-    setTitle(qAppName());
-//    setCentralWidget(m_view);
+    m_view->setIcon(QIcon::fromTheme("pairs"));
+    m_view->setTitle(qAppName());
     
     //setAutoSaveSettings();
 }

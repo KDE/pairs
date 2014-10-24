@@ -77,11 +77,11 @@ int main(int argc, char **argv)
 //        widget->view()->setLanguage(KSharedConfig::locale()->language().left(2));
         if (fsMode) 
         {
-            widget->showFullScreen();
+            widget->view()->showFullScreen();
         }
         else
         {
-            widget->show();
+            widget->view()->show();
         }
     }
     return app.exec();

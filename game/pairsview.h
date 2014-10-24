@@ -44,7 +44,7 @@ public:
     /**
      * Default constructor
      */
-    PairsView(QQmlEngine *pengine, const QString &file = "", QWindow *parent = 0);
+    PairsView(const QString &file = QString(), QWindow *parent = 0);
 
     /**
      * Destructor

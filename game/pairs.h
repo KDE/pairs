@@ -35,7 +35,7 @@ class PairsView;
 #include <QQuickWindow>
 
 class QQmlEngine;
-class Pairs : public QQuickWindow
+class Pairs : public QObject
 {
     Q_OBJECT
 public:
@@ -53,7 +53,6 @@ public:
     virtual QSize sizeHint() const { return QSize(800,500); }
     
 private:
-    QQmlEngine *m_engine;
     PairsView *m_view;
     QString m_right;
     QString m_wrong;

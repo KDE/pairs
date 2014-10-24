@@ -54,8 +54,8 @@
 //#include <KStandardDirs>
 //#include <kdeclarative.h>
 
-PairsView::PairsView(QQmlEngine *pengine, const QString &file, QWindow *parent)
-    : QQuickView(pengine, parent)
+PairsView::PairsView(const QString &file, QWindow *parent)
+    : QQuickView(parent)
     , m_knsDialog(0)
 {
     m_model = new ThemesModel(this, file);
@@ -76,7 +76,7 @@ PairsView::PairsView(QQmlEngine *pengine, const QString &file, QWindow *parent)
     kdeclarative.setupBindings();
 
     setSource(QUrl("qrc:/qml/Main.qml"));
-    //Q_ASSERT(errors().isEmpty());
+    Q_ASSERT(errors().isEmpty());
     
     connect(engine(), SIGNAL(quit()), QCoreApplication::instance(), SLOT(quit()));
     
