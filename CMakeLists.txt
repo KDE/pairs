@@ -34,7 +34,7 @@ include(KDECompilerSettings)
 include(FeatureSummary)
 
 find_package(Qt5 REQUIRED COMPONENTS Widgets Svg Quick XmlPatterns )
-find_package(KF5 REQUIRED COMPONENTS Archive CoreAddons Solid XmlGui KDELibs4Support NewStuff Completion KIO Declarative)
+find_package(KF5 REQUIRED COMPONENTS Archive CoreAddons Solid XmlGui KDELibs4Support NewStuff Completion KIO)
 find_package(Phonon4Qt5 CONFIG REQUIRED)
 
 include_directories(${PHONON_INCLUDES})
