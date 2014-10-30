@@ -1,8 +1,24 @@
 [Desktop Entry]
 Name=Pairs
+Name[cs]=Pexeso
+Name[es]=Parejas
+Name[fr]=Pairs
+Name[nl]=Paren
+Name[pt]=Pairs
+Name[pt_BR]=Pairs
+Name[uk]=Pairs
+Name[x-test]=xxPairsxx
 Exec=pairs %i -caption %c
 Icon=pairs
 Type=Application
 GenericName=A game to enhance your memory
+GenericName[cs]=Hra pro zlepšení vaší paměti
+GenericName[es]=Un juego para mejorar la memoria
+GenericName[fr]=Un jeu pour travailler votre mémoire 
+GenericName[nl]=Een spel om uw geheugen te verbeteren
+GenericName[pt]=Um jogo para melhorar a sua memória
+GenericName[pt_BR]=Um jogo para melhorar sua memória
+GenericName[uk]=Гра для удосконалення пам’яті
+GenericName[x-test]=xxA game to enhance your memoryxx
 Terminal=false
 Categories=Qt;KDE;Education;Game;KidsGame;

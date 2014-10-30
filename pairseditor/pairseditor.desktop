@@ -1,9 +1,25 @@
 [Desktop Entry]
 Name=Pairs Theme Editor
+Name[cs]=Editor motivu Pexesa
+Name[es]=Editor de temas para Pairs
+Name[fr]=Thème des paires
+Name[nl]=Themabewerker van Paren
+Name[pt]=Editor de Temas do Pairs
+Name[pt_BR]=Editor de Temas do Pairs
+Name[uk]=Редактор тем Pairs
+Name[x-test]=xxPairs Theme Editorxx
 Exec=pairseditor %i -caption %c
 Icon=pairseditor
 X-DocPath=pairseditor/index.html
 Type=Application
 GenericName=A Pairs theme editor
+GenericName[cs]=Editor motivu Pexesa
+GenericName[es]=Un editor de temas para Pairs
+GenericName[fr]=Un éditeur de thème pour Pairs
+GenericName[nl]=Een themabewerker van Paren
+GenericName[pt]=Um editor de temas do Pairs
+GenericName[pt_BR]=Um editor de temas para o Pairs
+GenericName[uk]=Програма для редагування тем Pairs
+GenericName[x-test]=xxA Pairs theme editorxx
 Terminal=false
 Categories=Qt;KDE;Education;Game;KidsGame;
