@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Pairs Theme Editor
 Name[cs]=Editor motivu Pexesa
+Name[de]=Pairs-Designeditor
 Name[en_GB]=Pairs Theme Editor
 Name[es]=Editor de temas para Pairs
 Name[fi]=Parit-teemamuokkain
@@ -18,6 +19,7 @@ X-DocPath=pairseditor/index.html
 Type=Application
 GenericName=A Pairs theme editor
 GenericName[cs]=Editor motivu Pexesa
+GenericName[de]=Ein Designeditor für Pairs
 GenericName[en_GB]=A Pairs theme editor
 GenericName[es]=Un editor de temas para Pairs
 GenericName[fi]=Parit-teemamuokkain

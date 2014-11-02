@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Pairs
 Name[cs]=Pexeso
+Name[de]=Paare
 Name[en_GB]=Pairs
 Name[es]=Parejas
 Name[fi]=Parit
@@ -17,6 +18,7 @@ Icon=pairs
 Type=Application
 GenericName=A game to enhance your memory
 GenericName[cs]=Hra pro zlepšení vaší paměti
+GenericName[de]=Ein Spiel zum Gedächtnistraining
 GenericName[en_GB]=A game to enhance your memory
 GenericName[es]=Un juego para mejorar la memoria
 GenericName[fi]=Muistipeli
