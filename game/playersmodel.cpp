@@ -22,13 +22,12 @@
 
 #include "playersmodel.h"
 #include "pairsplayer.h"
-#include <KStandardDirs>
 #include <KConfig>
 #include <KConfigGroup>
 #include <KLocalizedString>
-#include <KGlobal>
 #include <krandom.h>
 #include <QDebug>
+#include <QDirIterator>
 #include <QFileSystemWatcher>
 #include "themesmodel.h"
 
@@ -41,7 +40,13 @@ PlayersModel::PlayersModel(QObject* parent)
     names.insert(Time, "time");
     names.insert(Selected, "selected");
     setRoleNames(names);
-    m_playerIcons = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "players/*.svg"));
+    QStringList dirs = QStandardPaths::locateAll(QStandardPaths::DataLocation, QLatin1String("players/"), QStandardPaths::LocateDirectory);
+    Q_FOREACH (const QString& dir, dirs) {
+        QDirIterator it(dir, QStringList() << QStringLiteral("*.svg"));
+        while (it.hasNext()) {
+            m_playerIcons.append(it.next());
+        }
+    }
     for(QStringList::iterator it=m_playerIcons.begin(), itEnd=m_playerIcons.end(); it!=itEnd; ++it) {
         *it = QUrl::fromLocalFile(*it).toString();
     }

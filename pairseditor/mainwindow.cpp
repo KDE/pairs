@@ -33,7 +33,6 @@
 #include <QtCore/QProcess>
 #include <QAction>
 #include <KGlobal>
-#include <KStandardDirs>
 #include <KStandardAction>
 #include <kdeversion.h>
 #include <KUrlRequester>

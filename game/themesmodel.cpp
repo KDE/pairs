@@ -23,9 +23,9 @@
 #include "themesmodel.h"
 #include "themeiconsprovider.h"
 #include "pairstheme.h"
-#include <KStandardDirs>
-#include <KGlobal>
 #include <krandom.h>
+#include <QDirIterator>
+#include <QStandardPaths>
 #include <QDebug>
 
 ThemesModel::ThemesModel(QObject* parent, const QString &filePath): QStandardItemModel(parent)
@@ -34,10 +34,9 @@ ThemesModel::ThemesModel(QObject* parent, const QString &filePath): QStandardIte
     names.insert(PairsTheme::CardTypeRole, "type");
     names.insert(PairsTheme::LanguagesRole, "languages");
     setRoleNames(names);
-//     qDebug() << "file path:"<< filePath;
-	if(filePath.isEmpty())
+    if(filePath.isEmpty())
 	{
-		QStringList themesdirs=KGlobal::dirs()->findDirs("appdata", "themes");
+		QStringList themesdirs = QStandardPaths::locateAll(QStandardPaths::DataLocation, "themes", QStandardPaths::LocateDirectory);
 		m_fs=new QFileSystemWatcher(this);
 		m_fs->addPaths(themesdirs);
 		connect(m_fs, SIGNAL(directoryChanged(QString)), SLOT(reload()));
@@ -66,8 +65,14 @@ void ThemesModel::reload()
 {
     m_fs->blockSignals(true);
     clear();
-    const QStringList themes = KGlobal::dirs()->findAllResources("appdata", QLatin1String( "themes/*.pairs.*" ));
-
+    QStringList themes;
+    QStringList dirs = QStandardPaths::locateAll(QStandardPaths::DataLocation, QLatin1String( "themes" ),QStandardPaths::LocateDirectory);
+    Q_FOREACH (const QString& dir, dirs) {
+        QDirIterator it(dir, QStringList() << QStringLiteral("*.pairs.*"));
+        while (it.hasNext()) {
+            themes.append(it.next());
+        }
+    }
     Q_FOREACH(const QString& themePath, themes) {
         PairsTheme* theme = new PairsTheme(themePath);
 

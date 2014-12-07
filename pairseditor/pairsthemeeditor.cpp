@@ -23,7 +23,6 @@
 #include "pairsthemeeditor.h"
 #include <QtCore/QDebug>
 #include <KLocalizedString>
-#include <KStandardDirs>
 #include <QtXmlPatterns/QXmlSchemaValidator>
 #include <QtXmlPatterns/QXmlSchema>
 
