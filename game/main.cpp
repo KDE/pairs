@@ -25,10 +25,12 @@
 #include "pairsview.h"
 #include <QApplication>
 #include <KAboutData>
-#include <KCmdLineArgs>
 #include <KLocalizedString>
 #include <KSharedConfig>
 #include <QDebug>
+#include <QCommandLineParser>
+#include <QUrl>
+#include <QDir>
 #include "pairstheme.h"
 
 static const char description[] =
@@ -43,16 +45,20 @@ int main(int argc, char **argv)
     about.addAuthor( i18n("Aleix Pol Gonzalez"), i18n("Initial implementation and maintainer"), QStringLiteral("aleixpol@kde.org"), 0);
     about.addAuthor( i18n("Marco Calignano"), i18n("Theme support enhancement and general feature development"), QStringLiteral("marco.calignano@gmail.com"), 0);
     about.addAuthor( i18n("Albert Astals Cid"), i18n("Initial project setup and ideas"), QStringLiteral("aacid@kde.org"), 0);
-    KCmdLineArgs::init(argc, argv, QByteArray("pairs"), QByteArray("pairs"), KLocalizedString(), QByteArray(version));
-  
-    KCmdLineOptions options;
-    options.add("fullscreen", ki18n( "start in fullscreen mode"));
-//    KCmdLineArgs::addCmdLineOptions(options);
-    options.add("+[file]", ki18n("Pairs theme to open")); //new
-    KCmdLineArgs::addCmdLineOptions(options); //new
 
     QApplication app(argc, argv);
     
+    QCommandLineParser parser;
+    KAboutData::setApplicationData(about);
+    parser.addVersionOption();
+    parser.addHelpOption();
+    QCommandLineOption fullscreenOption("fullscreen", ki18n( "start in fullscreen mode").toString());
+    parser.addOption(fullscreenOption);
+    parser.addPositionalArgument("file", ki18n("Pairs theme to open").toString());
+    about.setupCommandLine(&parser);
+    parser.process(app);
+    about.processCommandLine(&parser);
+
     // see if we are starting with session management
     if (app.isSessionRestored())
     {
@@ -61,18 +67,26 @@ int main(int argc, char **argv)
     else
     {
         // no session.. just start up normally
-        KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-        bool fsMode = KCmdLineArgs::parsedArgs()->isSet("fullscreen");
+        const QStringList args = parser.positionalArguments();
+        bool fsMode = parser.isSet("fullscreen");
         Pairs *widget = 0;
-        if(args->count())
+        if(args.count())
         {
-             widget = new Pairs(args->url(0).toLocalFile());
+            QUrl url;
+#if QT_VERSION >= 0x050400
+            url = QUrl::fromUserInput(args[0], QDir::currentPath(), QUrl::AssumeLocalFile);
+#else
+            // Logic from QUrl::fromUserInput(QString, QString, UserInputResolutionOptions)
+            url = (QUrl(args[0], QUrl::TolerantMode).isRelative() && !QDir::isAbsolutePath(args[0]))
+                   ? QUrl::fromLocalFile(QDir::current().absoluteFilePath(args[0]))
+                   : QUrl::fromUserInput(args[0]);
+#endif
+            widget = new Pairs(url.toLocalFile());
         }
         else
         {
             widget = new Pairs;
         }
-    	args->clear();
 //TODO
 //        widget->view()->setLanguage(KSharedConfig::locale()->language().left(2));
         if (fsMode) 

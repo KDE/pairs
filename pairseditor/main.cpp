@@ -46,11 +46,10 @@ int main(int argc, char *argv[])
     KAboutData::setApplicationData(aboutData);
     parser.addVersionOption();
     parser.addHelpOption();
-    //PORTING SCRIPT: adapt aboutdata variable if necessary
+    parser.addPositionalArgument("URL", i18n("Theme to open"));
     aboutData.setupCommandLine(&parser);
     parser.process(app);
     aboutData.processCommandLine(&parser);
-    parser.addOption(QCommandLineOption(QStringList() <<  QLatin1String("+[URL]"), i18n("Theme to open")));
     
     if (app.isSessionRestored())
     {
@@ -60,8 +59,8 @@ int main(int argc, char *argv[])
         // no session.. just start up normally
         MainWindow *w = new MainWindow;
 
-        if(parser.positionalArguments().count()==2)
-            w->openfile(QUrl::fromUserInput(argv[1]).toLocalFile());
+        if(parser.positionalArguments().count())
+            w->openfile(QUrl::fromUserInput(parser.positionalArguments()[0]).toLocalFile());
         
         w->show();
     }
