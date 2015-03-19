@@ -10,6 +10,7 @@
   <name xml:lang="da">Pairs</name>
   <name xml:lang="de">Pairs</name>
   <name xml:lang="en-GB">Pairs</name>
+  <name xml:lang="eo">Pairs</name>
   <name xml:lang="es">Pairs</name>
   <name xml:lang="et">Paarid</name>
   <name xml:lang="fi">Parit</name>
@@ -31,6 +32,7 @@
   <summary xml:lang="cs">Hra k procvičování paměti</summary>
   <summary xml:lang="de">Spiel zum Gedächtnistraining</summary>
   <summary xml:lang="en-GB">Memory Enhancement Game</summary>
+  <summary xml:lang="eo">Ludo por plibonigi memoron</summary>
   <summary xml:lang="es">Juego para la mejora de la memoria</summary>
   <summary xml:lang="et">Mälu parandamise mäng</summary>
   <summary xml:lang="fi">Muistipeli</summary>
@@ -50,6 +52,7 @@
     <p xml:lang="bs">Parovi je zbirka igara usmjerenih da pomognu razvoj dece predškolskog uzrasta. Sa ovim igrama dijete može da poboljša pamćenje, logiku, sluh, čak i vještinu čitanje. Svaka igra može imati različite teme, tako se dijete stimuliše sa različitim i novim izazovima. Ona pruža urednika da stvori svoju igru setova.</p>
     <p xml:lang="ca">El Pairs és una col·lecció de jocs amb l'objectiu d'ajudar al desenvolupament dels nens i nenes preescolars. Amb aquests jocs els nens poden millorar la memòria, la lògica, l'audició, i inclús les habilitats de lectura. Cada joc pot tenir temes diferents de manera que la canalla s'estimula amb reptes nous i diferents. Proporciona un editor per crear conjunts de jocs propis.</p>
     <p xml:lang="en-GB">Pairs is a collection of games aimed to help the development of preschool children. With these games the child can improve memory, logic, hearing, and even reading skills. Each game can have different themes so the child is stimulated with different and new challenges. It provides an editor to create own game sets.</p>
+    <p xml:lang="eo">Pairs estas ludaro kiu celas helpi la disvolviĝon ĉe infanoj kiuj ankoraŭ ne iras al la lernejo. Per tiuj ludoj, la infano povas plibonigi sian memoron,  logikon, aŭdon kaj eĉ legadajn kapablecojn. Ĉiuj ludoj havas diversajn etosojn por stimuli la infanon per diversaj kaj novaj defioj. Estas ankaŭ redaktilo por helpi krei viajn proprajn ludojn.</p>
     <p xml:lang="es">Pairs es una colección de juegos cuyo objetivo es contribuir al desarrollo de los niños en edad prescolar. Con estos juegos, los niños pueden mejorar la memoria, la lógica, la audición e incluso, la habilidad lectora. Cada juego puede tener diferentes temas, de forma que se estimula al niño con diferentes y nuevos retos. Proporciona un editor para crear conjuntos de juegos personalizados.</p>
     <p xml:lang="et">Paarid koosneb õige mitmest mängust, mis on eelkõige mõeldud koolieelikute arendamiseks. Mängud aitavad parandada laste mälu, loogilist mõtlemisvõimet, kuulamis- ja isegi lugemisoskust. Kõigil mängudel on eri teema, mis aitab koondada lapse tähelepanu just sellele mängule. Samuti on olemas redaktor, millega saab ise mänge luua.</p>
     <p xml:lang="fi">Parit on kokoelma alle kouluikäisille lapsille suunnattuja pelejä. Näillä peleillä voit kehittää muistia, logiikkaa, kuuloa ja jopa lukutaitoa. Kussakin pelissä voi valita erilaisia teemoja, jotta lapsen kiinnostus säilyy uusien erilaisten haasteiden edessä. Peleihin sisältyy muokkain, jolla luoda omia pelimuunnelmia.</p>
@@ -70,6 +73,7 @@
     <p xml:lang="cs">Hry:</p>
     <p xml:lang="de">Spiele:</p>
     <p xml:lang="en-GB">Games:</p>
+    <p xml:lang="eo">Ludoj:</p>
     <p xml:lang="es">Juegos:</p>
     <p xml:lang="et">Mängud:</p>
     <p xml:lang="fi">Pelit:</p>
@@ -89,6 +93,7 @@
       <li xml:lang="bs">Parovi: igra za razvoj memorijskih veština. Na ploči postoje različite kartice, sve okrenuta nadole, pa igrač ne vidi slike. Svaka kartica odgovara samo jednoj drugoj kartici koja ima istu tačnu sliku. Igrač mora da klikne na karticu da je uključite i pokuša da se sjeti gdje se poklapaju. Kada se pronađe poklapanje obije kartice ostati otkrivene i igrač dobija poen.</li>
       <li xml:lang="ca">Pairs: Un joc pel desenvolupament de les habilitats de memòria. En un tauler hi ha cartes diferents, totes cara avall de manera que el jugador no veu les imatges. Cada carta coincideix amb només una altra carta que té exactament la mateixa imatge. El jugador ha de clicar un carta per mostrar-la i intentar recordar a on és la coincident. Quan es troba una coincidència, ambdues cartes queden cara amunt i el jugador guanya un punt.</li>
       <li xml:lang="en-GB">Pairs: A game for the development of memory skills. On a board there are different cards, all facing down, so the player does not see the pictures. Each card matches only one other card that has the same exact picture. The player has to click a card to turn it and try to remember where the match is. When a match is found both cards stay uncovered and the player gets a point.</li>
+      <li xml:lang="eo">Pairs: Ludo por plibonigi memorkapablecon. Sur la tabulo estas diversaj kartoj kaŝitaj. La ludisto do ne vidas la bildon. Ĉiuj kartoj kongruas kun nur unu alia karto kiu havas la saman bildon. La ludisto devas kliki sur la karton por returni ĝin kaj vidi ĝin. Ŝli devas memori kie estas la kongruanta karto kaj trovi ĝin. Kiam kongruanta paro estas trovita, la du kartoj restas videble kaj la ludisto ricevas poenton.</li>
       <li xml:lang="es">Pairs: juego para el desarrollo de la memoria. En un tablero, hay varias cartas, todas boca abajo, de manera que el jugador no ve las ilustraciones. Cada carta hace pareja con una única carta que tiene exactamente la misma imagen. El jugador tiene que hacer clic en una carta para darle la vuelta e intentar recordar dónde está la carta que hace pareja. Cuando se encuentra una pareja, ambas cartas permanecen boca arriba y el jugador obtiene un punto.</li>
       <li xml:lang="et">Paarid: mälu arendamise mäng. Mängulauale on selg üles asetatud kaardid, nii et nende pilte pole näha. Iga kaart sobib kokku ainult ühe teise kaardiga, millel on sama pilt. Mängija peab klõpsama kaardile, millega see ümber pööratakse, ja püüdma meelde tuletada, kus asus selle paariline. Kui paariline on leitud, avatakse mõlemad kaardid ja mängija teenib punkti.</li>
       <li xml:lang="fi">Parit: Peli muistin kehittämiseksi. Laudalla on eri kortteja kuvapuoli alaspäin, jottei pelaaja näe niitä. Kukin kortti vastaa vain yhtä toista korttia, jossa on sama kuva. Pelaajan täytyy kääntää kortti napsauttamalla sitä ja muistaa missä sen pari on. Parin löydyttyä kumpikin kortti jää kuvapuoli ylöspäin ja pelaaja saa pisteen.</li>
