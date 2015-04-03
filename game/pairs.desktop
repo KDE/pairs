@@ -44,6 +44,7 @@ Exec=pairs %i -caption %c
 Icon=pairs
 Type=Application
 GenericName=A game to enhance your memory
+GenericName[ast]=Un xuegu p'ameyorar la to memoria
 GenericName[bg]=Игра за подобряване на паметта ви
 GenericName[bs]=Igra za poboljšanje memorije
 GenericName[ca]=Un joc per millorar la teva memòria
