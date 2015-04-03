@@ -27,6 +27,7 @@
   <name xml:lang="x-test">xxPairsxx</name>
   <name xml:lang="zh-TW">配對遊戲_Pairs</name>
   <summary>Memory Enhancement Game</summary>
+  <summary xml:lang="ast">Xuegu d'ameyora de memoria</summary>
   <summary xml:lang="bs">Igra za poboljšanje pamćenja</summary>
   <summary xml:lang="ca">Un joc per millorar la memòria</summary>
   <summary xml:lang="cs">Hra k procvičování paměti</summary>
