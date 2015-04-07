@@ -1,6 +1,5 @@
 [Desktop Entry]
 Name=Pairs Theme Editor
-Name[ast]=Editor de tema Pairs
 Name[bs]=Uređivač tema za igru parova
 Name[ca]=Editor de temes del Pairs
 Name[cs]=Editor motivu Pexesa
@@ -27,7 +26,6 @@ Icon=pairseditor
 X-DocPath=pairseditor/index.html
 Type=Application
 GenericName=A Pairs theme editor
-GenericName[ast]=Un editor de temes Pairs
 GenericName[bs]=Uređivač tema za igru parova
 GenericName[ca]=Un editor de temes pel Pairs
 GenericName[cs]=Editor motivu Pexesa
