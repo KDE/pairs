@@ -13,6 +13,7 @@
   <name xml:lang="eo">Paroj</name>
   <name xml:lang="es">Pairs</name>
   <name xml:lang="fi">Parit</name>
+  <name xml:lang="ko">Pairs</name>
   <name xml:lang="nl">Paren</name>
   <name xml:lang="pl">Pary</name>
   <name xml:lang="pt">Pairs</name>
@@ -33,6 +34,7 @@
   <summary xml:lang="eo">Ludo por plibonigi memoron</summary>
   <summary xml:lang="es">Juego para la mejora de la memoria</summary>
   <summary xml:lang="fi">Muistipeli</summary>
+  <summary xml:lang="ko">기억력 향상 게임</summary>
   <summary xml:lang="nl">Geheugenoefenspel</summary>
   <summary xml:lang="pl">Gra na ćwiczenie pamięci</summary>
   <summary xml:lang="pt">Jogo de Exercícios de Memória</summary>
@@ -70,6 +72,7 @@
     <p xml:lang="eo">Ludoj:</p>
     <p xml:lang="es">Juegos:</p>
     <p xml:lang="fi">Pelit:</p>
+    <p xml:lang="ko">게임:</p>
     <p xml:lang="nl">Spellen:</p>
     <p xml:lang="pl">Gry:</p>
     <p xml:lang="pt">Jogos:</p>
