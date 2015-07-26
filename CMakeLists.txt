@@ -1,3 +1,4 @@
+cmake_minimum_required(VERSION 2.8.9)
 #  This file is part of Pairs
 #
 #  Copyright (C) <2010>       <Albert Astals Cid>   <aacid@kde.org>
@@ -25,6 +26,8 @@ project(pairs)
 
 find_package(KDE4 REQUIRED)
 include (KDE4Defaults)
+
+find_package(KDeclarative REQUIRED)
 
 include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
 add_definitions( ${KDE4_DEFINITIONS} )
