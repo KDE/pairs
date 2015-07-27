@@ -22,7 +22,7 @@
 
 #include "pairstheme.h"
 #include <QtCore/QDebug>
-#include <KLocalizedString>
+#include <klocalizedstring.h>
 #include <QUrl>
 #include <QStandardPaths>
 #include <QtXmlPatterns/QXmlSchemaValidator>

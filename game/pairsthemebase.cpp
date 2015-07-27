@@ -23,7 +23,7 @@
 #include "pairsthemebase.h"
 #include <QtCore/QFile>
 #include <QtCore/QDebug>
-#include <KLocalizedString>
+#include <klocalizedstring.h>
 #include <QtXmlPatterns/QXmlSchemaValidator>
 #include <QtXmlPatterns/QXmlSchema>
 #include "cardtype.h"
